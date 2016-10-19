@@ -33,6 +33,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using SimpleFramework.Core.Web;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using SimpleFramework.Infrastructure.Common.Razor;
 
 namespace SimpleFramework.Core.Extensions
 {
@@ -47,7 +48,7 @@ namespace SimpleFramework.Core.Extensions
                     [0] = this.AddStaticFiles,
                     [1] = this.AddMvc,
                     [2] = this.AddCustomizedDataStore,
-                    [3]=this.AddDistributedCache,
+                    [3] = this.AddDistributedCache,
                     [4] = this.AddCoreServices
                 };
             }
@@ -60,7 +61,7 @@ namespace SimpleFramework.Core.Extensions
                 return new Dictionary<int, Action<IApplicationBuilder>>()
                 {
                     [0] = this.UseStaticFiles,
-                    [1]=this.UseCustomizedRequestLocalization,
+                    [1] = this.UseCustomizedRequestLocalization,
                     [2] = this.UseMvc,
                 };
             }
@@ -163,7 +164,7 @@ namespace SimpleFramework.Core.Extensions
                 configure.Password.RequireUppercase = false;//是否需要大写字母(A-Z).
                 configure.Password.RequireNonAlphanumeric = false;//是否包含非字母或数字字符。
                 configure.Password.RequiredLength = 6;//设置密码长度最小为6
-              //  configure.Cookies.ApplicationCookie.LoginPath = "/login";
+                                                      //  configure.Cookies.ApplicationCookie.LoginPath = "/login";
                 configure.Cookies.ApplicationCookie.AuthenticationScheme = "Cookies";
                 configure.Cookies.ApplicationCookie.LoginPath = new PathString("/account/login");
                 configure.Cookies.ApplicationCookie.AccessDeniedPath = new PathString("/account/forbidden");
@@ -174,7 +175,7 @@ namespace SimpleFramework.Core.Extensions
               .AddUserStore<SimplUserStore>()
               .AddDefaultTokenProviders();
 
-          
+            services.AddSingleton<ViewRenderer>();
 
 
             services.AddSingleton<IWidgetInstanceService, WidgetInstanceService>();
@@ -229,7 +230,7 @@ namespace SimpleFramework.Core.Extensions
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>
-        public void UseCustomizedRequestLocalization( IApplicationBuilder app)
+        public void UseCustomizedRequestLocalization(IApplicationBuilder app)
         {
             var supportedCultures = new[]
             {
@@ -242,7 +243,7 @@ namespace SimpleFramework.Core.Extensions
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             });
-            
+
         }
         /// <summary>
         /// 配置静态文件

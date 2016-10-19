@@ -1,4 +1,5 @@
 # A super simple, modularized bussiness system built on .NET Core
+# QQ½»Á÷Èº 433379982
 
 ## Prerequisite:
 - .NET Core SDK (https://www.microsoft.com/net/core)

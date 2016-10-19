@@ -45,7 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// This method adds an embedded file provider to the RazorViewOptions to be able to load the Navigation related views.
         /// If you download and install the views below your view folder you don't need this method and you can customize the views.
-        /// You can get the views from https://github.com/joeaudette/SimpleFramework.Web.Navigation/tree/master/src/SimpleFramework.Web.Navigation/Views
+        /// You can get the views from https://github.com/joeaudette/cloudscribe.Web.Navigation/tree/master/src/cloudscribe.Web.Navigation/Views
         /// </summary>
         /// <param name="options"></param>
         /// <returns>RazorViewEngineOptions</returns>
