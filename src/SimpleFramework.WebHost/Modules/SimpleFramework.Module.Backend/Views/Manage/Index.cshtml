@@ -1,0 +1,49 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Manage your account";
+}
+<p class="text-success">@ViewData["StatusMessage"]</p>
+<div class="row">
+    <div class="col-md-3">
+        @Html.Partial("_AccountMenu")
+    </div>
+    <div class="col-md-9">
+        <h2>Manage your account</h2>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Security</div>
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+                            <dt>Password:</dt>
+                            <dd>
+                                @if (Model.HasPassword)
+                                {
+                                    <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Change</a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Create</a>
+                                }
+                            </dd>
+                            <dt>External Logins:</dt>
+                            <dd>
+                                @Model.Logins.Count <a asp-controller="Manage" asp-action="ManageLogins" class="btn-bracketed">Manage</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Default delivery address</div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title | SimpleFramework</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    @await Component.InvokeAsync("BackendStyleSheets")
+    @await Component.InvokeAsync("BackendScripts")
+</head>
+<body>
+    <div class="container with-side @(this.ViewBag.HasSideDetails == null ? null : "with-side-details")">
+        <div class="side">
+            <a class="platformus" href="/backend/">
+                Platformus <span>CMS</span>
+            </a>
+            @await Component.InvokeAsync("BackendMenu")
+            @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapTopNav", filterName = NamedNavigationFilters.FullTree, startingNodeKey = "" })
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

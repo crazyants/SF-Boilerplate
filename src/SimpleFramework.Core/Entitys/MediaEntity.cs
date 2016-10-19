@@ -1,0 +1,15 @@
+﻿using SimpleFramework.Infrastructure.Entitys;
+
+namespace SimpleFramework.Core.Entitys
+{
+    public class MediaEntity :AuditableEntity
+    {
+        public string Caption { get; set; }
+
+        public int FileSize { get; set; }
+
+        public string FileName { get; set; }
+
+        public MediaType MediaType { get; set; }
+    }
+}
