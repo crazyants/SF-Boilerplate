@@ -11,8 +11,8 @@
 <body>
     <div class="container with-side @(this.ViewBag.HasSideDetails == null ? null : "with-side-details")">
         <div class="side">
-            <a class="platformus" href="/backend/">
-                Platformus <span>CMS</span>
+            <a class="" href="#">
+                <span>SimpleFramework</span>
             </a>
             @await Component.InvokeAsync("BackendMenu")
             @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapTopNav", filterName = NamedNavigationFilters.FullTree, startingNodeKey = "" })
