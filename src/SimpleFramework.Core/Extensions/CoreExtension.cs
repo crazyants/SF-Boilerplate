@@ -34,6 +34,8 @@ using SimpleFramework.Core.Web;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using SimpleFramework.Infrastructure.Common.Razor;
+using SimpleFramework.Core.Formatters.CsvImportExport;
+using Microsoft.Net.Http.Headers;
 
 namespace SimpleFramework.Core.Extensions
 {
@@ -103,8 +105,14 @@ namespace SimpleFramework.Core.Extensions
                 this.logger.LogInformation("Executing prioritized AddMvc action '{0}' of {1}", this.GetActionMethodInfo(prioritizedAddMvcAction));
                 prioritizedAddMvcAction(mvcBuilder);
             }
-
-
+            //Csv
+            var csvFormatterOptions = new CsvFormatterOptions();
+            mvcBuilder.AddMvcOptions(options =>
+            {
+                options.InputFormatters.Add(new CsvInputFormatter(csvFormatterOptions));
+                options.OutputFormatters.Add(new CsvOutputFormatter(csvFormatterOptions));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("csv", MediaTypeHeaderValue.Parse("text/csv"));
+            });
 
 
         }

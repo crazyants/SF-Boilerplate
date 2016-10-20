@@ -43,19 +43,19 @@ namespace SimpleFramework.Web.Navigation
                 if (!string.IsNullOrEmpty(n.Value.NamedRoute))
                 {
                     targetUrl = urlHelper.RouteUrl(n.Value.NamedRoute);
-                    if (targetUrl.IndexOf(urlToMatch, StringComparison.OrdinalIgnoreCase) >= 0) { return true; }
+                    if (targetUrl != null && targetUrl.IndexOf(urlToMatch, StringComparison.OrdinalIgnoreCase) >= 0) { return true; }
                 }
 
                 if ((!string.IsNullOrEmpty(n.Value.Action))&& (!string.IsNullOrEmpty(n.Value.Controller)))
                 {
                     targetUrl = urlHelper.Action(n.Value.Action, n.Value.Controller, new { area = n.Value.Area });
-                    if (targetUrl.IndexOf(urlToMatch, StringComparison.OrdinalIgnoreCase) >= 0) { return true; }
+                    if (targetUrl!=null&&targetUrl.IndexOf(urlToMatch, StringComparison.OrdinalIgnoreCase) >= 0) { return true; }
                 }
 
                 if ((urlPrefix.Length > 0)&&(n.Value.Url.Length > 0))
                 {
                     targetUrl = n.Value.Url.Replace("~/", "~/" + urlPrefix + "/");
-                    if(targetUrl.IndexOf(urlToMatch,StringComparison.OrdinalIgnoreCase) >= 0) { return true; }      
+                    if(targetUrl != null && targetUrl.IndexOf(urlToMatch,StringComparison.OrdinalIgnoreCase) >= 0) { return true; }      
                 }
 
                 return false;

@@ -81,11 +81,13 @@ namespace SimpleFramework.WebHost
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             //  loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-           // loggerFactory.AddDebug();
+            // loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsEnvironment("Development"))
             {
+                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
 
             app.UseCustomizedRequestLocalization();
