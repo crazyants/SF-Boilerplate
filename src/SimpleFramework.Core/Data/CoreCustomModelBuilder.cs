@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Entitys;
 
 namespace SimpleFramework.Core.Data

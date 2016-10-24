@@ -6,8 +6,8 @@ using System.Globalization;
 using System.Linq;
 using Omu.ValueInjecter;
 using SimpleFramework.Core.Entitys;
-using SimpleFramework.Infrastructure.Common;
-using SimpleFramework.Infrastructure.Extensions;
+using SimpleFramework.Core.Common;
+using SimpleFramework.Core.Extensions;
 
 namespace SimpleFramework.Core.Settings.Converters
 {

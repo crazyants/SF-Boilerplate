@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SimpleFramework.Infrastructure.Data;
-using SimpleFramework.Infrastructure.Data.UnitOfWork;
-using SimpleFramework.Infrastructure.Entitys;
+using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Abstraction.Data.UnitOfWork;
+using SimpleFramework.Core.Abstraction.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using SimpleFramework.Infrastructure.Entitys;
+﻿using SimpleFramework.Core.Abstraction.Entitys;
 using System.Security.Claims;
 using System.Collections.Generic;
 using System.Linq;

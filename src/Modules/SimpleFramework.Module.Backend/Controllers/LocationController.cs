@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Entitys;
 
 namespace SimpleFramework.Module.Backend.Controllers

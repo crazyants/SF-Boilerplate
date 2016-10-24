@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SimpleFramework.Core.Entitys;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data;
 
 namespace SimpleFramework.Core.Extensions
 {

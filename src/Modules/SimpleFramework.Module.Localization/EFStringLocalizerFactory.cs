@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Module.Localization.Models;
 
 namespace SimpleFramework.Module.Localization

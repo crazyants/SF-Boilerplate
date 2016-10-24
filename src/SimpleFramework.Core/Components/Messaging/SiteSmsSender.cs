@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.Extensions.Logging;
-using SimpleFramework.Infrastructure.Common.Sms;
+using SimpleFramework.Core.Common.Sms;
 using SimpleFramework.Core.Extensions;
 using System;
 using System.Threading.Tasks;

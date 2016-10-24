@@ -1,9 +1,8 @@
 ﻿
-using SimpleFramework.Infrastructure;
-using SimpleFramework.Infrastructure.UI;
+using SimpleFramework.Core;
+using SimpleFramework.Core.UI;
 using System.Collections.Generic;
 using System.Linq;
-
 
 namespace SimpleFramework.Module.Backend.ViewModels.Shared
 {

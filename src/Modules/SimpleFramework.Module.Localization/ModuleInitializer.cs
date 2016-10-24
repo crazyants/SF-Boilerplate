@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
-using SimpleFramework.Infrastructure;
+using SimpleFramework.Core.Abstraction;
+using SimpleFramework.Core;
 
 namespace SimpleFramework.Module.Localization
 {

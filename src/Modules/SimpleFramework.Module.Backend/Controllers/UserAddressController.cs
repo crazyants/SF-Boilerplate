@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Module.Backend.ViewModels;
 using SimpleFramework.Core.Extensions;

@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using SimpleFramework.Infrastructure.Common.Email;
-using SimpleFramework.Infrastructure.Common.Razor;
+using SimpleFramework.Core.Common.Email;
+using SimpleFramework.Core.Common.Razor;
 using SimpleFramework.Core.Extensions;
 using System;
 using System.Threading.Tasks;

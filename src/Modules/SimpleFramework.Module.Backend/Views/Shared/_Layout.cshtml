@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="container with-side @(this.ViewBag.HasSideDetails == null ? null : "with-side-details")">
+
         <div class="side">
             <a class="" href="#">
                 <span>SimpleFramework</span>
@@ -17,6 +18,10 @@
             @await Component.InvokeAsync("BackendMenu")
             @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapTopNav", filterName = NamedNavigationFilters.FullTree, startingNodeKey = "" })
         </div>
+        @* 面包屑 *@
+        <breadcrumb asp-homepage-title="Home"
+                    asp-homepage-url="@Url.Action("Index", "Home")"
+                    asp-homepage-glyphicon="glyphicon glyphicon-home"></breadcrumb>
         <div class="content">
             @RenderBody()
         </div>

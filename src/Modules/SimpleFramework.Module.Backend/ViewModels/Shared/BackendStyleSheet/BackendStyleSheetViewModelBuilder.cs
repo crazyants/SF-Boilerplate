@@ -1,5 +1,7 @@
 ﻿
-using SimpleFramework.Infrastructure.UI;
+
+
+using SimpleFramework.Core.UI;
 
 namespace SimpleFramework.Module.Backend.ViewModels.Shared
 {

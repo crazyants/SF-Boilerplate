@@ -50,7 +50,7 @@
     "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Facebook": "1.0.0",
     "MediatR": "2.1.0",
-    "SimpleFramework.Infrastructure": "1.0.0-*",
+    "SimpleFramework.Core.Abstraction": "1.0.0-*",
     "Audit.NET": "4.5.6",
     "Audit.NET.SqlServer": "4.5.6",
     "Audit.NET.MongoDB": "4.5.6",

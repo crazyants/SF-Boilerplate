@@ -1,4 +1,4 @@
-﻿using SimpleFramework.Infrastructure.Data;
+﻿using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Plugins.Abstraction;
 using SimpleFramework.Core.Plugins.Models;
 using System;

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "7b8762050f4088f070073e485033cf20afd5af60"
+    "signature": "9de6b8883539afebbdc12441c598a1848f28dda1"
   },
   "compilationOptions": {},
   "targets": {
@@ -23,13 +23,14 @@
           "MailKit": "1.4.0",
           "MimeKit": "1.4.0",
           "NodaTime": "2.0.0-alpha20160523",
-          "SimpleFramework.Infrastructure": "1.0.0",
           "valueinjecter": "3.1.1.3",
           "LinqKit": "1.1.7.3",
           "Microsoft.AspNetCore.StaticFiles": "1.0.0",
           "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
-          "Microsoft.Extensions.Caching.SqlServer": "1.0.0"
+          "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
+          "SimpleFramework.Core.Abstraction": "1.0.0",
+          "CoreCompat.System.Drawing": "1.0.0-beta006"
         },
         "runtime": {
           "SimpleFramework.Core.dll": {}
@@ -64,6 +65,26 @@
         },
         "runtime": {
           "lib/netstandard1.3/CoreCompat.Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "CoreCompat.System.Drawing/1.0.0-beta006": {
+        "dependencies": {
+          "Microsoft.Win32.Primitives": "4.0.1",
+          "System.Collections.NonGeneric": "4.0.1",
+          "System.Collections.Specialized": "4.0.1",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Drawing.Primitives": "4.0.0",
+          "System.IO.FileSystem": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.0.0",
+          "System.Text.Encoding.Extensions": "4.0.11",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/CoreCompat.System.Drawing.dll": {}
         }
       },
       "LinqKit/1.1.7.3": {
@@ -1526,6 +1547,15 @@
           "System.Runtime": "4.1.0"
         }
       },
+      "System.Drawing.Primitives/4.0.0": {
+        "dependencies": {
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.1/System.Drawing.Primitives.dll": {}
+        }
+      },
       "System.Dynamic.Runtime/4.0.11": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -2534,7 +2564,7 @@
           "lib/netstandard1.6/Omu.ValueInjecter.dll": {}
         }
       },
-      "SimpleFramework.Infrastructure/1.0.0": {
+      "SimpleFramework.Core.Abstraction/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "System.ComponentModel.Annotations": "4.1.0",
@@ -2555,7 +2585,7 @@
           "NodaTime": "2.0.0-alpha20160523"
         },
         "runtime": {
-          "SimpleFramework.Infrastructure.dll": {}
+          "SimpleFramework.Core.Abstraction.dll": {}
         }
       }
     }
@@ -2575,6 +2605,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-5Zw3//TAPtjKsbYteiVkqB1MHtE0SZ48mwcFbELOnMh1P/QySzGCuD+2dhrO81hx4tGzvJdLaCiFgIBDkEM0dg=="
+    },
+    "CoreCompat.System.Drawing/1.0.0-beta006": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KOBeVy8FHx9zkXrIZAM8OdXPrimROmvfB02fOegrYIelNN/zWhsOwzONgD7gw7wOTJgAFfdwpme5CiMraJj47Q=="
     },
     "LinqKit/1.1.7.3": {
       "type": "package",
@@ -3146,6 +3181,11 @@
       "serviceable": true,
       "sha512": "sha512-vDN1PoMZCkkdNjvZLql592oYJZgS7URcJzJ7bxeBgGtx5UtR5leNm49VmfHGqIffX4FKacHbI3H6UyNSHQknBg=="
     },
+    "System.Drawing.Primitives/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9lVRG1voBwzLGZkf1XFJrobdZDZ5ZHMU4FVTbXAbzehpN90yYgkUeo9GoEYdvkt/EXaaHZJAeuffXP4JBbY+Ig=="
+    },
     "System.Dynamic.Runtime/4.0.11": {
       "type": "package",
       "serviceable": true,
@@ -3511,7 +3551,7 @@
       "serviceable": true,
       "sha512": "sha512-4xcg4w9/Ri/gDLxyJRwDu+flBmaN2keQTgcoPGpCgby+ooL8xFbAmr/jWBZD4IglmuaZZ3fWmxAR7laM3ptVkw=="
     },
-    "SimpleFramework.Infrastructure/1.0.0": {
+    "SimpleFramework.Core.Abstraction/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

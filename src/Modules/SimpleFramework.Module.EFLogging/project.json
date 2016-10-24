@@ -8,7 +8,7 @@
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "NETStandard.Library": "1.6.0",
     "SimpleFramework.Core": "1.0.0-*",
-    "SimpleFramework.Infrastructure": "1.0.0-*",
+    "SimpleFramework.Core.Abstraction": "1.0.0-*",
     "SimpleFramework.Web.Pagination": "1.0.0-*"
   },
   "tools": {

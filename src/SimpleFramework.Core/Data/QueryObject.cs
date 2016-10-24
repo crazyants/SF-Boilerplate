@@ -1,5 +1,5 @@
 ﻿using LinqKit;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

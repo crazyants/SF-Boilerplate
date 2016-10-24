@@ -4,7 +4,7 @@
   "dependencies": {
     "CacheManager.Core": "0.9.1",
     "NETStandard.Library": "1.6.0",
-    "SimpleFramework.Infrastructure": "1.0.0-*",
+    "SimpleFramework.Core.Abstraction": "1.0.0-*",
     "Microsoft.EntityFrameworkCore": "1.0.1",
     "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.0.0*",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
@@ -19,7 +19,9 @@
     "SimpleFramework.Core": "1.0.0-*",
     "SimpleFramework.Core.Security": "1.0.0-*",
     "SimpleFramework.Core.Plugins": "1.0.0-*",
-    "SimpleFramework.Web.Navigation": "1.0.0-*"
+    "SimpleFramework.Web.Navigation": "1.0.0-*",
+    "SimpleFramework.Core.Scheduler": "1.0.0-*",
+    "SimpleFramework.Core.BreadCrumb": "1.0.0-*"
   },
 
   "frameworks": {

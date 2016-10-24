@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SimpleFramework.Infrastructure;
+using SimpleFramework.Core.Abstraction;
 using SimpleFramework.WebHost.Extensions;
 using SimpleFramework.Core.Plugins;
-using simpleGlobal = SimpleFramework.Infrastructure;
+using simpleGlobal = SimpleFramework.Core;
 using SimpleFramework.Core.Web;
 using System.Reflection;
-using SimpleFramework.Infrastructure.Common;
 using System.Linq;
+using SimpleFramework.Core;
+using SimpleFramework.Core.Common;
 
 namespace SimpleFramework.WebHost
 {

@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Plugins.Abstraction;
 using SimpleFramework.Core.Plugins.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SimpleFramework.Infrastructure;
+using SimpleFramework.Core.Abstraction;
 
 namespace SimpleFramework.Core.Plugins
 {

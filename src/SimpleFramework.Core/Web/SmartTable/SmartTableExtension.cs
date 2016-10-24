@@ -1,4 +1,4 @@
-﻿using SimpleFramework.Infrastructure;
+﻿using SimpleFramework.Core.Abstraction;
 using System;
 using System.Linq;
 

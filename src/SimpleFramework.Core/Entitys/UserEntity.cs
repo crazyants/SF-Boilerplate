@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using SimpleFramework.Infrastructure.Entitys;
-using SimpleFramework.Infrastructure.Common;
+using SimpleFramework.Core.Abstraction.Entitys;
+using SimpleFramework.Core.Common;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 

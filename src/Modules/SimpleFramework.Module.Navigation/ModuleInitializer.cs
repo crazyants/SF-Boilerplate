@@ -1,4 +1,4 @@
-﻿using SimpleFramework.Infrastructure;
+﻿using SimpleFramework.Core.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using SimpleFramework.Web.SiteMap;
 using SimpleFramework.Module.Navigation.SiteMap;
-using SimpleFramework.Infrastructure.UI;
 using Microsoft.AspNetCore.Builder;
+using SimpleFramework.Core;
 
 namespace SimpleFramework.Module.Navigation
 {

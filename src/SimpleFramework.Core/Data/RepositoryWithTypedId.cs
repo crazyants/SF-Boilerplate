@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using SimpleFramework.Infrastructure.Data;
-using SimpleFramework.Infrastructure.Entitys;
-using SimpleFramework.Infrastructure.Data.UnitOfWork;
+using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Abstraction.Entitys;
+using SimpleFramework.Core.Abstraction.Data.UnitOfWork;
 using LinqKit;
 using System;
 using System.Collections.Generic;

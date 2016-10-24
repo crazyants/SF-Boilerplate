@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SimpleFramework.Core.Events;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Module.ActivityLog.Models;
 
 namespace SimpleFramework.Module.ActivityLog.Events

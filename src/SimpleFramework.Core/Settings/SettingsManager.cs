@@ -4,12 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using CacheManager.Core;
 using SimpleFramework.Core.Entitys;
-using SimpleFramework.Infrastructure.Data;
-using SimpleFramework.Infrastructure.Entitys;
+using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Abstraction.Entitys;
 using Microsoft.EntityFrameworkCore;
 using SimpleFramework.Core.Settings.Converters;
-using SimpleFramework.Infrastructure.Common;
-using SimpleFramework.Infrastructure.Extensions;
+using SimpleFramework.Core.Common;
+using SimpleFramework.Core.Extensions;
 
 namespace SimpleFramework.Core.Settings
 {

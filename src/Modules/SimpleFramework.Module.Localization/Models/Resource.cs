@@ -1,4 +1,4 @@
-﻿using SimpleFramework.Infrastructure.Entitys;
+﻿using SimpleFramework.Core.Abstraction.Entitys;
 
 namespace SimpleFramework.Module.Localization.Models
 {

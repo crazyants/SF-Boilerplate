@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
-using SimpleFramework.Infrastructure.Data.UnitOfWork;
-using SimpleFramework.Infrastructure.Entitys;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data.UnitOfWork;
+using SimpleFramework.Core.Abstraction.Entitys;
+using SimpleFramework.Core.Abstraction.Data;
 using Microsoft.Practices.ServiceLocation;
 using SimpleFramework.Core.Interceptors;
 

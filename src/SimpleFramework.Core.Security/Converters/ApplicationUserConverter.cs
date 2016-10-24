@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Omu.ValueInjecter;
-using SimpleFramework.Infrastructure.Common;
-using SimpleFramework.Infrastructure.Extensions;
+using SimpleFramework.Core.Common;
+using SimpleFramework.Core.Extensions;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Security;
 using System;

@@ -1,6 +1,6 @@
 ﻿
-using SimpleFramework.Infrastructure.Data;
-using SimpleFramework.Infrastructure.Entitys;
+using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Abstraction.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using SimpleFramework.Infrastructure;
+﻿using SimpleFramework.Core.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +10,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using SimpleFramework.Module.EFLogging.Data;
 using SimpleFramework.Module.EFLogging.Models;
-using SimpleFramework.Infrastructure.UI;
+
 using Microsoft.AspNetCore.Builder;
+using SimpleFramework.Core;
 
 namespace SimpleFramework.Module.EFLogging
 {

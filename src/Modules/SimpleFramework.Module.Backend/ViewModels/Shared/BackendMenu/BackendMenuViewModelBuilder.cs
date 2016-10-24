@@ -1,6 +1,7 @@
 ﻿
-using SimpleFramework.Infrastructure;
-using SimpleFramework.Infrastructure.UI;
+using SimpleFramework.Core;
+using SimpleFramework.Core.Abstraction;
+using SimpleFramework.Core.UI;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using CacheManager.Core;
 using SimpleFramework.Core.Security.Converters;
 using SimpleFramework.Core.Entitys;
-using SimpleFramework.Infrastructure.Extensions;
+using SimpleFramework.Core.Extensions;
 using Microsoft.AspNetCore.Identity;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction.Data;
 
 namespace SimpleFramework.Core.Security
 {

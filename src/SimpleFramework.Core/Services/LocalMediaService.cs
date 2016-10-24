@@ -1,6 +1,6 @@
 ﻿using System.IO;
-using SimpleFramework.Infrastructure;
-using SimpleFramework.Infrastructure.Data;
+using SimpleFramework.Core.Abstraction;
+using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Entitys;
 
 namespace SimpleFramework.Core.Services
