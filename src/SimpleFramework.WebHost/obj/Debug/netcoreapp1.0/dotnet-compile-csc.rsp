@@ -280,7 +280,6 @@
 -r:"D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Abstraction\bin\Debug\netstandard1.6\SimpleFramework.Core.Abstraction.dll"
 -r:"D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\bin\Debug\netstandard1.6\SimpleFramework.Core.Plugins.dll"
 -r:"D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\bin\Debug\netstandard1.6\SimpleFramework.Core.Security.dll"
--r:"D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Web.FromNavigation\bin\Debug\netstandard1.6\SimpleFramework.Web.FromNavigation.dll"
 -r:"D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Web.Navigation\bin\Debug\netstandard1.6\SimpleFramework.Web.Navigation.dll"
 -r:"D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Web.Pagination\bin\Debug\netstandard1.6\SimpleFramework.Web.Pagination.dll"
 -r:"D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Web.SiteMap\bin\Debug\netstandard1.6\SimpleFramework.Web.SiteMap.dll"

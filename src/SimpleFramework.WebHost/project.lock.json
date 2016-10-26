@@ -5299,27 +5299,6 @@
           "netstandard1.6/SimpleFramework.Core.Security.dll": {}
         }
       },
-      "SimpleFramework.Web.FromNavigation/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "LinqKit": "1.1.7.3",
-          "Microsoft.AspNetCore.Mvc": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
-          "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "SimpleFramework.Web.Navigation": "1.0.0",
-          "SimpleFramework.Web.SiteMap": "1.0.0"
-        },
-        "compile": {
-          "netstandard1.6/SimpleFramework.Web.FromNavigation.dll": {}
-        },
-        "runtime": {
-          "netstandard1.6/SimpleFramework.Web.FromNavigation.dll": {}
-        }
-      },
       "SimpleFramework.Web.Navigation/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
@@ -12954,11 +12933,6 @@
       "path": "../SimpleFramework.Core.Security/project.json",
       "msbuildProject": "../SimpleFramework.Core.Security/SimpleFramework.Core.Security.xproj"
     },
-    "SimpleFramework.Web.FromNavigation/1.0.0": {
-      "type": "project",
-      "path": "../SimpleFramework.Web.FromNavigation/project.json",
-      "msbuildProject": "../SimpleFramework.Web.FromNavigation/SimpleFramework.Web.FromNavigation.xproj"
-    },
     "SimpleFramework.Web.Navigation/1.0.0": {
       "type": "project",
       "path": "../SimpleFramework.Web.Navigation/project.json",
@@ -13019,7 +12993,6 @@
       "SimpleFramework.Core.Abstraction >= 1.0.0-*",
       "SimpleFramework.Core.Plugins >= 1.0.0-*",
       "SimpleFramework.Core.Security >= 1.0.0-*",
-      "SimpleFramework.Web.FromNavigation >= 1.0.0-*",
       "SimpleFramework.Web.Navigation >= 1.0.0-*",
       "SimpleFramework.Web.Pagination >= 1.0.0-*",
       "SimpleFramework.Web.SiteMap >= 1.0.0-*",

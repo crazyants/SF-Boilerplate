@@ -54,7 +54,6 @@
           "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
           "SimpleFramework.Web.Navigation": "1.0.0",
           "SimpleFramework.Web.SiteMap": "1.0.0",
-          "SimpleFramework.Web.FromNavigation": "1.0.0",
           "System.Interactive.Async": "3.0.0",
           "SimpleFramework.Core": "1.0.0",
           "SimpleFramework.Core.Security": "1.0.0",
@@ -3017,25 +3016,6 @@
           "SimpleFramework.Core.Security.dll": {}
         }
       },
-      "SimpleFramework.Web.FromNavigation/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
-          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-          "Microsoft.AspNetCore.Mvc": "1.0.1",
-          "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.1",
-          "NETStandard.Library": "1.6.0",
-          "LinqKit": "1.1.7.3",
-          "SimpleFramework.Web.SiteMap": "1.0.0",
-          "SimpleFramework.Web.Navigation": "1.0.0"
-        },
-        "runtime": {
-          "SimpleFramework.Web.FromNavigation.dll": {}
-        },
-        "compile": {
-          "SimpleFramework.Web.FromNavigation.dll": {}
-        }
-      },
       "SimpleFramework.Web.Navigation/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
@@ -5613,11 +5593,6 @@
       "sha512": ""
     },
     "SimpleFramework.Core.Security/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SimpleFramework.Web.FromNavigation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

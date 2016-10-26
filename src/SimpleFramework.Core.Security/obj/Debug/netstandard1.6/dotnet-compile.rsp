@@ -204,7 +204,9 @@ D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Co
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Extensions\SecurityExtensions.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Filters\AdminFilter.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Filters\AdminZoneFilter.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Filters\ContentSecurityPolicyAttribute.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Filters\FilterProvider.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Filters\RequireHstsAttribute.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Models\AccountState.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Models\AccountType.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Models\ApiAccount.cs
@@ -220,3 +222,5 @@ D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Mo
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Models\UserSearchRequest.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Models\UserSearchResponse.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Properties\AssemblyInfo.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Rendering\ContentSecurityPolicyInlineElement.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Security\Rendering\HtmlHelperContentSecurityPolicyExtensions.cs

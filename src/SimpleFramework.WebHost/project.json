@@ -62,7 +62,6 @@
     "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
     "SimpleFramework.Web.Navigation": "1.0.0-*",
     "SimpleFramework.Web.SiteMap": "1.0.0-*",
-    "SimpleFramework.Web.FromNavigation": "1.0.0-*",
     "System.Interactive.Async": "3.0.0",
     "SimpleFramework.Core": "1.0.0-*",
     "SimpleFramework.Core.Security": "1.0.0-*",
