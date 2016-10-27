@@ -173,16 +173,16 @@
             </nav>
         </header>
         <main>
-            @*@Html.Partial("_Tabs")
+            @Html.Partial("_Tabs")
             <div class="content-iframe" style="background-color: #f9f9f9; overflow: hidden;">
 
                 <div class="mainContent" id="content-main" style="margin: 0; margin-bottom: 0px; padding: 0;">
                     <iframe class="NFine_iframe" width="100%" height="100%" src="/Home/Default" frameborder="0" data-id="/Home/Default"></iframe>
                     @RenderBody()
                 </div>
-            </div>*@
+            </div>
 
-            @RenderBody()
+            @*@RenderBody()*@
         </main>
         <footer>
             <hr>
