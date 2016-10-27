@@ -24,9 +24,9 @@ namespace SimpleFramework.Module.Backend
             {
                 return new BackendScript[]
                 {
-          new BackendScript("/lib/jquery/jquery.min.js", 100),
-          new BackendScript("/lib/jquery-validation/jquery.validate.min.js", 200),
-          new BackendScript("/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js", 300)
+          //new BackendScript("/lib/jquery/jquery.min.js", 100),
+          //new BackendScript("/lib/jquery-validation/jquery.validate.min.js", 200),
+          //new BackendScript("/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js", 300)
                 };
             }
         }

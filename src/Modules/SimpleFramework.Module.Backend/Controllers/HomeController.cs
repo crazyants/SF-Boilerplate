@@ -53,6 +53,11 @@ namespace SimpleFramework.Module.Backend.Controllers
 
             return View(model);
         }
+
+        public IActionResult Default()
+        {
+            return View();
+        }
         /// <summary>
         /// 测试授权
         /// </summary>

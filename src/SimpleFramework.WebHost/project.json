@@ -65,7 +65,10 @@
     "System.Interactive.Async": "3.0.0",
     "SimpleFramework.Core": "1.0.0-*",
     "SimpleFramework.Core.Security": "1.0.0-*",
-    "SimpleFramework.Core.Plugins": "1.0.0-*"
+    "SimpleFramework.Core.Plugins": "1.0.0-*",
+    "SimpleFramework.Core.BreadCrumb": "1.0.0-*",
+    "SimpleFramework.Core.Scheduler": "1.0.0-*",
+    "SimpleFramework.Web.JqGrid": "1.0.0-*"
   },
 
   "tools": {

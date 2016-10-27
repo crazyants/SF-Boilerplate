@@ -1,0 +1,42 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+@*<div class="container with-side @(this.ViewBag.HasSideDetails == null ? null : "with-side-details")">
+
+    <div class="side">
+        <a class="" href="#">
+            <span>SimpleFramework</span>
+        </a>
+        @await Component.InvokeAsync("BackendMenu")
+        @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapTopNav", filterName = NamedNavigationFilters.FullTree, startingNodeKey = "" })
+    </div>
+    </div>
+    @* 面包屑 *@
+@*<breadcrumb asp-homepage-title="Home"
+                asp-homepage-url="@Url.Action("Index", "Home")"
+                asp-homepage-glyphicon="glyphicon glyphicon-home"></breadcrumb>
+    <div class="content">
+        @RenderBody()
+    </div>*@
+
+<div id="page-wrapper">
+    <div id="content-wrapper">
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+</div>
+
+@* 全局弹出框Start *@
+<div id="modal-popup" class="modal container modal-content sf-modal sf-modal-frame">
+    <div id="modal-popup_contentPanel" class="iframe">
+        <iframe id="modal-popup_iframe" scrolling="no" style="height:auto;"></iframe>
+    </div>
+</div>
+@* 全局弹出框End *@
+
+
+
+
+
