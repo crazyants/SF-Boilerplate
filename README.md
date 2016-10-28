@@ -1,5 +1,5 @@
 # A super simple, modularized bussiness system built on .NET Core
-# QQ交流群：433379982
+# QQ Group：433379982
 
 ## Prerequisite:
 - .NET Core SDK (https://www.microsoft.com/net/core)
