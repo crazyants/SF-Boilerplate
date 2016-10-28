@@ -7,7 +7,7 @@ using SimpleFramework.Core.Data;
 
 namespace SimpleFramework.WebHost.Migrations
 {
-    [DbContext(typeof(SimpleDbContext))]
+    [DbContext(typeof(CoreDbContext))]
     [Migration("20161008144203_UpdateActivity")]
     partial class UpdateActivity
     {

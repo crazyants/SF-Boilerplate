@@ -15,7 +15,7 @@ namespace SimpleFramework.Core.Data
        where TEntity : Entity
     {
         private readonly IUnitOfWorkAsync _unitOfWork;
-        public RepositoryAsync(SimpleDbContext context, IUnitOfWorkAsync unitOfWork) : base(context, unitOfWork)
+        public RepositoryAsync(CoreDbContext context, IUnitOfWorkAsync unitOfWork) : base(context, unitOfWork)
         {
 
         }

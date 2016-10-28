@@ -69,6 +69,8 @@ namespace SimpleFramework.Core
                 };
             }
         }
+
+        #region MyRegion IServiceCollection
         /// <summary>
         /// 将项目文件变成内嵌资源
         /// </summary>
@@ -125,14 +127,18 @@ namespace SimpleFramework.Core
         /// <returns></returns>
         public void AddCustomizedDataStore(IServiceCollection services)
         {
-
-            services.AddDbContext<SimpleDbContext>(options =>
+            //        services.AddEntityFramework()
+            //.AddSqlServer()
+            //.AddDbContext<CoreDbContext>();
+            services.AddDbContext<CoreDbContext>(options =>
                 options.UseSqlServer(this.configurationRoot.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("SimpleFramework.WebHost")));
 
-            //services.AddDbContext<SimpleDbContext>(options =>
+            //services.AddDbContext<CoreDbContext>(options =>
             //    options.UseMySql(configuration.GetConnectionString("MMysqlDatabase"),
             //        b => b.MigrationsAssembly("SimpleFramework.WebHost")));
+
+
         }
         /// <summary>
         /// 添加TagHelper分布式缓存配置
@@ -204,7 +210,7 @@ namespace SimpleFramework.Core
             services.AddSingleton<IUserNameResolver, UserNameResolver>();
             services.AddSingleton<IUnitOfWorkAsync>(sp =>
             {
-                var simpleDbContext = sp.GetService<SimpleDbContext>();
+                var simpleDbContext = sp.GetService<CoreDbContext>();
                 var userNameResolver = sp.GetService<IUserNameResolver>();
                 return new UnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
             });
@@ -219,8 +225,9 @@ namespace SimpleFramework.Core
 
 
             services.AddDNTCaptcha();
-        }
 
+
+        }
 
 
         private Action<IMvcBuilder>[] GetPrioritizedAddMvcActions()
@@ -234,6 +241,8 @@ namespace SimpleFramework.Core
 
             return this.GetPrioritizedActions(addMvcActionsByPriorities);
         }
+        #endregion
+        #region MyRegion IApplicationBuilder
 
 
         /// <summary>
@@ -302,6 +311,52 @@ namespace SimpleFramework.Core
 
               }
             );
+
+            applicationBuilder.UseMultitenancy<SiteContext>();
+            //多租户
+            var storage = configurationRoot["DevOptions:DbPlatform"];
+            applicationBuilder.UsePerTenant<SiteContext>((ctx, builder) =>
+            {
+                // custom 404 and error page - this preserves the status code (ie 404)
+                if (string.IsNullOrEmpty(ctx.Tenant.SiteFolderName))
+                {
+                    builder.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+                }
+                else
+                {
+                    builder.UseStatusCodePagesWithReExecute("/" + ctx.Tenant.SiteFolderName + "/Home/Error/{0}");
+                }
+
+                // todo how to make this multi tenant for folders?
+                // https://github.com/IdentityServer/IdentityServer4/issues/19
+                //https://github.com/IdentityServer/IdentityServer4/blob/dev/src/IdentityServer4/Configuration/IdentityServerApplicationBuilderExtensions.cs
+                //https://github.com/IdentityServer/IdentityServer4/blob/dev/src/IdentityServer4/Hosting/IdentityServerMiddleware.cs
+                // perhaps will need to plugin custom IEndpointRouter?
+                if (storage == "ef")
+                {
+                    // with this uncommented it breaks folder tenants
+                    // builder.UseIdentityServer();
+
+                    // this sets up the authentication for apis within this endpoint
+                    // ie apis that are hosted in the same web app endpoint with the authority server
+                    // this is not needed here if you are only using separate api endpoints
+                    // it is needed in the startup of those separate endpoints
+                    applicationBuilder.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+                    {
+                        Authority = "https://localhost:44399",
+                        // using the site aliasid as the scope so each tenant has a different scope
+                        // you can view the aliasid from site settings
+                        // clients must be configured with the scope to have access to the apis for the tenant
+                        ScopeName = ctx.Tenant.AliasId,
+
+                        RequireHttpsMetadata = true
+                    });
+
+                }
+
+
+
+            });
         }
 
         private Action<IRouteBuilder>[] GetPrioritizedUseMvcActions()
@@ -343,5 +398,7 @@ namespace SimpleFramework.Core
 
             return new string[] { methodInfo.Name, methodInfo.DeclaringType.FullName };
         }
+
+        #endregion
     }
 }

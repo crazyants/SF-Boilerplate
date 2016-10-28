@@ -7,7 +7,7 @@ using SimpleFramework.Core.Data;
 
 namespace SimpleFramework.WebHost.Migrations
 {
-    [DbContext(typeof(SimpleDbContext))]
+    [DbContext(typeof(CoreDbContext))]
     [Migration("20161019041322_ModifyEFLogging")]
     partial class ModifyEFLogging
     {

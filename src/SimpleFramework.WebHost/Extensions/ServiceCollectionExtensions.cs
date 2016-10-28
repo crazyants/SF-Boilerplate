@@ -136,7 +136,7 @@ namespace SimpleFramework.WebHost.Extensions
                 //builder.RegisterType<UserNameResolver>().As<IUserNameResolver>();
                 //builder.Register<IUnitOfWorkAsync>(c =>
                 //{
-                //    var simpleDbContext = c.Resolve<SimpleDbContext>();
+                //    var simpleDbContext = c.Resolve<CoreDbContext>();
                 //    var userNameResolver = c.Resolve<IUserNameResolver>();
                 //    return new UnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
                 //});

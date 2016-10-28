@@ -14,7 +14,7 @@ namespace SimpleFramework.Core.Data
         {
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var db = serviceScope.ServiceProvider.GetService<SimpleDbContext>();
+                var db = serviceScope.ServiceProvider.GetService<CoreDbContext>();
 
                 // ran into an error when I made a change to the model and tried to apply the migration
                 // found the reason was this line:
@@ -36,7 +36,7 @@ namespace SimpleFramework.Core.Data
             }
 
         }
-        private static async Task EnsureData(SimpleDbContext db)
+        private static async Task EnsureData(CoreDbContext db)
         {
             int rowsAffected = 0;
 

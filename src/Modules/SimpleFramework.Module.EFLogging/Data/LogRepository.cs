@@ -14,7 +14,7 @@ namespace SimpleFramework.Module.EFLogging.Data
     {
         private readonly DbContext dbContext;
 
-        public LogRepository(SimpleDbContext dbContext)
+        public LogRepository(CoreDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

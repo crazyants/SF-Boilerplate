@@ -7,8 +7,8 @@ using SimpleFramework.Core.Data;
 
 namespace SimpleFramework.WebHost.Migrations
 {
-    [DbContext(typeof(SimpleDbContext))]
-    partial class SimpleDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(CoreDbContext))]
+    partial class CoreDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

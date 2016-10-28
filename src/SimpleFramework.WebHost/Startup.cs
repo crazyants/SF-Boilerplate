@@ -43,6 +43,12 @@ namespace SimpleFramework.WebHost
                 .AddJsonFile("appsettings.json", true, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
 
+            // you can use whatever file name you like and it is probably a good idea to use a custom file name
+            // just an a small extra protection in case hackers try some kind of attack based on knowing the name of the file
+            // it should not be possible for anyone to get files outside of wwwroot using http requests
+            // but every little thing you can do for stronger security is a good idea
+            builder.AddJsonFile("simpleauthsettings.json", optional: true);
+
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets();

@@ -19,12 +19,12 @@ namespace SimpleFramework.Core.Data
     {
         #region Private Fields
 
-        private readonly SimpleDbContext _context;
+        private readonly CoreDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
         private readonly IUnitOfWorkAsync _unitOfWork;
 
         #endregion Private Fields
-        public RepositoryWithTypedId(SimpleDbContext context, IUnitOfWorkAsync unitOfWork)
+        public RepositoryWithTypedId(CoreDbContext context, IUnitOfWorkAsync unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;
