@@ -28,7 +28,7 @@
           "SimpleFramework.Core.Plugins": "1.0.0",
           "SimpleFramework.Web.Navigation": "1.0.0",
           "SimpleFramework.Core.Scheduler": "1.0.0",
-          "SimpleFramework.Core.BreadCrumb": "1.0.0"
+          "SimpleFramework.Web.BreadCrumb": "1.0.0"
         },
         "runtime": {
           "SimpleFramework.Module.Backend.dll": {}
@@ -2935,7 +2935,7 @@
           "SimpleFramework.Core.Abstraction.dll": {}
         }
       },
-      "SimpleFramework.Core.BreadCrumb/1.0.0": {
+      "SimpleFramework.Web.BreadCrumb/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "System.ComponentModel.Annotations": "4.1.0",
@@ -2957,7 +2957,7 @@
           "SimpleFramework.Core": "1.0.0"
         },
         "runtime": {
-          "SimpleFramework.Core.BreadCrumb.dll": {}
+          "SimpleFramework.Web.BreadCrumb.dll": {}
         }
       },
       "SimpleFramework.Core.Plugins/1.0.0": {
@@ -4161,7 +4161,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "SimpleFramework.Core.BreadCrumb/1.0.0": {
+    "SimpleFramework.Web.BreadCrumb/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

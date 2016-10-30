@@ -56,11 +56,11 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Abstra
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Scheduler", "src\SimpleFramework.Core.Scheduler\SimpleFramework.Core.Scheduler.xproj", "{136BE87A-2D4E-4855-A541-F25744BF239A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.BreadCrumb", "src\SimpleFramework.Core.BreadCrumb\SimpleFramework.Core.BreadCrumb.xproj", "{F818F787-A9CF-4A5F-A78D-9510D8EC152B}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.JqGrid", "src\SimpleFramework.Web.JqGrid\SimpleFramework.Web.JqGrid.xproj", "{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}"
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.SimpleAuth", "src\SimpleFramework.Web.SimpleAuth\SimpleFramework.Web.SimpleAuth.xproj", "{2F22A31D-1596-496D-8DF2-5B64E7877FEF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.Control", "src\SimpleFramework.Web.Control\SimpleFramework.Web.Control.xproj", "{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.BreadCrumb", "src\SimpleFramework.Web.BreadCrumb\SimpleFramework.Web.BreadCrumb.xproj", "{F818F787-A9CF-4A5F-A78D-9510D8EC152B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -132,18 +132,18 @@ Global
 		{136BE87A-2D4E-4855-A541-F25744BF239A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{136BE87A-2D4E-4855-A541-F25744BF239A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{136BE87A-2D4E-4855-A541-F25744BF239A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F818F787-A9CF-4A5F-A78D-9510D8EC152B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F818F787-A9CF-4A5F-A78D-9510D8EC152B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F818F787-A9CF-4A5F-A78D-9510D8EC152B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F818F787-A9CF-4A5F-A78D-9510D8EC152B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F22A31D-1596-496D-8DF2-5B64E7877FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F22A31D-1596-496D-8DF2-5B64E7877FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F22A31D-1596-496D-8DF2-5B64E7877FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F22A31D-1596-496D-8DF2-5B64E7877FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F818F787-A9CF-4A5F-A78D-9510D8EC152B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F818F787-A9CF-4A5F-A78D-9510D8EC152B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F818F787-A9CF-4A5F-A78D-9510D8EC152B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F818F787-A9CF-4A5F-A78D-9510D8EC152B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,8 +170,8 @@ Global
 		{96C529AA-B4A5-4F39-A4CF-31F66A8DF6CA} = {6A7EE3A2-1748-4CCA-B939-9D7F782B1CDE}
 		{9C156841-9389-4840-82CB-D5A4ED9A6A00} = {3C593EDB-AB76-4467-9884-707C3754A796}
 		{136BE87A-2D4E-4855-A541-F25744BF239A} = {3C593EDB-AB76-4467-9884-707C3754A796}
-		{F818F787-A9CF-4A5F-A78D-9510D8EC152B} = {3C593EDB-AB76-4467-9884-707C3754A796}
-		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A} = {3C593EDB-AB76-4467-9884-707C3754A796}
 		{2F22A31D-1596-496D-8DF2-5B64E7877FEF} = {3C593EDB-AB76-4467-9884-707C3754A796}
+		{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A} = {3C593EDB-AB76-4467-9884-707C3754A796}
+		{F818F787-A9CF-4A5F-A78D-9510D8EC152B} = {3C593EDB-AB76-4467-9884-707C3754A796}
 	EndGlobalSection
 EndGlobal

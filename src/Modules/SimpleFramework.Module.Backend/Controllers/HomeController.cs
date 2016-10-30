@@ -9,7 +9,7 @@ using SimpleFramework.Core.Security;
 using System.Threading.Tasks;
 using SimpleFramework.Core.Models;
 using SimpleFramework.Core.UI.Captcha;
-using SimpleFramework.Core.BreadCrumb;
+using SimpleFramework.Web.BreadCrumb;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "08a8afe7e9bf000bba5c2caf31ec08432e22f859"
+    "signature": "ca10a6ced1fc44c4e216996c5c01cdb7085b453e"
   },
   "compilationOptions": {
     "defines": [
@@ -61,9 +61,9 @@
           "SimpleFramework.Core": "1.0.0",
           "SimpleFramework.Core.Security": "1.0.0",
           "SimpleFramework.Core.Plugins": "1.0.0",
-          "SimpleFramework.Core.BreadCrumb": "1.0.0",
+          "SimpleFramework.Web.BreadCrumb": "1.0.0",
           "SimpleFramework.Core.Scheduler": "1.0.0",
-          "SimpleFramework.Web.JqGrid": "1.0.0",
+          "SimpleFramework.Web.Control": "1.0.0",
           "SimpleFramework.Web.SimpleAuth": "1.0.0"
         },
         "compile": {
@@ -2625,6 +2625,24 @@
           "ref/netstandard1.6/System.Linq.dll": {}
         }
       },
+      "System.Linq.Dynamic.Core/1.0.6.6": {
+        "dependencies": {
+          "System.Collections.Concurrent": "4.0.12",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Globalization": "4.0.11",
+          "System.Linq.Expressions": "4.1.0",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Reflection.Emit": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Threading": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/System.Linq.Dynamic.Core.dll": {}
+        }
+      },
       "System.Linq.Expressions/4.1.0": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -3686,31 +3704,6 @@
           "SimpleFramework.Core.Abstraction.dll": {}
         }
       },
-      "SimpleFramework.Core.BreadCrumb/1.0.0": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
-          "Microsoft.EntityFrameworkCore": "1.0.1",
-          "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-          "MediatR": "2.1.0",
-          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "CacheManager.Core": "0.9.1",
-          "MailKit": "1.4.0",
-          "MimeKit": "1.4.0",
-          "NodaTime": "2.0.0-alpha20160523",
-          "SimpleFramework.Core.Abstraction": "1.0.0",
-          "valueinjecter": "3.1.1.3",
-          "LinqKit": "1.1.7.3",
-          "SimpleFramework.Core": "1.0.0"
-        },
-        "compile": {
-          "SimpleFramework.Core.BreadCrumb.dll": {}
-        }
-      },
       "SimpleFramework.Core.Plugins/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -3786,7 +3779,32 @@
           "SimpleFramework.Core.Security.dll": {}
         }
       },
-      "SimpleFramework.Web.JqGrid/1.0.0": {
+      "SimpleFramework.Web.BreadCrumb/1.0.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "System.ComponentModel.Annotations": "4.1.0",
+          "System.Globalization.Extensions": "4.0.1",
+          "Microsoft.EntityFrameworkCore": "1.0.1",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+          "MediatR": "2.1.0",
+          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
+          "CacheManager.Core": "0.9.1",
+          "MailKit": "1.4.0",
+          "MimeKit": "1.4.0",
+          "NodaTime": "2.0.0-alpha20160523",
+          "SimpleFramework.Core.Abstraction": "1.0.0",
+          "valueinjecter": "3.1.1.3",
+          "LinqKit": "1.1.7.3",
+          "SimpleFramework.Core": "1.0.0"
+        },
+        "compile": {
+          "SimpleFramework.Web.BreadCrumb.dll": {}
+        }
+      },
+      "SimpleFramework.Web.Control/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
@@ -3796,10 +3814,11 @@
           "NETStandard.Library": "1.6.0",
           "LinqKit": "1.1.7.3",
           "SimpleFramework.Web.SiteMap": "1.0.0",
-          "SimpleFramework.Web.Navigation": "1.0.0"
+          "SimpleFramework.Web.Navigation": "1.0.0",
+          "System.Linq.Dynamic.Core": "1.0.6.6"
         },
         "compile": {
-          "SimpleFramework.Web.JqGrid.dll": {}
+          "SimpleFramework.Web.Control.dll": {}
         }
       },
       "SimpleFramework.Web.Navigation/1.0.0": {
@@ -3919,9 +3938,9 @@
           "SimpleFramework.Core": "1.0.0",
           "SimpleFramework.Core.Security": "1.0.0",
           "SimpleFramework.Core.Plugins": "1.0.0",
-          "SimpleFramework.Core.BreadCrumb": "1.0.0",
+          "SimpleFramework.Web.BreadCrumb": "1.0.0",
           "SimpleFramework.Core.Scheduler": "1.0.0",
-          "SimpleFramework.Web.JqGrid": "1.0.0",
+          "SimpleFramework.Web.Control": "1.0.0",
           "SimpleFramework.Web.SimpleAuth": "1.0.0"
         },
         "runtime": {
@@ -6447,6 +6466,24 @@
           "lib/netstandard1.6/System.Linq.dll": {}
         }
       },
+      "System.Linq.Dynamic.Core/1.0.6.6": {
+        "dependencies": {
+          "System.Collections.Concurrent": "4.0.12",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Globalization": "4.0.11",
+          "System.Linq.Expressions": "4.1.0",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Reflection.Emit": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Threading": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Linq.Dynamic.Core.dll": {}
+        }
+      },
       "System.Linq.Expressions/4.1.0": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -7436,31 +7473,6 @@
           "SimpleFramework.Core.Abstraction.dll": {}
         }
       },
-      "SimpleFramework.Core.BreadCrumb/1.0.0": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
-          "Microsoft.EntityFrameworkCore": "1.0.1",
-          "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-          "MediatR": "2.1.0",
-          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "CacheManager.Core": "0.9.1",
-          "MailKit": "1.4.0",
-          "MimeKit": "1.4.0",
-          "NodaTime": "2.0.0-alpha20160523",
-          "SimpleFramework.Core.Abstraction": "1.0.0",
-          "valueinjecter": "3.1.1.3",
-          "LinqKit": "1.1.7.3",
-          "SimpleFramework.Core": "1.0.0"
-        },
-        "runtime": {
-          "SimpleFramework.Core.BreadCrumb.dll": {}
-        }
-      },
       "SimpleFramework.Core.Plugins/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -7536,7 +7548,32 @@
           "SimpleFramework.Core.Security.dll": {}
         }
       },
-      "SimpleFramework.Web.JqGrid/1.0.0": {
+      "SimpleFramework.Web.BreadCrumb/1.0.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "System.ComponentModel.Annotations": "4.1.0",
+          "System.Globalization.Extensions": "4.0.1",
+          "Microsoft.EntityFrameworkCore": "1.0.1",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+          "MediatR": "2.1.0",
+          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
+          "CacheManager.Core": "0.9.1",
+          "MailKit": "1.4.0",
+          "MimeKit": "1.4.0",
+          "NodaTime": "2.0.0-alpha20160523",
+          "SimpleFramework.Core.Abstraction": "1.0.0",
+          "valueinjecter": "3.1.1.3",
+          "LinqKit": "1.1.7.3",
+          "SimpleFramework.Core": "1.0.0"
+        },
+        "runtime": {
+          "SimpleFramework.Web.BreadCrumb.dll": {}
+        }
+      },
+      "SimpleFramework.Web.Control/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
@@ -7546,10 +7583,11 @@
           "NETStandard.Library": "1.6.0",
           "LinqKit": "1.1.7.3",
           "SimpleFramework.Web.SiteMap": "1.0.0",
-          "SimpleFramework.Web.Navigation": "1.0.0"
+          "SimpleFramework.Web.Navigation": "1.0.0",
+          "System.Linq.Dynamic.Core": "1.0.6.6"
         },
         "runtime": {
-          "SimpleFramework.Web.JqGrid.dll": {}
+          "SimpleFramework.Web.Control.dll": {}
         }
       },
       "SimpleFramework.Web.Navigation/1.0.0": {
@@ -8603,6 +8641,11 @@
       "serviceable": true,
       "sha512": "sha512-bQ0iYFOQI0nuTnt+NQADns6ucV4DUvMdwN6CbkB1yj8i7arTGiTN5eok1kQwdnnNWSDZfIUySQY+J3d5KjWn0g=="
     },
+    "System.Linq.Dynamic.Core/1.0.6.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mOocOqjjVQUOkc//kBvwq/DEB0pQtqzkV7oxdS6vllfBsh3oxFzEo047dH3k5BJxo16+CV35Y1+Gai28zJyTyA=="
+    },
     "System.Linq.Expressions/4.1.0": {
       "type": "package",
       "serviceable": true,
@@ -8948,11 +8991,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "SimpleFramework.Core.BreadCrumb/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "SimpleFramework.Core.Plugins/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -8968,7 +9006,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "SimpleFramework.Web.JqGrid/1.0.0": {
+    "SimpleFramework.Web.BreadCrumb/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SimpleFramework.Web.Control/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
