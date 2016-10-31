@@ -3674,7 +3674,8 @@
           "SaasKit.Multitenancy": "1.1.4",
           "IdentityModel": "2.0.0",
           "IdentityServer4.AccessTokenValidation": "1.0.1-rc2",
-          "Microsoft.AspNetCore.Diagnostics": "1.0.0"
+          "Microsoft.AspNetCore.Diagnostics": "1.0.0",
+          "Microsoft.Extensions.Configuration.Json": "1.0.0"
         },
         "compile": {
           "SimpleFramework.Core.dll": {}
@@ -7443,7 +7444,8 @@
           "SaasKit.Multitenancy": "1.1.4",
           "IdentityModel": "2.0.0",
           "IdentityServer4.AccessTokenValidation": "1.0.1-rc2",
-          "Microsoft.AspNetCore.Diagnostics": "1.0.0"
+          "Microsoft.AspNetCore.Diagnostics": "1.0.0",
+          "Microsoft.Extensions.Configuration.Json": "1.0.0"
         },
         "runtime": {
           "SimpleFramework.Core.dll": {}

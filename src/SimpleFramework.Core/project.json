@@ -27,7 +27,8 @@
     "SaasKit.Multitenancy": "1.1.*",
     "IdentityModel": "2.0.0-*",
     "IdentityServer4.AccessTokenValidation": "1.0.1-*",
-    "Microsoft.AspNetCore.Diagnostics": "1.0.0"
+    "Microsoft.AspNetCore.Diagnostics": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0"
   },
 
   "frameworks": {

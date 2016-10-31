@@ -5394,6 +5394,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
           "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
           "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+          "Microsoft.Extensions.Configuration.Json": "1.0.0",
           "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
           "MimeKit": "1.4.0",
           "NETStandard.Library": "1.6.0",
