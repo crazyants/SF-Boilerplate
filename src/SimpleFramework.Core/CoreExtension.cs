@@ -36,7 +36,6 @@ using Microsoft.AspNetCore.Localization;
 using SimpleFramework.Core.Formatters.CsvImportExport;
 using Microsoft.Net.Http.Headers;
 using SimpleFramework.Core.Common.Razor;
-using SimpleFramework.Core.UI.Captcha;
 
 namespace SimpleFramework.Core
 {
@@ -224,7 +223,7 @@ namespace SimpleFramework.Core
             services.TryAddScoped<ISmsSender, SiteSmsSender>();
 
 
-            services.AddDNTCaptcha();
+       
 
 
         }

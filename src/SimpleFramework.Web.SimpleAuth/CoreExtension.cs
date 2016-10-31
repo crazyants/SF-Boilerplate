@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Options;
-using System.Reflection;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleFramework.Core;
 using SimpleFramework.Web.SimpleAuth.Models;
@@ -15,7 +9,6 @@ using SimpleFramework.Web.SimpleAuth.Services;
 using SimpleFramework.Web.SimpleAuth.Tenants;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using SimpleFramework.Web.SimpleAuth.Controllers;
 
 namespace SimpleFramework.Web.SimpleAuth
 {

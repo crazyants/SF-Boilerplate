@@ -7,8 +7,6 @@ using Audit.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using SimpleFramework.Core.Security;
 using System.Threading.Tasks;
-using SimpleFramework.Core.Models;
-using SimpleFramework.Core.UI.Captcha;
 using SimpleFramework.Web.BreadCrumb;
 
 namespace SimpleFramework.Module.Backend.Controllers
@@ -28,7 +26,7 @@ namespace SimpleFramework.Module.Backend.Controllers
         }
         [Audit]
         [BreadCrumb(Title = "Main index", Order = 1)]
-        //[ValidateDNTCaptcha(ErrorMessage = "Please enter the security code as a number.",
+        //[ValidateSFCaptcha(ErrorMessage = "Please enter the security code as a number.",
         //                    IsNumericErrorMessage = "The input value should be a number.",
         //                    CaptchaGeneratorLanguage = Language.English)]
         public IActionResult Index()

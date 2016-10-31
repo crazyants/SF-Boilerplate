@@ -49,6 +49,8 @@ namespace SimpleFramework.WebHost
             // but every little thing you can do for stronger security is a good idea
             builder.AddJsonFile("simpleauthsettings.json", optional: true);
 
+            builder.AddJsonFile("ratelimitsettings.json", optional: true);
+
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets();

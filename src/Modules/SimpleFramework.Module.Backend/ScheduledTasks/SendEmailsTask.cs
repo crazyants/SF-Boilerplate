@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using SimpleFramework.Core.Scheduler.Contracts;
 
-namespace DNTScheduler.TestWebApp.ScheduledTasks
+namespace SimpleFramework.Module.Backend.ScheduledTasks
 {
     public class SendEmailsTask : IScheduledTask
     {
