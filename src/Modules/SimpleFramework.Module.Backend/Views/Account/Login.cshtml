@@ -53,7 +53,7 @@
             </section>
         </div>
 
-    </div*@>
+</div*@>
 
 <div id="content">
     <div id="logo">
@@ -62,15 +62,14 @@
     <div id="content-box" class="clearfix">
         <div id="zone-main" class="zone-instance">
             <div class="zone-content">
-                <div id="bid_10" data-zone-location="Page" class="block-instance login">
+                <div data-zone-location="Page" class="block-instance login">
                     <div class="block-content">
                         <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-
                             <fieldset>
                                 <legend>Login</legend>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div id="valSummary" class="alert alert-danger" style="display:none">
+                                        <div   class="login_tips alert alert-danger" style="display:none">
                                         </div>
                                         <div asp-validation-summary="All" class="text-danger"></div>
                                         <div class="form-group rock-text-box">
@@ -99,13 +98,11 @@
                         </form>
                     </div>
                 </div>
-                <div id="bid_459" data-zone-location="Page" class="block-instance html-content">
+                <div data-zone-location="Page" class="block-instance html-content">
                     <div class="block-content">
-                        <div id="ctl10_ctl02_ctl00_upnlHtmlContent">
                             <div class="alert alert-info margin-t-lg">
                                 <strong>Demo Account</strong> To login as a demo administrator use the username 'admin' with the password of 'admin'.
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -122,7 +119,6 @@
             btnlogin.click();
         }
     }
-
     // add quick fade-in effect to the page
     $(document).ready(function () {
         $("#content").sfFadeIn();
@@ -189,8 +185,7 @@
         $("#login_verifycode").click(function () {
             $("#verifycode").val('');
             $("#login_verifycode").attr("src", contentPath + "/Login/VerifyCode?time=" + Math.random());
-        });
-      
+        });  
     });
     //登录验证
     function CheckLogin(autologin) {
@@ -230,12 +225,12 @@
     }
     //提示信息
     function formMessage(msg, type) {
-        $('.login_tips').parents('dt').remove();
-        var _class = "login_tips";
+        $('.login_tips').prepend(msg);
+        $('.login_tips').addClass("alert-danger");
         if (type == 1) {
-            _class = "login_tips-succeed";
+            $('.login_tips').removeClass("alert-success");
         }
-        $('.form').prepend('<dt><div class="' + _class + '"><i class="fa fa-question-circle"></i>' + msg + '</div></dt>');
+        $('.login_tips').show();
     }
 </script>
 
