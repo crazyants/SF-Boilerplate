@@ -7,6 +7,7 @@ using System.IO;
 using SimpleFramework.Web.Captcha.Contracts;
 using SimpleFramework.Core.Common;
 using SimpleFramework.Core;
+using Microsoft.AspNetCore.Http;
 
 namespace SimpleFramework.Web.Captcha.Providers
 {
@@ -16,7 +17,8 @@ namespace SimpleFramework.Web.Captcha.Providers
     public class DynamicCaptchaImageProvider : ICaptchaImageProvider
     {
         private readonly IRandomNumberProvider _randomNumberProvider;
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private ISession _session => _httpContextAccessor.HttpContext.Session;
         /// <summary>
         /// 每个字符的宽度
         /// </summary>
@@ -42,13 +44,17 @@ namespace SimpleFramework.Web.Captcha.Providers
         /// </summary>
         public const int CharGraphicMaxRotate = 35;
         /// <summary>
+		/// 保存到会话时使用的键名前缀
+		/// </summary>
+		public const string SessionItemKeyPrefix = "Common.Captcha.";
+        /// <summary>
         /// The default captcha image provider
         /// </summary>
-        public DynamicCaptchaImageProvider(IRandomNumberProvider randomNumberProvider)
+        public DynamicCaptchaImageProvider(IRandomNumberProvider randomNumberProvider, IHttpContextAccessor httpContextAccessor)
         {
             randomNumberProvider.CheckArgumentNull(nameof(randomNumberProvider));
-
             _randomNumberProvider = randomNumberProvider;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -154,11 +160,8 @@ namespace SimpleFramework.Web.Captcha.Providers
                 }
             }
             // 储存到会话，会话的过期时间最少是30分钟
-            //var sessionManager = Application.Ioc.Resolve<SessionManager>();
-            //var session = sessionManager.GetSession();
-            //session.Items[SessionItemKeyPrefix + key] = captchaCode;
-            //session.SetExpiresAtLeast(TimeSpan.FromMinutes(MakeSessionAliveAtLeast));
-            //sessionManager.SaveSession();
+            _session.SetString(SessionItemKeyPrefix + key, captchaCode);
+            
             // 返回图片对象
             return image;
 

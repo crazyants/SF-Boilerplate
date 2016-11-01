@@ -6,11 +6,11 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Digipolis.Codetable.Interfaces;
 using SimpleFramework.Core.Abstraction.Entitys;
 using SimpleFramework.Core.Web.Base.Datatypes;
 using SimpleFramework.Core.Web.Base.Business;
 using SimpleFramework.Core.Errors.Exceptions;
+using SimpleFramework.Core.Web.Base.DataContractMapper;
 
 namespace SimpleFramework.Core.Web.Base.Controllers
 {
@@ -25,7 +25,7 @@ namespace SimpleFramework.Core.Web.Base.Controllers
         /// 数据转换
         /// </summary>
         /// <returns></returns>
-        public IModelFormBuilder<TCodeTabelEntity, TCodeTabelModel> ModelFormBuilder { get; set; }
+        public ICrudDtoMapper<TCodeTabelEntity, TCodeTabelModel> CrudDtoMapper { get; set; }
 
         public CodetableControllerBase(IServiceCollection service, ILogger<Controller> logger) : base(logger)
         {
@@ -42,7 +42,7 @@ namespace SimpleFramework.Core.Web.Base.Controllers
                 var codetable = await _reader.GetAsync(id);
                 if (codetable == null)
                     return NotFoundResult($"Code with id {id} not found in {typeof(TCodeTabelModel).Name}.");
-                var model = ModelFormBuilder.ToDataModel(codetable);
+                var model = CrudDtoMapper.MapEntityToDto(codetable);
                 return OkResult(model);
             }
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace SimpleFramework.Core.Web.Base.Controllers
                 var values = await _reader.GetAllAsync();
                 var mappedValues = values.Select(x =>
                   {
-                      return ModelFormBuilder.ToDataModel(x);
+                      return CrudDtoMapper.MapEntityToDto(x);
                   });
                 // var mappedValues = Mapper.Map<IEnumerable<TCodeTabelModel>>(values);
                 return OkResult(mappedValues);
@@ -79,11 +79,11 @@ namespace SimpleFramework.Core.Web.Base.Controllers
 
             try
             {
-                var entity = ModelFormBuilder.ToCoreModel(model);
+                var entity = CrudDtoMapper.MapDtoToEntity(model);
                 //    var entity = Mapper.Map<TCodeTabelEntity>(model);
                 var insertedEntity = await _writer.InsertAsync(entity);
 
-                return Created($"{Request.Path.Value}/{insertedEntity.Id}", ModelFormBuilder.ToDataModel(insertedEntity));
+                return Created($"{Request.Path.Value}/{insertedEntity.Id}", CrudDtoMapper.MapEntityToDto(insertedEntity));
             }
             catch (ValidationException validationEx)
             {
@@ -105,7 +105,7 @@ namespace SimpleFramework.Core.Web.Base.Controllers
             {
                 if (model == null) throw new ValidationException("model not provided");
                 if (id != model.Id) throw new ValidationException("id does not match model id");
-                var entity = ModelFormBuilder.ToCoreModel(model);
+                var entity = CrudDtoMapper.MapDtoToEntity(model);
                 // var entity = Mapper.Map<TCodeTabelEntity>(model);
                 await _writer.UpdateAsync(entity);
                 return OkResult();

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
-using SimpleFramework.Core.Abstraction;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.CodeAnalysis;
@@ -165,8 +163,11 @@ namespace SimpleFramework.Core
         /// <param name="services"></param>
         public void AddCoreServices(IServiceCollection services)
         {
-            services.Configure<RazorViewEngineOptions>(
-       options => { options.ViewLocationExpanders.Add(new ModuleViewLocationExpander()); });
+            //在使用session之前要注入cacheing，因为session依赖于cache进行存储
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            services.AddSession();
+
+            services.Configure<RazorViewEngineOptions>(options => { options.ViewLocationExpanders.Add(new ModuleViewLocationExpander()); });
             // 确保数据库创建和初始数据
             // CoreEFStartup.InitializeDatabaseAsync(app.ApplicationServices).Wait();
             //Identity配置
@@ -205,8 +206,6 @@ namespace SimpleFramework.Core
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
             services.AddTransient(typeof(IRepositoryWithTypedId<,>), typeof(RepositoryWithTypedId<,>));
 
-
-
             services.AddSingleton<ICurrentUser, CurrentUser>();
             services.AddSingleton<IUserNameResolver, UserNameResolver>();
             services.AddSingleton<IUnitOfWorkAsync>(sp =>
@@ -228,7 +227,7 @@ namespace SimpleFramework.Core
             services.AddTransient(typeof(ICodetableWriter<>), typeof(CodeTabelWriter<>));
             services.AddTransient(typeof(ICodetableReader<>), typeof(CodetableReader<>));
 
-            
+
 
         }
 
@@ -296,6 +295,10 @@ namespace SimpleFramework.Core
 
         private void UseMvc(IApplicationBuilder applicationBuilder)
         {
+            // 重要: session的注册必须在UseMvc之前，因为MVC里面要用 
+            // applicationBuilder.UseSession();
+            applicationBuilder.UseSession(new SessionOptions() { IdleTimeout = TimeSpan.FromMinutes(30) });
+
             applicationBuilder.UseMvc(
               routeBuilder =>
               {

@@ -70,7 +70,7 @@
                                 <legend>Login</legend>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="alert alert-danger" style="display:none">
+                                        <div id="valSummary" class="alert alert-danger" style="display:none">
                                         </div>
                                         <div asp-validation-summary="All" class="text-danger"></div>
                                         <div class="form-group rock-text-box">
@@ -91,7 +91,7 @@
                                         <div class="checkbox">
                                             <label><input asp-for="RememberMe">@Localizer["Remember me?"]</label>
                                         </div>
-                                        <input type="submit" value="@Localizer["Log in"]" id="btnLogin" class="btn btn-primary">
+                                        <input type="submit" value="@Localizer["Log in"]" id="btnlogin" class="btn btn-primary">
                                         <input type="submit" value="@Localizer["Forgot your password?"]" id="btnHelp" class="btn btn-link">
                                     </div>
                                 </div>
@@ -114,10 +114,129 @@
 </div>
 
 <script>
+    //回车键
+    document.onkeydown = function (e) {
+        if (!e) e = window.event;
+        if ((e.keyCode || e.which) == 13) {
+            var btlogin = document.getElementById("btnlogin");
+            btnlogin.click();
+        }
+    }
+
     // add quick fade-in effect to the page
     $(document).ready(function () {
         $("#content").sfFadeIn();
+        //错误提示
+        if (top.$.cookie('learun_login_error') != null) {
+            switch (top.$.cookie('learun_login_error')) {
+                case "Overdue":
+                    formMessage('登录已超时,请重新登录');
+                    break;
+                case "OnLine":
+                    formMessage('您的帐号已在其它地方登录,请重新登录');
+                    break;
+                case "-1":
+                    formMessage('未知错误,请重新登录');
+                    break;
+                default:
+                    break;
+            }
+            top.$.cookie('learun_login_error', '', { path: "/", expires: -1 });
+        }
+        //是否自动登录
+        if (top.$.cookie('learn_autologin') == 1) {
+            $("#autologin").attr("checked", 'true');
+            $("#Email").val(top.$.cookie('learn_username'));
+            $("#Password").val(top.$.cookie('learn_password'));
+            CheckLogin(1);
+        }
+        //设置下次自动登录
+        $("#RememberMe").click(function () {
+            if (!$(this).attr('checked')) {
+                $(this).attr("checked", 'true');
+                top.$.cookie('learn_autologin', 1, { path: "/", expires: 7 });
+            } else {
+                $(this).removeAttr("checked");
+                top.$.cookie('learn_autologin', '', { path: "/", expires: -1 });
+                top.$.cookie('learn_username', '', { path: "/", expires: -1 });
+                top.$.cookie('learn_password', '', { path: "/", expires: -1 });
+            }
+        })
+        //登录按钮事件
+        $("#btnlogin").click(function () {
+            var $username = $("#Email");
+            var $password = $("#Password");
+            //var $verifycode = $("#verifycode");
+            if ($username.val() == "") {
+                $username.focus();
+                formMessage('请输入账户或手机号或邮箱。');
+                return false;
+            } else if ($password.val() == "") {
+                $password.focus();
+                formMessage('请输入密码。');
+                return false;
+            }
+                // else if ($verifycode.val() == "") {
+                //    $verifycode.focus();
+                //    formMessage('请输入验证码。');
+                //    return false;
+                //}
+            else {
+                CheckLogin(0);
+            }
+        });
+        //点击切换验证码
+        $("#login_verifycode").click(function () {
+            $("#verifycode").val('');
+            $("#login_verifycode").attr("src", contentPath + "/Login/VerifyCode?time=" + Math.random());
+        });
+      
     });
+    //登录验证
+    function CheckLogin(autologin) {
+        $("#btnlogin").addClass('active').attr('disabled', 'disabled');
+        $("#btnlogin").find('span').hide();
+
+        var username = $.trim($("#Email").val());
+        var password = $.trim($("#Password").val());
+      //  var verifycode = $.trim($("#verifycode").val());
+        if (top.$.cookie('learn_password') == "" || top.$.cookie('learn_password') == null) {
+            password = $.md5(password);
+        }
+        $.ajax({
+            url: contentPath + "/Login",
+            data: { Email: $.trim(username), password: $.trim(password), verifycode: verifycode, rememberMe: autologin },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.type == 1) {
+                    if (top.$.cookie('learn_autologin') == 1) {
+                        top.$.cookie('learn_username', $.trim(username), { path: "/", expires: 7 });
+                        top.$.cookie('learn_password', $.trim(password), { path: "/", expires: 7 });
+                    }
+                    window.location.href = contentPath + '/Home/AdminDefault';
+                } else {
+                    if (data.message.length >= 30) {
+                        SF.dialogs.alert(data.message)
+                    } else {
+                        formMessage(data.message);
+                    }
+                    $("#btnlogin").removeClass('active').removeAttr('disabled');
+                    $("#btnlogin").find('span').show();
+                    $("#login_verifycode").trigger("click");
+                }
+            }
+        });
+    }
+    //提示信息
+    function formMessage(msg, type) {
+        $('.login_tips').parents('dt').remove();
+        var _class = "login_tips";
+        if (type == 1) {
+            _class = "login_tips-succeed";
+        }
+        $('.form').prepend('<dt><div class="' + _class + '"><i class="fa fa-question-circle"></i>' + msg + '</div></dt>');
+    }
 </script>
 
 <div style="display:none">
