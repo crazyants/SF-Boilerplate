@@ -128,9 +128,36 @@ namespace SimpleFramework.Core.Data
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
+            var entries = _context.ChangeTracker.Entries().ToList();
+            var entriesByState = entries.ToLookup(row => row.State);
+            var processInterceptors = _interceptors != null;
+
+            InterceptionContext intercept = null;
+
+            if (_interceptors != null)
+            {
+                intercept = new InterceptionContext(_interceptors)
+                {
+                    DatabaseContext = _context,
+                    ChangeTracker = _context.ChangeTracker,
+                    Entries = entries,
+                    EntriesByState = entriesByState,
+                };
+            }
+
+            if (intercept != null)
+            {
+                intercept.Before();
+            }
             SyncObjectsStatePreCommit();
             var changesAsync = await _context.SaveChangesAsync(cancellationToken);
             SyncObjectsStatePostCommit();
+
+            if (intercept != null)
+            {
+                intercept.After();
+            }
+
             return changesAsync;
         }
 

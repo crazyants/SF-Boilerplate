@@ -1,4 +1,6 @@
-﻿namespace SimpleFramework.Core.Abstraction.Entitys
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SimpleFramework.Core.Abstraction.Entitys
 {
     /// <summary>
     ///     Provides a base class for your objects which will be persisted to the database.
@@ -8,8 +10,12 @@
     ///     base class leverages this assumption.  If you want an entity with a type other
     ///     than int, such as string, then use <see cref="EntityWithTypedId{IdT}" /> instead.
     /// </summary>
-    public abstract class Entity : EntityWithTypedId<long>
+    public abstract class EntityBase : EntityWithTypedId<long>
     {
-      
+        /// <summary>
+        /// A Serial number for the value in the code table.  This can be used to sort (required).
+        /// </summary>
+        [Required]
+        public int Sortindex { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using SimpleFramework.Core.Abstraction.Entitys;
 
 namespace SimpleFramework.Module.ActivityLog.Models
 {
-    public class Activity : Entity
+    public class Activity : EntityBase
     {
         public long ActivityTypeId { get; set; }
 

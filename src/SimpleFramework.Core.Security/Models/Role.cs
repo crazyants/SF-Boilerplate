@@ -1,5 +1,6 @@
-﻿using SimpleFramework.Core.Models;
+﻿
 using SimpleFramework.Core.Abstraction.Entitys;
+using SimpleFramework.Core.Web.Base.Datatypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

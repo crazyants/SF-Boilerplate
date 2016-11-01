@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Routing;
 
-namespace SimpleFramework.Core.Mvc
+namespace SimpleFramework.Core.Web.Attributes
 {
     public class FormValueRequiredAttribute : ActionMethodSelectorAttribute
     {

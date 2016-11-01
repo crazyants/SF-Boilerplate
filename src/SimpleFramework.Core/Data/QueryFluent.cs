@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Data
 {
-    public sealed class QueryFluent<TEntity> : IQueryFluent<TEntity> where TEntity : Entity
+    public sealed class QueryFluent<TEntity> : IQueryFluent<TEntity> where TEntity : EntityBase
     {
         #region Private Fields
         private readonly Expression<Func<TEntity, bool>> _expression;

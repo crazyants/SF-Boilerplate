@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Builder;
-using SimpleFramework.Core.UI;
+using SimpleFramework.Core.Web.UI.Backends;
 
 namespace SimpleFramework.Core
 {

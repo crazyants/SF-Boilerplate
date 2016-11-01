@@ -9,17 +9,17 @@ namespace SimpleFramework.Core.Settings
         /// Deep load and populate settings values for entity and all nested objects 
         /// </summary>
         /// <param name="entity"></param>
-		void LoadEntitySettingsValues(Entity entity);
+		void LoadEntitySettingsValues(EntityBase entity);
         /// <summary>
         /// Deep save entity and all nested objects settings values
         /// </summary>
         /// <param name="entity"></param>
-        void SaveEntitySettingsValues(Entity entity);
+        void SaveEntitySettingsValues(EntityBase entity);
         /// <summary>
         /// Deep remove entity and all nested objects settings values
         /// </summary>
         /// <param name="entity"></param>
-		void RemoveEntitySettings(Entity entity);
+		void RemoveEntitySettings(EntityBase entity);
 		void SaveSettings(SettingEntry[] settings);
 
         T GetValue<T>(string name, T defaultValue);

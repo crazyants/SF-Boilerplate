@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using SimpleFramework.Core.Models;
+using SimpleFramework.Core.Web.Base.Datatypes;
 
 namespace SimpleFramework.Core.Security
 {

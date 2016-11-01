@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace SimpleFramework.Core.Middleware
+namespace SimpleFramework.Core.Web.Middleware
 {
     public class RequestLoggerMiddleware
     {

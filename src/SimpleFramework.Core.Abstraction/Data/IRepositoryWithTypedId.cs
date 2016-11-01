@@ -33,6 +33,7 @@ namespace SimpleFramework.Core.Abstraction.Data
 
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> Queryable();
-
+        bool Any(Expression<Func<TEntity, bool>> filter = null);
+        int Count(Expression<Func<TEntity, bool>> filter = null);
     }
 }

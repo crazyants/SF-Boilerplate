@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace SimpleFramework.Core.Models
+namespace SimpleFramework.Core.Web.Base.Datatypes
 {
     public sealed class CustomPropertiesDictionary : Dictionary<string, object>
     {
@@ -12,27 +13,27 @@ namespace SimpleFramework.Core.Models
     {
         public ModelBase()
         {
-            this.CustomProperties = new CustomPropertiesDictionary();
+
         }
 
         public virtual void BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
         }
 
-        /// <summary>
-        /// Use this property to store any custom value for your models. 
-        /// </summary>
-        public CustomPropertiesDictionary CustomProperties { get; set; }
+
     }
 
     public abstract partial class EntityModelBase : ModelBase
     {
         public virtual long Id { get; set; }
+
+        [Required(ErrorMessage = ErrorMessages.RequiredField)]
+        public int Sortindex { get; set; }
     }
     public abstract partial class TabbableModel : EntityModelBase
     {
- 
+
         public virtual string[] LoadedTabs { get; set; }
     }
-   
+
 }

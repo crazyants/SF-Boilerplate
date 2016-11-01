@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class PermissionScopeEntity : Entity
+    public class PermissionScopeEntity : EntityBase
     {
         [Required]
         [StringLength(1024)]

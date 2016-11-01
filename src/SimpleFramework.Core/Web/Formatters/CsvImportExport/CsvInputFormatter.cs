@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 
-namespace SimpleFramework.Core.Formatters.CsvImportExport
+namespace SimpleFramework.Core.Web.Formatters.CsvImportExport
 {
     /// <summary>
     /// ContentType: text/csv

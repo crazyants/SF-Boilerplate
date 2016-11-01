@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleFramework.Core.Formatters.CsvImportExport
+namespace SimpleFramework.Core.Web.Formatters.CsvImportExport
 {
     public class CsvFormatterOptions
     {

@@ -19,12 +19,12 @@ namespace SimpleFramework.Core.Data
     {
         #region Private Fields
 
-        private readonly CoreDbContext _context;
+        private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
         private readonly IUnitOfWorkAsync _unitOfWork;
 
         #endregion Private Fields
-        public RepositoryWithTypedId(CoreDbContext context, IUnitOfWorkAsync unitOfWork)
+        public RepositoryWithTypedId(DbContext context, IUnitOfWorkAsync unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;
@@ -117,6 +117,29 @@ namespace SimpleFramework.Core.Data
 
         public IQueryable<TEntity> Queryable() => _dbSet;
 
+        public virtual bool Any(Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Any();
+        }
+
+        public virtual int Count(Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = Context.Set<TEntity>();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Count();
+        }
 
         internal IQueryable<TEntity> Select(
             Expression<Func<TEntity, bool>> predicate = null,

@@ -33,9 +33,11 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using SimpleFramework.Core.Web;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
-using SimpleFramework.Core.Formatters.CsvImportExport;
 using Microsoft.Net.Http.Headers;
 using SimpleFramework.Core.Common.Razor;
+using SimpleFramework.Core.Web.Base.Business;
+using SimpleFramework.Core.Errors;
+using SimpleFramework.Core.Web.Formatters.CsvImportExport;
 
 namespace SimpleFramework.Core
 {
@@ -222,9 +224,11 @@ namespace SimpleFramework.Core
             services.TryAddScoped<ISiteMessageEmailSender, SiteEmailMessageSender>();
             services.TryAddScoped<ISmsSender, SiteSmsSender>();
 
+            services.TryAddScoped<IExceptionMapper, BaseExceptionMapper>();
+            services.AddTransient(typeof(ICodetableWriter<>), typeof(CodeTabelWriter<>));
+            services.AddTransient(typeof(ICodetableReader<>), typeof(CodetableReader<>));
 
-       
-
+            
 
         }
 

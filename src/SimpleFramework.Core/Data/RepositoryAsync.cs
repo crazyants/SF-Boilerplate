@@ -12,13 +12,19 @@ using System.Threading.Tasks;
 namespace SimpleFramework.Core.Data
 {
     public class RepositoryAsync<TEntity> : Repository<TEntity>, IRepositoryAsync<TEntity>
-       where TEntity : Entity
+       where TEntity : EntityBase
     {
         private readonly IUnitOfWorkAsync _unitOfWork;
-        public RepositoryAsync(CoreDbContext context, IUnitOfWorkAsync unitOfWork) : base(context, unitOfWork)
+        public RepositoryAsync(DbContext context, IUnitOfWorkAsync unitOfWork) : base(context, unitOfWork)
         {
 
         }
+
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await DbSet.ToListAsync();
+        }
+
         public virtual async Task<TEntity> FindAsync(params object[] keyValues) => await DbSet.FindAsync(keyValues);
 
         public virtual async Task<TEntity> FindAsync(CancellationToken cancellationToken, params object[] keyValues) => await DbSet.FindAsync(cancellationToken, keyValues);
@@ -47,6 +53,30 @@ namespace SimpleFramework.Core.Data
                   int? pageSize = null)
         {
             return await Select(predicate, orderBy, includes, page, pageSize).ToListAsync();
+        }
+
+        public virtual Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.AnyAsync();
+        }
+
+        public virtual Task<int> CountAsync(Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.CountAsync();
         }
     }
 }

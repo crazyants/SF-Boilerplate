@@ -12,6 +12,7 @@ namespace SimpleFramework.Core.Abstraction.Data
 {
     public interface IRepositoryAsync<TEntity> : IRepository<TEntity> where TEntity : IEntityWithTypedId<long>
     {
+        Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> FindAsync(params object[] keyValues);
         Task<TEntity> FindAsync(CancellationToken cancellationToken, params object[] keyValues);
         Task<bool> DeleteAsync(params object[] keyValues);
@@ -22,5 +23,8 @@ namespace SimpleFramework.Core.Abstraction.Data
             List<Expression<Func<TEntity, object>>> includes = null,
             int? page = null,
             int? pageSize = null);
+
+        Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter = null);
+        Task<int> CountAsync(Expression<Func<TEntity, bool>> filter = null);
     }
 }

@@ -31,5 +31,11 @@ namespace SimpleFramework.Core.Errors.Internal
             internal const string Title = "Bad request.";
             internal const string Code = "UNVALI001";
         }
+
+        internal class EntityNotFoundException
+        {
+            internal const string Title = "Entity Not found.";
+            internal const string Code = "UNVALI001";
+        }
     }
 }

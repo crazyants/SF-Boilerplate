@@ -1,5 +1,5 @@
 ﻿
-namespace SimpleFramework.Core.UI
+namespace SimpleFramework.Core.Web.UI.Backends
 {
   public class BackendStyleSheet
   {

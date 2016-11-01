@@ -61,7 +61,7 @@ namespace SimpleFramework.Core.Common
 
 			retVal.Add(type);
 			var baseType = type.GetTypeInfo().BaseType;
-			while (baseType != typeof(Entity) && baseType != typeof(object) )
+			while (baseType != typeof(EntityBase) && baseType != typeof(object) )
 			{
 				retVal.Add(baseType);
 				baseType = baseType.GetTypeInfo().BaseType;

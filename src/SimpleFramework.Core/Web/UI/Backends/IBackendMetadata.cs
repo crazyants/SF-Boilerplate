@@ -1,7 +1,7 @@
 ﻿ 
 using System.Collections.Generic;
 
-namespace SimpleFramework.Core.UI
+namespace SimpleFramework.Core.Web.UI.Backends
 {
   public interface IBackendMetadata
   {

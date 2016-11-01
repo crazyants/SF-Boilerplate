@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 namespace SimpleFramework.Core.Data
 {
     public class Repository<TEntity> : RepositoryWithTypedId<TEntity, long>, IRepository<TEntity>
-       where TEntity : Entity
+       where TEntity : EntityBase
     {
         private readonly IUnitOfWorkAsync _unitOfWork;
-        public Repository(CoreDbContext context, IUnitOfWorkAsync unitOfWork) : base(context, unitOfWork)
+        public Repository(DbContext context, IUnitOfWorkAsync unitOfWork) : base(context, unitOfWork)
         {
 
         }
