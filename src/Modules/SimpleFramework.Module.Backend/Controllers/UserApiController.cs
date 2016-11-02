@@ -24,7 +24,7 @@ namespace SimpleFramework.Module.Backend.Controllers
         public ActionResult List([FromBody] SmartTableParam param)
         {
             var query = userRepository.Queryable()
-                .Include(x => x.Roles).ThenInclude(r => r.Role)
+               // .Include(x => x.Roles).ThenInclude(r => r.Role)
                 .Where(x => !x.IsDeleted);
 
             if (param.Search.PredicateObject != null)
@@ -49,14 +49,14 @@ namespace SimpleFramework.Module.Backend.Controllers
                     {
                         DateTimeOffset before = search.CreatedOn.before;
                         before = before.Date.AddDays(1);
-                        query = query.Where(x => x.CreatedDate <= before);
+                       // query = query.Where(x => x.CreatedDate <= before);
                     }
 
                     if (search.CreatedOn.after != null)
                     {
                         DateTimeOffset after = search.CreatedOn.after;
                         after = after.Date;
-                        query = query.Where(x => x.CreatedDate >= after);
+                       // query = query.Where(x => x.CreatedDate >= after);
                     }
                 }
             }
@@ -68,8 +68,8 @@ namespace SimpleFramework.Module.Backend.Controllers
                     Id = user.Id,
                     Email = user.Email,
                     FullName = user.FullName,
-                    CreatedOn = user.CreatedDate,
-                    Roles = string.Join(", ", user.Roles.Select(x => x.Role.Name))
+                   // CreatedOn = user.CreatedDate,
+                 //   Roles = string.Join(", ", user.Roles.Select(x => x.Role.Name))
                 });
 
             return Json(users);

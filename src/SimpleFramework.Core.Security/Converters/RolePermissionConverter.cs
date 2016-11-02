@@ -6,6 +6,7 @@ using SimpleFramework.Core.Security;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Common;
 using SimpleFramework.Core.Extensions;
+using System.Collections.Generic;
 
 namespace SimpleFramework.Core.Security.Converters
 {
@@ -30,7 +31,7 @@ namespace SimpleFramework.Core.Security.Converters
             result.PermissionId = source.Id;
             if (source.AssignedScopes != null)
             {
-                result.Scopes = new ObservableCollection<PermissionScopeEntity>(source.AssignedScopes.Where(x=>!String.IsNullOrEmpty(x.Scope)).Select(x => x.ToDataModel()));
+                result.Scopes = new List<PermissionScopeEntity>(source.AssignedScopes.Where(x=>!String.IsNullOrEmpty(x.Scope)).Select(x => x.ToDataModel()));
             }
             return result;
         }

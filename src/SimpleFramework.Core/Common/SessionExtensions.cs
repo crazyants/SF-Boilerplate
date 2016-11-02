@@ -31,7 +31,7 @@ namespace SimpleFramework.Core.Common
             {
                 using (var memoryStream = new MemoryStream(byteArray))
                 {
-                    var obj = ProtoBuf.Serializer.Deserialize<T>(memoryStream);
+                    var obj = ProtoBuf.Serializer.Deserialize<T>(memoryStream);  
                     return obj;
                 }
             }

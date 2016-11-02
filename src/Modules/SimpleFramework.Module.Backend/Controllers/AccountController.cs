@@ -12,6 +12,7 @@ using SimpleFramework.Core.Services;
 using Audit.Mvc;
 using SimpleFramework.Core.Components.Messaging;
 using SimpleFramework.Core.Extensions;
+using SimpleFramework.Core.Web;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
@@ -56,40 +57,40 @@ namespace SimpleFramework.Module.Backend.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [Route("login")]
-      //  [Audit(EventTypeName = "InsertOrderAction", IncludeHeaders = true, IncludeModel = true)]
+        //  [Audit(EventTypeName = "InsertOrderAction", IncludeHeaders = true, IncludeModel = true)]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+            if (result.Succeeded)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning(2, "User account locked out.");
-                    return View("Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
-                }
+                // _logger.LogInformation(1, "User logged in.");
+                //  return RedirectToLocal(returnUrl);
+                return Json(new AjaxResult { state = ResultType.success.ToString(), message = "登录成功。" });
+            }
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            }
+            if (result.IsLockedOut)
+            {
+                //   _logger.LogWarning(2, "用户帐户已锁定.");
+                //   return View("Lockout");
+                return Json(new AjaxResult { state = ResultType.error.ToString(), message = "用户帐户已锁定。" });
+            }
+            else
+            {
+                return Json(new AjaxResult { state = ResultType.error.ToString(), message = "登录失败。" });
             }
 
+            //  return Json(new AjaxResult { state = ResultType.error.ToString(), message = "输入数据不合法!" });
             // If we got this far, something failed, redisplay form
-            return View(model);
+            // return View(model);
         }
 
         //
@@ -124,7 +125,7 @@ namespace SimpleFramework.Module.Backend.Controllers
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                     //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
-                    await _userManager.AddToRoleAsync(user, "customer");
+                   // await _userManager.AddToRoleAsync(user, "customer");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
@@ -397,7 +398,7 @@ namespace SimpleFramework.Module.Backend.Controllers
             }
             else if (model.SelectedProvider == "Phone")
             {
-                await _smsSender.SendSmsAsync(_siteContext,await _userManager.GetPhoneNumberAsync(user), message);
+                await _smsSender.SendSmsAsync(_siteContext, await _userManager.GetPhoneNumberAsync(user), message);
             }
 
             return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });

@@ -2,7 +2,7 @@
 using SimpleFramework.Core.Common;
 using SimpleFramework.Core.Abstraction.Entitys;
 using System.Collections.ObjectModel;
-
+using System.Collections.Generic;
 
 namespace SimpleFramework.Core.Entitys
 {
@@ -10,7 +10,7 @@ namespace SimpleFramework.Core.Entitys
     {
         public RoleEntity()
         {
-            RolePermissions = new NullCollection<RolePermissionEntity>();
+            RolePermissions = new List<RolePermissionEntity>();
         }
 
         public RoleEntity(string name)
@@ -19,6 +19,6 @@ namespace SimpleFramework.Core.Entitys
         }
         public string Description { get; set; }
 
-        public virtual ObservableCollection<RolePermissionEntity> RolePermissions { get; set; }
+        public virtual IList<RolePermissionEntity> RolePermissions { get; set; }
     }
 }

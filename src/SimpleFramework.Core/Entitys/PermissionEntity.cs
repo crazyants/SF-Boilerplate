@@ -12,13 +12,13 @@ namespace SimpleFramework.Core.Entitys
     {
         public PermissionEntity()
         {
-            RolePermissions = new ObservableCollection<RolePermissionEntity>();
+            RolePermissions = new List<RolePermissionEntity>();
         }
         [Required]
         [StringLength(256)]
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ObservableCollection<RolePermissionEntity> RolePermissions { get; set; }
+        public virtual IList<RolePermissionEntity> RolePermissions { get; set; }
     }
 }

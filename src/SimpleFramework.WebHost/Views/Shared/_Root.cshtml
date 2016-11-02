@@ -23,11 +23,13 @@
 <body>
     <environment names="Development">
         <script src="/lib/jquery-1.12.4.min.js"></script>
-        <script src="/lib/jquery.jquery-dotimeout.js"></script>
+
         <script src="/lib/modernizr.js"></script>
-        <script src="/lib/summernote/summernote.min.js"></script>
+        <script src="/lib/cookie/jquery.cookie.js"></script>
         <script src="/lib/jquery.lazyload.min.js" type="text/javascript"></script>
+
         @* 编辑器插件 *@
+        <script src="/lib/summernote/summernote.min.js"></script>
         <script src="/lib/summernote/plugins/SFCodeEditor.js"></script>
         <script src="/lib/summernote/plugins/SFFileBrowser.js"></script>
         <script src="/lib/summernote/plugins/SFImageBrowser.js"></script>
@@ -35,7 +37,7 @@
         <script src="/lib/summernote/plugins/SFPasteFromWord.js"></script>
         <script src="/lib/summernote/plugins/SFPasteText.js"></script>
 
-
+        <script src="/lib/jquery.jquery-dotimeout.js"></script>
         <script src="/lib/jquery-ui-1.10.0.custom.min.js"></script>
         <script src="/lib/bootstrap.min.js"></script>
         <script src="/lib/bootstrap-timepicker.js"></script>
@@ -83,12 +85,10 @@
         <script src="/js/Controls/util.js"></script>
         <script src="/js/Controls/yearPicker.js"></script>
 
-        <script src="/js/Validate/ajaxClientErrorHandler.js"></script>
-        <script src="/js/Validate/validation.js"></script>
-
+        <script src="/lib/jquery.md5.js"></script>
+        <script src="/js/Validate/validator.js"></script>
         <script src="/js/Admin/pageAdmin.js"></script>
         <script src="/js/indextab.js"></script>
-        <script src="/js/Forms/WebUIValidation.js"></script>
     </environment>
     <environment names="Staging,Production">
         @*<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"

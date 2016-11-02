@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "20f7d47e8b403fae16bca2534353ffd3534b0816"
+    "signature": "68027229459f7845b530d5c3c0ec475cc8a1151a"
   },
   "compilationOptions": {},
   "targets": {
@@ -653,6 +653,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.AspNetCore.Routing.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Session/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.DataProtection": "1.0.0",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Caching.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Options": "1.0.0",
+          "System.Security.Cryptography.Algorithms": "4.2.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Session.dll": {}
         }
       },
       "Microsoft.AspNetCore.StaticFiles/1.0.0": {
@@ -1317,7 +1330,7 @@
           "System.Threading.Thread": "4.0.0",
           "System.Xml.ReaderWriter": "4.0.11",
           "System.Xml.XmlDocument": "4.0.1",
-          "System.Xml.XmlSerializer": "4.0.11-rc2-24027"
+          "System.Xml.XmlSerializer": "4.0.11"
         },
         "runtime": {
           "lib/netstandard1.3/NodaTime.dll": {}
@@ -1342,6 +1355,21 @@
         },
         "runtime": {
           "lib/netstandard1.3/crypto.dll": {}
+        }
+      },
+      "protobuf-net/2.1.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1",
+          "NETStandard.Library": "1.6.0",
+          "System.Reflection.Emit": "4.0.1",
+          "System.Reflection.Emit.ILGeneration": "4.0.1",
+          "System.Reflection.Emit.Lightweight": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Runtime.Serialization.Primitives": "4.1.1",
+          "System.Xml.XmlSerializer": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.5/protobuf-net.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -2103,7 +2131,7 @@
           "System.Threading.Tasks": "4.0.11",
           "System.Xml.ReaderWriter": "4.0.11",
           "System.Xml.XmlDocument": "4.0.1",
-          "System.Xml.XmlSerializer": "4.0.11-rc2-24027"
+          "System.Xml.XmlSerializer": "4.0.11"
         },
         "runtime": {
           "lib/netstandard1.3/System.Private.DataContractSerialization.dll": {}
@@ -2659,10 +2687,9 @@
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
       },
-      "System.Xml.XmlSerializer/4.0.11-rc2-24027": {
+      "System.Xml.XmlSerializer/4.0.11": {
         "dependencies": {
           "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
           "System.Globalization": "4.0.11",
           "System.IO": "4.1.0",
           "System.Linq": "4.1.0",
@@ -2749,7 +2776,9 @@
           "IdentityModel": "2.0.0",
           "IdentityServer4.AccessTokenValidation": "1.0.1-rc2",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
-          "Microsoft.Extensions.Configuration.Json": "1.0.0"
+          "Microsoft.Extensions.Configuration.Json": "1.0.0",
+          "protobuf-net": "2.1.0",
+          "Microsoft.AspNetCore.Session": "1.0.0"
         },
         "runtime": {
           "SimpleFramework.Core.dll": {}
@@ -3057,6 +3086,11 @@
       "serviceable": true,
       "sha512": "sha512-Vjjt7TVG0S7ozWyD7vbdy9oQ2LIWebE18hUBM1WMmLPz83w3b8+MKUjz8nP5AnnHXxQskQ5WhYMkICETgXnb+g=="
     },
+    "Microsoft.AspNetCore.Session/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RPoUeyNC0OXCcelURzsf5PZnrFC97HNUhQJMMEhBjmDNSAhFpKxgLJydKC3J/G7FxPkO4ciXu37zafPlA8AZqw=="
+    },
     "Microsoft.AspNetCore.StaticFiles/1.0.0": {
       "type": "package",
       "serviceable": true,
@@ -3306,6 +3340,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-bKqC2Me9ukybNYTBhlYd2sJ6j2kRV7SgB+JfiP2GueYq6QdM4Ym6PYV5eyrqb6KViOyd3zqQfJp0o6UW5ZG+GQ=="
+    },
+    "protobuf-net/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8ijiRUzGcB9SYo2ohIujk5s93MeaXF+/xd9WBGCgS1SqQyOC5gUTnCKIXZPlf8a6UROkK70McJloL4P19IvghQ=="
     },
     "Remotion.Linq/2.1.1": {
       "type": "package",
@@ -3817,10 +3856,10 @@
       "serviceable": true,
       "sha512": "sha512-2eZu6IP+etFVBBFUFzw2w6J21DqIN5eL9Y8r8JfJWUmV28Z5P0SNU01oCisVHQgHsDhHPnmq2s1hJrJCFZWloQ=="
     },
-    "System.Xml.XmlSerializer/4.0.11-rc2-24027": {
+    "System.Xml.XmlSerializer/4.0.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-pbajpRk7iPkxSCrrjzVFpWGk54uBUu4BqrOFtUNXR5pqwKkGtW/8xeHDXnFW7RiP6wKO57cmkOlb7+PxCTpTPw=="
+      "sha512": "sha512-FrazwwqfIXTfq23mfv4zH+BjqkSFNaNFBtjzu3I9NRmG8EELYyrv/fJnttCIwRMFRR/YKXF1hmsMmMEnl55HGw=="
     },
     "System.Xml.XPath/4.0.1": {
       "type": "package",

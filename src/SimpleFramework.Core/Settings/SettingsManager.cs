@@ -139,8 +139,8 @@ namespace SimpleFramework.Core.Settings
                     //Need for real remove object from nested collection (because EF default remove references only)
                     changeTracker.RemoveAction = x => _repository.Delete((SettingEntity)x);
 
-                    var target = new { Settings = new ObservableCollection<SettingEntity>(alreadyExistSettings) };
-                    var source = new { Settings = new ObservableCollection<SettingEntity>(settings.Select(x => x.ToEntity())) };
+                    var target = new { Settings = new List<SettingEntity>(alreadyExistSettings) };
+                    var source = new { Settings = new List<SettingEntity>(settings.Select(x => x.ToEntity())) };
 
                     changeTracker.Attach(target);
                     var settingComparer = AnonymousComparer.Create((SettingEntity x) => String.Join("-", x.Name, x.ObjectType, x.Id));

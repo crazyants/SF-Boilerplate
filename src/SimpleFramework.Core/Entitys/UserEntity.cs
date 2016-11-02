@@ -8,40 +8,30 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class UserEntity : IdentityUser<long, IdentityUserClaim<long>, UserRoleEntity, IdentityUserLogin<long>>, IEntityWithTypedId<long>, IAuditable
+    public class UserEntity : IdentityUser<long, IdentityUserClaim<long>, UserRoleEntity, IdentityUserLogin<long>>, IEntityWithTypedId<long>
     {
         public UserEntity()
         {
-            ApiAccounts = new NullCollection<ApiAccountEntity>();
+            CreatedOn = DateTimeOffset.Now;
+            UpdatedOn = DateTimeOffset.Now;
         }
 
-        public Guid UserGuid { get; set; }
+       public Guid UserGuid { get; set; }
 
         public string FullName { get; set; }
 
         public bool IsDeleted { get; set; }
 
-        public bool IsAdministrator { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
 
-        [StringLength(128)]
-        public string AccountState { get; set; }
-
-        [StringLength(128)]
-        public string UserType { get; set; }
-        
-        public long? CurrentShippingAddressId { get; set; }
-
-        public string CreatedBy { get; set; }
-        public string ModifiedBy { get; set; }
-
-        public DateTimeOffset CreatedDate { get; set; }
-
-        public DateTimeOffset? ModifiedDate { get; set; }
+        public DateTimeOffset UpdatedOn { get; set; }
 
         public virtual IList<UserAddressEntity> UserAddresses { get; set; } = new List<UserAddressEntity>();
 
         public virtual UserAddressEntity CurrentShippingAddress { get; set; }
 
-        public virtual ObservableCollection<ApiAccountEntity> ApiAccounts { get; set; }
+       // public long? CurrentShippingAddressId { get; set; }
+
+        // public virtual IList<ApiAccountEntity> ApiAccounts { get; set; }
     }
 }

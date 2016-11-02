@@ -36,6 +36,9 @@ using SimpleFramework.Core.Common.Razor;
 using SimpleFramework.Core.Web.Base.Business;
 using SimpleFramework.Core.Errors;
 using SimpleFramework.Core.Web.Formatters.CsvImportExport;
+using SimpleFramework.Core.Web.Attributes;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SimpleFramework.Core
 {
@@ -48,8 +51,8 @@ namespace SimpleFramework.Core
                 return new Dictionary<int, Action<IServiceCollection>>()
                 {
                     [0] = this.AddStaticFiles,
-                    [1] = this.AddMvc,
-                    [2] = this.AddCustomizedDataStore,
+                    [1] = this.AddCustomizedDataStore,
+                    [2] = this.AddMvc,
                     [3] = this.AddDistributedCache,
                     [4] = this.AddCoreServices
                 };
@@ -81,10 +84,23 @@ namespace SimpleFramework.Core
 
         private void AddMvc(IServiceCollection services)
         {
-            IMvcBuilder mvcBuilder = services.AddMvc();
 
-            //foreach (Assembly assembly in ExtensionManager.Assemblies)
-            //    mvcBuilder.AddApplicationPart(assembly);
+            //services.AddIdentity<UserEntity, RoleEntity>(configure => { configure.Cookies.ApplicationCookie.LoginPath = "/login"; })
+            //  .AddRoleStore<SimplRoleStore>()
+            //  .AddUserStore<SimplUserStore>()
+            // // .AddEntityFrameworkStores<CoreDbContext, long>()
+            // .AddDefaultTokenProviders();
+
+            services.AddIdentity<UserEntity, RoleEntity>()
+                 .AddEntityFrameworkStores<CoreDbContext,long>()
+                 .AddDefaultTokenProviders();
+
+            IMvcBuilder mvcBuilder = services.AddMvc();
+            mvcBuilder.AddMvcOptions(options =>
+            {
+                options.Filters.AddService(typeof(HandlerExceptionFilter));
+            });
+
             foreach (var module in ExtensionManager.Modules)
                 // Register controller from modules
                 mvcBuilder.AddApplicationPart(module.Assembly);
@@ -136,7 +152,7 @@ namespace SimpleFramework.Core
             //services.AddDbContext<CoreDbContext>(options =>
             //    options.UseMySql(configuration.GetConnectionString("MMysqlDatabase"),
             //        b => b.MigrationsAssembly("SimpleFramework.WebHost")));
-
+            services.AddSingleton<DbContext, CoreDbContext>();
 
         }
         /// <summary>
@@ -173,28 +189,44 @@ namespace SimpleFramework.Core
             //Identity配置
             services.AddScoped<SignInManager<UserEntity>, SimpleSignInManager<UserEntity>>();
 
-            services.AddIdentity<UserEntity, RoleEntity>(configure =>
-            {
-                //配置身份选项
-                configure.Password.RequireDigit = false;//是否需要数字(0-9).
-                configure.Password.RequireLowercase = false;//是否需要小写字母(a-z).
-                configure.Password.RequireUppercase = false;//是否需要大写字母(A-Z).
-                configure.Password.RequireNonAlphanumeric = false;//是否包含非字母或数字字符。
-                configure.Password.RequiredLength = 6;//设置密码长度最小为6
-                                                      //  configure.Cookies.ApplicationCookie.LoginPath = "/login";
-                configure.Cookies.ApplicationCookie.AuthenticationScheme = "Cookies";
-                configure.Cookies.ApplicationCookie.LoginPath = new PathString("/account/login");
-                configure.Cookies.ApplicationCookie.AccessDeniedPath = new PathString("/account/forbidden");
-                configure.Cookies.ApplicationCookie.AutomaticAuthenticate = true;
-                configure.Cookies.ApplicationCookie.AutomaticChallenge = true;
-            })
-              .AddRoleStore<SimplRoleStore>()
-              .AddUserStore<SimplUserStore>()
-              .AddDefaultTokenProviders();
+            //   services.AddAuthentication();
+            //services.AddIdentity<UserEntity, RoleEntity>()
+            //    .AddEntityFrameworkStores<CoreDbContext>()
+            //  //.AddRoleStore<SimplRoleStore>()
+            //  //.AddUserStore<SimplUserStore>()
+            //  .AddDefaultTokenProviders();
+
+
+
+            //services.AddIdentity<UserEntity, RoleEntity>(
+            //               options =>
+            //               {
+            //                   options.Cookies.ApplicationCookie.AutomaticAuthenticate = true;
+            //                   options.Cookies.ApplicationCookie.AutomaticChallenge = true;
+            //               //    options.Cookies.ApplicationCookieAuthenticationScheme = "ApplicationCookie";
+            //                   options.Cookies.ApplicationCookie.AuthenticationScheme = "ApplicationCookie";
+            //                   options.Cookies.ApplicationCookie.LoginPath = new PathString("/User/Login");
+            //                   options.Cookies.ApplicationCookie.LogoutPath = new PathString("/User/Logout");
+            //                   options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            //                   options.Cookies.ApplicationCookie.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+            //                   options.Cookies.ApplicationCookie.SlidingExpiration = true;
+            //                   options.Cookies.ApplicationCookie.CookieHttpOnly = true;
+            //                  // options.Cookies.ApplicationCookie.CookieSecure = CookieSecureOption.SameAsRequest;
+            //                 //  options.Cookies.ApplicationCookie.SystemClock = new SystemClock();
+            //                   options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents();
+            //                   options.Cookies.ApplicationCookie.CookieName = "TBMMNet";
+            //                   options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+            //                   options.Lockout.MaxFailedAccessAttempts = 10;
+            //                   options.Lockout.AllowedForNewUsers = false;
+            //               })
+            //                  .AddRoleStore<SimplRoleStore>()
+            //                  .AddUserStore<SimplUserStore>()
+            //               .AddDefaultTokenProviders();
+
 
             services.AddSingleton<ViewRenderer>();
 
-
+            services.AddScoped<HandlerExceptionFilter>();
             services.AddSingleton<IWidgetInstanceService, WidgetInstanceService>();
 
             services.AddSingleton<IWidgetInstanceService, WidgetInstanceService>();
@@ -244,6 +276,7 @@ namespace SimpleFramework.Core
             return this.GetPrioritizedActions(addMvcActionsByPriorities);
         }
         #endregion
+
         #region MyRegion IApplicationBuilder
 
 
@@ -296,9 +329,37 @@ namespace SimpleFramework.Core
         private void UseMvc(IApplicationBuilder applicationBuilder)
         {
             // 重要: session的注册必须在UseMvc之前，因为MVC里面要用 
-            // applicationBuilder.UseSession();
             applicationBuilder.UseSession(new SessionOptions() { IdleTimeout = TimeSpan.FromMinutes(30) });
+            applicationBuilder.UseIdentity();
 
+            //applicationBuilder.UseCookieAuthentication(new CookieAuthenticationOptions()
+            //{
+            //    ExpireTimeSpan = TimeSpan.FromHours(2),
+            //    AccessDeniedPath = new PathString("/LogIn"),
+            //    AuthenticationScheme = "cookies",
+            //    AutomaticAuthenticate = true,
+            //    AutomaticChallenge = false,
+            //    CookieHttpOnly = true,
+            //    CookieName = "_ath",
+            //    LoginPath = new PathString("/Account/LogIn"),
+            //    LogoutPath = new PathString("/Account/LogOff")
+            //});
+            //applicationBuilder.UseCookieAuthentication(new CookieAuthenticationOptions()
+            //{
+            //   AutomaticAuthenticate = true,
+            //   AutomaticChallenge = true,
+            //   AuthenticationScheme = "ApplicationCookie",
+            //   LoginPath = new PathString("/Account/Login"),
+            //   LogoutPath = new PathString("/Account/Logout"),
+            //   AccessDeniedPath = new PathString("/Account/AccessDenied"),
+            //   ExpireTimeSpan = TimeSpan.FromMinutes(5),
+            //   ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter,
+            //   SlidingExpiration = true,
+            //   CookieHttpOnly = true,
+            //   //CookieSecure = CookieSecureOption.SameAsRequest,
+            //   //SystemClock = new SystemClock(),
+            //   Events = new CookieAuthenticationEvents(),
+            //});
             applicationBuilder.UseMvc(
               routeBuilder =>
               {
@@ -321,48 +382,48 @@ namespace SimpleFramework.Core
             applicationBuilder.UseMultitenancy<SiteContext>();
             //多租户
             var storage = configurationRoot["DevOptions:DbPlatform"];
-            applicationBuilder.UsePerTenant<SiteContext>((ctx, builder) =>
-            {
-                // custom 404 and error page - this preserves the status code (ie 404)
-                if (string.IsNullOrEmpty(ctx.Tenant.SiteFolderName))
-                {
-                    builder.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
-                }
-                else
-                {
-                    builder.UseStatusCodePagesWithReExecute("/" + ctx.Tenant.SiteFolderName + "/Home/Error/{0}");
-                }
+            //    applicationBuilder.UsePerTenant<SiteContext>((ctx, builder) =>
+            //    {
+            //        // custom 404 and error page - this preserves the status code (ie 404)
+            //        if (string.IsNullOrEmpty(ctx.Tenant.SiteFolderName))
+            //        {
+            //            builder.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+            //        }
+            //        else
+            //        {
+            //            builder.UseStatusCodePagesWithReExecute("/" + ctx.Tenant.SiteFolderName + "/Home/Error/{0}");
+            //        }
 
-                // todo how to make this multi tenant for folders?
-                // https://github.com/IdentityServer/IdentityServer4/issues/19
-                //https://github.com/IdentityServer/IdentityServer4/blob/dev/src/IdentityServer4/Configuration/IdentityServerApplicationBuilderExtensions.cs
-                //https://github.com/IdentityServer/IdentityServer4/blob/dev/src/IdentityServer4/Hosting/IdentityServerMiddleware.cs
-                // perhaps will need to plugin custom IEndpointRouter?
-                if (storage == "ef")
-                {
-                    // with this uncommented it breaks folder tenants
-                    // builder.UseIdentityServer();
+            //        // todo how to make this multi tenant for folders?
+            //        // https://github.com/IdentityServer/IdentityServer4/issues/19
+            //        //https://github.com/IdentityServer/IdentityServer4/blob/dev/src/IdentityServer4/Configuration/IdentityServerApplicationBuilderExtensions.cs
+            //        //https://github.com/IdentityServer/IdentityServer4/blob/dev/src/IdentityServer4/Hosting/IdentityServerMiddleware.cs
+            //        // perhaps will need to plugin custom IEndpointRouter?
+            //        if (storage == "ef")
+            //        {
+            //            // with this uncommented it breaks folder tenants
+            //            // builder.UseIdentityServer();
 
-                    // this sets up the authentication for apis within this endpoint
-                    // ie apis that are hosted in the same web app endpoint with the authority server
-                    // this is not needed here if you are only using separate api endpoints
-                    // it is needed in the startup of those separate endpoints
-                    applicationBuilder.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
-                    {
-                        Authority = "https://localhost:44399",
-                        // using the site aliasid as the scope so each tenant has a different scope
-                        // you can view the aliasid from site settings
-                        // clients must be configured with the scope to have access to the apis for the tenant
-                        ScopeName = ctx.Tenant.AliasId,
+            //            // this sets up the authentication for apis within this endpoint
+            //            // ie apis that are hosted in the same web app endpoint with the authority server
+            //            // this is not needed here if you are only using separate api endpoints
+            //            // it is needed in the startup of those separate endpoints
+            //            applicationBuilder.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            //            {
+            //                Authority = "https://localhost:44399",
+            //                // using the site aliasid as the scope so each tenant has a different scope
+            //                // you can view the aliasid from site settings
+            //                // clients must be configured with the scope to have access to the apis for the tenant
+            //                ScopeName = ctx.Tenant.AliasId,
 
-                        RequireHttpsMetadata = true
-                    });
+            //                RequireHttpsMetadata = true
+            //            });
 
-                }
+            //        }
 
 
 
-            });
+            //    });
         }
 
         private Action<IRouteBuilder>[] GetPrioritizedUseMvcActions()

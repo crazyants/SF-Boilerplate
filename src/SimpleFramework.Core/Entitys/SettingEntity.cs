@@ -10,7 +10,7 @@ namespace SimpleFramework.Core.Entitys
     {
         public SettingEntity()
         {
-            SettingValues = new NullCollection<SettingValueEntity>();
+            SettingValues = new List<SettingValueEntity>();
         }
 
         [StringLength(128)]
@@ -39,6 +39,6 @@ namespace SimpleFramework.Core.Entitys
         /// </value>
         public bool IsLocaleDependant { get; set; }
 
-        public virtual ObservableCollection<SettingValueEntity> SettingValues { get; set; }
+        public virtual IList<SettingValueEntity> SettingValues { get; set; }
     }
 }

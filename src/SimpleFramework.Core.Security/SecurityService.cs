@@ -273,7 +273,7 @@ namespace SimpleFramework.Core.Security
 
             if (request.AccountTypes != null && request.AccountTypes.Any())
             {
-                query = query.Where(x => request.AccountTypes.Contains(x.UserType));
+              //  query = query.Where(x => request.AccountTypes.Contains(x.UserType));
             }
             result.TotalCount = query.Count();
 

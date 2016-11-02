@@ -6,6 +6,7 @@ using SimpleFramework.Core.Security;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Common;
 using SimpleFramework.Core.Extensions;
+using System.Collections.Generic;
 
 namespace SimpleFramework.Core.Security.Converters
 {
@@ -34,7 +35,7 @@ namespace SimpleFramework.Core.Security.Converters
 
             if (source.Permissions != null)
             {
-                result.RolePermissions = new ObservableCollection<RolePermissionEntity>(source.Permissions.Select(x=> x.ToRolePemissionDataModel()));
+                result.RolePermissions = new List<RolePermissionEntity>(source.Permissions.Select(x=> x.ToRolePemissionDataModel()));
             }
             return result;
         }
