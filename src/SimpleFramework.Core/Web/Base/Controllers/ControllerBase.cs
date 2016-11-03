@@ -90,5 +90,35 @@ namespace SimpleFramework.Core.Web.Base.Controllers
             var error = new Exception(string.Format(message, args));
             return new ObjectResult(_exceptionMapper.Resolve(error)) { StatusCode = 404 };
         }
+
+
+        /// <summary>
+        /// 返回成功消息
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <returns></returns>
+        protected virtual ActionResult Success(string message)
+        {
+            return Content(new AjaxResult { state = ResultType.success, message = message }.ToJson());
+        }
+        /// <summary>
+        /// 返回成功消息
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <param name="data">数据</param>
+        /// <returns></returns>
+        protected virtual ActionResult Success(string message, object data)
+        {
+            return Content(new AjaxResult { state = ResultType.success, message = message, data = data }.ToJson());
+        }
+        /// <summary>
+        /// 返回失败消息
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <returns></returns>
+        protected virtual ActionResult Error(string message)
+        {
+            return Content(new AjaxResult { state = ResultType.error, message = message }.ToJson());
+        }
     }
 }

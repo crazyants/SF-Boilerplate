@@ -15,6 +15,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
+using SimpleFramework.Core.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace SimpleFramework.Core.Web.Attributes
             }
             _Logger.LogError(new EventId(0), context.Exception, msg);
             // always return a JSON result
-            context.Result = new JsonResult(new AjaxResult { state = ResultType.error.ToString(), message = context.Exception.Message });
+            context.Result = new ContentResult() { Content = (new AjaxResult { state = ResultType.error.ToString(), message = context.Exception.Message }).ToJson() };
 
             base.OnException(context);
         }

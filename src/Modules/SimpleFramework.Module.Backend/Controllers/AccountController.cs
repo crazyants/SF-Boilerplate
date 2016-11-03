@@ -13,6 +13,7 @@ using Audit.Mvc;
 using SimpleFramework.Core.Components.Messaging;
 using SimpleFramework.Core.Extensions;
 using SimpleFramework.Core.Web;
+using SimpleFramework.Core.Common;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
@@ -71,7 +72,7 @@ namespace SimpleFramework.Module.Backend.Controllers
             {
                 // _logger.LogInformation(1, "User logged in.");
                 //  return RedirectToLocal(returnUrl);
-                return Json(new AjaxResult { state = ResultType.success.ToString(), message = "登录成功。" });
+                return Content((new AjaxResult { state = ResultType.success.ToString(), message = "登录成功。" }).ToJson());
             }
             if (result.RequiresTwoFactor)
             {
@@ -81,11 +82,11 @@ namespace SimpleFramework.Module.Backend.Controllers
             {
                 //   _logger.LogWarning(2, "用户帐户已锁定.");
                 //   return View("Lockout");
-                return Json(new AjaxResult { state = ResultType.error.ToString(), message = "用户帐户已锁定。" });
+                return Content((new AjaxResult { state = ResultType.error.ToString(), message = "用户帐户已锁定。" }).ToJson());
             }
             else
             {
-                return Json(new AjaxResult { state = ResultType.error.ToString(), message = "登录失败。" });
+                return Content((new AjaxResult { state = ResultType.error.ToString(), message = "登录失败。" }).ToJson());
             }
 
             //  return Json(new AjaxResult { state = ResultType.error.ToString(), message = "输入数据不合法!" });
@@ -128,10 +129,10 @@ namespace SimpleFramework.Module.Backend.Controllers
 
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 _logger.LogInformation(3, "User created a new account with password.");
-                return Json(new AjaxResult { state = ResultType.success, message = "注册成功!" });
+                return Content((new AjaxResult { state = ResultType.success, message = "注册成功!" }).ToJson());
             }
 
-            return Json(new AjaxResult { state = ResultType.error, message = AddErrors(result) });
+            return Content((new AjaxResult { state = ResultType.error, message = AddErrors(result) }).ToJson());
 
         }
 
@@ -142,7 +143,7 @@ namespace SimpleFramework.Module.Backend.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return Json(new AjaxResult { state = ResultType.success, message = "退出系统" });
+            return Content((new AjaxResult { state = ResultType.success, message = "退出系统" }).ToJson());
             // return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
