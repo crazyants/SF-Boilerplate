@@ -30,7 +30,7 @@ namespace SimpleFramework.Core.Security
             {
                 return new Dictionary<int, Action<IServiceCollection>>()
                 {
-                    [0] = this.AddSecuritys,
+                    [10000] = this.AddSecuritys,
      
                 };
             }

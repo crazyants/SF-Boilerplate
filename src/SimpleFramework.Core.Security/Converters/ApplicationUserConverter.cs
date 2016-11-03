@@ -22,11 +22,11 @@ namespace SimpleFramework.Core.Security.Converters
             retVal = new ApplicationUserExtended();
             retVal.InjectFrom(applicationUser);
             retVal.InjectFrom(dbEntity);
-           // retVal.UserState = EnumUtility.SafeParse<AccountState>( dbEntity.AccountState,AccountState.Approved);
- 
-        //    retVal.Roles = dbEntity.Roles.Select(x => x.Role.ToCoreModel(scopeService)).ToArray();
-            retVal.Permissions = retVal.Roles.SelectMany(x => x.Permissions).SelectMany(x=> x.GetPermissionWithScopeCombinationNames()).Distinct().ToArray();
-          //  retVal.ApiAccounts = dbEntity.ApiAccounts.Select(x => x.ToCoreModel()).ToArray();
+            retVal.UserState = EnumUtility.SafeParse<AccountState>(dbEntity.AccountState, AccountState.Approved);
+
+            retVal.Roles = dbEntity.Roles.Select(x => x.Role.ToCoreModel(scopeService)).ToArray();
+            retVal.Permissions = retVal.Roles.SelectMany(x => x.Permissions).SelectMany(x => x.GetPermissionWithScopeCombinationNames()).Distinct().ToArray();
+            retVal.ApiAccounts = dbEntity.ApiAccounts.Select(x => x.ToCoreModel()).ToArray();
 
             return retVal;
         }
@@ -43,7 +43,7 @@ namespace SimpleFramework.Core.Security.Converters
             var retVal = new UserEntity();
             retVal.InjectFrom(user);
 
-          //  retVal.AccountState = user.UserState.ToString();
+            retVal.AccountState = user.UserState.ToString();
 
             if (user.Roles != null)
             {
@@ -52,28 +52,28 @@ namespace SimpleFramework.Core.Security.Converters
                 {
                     retVal.Roles.Add(item);
                 }
-               
+
             }
             if (user.ApiAccounts != null)
             {
-              //  retVal.ApiAccounts = new List<ApiAccountEntity>(user.ApiAccounts.Select(x => x.ToDataModel()));
+                retVal.ApiAccounts = new ObservableCollection<ApiAccountEntity>(user.ApiAccounts.Select(x => x.ToDataModel()));
             }
             return retVal;
         }
 
         public static void Patch(this UserEntity source, UserEntity target)
         {
-            //var patchInjection = new PatchInjection<UserEntity>(x => x.UserType, x => x.AccountState,x => x.IsAdministrator);
-            //target.InjectFrom(patchInjection, source);
+            var patchInjection = new PatchInjection<UserEntity>(x => x.UserType, x => x.AccountState, x => x.IsAdministrator);
+            target.InjectFrom(patchInjection, source);
 
-            //if (!source.ApiAccounts.IsNullCollection())
-            //{
-            //    source.ApiAccounts.Patch(target.ApiAccounts, (sourceItem, targetItem) => sourceItem.Patch(targetItem));
-            //}
-            //if (!source.Roles.IsNullCollection())
-            //{
-            //    //source.Roles.Patch(target.Roles, (sourceItem, targetItem) => sourceItem.Patch(targetItem));
-            //}
+            if (!source.ApiAccounts.IsNullCollection())
+            {
+                source.ApiAccounts.Patch(target.ApiAccounts, (sourceItem, targetItem) => sourceItem.Patch(targetItem));
+            }
+            if (!source.Roles.IsNullCollection())
+            {
+                source.Roles.Patch(target.Roles, (sourceItem, targetItem) => sourceItem.Patch(targetItem));
+            }
         }
 
         public static void Patch(this ApplicationUserExtended user, UserEntity dbUser)

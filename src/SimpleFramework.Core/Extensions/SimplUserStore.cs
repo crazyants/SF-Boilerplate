@@ -7,7 +7,7 @@ using SimpleFramework.Core.Entitys;
 namespace SimpleFramework.Core.Extensions
 {
     public class SimplUserStore : UserStore<UserEntity, RoleEntity, CoreDbContext, long, IdentityUserClaim<long>, UserRoleEntity,
-        IdentityUserLogin<long>,IdentityUserToken<long>>
+        IdentityUserLogin<long>, IdentityUserToken<long>>
     {
         public SimplUserStore(CoreDbContext context) : base(context)
         {

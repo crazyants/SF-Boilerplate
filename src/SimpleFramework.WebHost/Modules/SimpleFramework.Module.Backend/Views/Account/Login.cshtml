@@ -1,4 +1,4 @@
-﻿@model LoginViewModel
+@model LoginViewModel
 @inject SignInManager<UserEntity> SignInManager
 
 @{
@@ -67,7 +67,7 @@
                                             <label><input asp-for="RememberMe">@Localizer["Remember me?"]</label>
                                         </div>
                                         <input type="submit" value="@Localizer["Log in"]" id="btnlogin" class="btn btn-primary">
-                                        <input type="submit" value="@Localizer["Forgot your password?"]" id="btnHelp" class="btn btn-link">
+                                        <a href="/Account/ForgotPassword" id="btnHelp" class="btn btn-link">@Localizer["Forgot your password?"]</a>
                                     </div>
                                 </div>
                             </fieldset>
@@ -179,7 +179,7 @@
         }
         $.ajax({
             url: contentPath + "/Login",
-            data: { Email: $.trim(username), password: $.trim(password), verifycode: verifycode, rememberMe: autologin, returnUrl: "/" },
+            data: { Email: $.trim(username), password: $.trim(password), verifycode: verifycode, rememberMe: autologin, returnUrl: "" },
             type: "post",
             dataType: "json",
             success: function (data) {
@@ -189,7 +189,7 @@
                         top.$.cookie('learn_password', $.trim(password), { path: "/", expires: 7 });
                     }
                     if (returnUrl = "")
-                        window.location.href = contentPath + '/Home/AdminDefault';
+                        window.location.href = contentPath + '/Admin';
                     else
                         window.location.href = returnUrl;
                 } else {
@@ -224,8 +224,4 @@
         $('.login_tips').show();
     }
 </script>
-
-<div style="display:none">
-    <input type="submit" name="rock-config-trigger" value="" id="rock-config-trigger" />
-    <input type="hidden" name="rock-config-trigger-data" id="rock-config-trigger-data" />
-</div>
+ 

@@ -1,5 +1,3 @@
-The ISC License
-
 Copyright (c) 2015, Contributors
 
 Permission to use, copy, modify, and/or distribute this software

@@ -31,7 +31,7 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("Core_RoleClaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<long>", b =>
@@ -49,7 +49,7 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("Core_UserClaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<long>", b =>
@@ -66,22 +66,7 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<long>", b =>
-                {
-                    b.Property<long>("UserId");
-
-                    b.Property<long>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("Core_UserLogin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<long>", b =>
@@ -96,7 +81,7 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("Core_UserToken");
                 });
 
             modelBuilder.Entity("SimpleFramework.Core.AutoHistorys.Internal.AutoHistory", b =>
@@ -731,7 +716,8 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("AccountState");
+                    b.Property<string>("AccountState")
+                        .HasAnnotation("MaxLength", 128);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -782,7 +768,8 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
 
-                    b.Property<string>("UserType");
+                    b.Property<string>("UserType")
+                        .HasAnnotation("MaxLength", 128);
 
                     b.HasKey("Id");
 
@@ -796,6 +783,21 @@ namespace SimpleFramework.WebHost.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("Core_User");
+                });
+
+            modelBuilder.Entity("SimpleFramework.Core.Entitys.UserRoleEntity", b =>
+                {
+                    b.Property<long>("UserId");
+
+                    b.Property<long>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Core_UserRole");
                 });
 
             modelBuilder.Entity("SimpleFramework.Core.Entitys.WidgetEntity", b =>
@@ -1024,19 +1026,6 @@ namespace SimpleFramework.WebHost.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<long>", b =>
-                {
-                    b.HasOne("SimpleFramework.Core.Entitys.RoleEntity")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SimpleFramework.Core.Entitys.UserEntity")
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("SimpleFramework.Core.Entitys.AddressEntity", b =>
                 {
                     b.HasOne("SimpleFramework.Core.Entitys.CountryEntity", "Country")
@@ -1127,6 +1116,19 @@ namespace SimpleFramework.WebHost.Migrations
                     b.HasOne("SimpleFramework.Core.Entitys.UserAddressEntity", "CurrentShippingAddress")
                         .WithMany()
                         .HasForeignKey("CurrentShippingAddressId");
+                });
+
+            modelBuilder.Entity("SimpleFramework.Core.Entitys.UserRoleEntity", b =>
+                {
+                    b.HasOne("SimpleFramework.Core.Entitys.RoleEntity", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SimpleFramework.Core.Entitys.UserEntity", "User")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SimpleFramework.Core.Entitys.WidgetInstanceEntity", b =>

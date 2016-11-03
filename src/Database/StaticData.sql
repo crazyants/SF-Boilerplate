@@ -1,5 +1,4 @@
-﻿USE [SimpleFramework2]
-GO
+﻿GO
 SET IDENTITY_INSERT [dbo].[Core_Role] ON 
 
 GO
@@ -23,7 +22,7 @@ GO
 SET IDENTITY_INSERT [dbo].[Plugins_InstalledPlugin] ON 
 
 GO
-INSERT [dbo].[Plugins_InstalledPlugin] ([Id], [Active], [DateActivated], [DateDeactivated], [DateInstalled], [Installed], [PluginAssemblyName], [PluginName], [PluginVersion]) VALUES (1, 1, CAST(0x070000000000000000 AS DateTime2), CAST(0x070000000000000000 AS DateTime2), CAST(0x0729AE988793F43B0B AS DateTime2), 1, N'SimpleFramework.Plugin.Blogs', N'ModBlog', N'1.0')
+INSERT [dbo].[Plugins_InstalledPlugin] ([Id], [Active], [DateActivated], [DateDeactivated], [DateInstalled], [Installed], [PluginAssemblyName], [PluginName], [PluginVersion],[Sortindex]) VALUES (1, 1, CAST(0x070000000000000000 AS DateTime2), CAST(0x070000000000000000 AS DateTime2), CAST(0x0729AE988793F43B0B AS DateTime2), 1, N'SimpleFramework.Plugin.Blogs', N'ModBlog', N'1.0',1)
 GO
 SET IDENTITY_INSERT [dbo].[Plugins_InstalledPlugin] OFF
 GO

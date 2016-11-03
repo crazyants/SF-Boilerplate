@@ -113,40 +113,37 @@ namespace SimpleFramework.Module.Backend.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                var user = new UserEntity { UserName = model.Email, Email = model.Email, FullName = model.FullName };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                    // Send an email with this link
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
-                   // await _userManager.AddToRoleAsync(user, "customer");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
-                }
-                AddErrors(result);
+            var user = new UserEntity { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                // Send an email with this link
+                //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                // await _userManager.AddToRoleAsync(user, "customer");
+
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                _logger.LogInformation(3, "User created a new account with password.");
+                return Json(new AjaxResult { state = ResultType.success, message = "注册成功!" });
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return Json(new AjaxResult { state = ResultType.error, message = AddErrors(result) });
+
         }
 
         //
         // POST: /Account/LogOff
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return Json(new AjaxResult { state = ResultType.success, message = "退出系统" });
+            // return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         //
@@ -453,12 +450,14 @@ namespace SimpleFramework.Module.Backend.Controllers
 
         #region Helpers
 
-        private void AddErrors(IdentityResult result)
+        private string AddErrors(IdentityResult result)
         {
+            string errorMsg = "";
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                errorMsg += "\n" + error.Description;
             }
+            return errorMsg;
         }
 
         private Task<UserEntity> GetCurrentUserAsync()

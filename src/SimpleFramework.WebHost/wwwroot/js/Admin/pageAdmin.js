@@ -1,6 +1,6 @@
 (function ($) {
     'use strict';
-    window.SF= window.SF|| {};
+    window.SF = window.SF || {};
     SF.admin = SF.admin || {};
 
     SF.admin.pageAdmin = (function () {
@@ -101,9 +101,9 @@
                 $('a.block-delete').off('click').on('click', function (a, b, c) {
                     var blockId = $(this).attr('href');
 
-                    SF.dialogs.confirm('Are you sure you want to delete this block?', function(result) {
+                    SF.dialogs.confirm('Are you sure you want to delete this block?', function (result) {
 
-                        if (result)   {
+                        if (result) {
 
                             // delete the block instance
                             $.ajax({
@@ -176,6 +176,24 @@
                 },
                 showPageZones: function () {
                     _showPageZones();
+                },
+                //安全退出
+                outLogin: function () {
+                    SF.dialogs.confirm("注：您确定要安全退出本次登录吗？", function (r) {
+                        if (r) {
+                            SF.utility.loading(true, "正在安全退出...");
+                            window.setTimeout(function () {
+                                $.ajax({
+                                    url: "/Account/LogOff",
+                                    type: "post",
+                                    dataType: "json",
+                                    success: function (data) {
+                                        window.location.href = "/Login";
+                                    }
+                                });
+                            }, 500);
+                        }
+                    });
                 }
             };
 

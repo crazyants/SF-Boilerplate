@@ -11,7 +11,8 @@ using SimpleFramework.Web.BreadCrumb;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
-    [BreadCrumb(Title = "Home", UseDefaultRouteUrl = true, Order = 0)]
+    //[Authorize(Roles = "admin")]
+    //  [BreadCrumb(Title = "Home", UseDefaultRouteUrl = true, Order = 0)]
     public class HomeController : Controller
     {
         private IWidgetInstanceService _widgetInstanceService;
@@ -24,8 +25,9 @@ namespace SimpleFramework.Module.Backend.Controllers
             _localizer = localizer;
             _authorizationService = authorizationService;
         }
-        [Audit]
-        [BreadCrumb(Title = "Main index", Order = 1)]
+
+        // [Audit]
+        // [BreadCrumb(Title = "Main index", Order = 1)]
         //[ValidateSFCaptcha(ErrorMessage = "Please enter the security code as a number.",
         //                    IsNumericErrorMessage = "The input value should be a number.",
         //                    CaptchaGeneratorLanguage = Language.English)]

@@ -1,19 +1,34 @@
-﻿/*
-This file in the main entry point for defining Gulp tasks and using Gulp plugins.
-Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
-*/
+﻿/// <binding AfterBuild='copy-modules' />
+"use strict";
 
-var gulp = require("gulp"),
-  autoprefixer = require("gulp-autoprefixer"),
-  concat = require("gulp-concat"),
-  del = require("del"),
-  minifyCss = require("gulp-minify-css"),
-  rename = require("gulp-rename"),
-  runSequence = require("run-sequence"),
-  sass = require("gulp-sass"),
-  tsc = require("gulp-tsc"),
-  uglify = require("gulp-uglify");
+var gulp = require('gulp'),
+    clean = require('gulp-clean');
 
-gulp.task('default', function () {
-    // place code for your default task here
+var paths = {
+    devModules: "../Modules/",
+    hostModules: "./Modules/"
+};
+
+var modules = [
+    'SimpleFramework.Module.ActivityLog',
+    'SimpleFramework.Module.Backend',
+    'SimpleFramework.Module.Localization'
+];
+
+gulp.task('clean-module', function () {
+    return gulp.src([paths.hostModules + '*'], { read: false })
+    .pipe(clean());
+});
+
+
+gulp.task('copy-modules', ['clean-module'], function () {
+    modules.forEach(function (module) {
+        gulp.src([paths.devModules + module + '/Views/**/*.*', paths.devModules + module + '/wwwroot/**/*.*'], { base: module })
+            .pipe(gulp.dest(paths.hostModules + module));
+        gulp.src(paths.devModules + module + '/bin/Debug/netstandard1.6/**/' + module + '.*')
+            .pipe(gulp.dest(paths.hostModules + module + '/bin'));
+    });
+
+    //gulp.src(paths.devModules + 'SimpleFramework.Module.SampleData/SampleContent/**/*.*')
+    //        .pipe(gulp.dest(paths.hostModules + 'SimpleFramework.Module.SampleData/SampleContent'));
 });

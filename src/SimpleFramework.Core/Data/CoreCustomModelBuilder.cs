@@ -16,43 +16,43 @@ namespace SimpleFramework.Core.Data
             modelBuilder.Entity<RoleEntity>()
                 .ToTable("Core_Role");
 
-            //modelBuilder.Entity<IdentityUserClaim<long>>(b =>
-            //{
-            //    b.HasKey(uc => uc.Id);
-            //    b.ToTable("Core_UserClaim");
-            //});
+            modelBuilder.Entity<IdentityUserClaim<long>>(b =>
+            {
+                b.HasKey(uc => uc.Id);
+                b.ToTable("Core_UserClaim");
+            });
 
-            //modelBuilder.Entity<IdentityRoleClaim<long>>(b =>
-            //{
-            //    b.HasKey(rc => rc.Id);
-            //    b.ToTable("Core_RoleClaim");
-            //});
+            modelBuilder.Entity<IdentityRoleClaim<long>>(b =>
+            {
+                b.HasKey(rc => rc.Id);
+                b.ToTable("Core_RoleClaim");
+            });
 
-            //modelBuilder.Entity<UserRoleEntity>(b =>
-            //{
-            //    b.HasKey(ur => new { ur.UserId, ur.RoleId });
-            //    b.HasOne(ur => ur.Role).WithMany(r => r.Users).HasForeignKey(r => r.RoleId);
-            //    b.HasOne(ur => ur.User).WithMany(u => u.Roles).HasForeignKey(u => u.UserId);
-            //    b.ToTable("Core_UserRole");
-            //});
+            modelBuilder.Entity<UserRoleEntity>(b =>
+            {
+                b.HasKey(ur => new { ur.UserId, ur.RoleId });
+                b.HasOne(ur => ur.Role).WithMany(r => r.Users).HasForeignKey(r => r.RoleId);
+                b.HasOne(ur => ur.User).WithMany(u => u.Roles).HasForeignKey(u => u.UserId);
+                b.ToTable("Core_UserRole");
+            });
 
-            //modelBuilder.Entity<IdentityUserLogin<long>>(b =>
-            //{
-            //    b.ToTable("Core_UserLogin");
-            //});
+            modelBuilder.Entity<IdentityUserLogin<long>>(b =>
+            {
+                b.ToTable("Core_UserLogin");
+            });
 
-            //modelBuilder.Entity<IdentityUserToken<long>>(b =>
-            //{
-            //    b.ToTable("Core_UserToken");
-            //});
+            modelBuilder.Entity<IdentityUserToken<long>>(b =>
+            {
+                b.ToTable("Core_UserToken");
+            });
 
-            //modelBuilder.Entity<UserEntity>(u =>
-            //{
-            //    u.HasOne(x => x.CurrentShippingAddress)
-            //   .WithMany()
-            //   .HasForeignKey(x => x.CurrentShippingAddressId)
-            //   .OnDelete(DeleteBehavior.Restrict);
-            //});
+            modelBuilder.Entity<UserEntity>(u =>
+            {
+                u.HasOne(x => x.CurrentShippingAddress)
+               .WithMany()
+               .HasForeignKey(x => x.CurrentShippingAddressId)
+               .OnDelete(DeleteBehavior.Restrict);
+            });
 
             modelBuilder.Entity<UserAddressEntity>()
                 .HasOne(x => x.User)
@@ -97,18 +97,18 @@ namespace SimpleFramework.Core.Data
                 b.ToTable("Core_PermissionScope");
             });
 
- 
+
             // Relations
-            //modelBuilder.Entity<ApiAccountEntity>()
-            //    .HasOne(x => x.Account)
-            //    .WithMany(x => x.ApiAccounts)
-            //    .HasForeignKey(x => x.AccountId);
- 
+            modelBuilder.Entity<ApiAccountEntity>()
+                .HasOne(x => x.Account)
+                .WithMany(x => x.ApiAccounts)
+                .HasForeignKey(x => x.AccountId);
+
 
             modelBuilder.Entity<RolePermissionEntity>()
                 .HasOne(x => x.Permission)
                 .WithMany(x => x.RolePermissions)
-                .HasForeignKey(x => x.PermissionId).OnDelete( DeleteBehavior.Restrict);
+                .HasForeignKey(x => x.PermissionId).OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<RolePermissionEntity>()
                 .HasOne(x => x.Role)
@@ -134,7 +134,7 @@ namespace SimpleFramework.Core.Data
                 b.HasKey(uc => uc.Id);
                 b.ToTable("Core_SettingValue");
             });
- 
+
             modelBuilder.Entity<SettingValueEntity>()
                 .HasOne(x => x.Setting)
                 .WithMany(x => x.SettingValues)
@@ -142,7 +142,7 @@ namespace SimpleFramework.Core.Data
 
             #endregion
 
-            
+
 
             // enable auto history
             modelBuilder.EnableAutoHistory();

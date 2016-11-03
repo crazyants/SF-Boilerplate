@@ -108,7 +108,7 @@
                                                     <li><a id="hlMyProfile" href="/Person/1">账户管理</a></li>
                                                     <li><a href="/MyDashboard">控制台</a></li>
                                                     <li class="divider"></li>
-                                                    <li><a id="lbLoginLogout">注销</a></li>
+                                                    <li><a onclick="SF.admin.pageAdmin.outLogin()">注销</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -173,7 +173,7 @@
             </nav>
         </header>
         <main>
-          @RenderBody()
+            @RenderBody()
         </main>
         <footer>
             <hr>
@@ -254,6 +254,7 @@
 
 <script>
     $(function ($) {
+       
         //$("body").css("overflow","hidden");
         $("#content-wrapper").find('.mainContent').height($(window).height() - 100);
         $(window).resize(function (e) {

@@ -5,7 +5,7 @@ using SimpleFramework.Core.Entitys;
 
 namespace SimpleFramework.Core.Extensions
 {
-    public class SimplRoleStore: RoleStore<RoleEntity, CoreDbContext, long, UserRoleEntity, IdentityRoleClaim<long>>
+    public class SimplRoleStore : RoleStore<RoleEntity, CoreDbContext, long, UserRoleEntity, IdentityRoleClaim<long>>
     {
         public SimplRoleStore(CoreDbContext context) : base(context)
         {

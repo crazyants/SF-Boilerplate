@@ -28,7 +28,7 @@ namespace SimpleFramework.Core.Plugins
             {
                 return new Dictionary<int, Action<IServiceCollection>>()
                 {
-                    [0] = this.AddPlugins,
+                    [9999] = this.AddPlugins,
                     [10000] = this.AddPluginManager
                 };
             }
@@ -40,7 +40,7 @@ namespace SimpleFramework.Core.Plugins
             {
                 return new Dictionary<int, Action<IApplicationBuilder>>()
                 {
-                    [0] = this.UseMvcWithPlugin,
+                    [9999] = this.UseMvcWithPlugin,
                     [10000] = this.AddPluginCustomizedMvc
                 };
             }

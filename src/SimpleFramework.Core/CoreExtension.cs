@@ -39,6 +39,8 @@ using SimpleFramework.Core.Web.Formatters.CsvImportExport;
 using SimpleFramework.Core.Web.Attributes;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace SimpleFramework.Core
 {
@@ -52,9 +54,9 @@ namespace SimpleFramework.Core
                 {
                     [0] = this.AddStaticFiles,
                     [1] = this.AddCustomizedDataStore,
-                    [2] = this.AddMvc,
-                    [3] = this.AddDistributedCache,
-                    [4] = this.AddCoreServices
+                    [2] = this.AddCoreServices,
+                    //  [3] = this.AddDistributedCache,
+                    [4] = this.AddMvc
                 };
             }
         }
@@ -85,15 +87,6 @@ namespace SimpleFramework.Core
         private void AddMvc(IServiceCollection services)
         {
 
-            //services.AddIdentity<UserEntity, RoleEntity>(configure => { configure.Cookies.ApplicationCookie.LoginPath = "/login"; })
-            //  .AddRoleStore<SimplRoleStore>()
-            //  .AddUserStore<SimplUserStore>()
-            // // .AddEntityFrameworkStores<CoreDbContext, long>()
-            // .AddDefaultTokenProviders();
-
-            services.AddIdentity<UserEntity, RoleEntity>()
-                 .AddEntityFrameworkStores<CoreDbContext,long>()
-                 .AddDefaultTokenProviders();
 
             IMvcBuilder mvcBuilder = services.AddMvc();
             mvcBuilder.AddMvcOptions(options =>
@@ -142,9 +135,7 @@ namespace SimpleFramework.Core
         /// <returns></returns>
         public void AddCustomizedDataStore(IServiceCollection services)
         {
-            //        services.AddEntityFramework()
-            //.AddSqlServer()
-            //.AddDbContext<CoreDbContext>();
+
             services.AddDbContext<CoreDbContext>(options =>
                 options.UseSqlServer(this.configurationRoot.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("SimpleFramework.WebHost")));
@@ -188,41 +179,64 @@ namespace SimpleFramework.Core
             // CoreEFStartup.InitializeDatabaseAsync(app.ApplicationServices).Wait();
             //Identity配置
             services.AddScoped<SignInManager<UserEntity>, SimpleSignInManager<UserEntity>>();
-
-            //   services.AddAuthentication();
-            //services.AddIdentity<UserEntity, RoleEntity>()
-            //    .AddEntityFrameworkStores<CoreDbContext>()
-            //  //.AddRoleStore<SimplRoleStore>()
-            //  //.AddUserStore<SimplUserStore>()
-            //  .AddDefaultTokenProviders();
-
-
-
-            //services.AddIdentity<UserEntity, RoleEntity>(
-            //               options =>
-            //               {
-            //                   options.Cookies.ApplicationCookie.AutomaticAuthenticate = true;
-            //                   options.Cookies.ApplicationCookie.AutomaticChallenge = true;
-            //               //    options.Cookies.ApplicationCookieAuthenticationScheme = "ApplicationCookie";
-            //                   options.Cookies.ApplicationCookie.AuthenticationScheme = "ApplicationCookie";
-            //                   options.Cookies.ApplicationCookie.LoginPath = new PathString("/User/Login");
-            //                   options.Cookies.ApplicationCookie.LogoutPath = new PathString("/User/Logout");
-            //                   options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-            //                   options.Cookies.ApplicationCookie.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-            //                   options.Cookies.ApplicationCookie.SlidingExpiration = true;
-            //                   options.Cookies.ApplicationCookie.CookieHttpOnly = true;
-            //                  // options.Cookies.ApplicationCookie.CookieSecure = CookieSecureOption.SameAsRequest;
-            //                 //  options.Cookies.ApplicationCookie.SystemClock = new SystemClock();
-            //                   options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents();
-            //                   options.Cookies.ApplicationCookie.CookieName = "TBMMNet";
-            //                   options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-            //                   options.Lockout.MaxFailedAccessAttempts = 10;
-            //                   options.Lockout.AllowedForNewUsers = false;
-            //               })
-            //                  .AddRoleStore<SimplRoleStore>()
-            //                  .AddUserStore<SimplUserStore>()
-            //               .AddDefaultTokenProviders();
-
+            //注意 必须在AddMvc之前注册
+            services.AddIdentity<UserEntity, RoleEntity>(configure =>
+            {
+                //配置身份选项
+                configure.Password.RequireDigit = false;//是否需要数字(0-9).
+                configure.Password.RequireLowercase = false;//是否需要小写字母(a-z).
+                configure.Password.RequireUppercase = false;//是否需要大写字母(A-Z).
+                configure.Password.RequireNonAlphanumeric = false;//是否包含非字母或数字字符。
+                configure.Password.RequiredLength = 6;//设置密码长度最小为6
+                                                      //  configure.Cookies.ApplicationCookie.LoginPath = "/login";
+                configure.Cookies.ApplicationCookie.AuthenticationScheme = "Cookies";
+                configure.Cookies.ApplicationCookie.LoginPath = new PathString("/login");
+                configure.Cookies.ApplicationCookie.AccessDeniedPath = new PathString("/account/forbidden");
+                configure.Cookies.ApplicationCookie.AutomaticAuthenticate = true;
+                configure.Cookies.ApplicationCookie.AutomaticChallenge = true;
+            })
+              .AddRoleStore<SimplRoleStore>()
+              .AddUserStore<SimplUserStore>()
+             .AddDefaultTokenProviders();
+            //配置身份选项
+            //services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Cookies = new IdentityCookieOptions
+            //    {
+            //        ApplicationCookie = new CookieAuthenticationOptions
+            //        {
+            //            LoginPath = "/login",
+            //            AuthenticationScheme = "ApplicationCookie",
+            //            AccessDeniedPath = new PathString("/account/forbidden"),
+            //            AutomaticAuthenticate = true,
+            //            AutomaticChallenge = true,
+            //            ExpireTimeSpan = TimeSpan.FromMinutes(5),
+            //            ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter,
+            //        }
+            //    };
+            //    options.Lockout = new LockoutOptions
+            //    {
+            //        DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10),
+            //        MaxFailedAccessAttempts = 10,
+            //        AllowedForNewUsers = false,
+            //    };
+            //    options.Password = new PasswordOptions
+            //    {
+            //        RequireDigit = false,//是否需要数字(0-9).
+            //        RequireLowercase = false,//是否需要小写字母(a-z).
+            //        RequireUppercase = false,//是否需要大写字母(A-Z).
+            //        RequireNonAlphanumeric = false,//是否包含非字母或数字字符。
+            //        RequiredLength = 6,//设置密码长度最小为6
+            //    };
+            //    options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
+            //    {
+            //        OnRedirectToLogin = ctx =>
+            //        {
+            //            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            //            return Task.FromResult<object>(null);
+            //        }
+            //    };
+            //});
 
             services.AddSingleton<ViewRenderer>();
 
@@ -332,34 +346,7 @@ namespace SimpleFramework.Core
             applicationBuilder.UseSession(new SessionOptions() { IdleTimeout = TimeSpan.FromMinutes(30) });
             applicationBuilder.UseIdentity();
 
-            //applicationBuilder.UseCookieAuthentication(new CookieAuthenticationOptions()
-            //{
-            //    ExpireTimeSpan = TimeSpan.FromHours(2),
-            //    AccessDeniedPath = new PathString("/LogIn"),
-            //    AuthenticationScheme = "cookies",
-            //    AutomaticAuthenticate = true,
-            //    AutomaticChallenge = false,
-            //    CookieHttpOnly = true,
-            //    CookieName = "_ath",
-            //    LoginPath = new PathString("/Account/LogIn"),
-            //    LogoutPath = new PathString("/Account/LogOff")
-            //});
-            //applicationBuilder.UseCookieAuthentication(new CookieAuthenticationOptions()
-            //{
-            //   AutomaticAuthenticate = true,
-            //   AutomaticChallenge = true,
-            //   AuthenticationScheme = "ApplicationCookie",
-            //   LoginPath = new PathString("/Account/Login"),
-            //   LogoutPath = new PathString("/Account/Logout"),
-            //   AccessDeniedPath = new PathString("/Account/AccessDenied"),
-            //   ExpireTimeSpan = TimeSpan.FromMinutes(5),
-            //   ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter,
-            //   SlidingExpiration = true,
-            //   CookieHttpOnly = true,
-            //   //CookieSecure = CookieSecureOption.SameAsRequest,
-            //   //SystemClock = new SystemClock(),
-            //   Events = new CookieAuthenticationEvents(),
-            //});
+
             applicationBuilder.UseMvc(
               routeBuilder =>
               {
@@ -379,9 +366,9 @@ namespace SimpleFramework.Core
               }
             );
 
-            applicationBuilder.UseMultitenancy<SiteContext>();
+            //  applicationBuilder.UseMultitenancy<SiteContext>();
             //多租户
-            var storage = configurationRoot["DevOptions:DbPlatform"];
+            // var storage = configurationRoot["DevOptions:DbPlatform"];
             //    applicationBuilder.UsePerTenant<SiteContext>((ctx, builder) =>
             //    {
             //        // custom 404 and error page - this preserves the status code (ie 404)
