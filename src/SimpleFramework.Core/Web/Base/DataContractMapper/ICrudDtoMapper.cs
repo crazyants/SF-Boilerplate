@@ -8,7 +8,7 @@ namespace SimpleFramework.Core.Web.Base.DataContractMapper
     /// 从模型构建表单的构建器的接口
     /// </summary>
     public interface ICrudDtoMapper<TEntity, TDto>
-        where TEntity : EntityBase
+        where TEntity : IEntityWithTypedId<long>
         where TDto : EntityModelBase
     {
 

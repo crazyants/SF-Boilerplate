@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SimpleFramework.Core.Web.Base.Datatypes
 {
-    public sealed class CustomPropertiesDictionary : Dictionary<string, object>
-    {
-    }
+    /// <summary>
+    /// 模型基类
+    /// </summary>
     public abstract partial class ModelBase
     {
         public ModelBase()
@@ -22,7 +22,9 @@ namespace SimpleFramework.Core.Web.Base.Datatypes
 
 
     }
-
+    /// <summary>
+    /// 模型基类
+    /// </summary>
     public abstract partial class EntityModelBase : ModelBase
     {
         public virtual long Id { get; set; }

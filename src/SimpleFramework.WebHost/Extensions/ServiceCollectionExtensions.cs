@@ -12,21 +12,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SimpleFramework.Core.Abstraction;
-using SimpleFramework.Core.Abstraction.Data;
-using SimpleFramework.Core.Data;
-using SimpleFramework.Core.Entitys;
-using SimpleFramework.Core.Abstraction.Data.UnitOfWork;
-using Microsoft.Extensions.Caching.SqlServer;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.AspNetCore.Identity;
-using SimpleFramework.Core.Plugins.Models;
-using SimpleFramework.Core.Services;
-using SimpleFramework.Core.Extensions;
-using SimpleFramework.Core;
-using SimpleFramework.Core.Interceptors;
-using Microsoft.AspNetCore.Mvc.Razor;
-using SimpleFramework.Core.Web;
 
 namespace SimpleFramework.WebHost.Extensions
 {

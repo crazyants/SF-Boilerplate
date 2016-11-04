@@ -25,10 +25,6 @@
           "Hangfire": "1.6.5",
           "SimpleFramework.Core": "1.0.0",
           "SimpleFramework.Core.Security": "1.0.0",
-          "SimpleFramework.Core.Plugins": "1.0.0",
-          "SimpleFramework.Web.Navigation": "1.0.0",
-          "SimpleFramework.Core.Scheduler": "1.0.0",
-          "SimpleFramework.Web.BreadCrumb": "1.0.0",
           "SimpleFramework.Web.Captcha": "1.0.0",
           "SimpleFramework.Web.Control": "1.0.0"
         },
@@ -3008,56 +3004,6 @@
           "SimpleFramework.Core.Abstraction.dll": {}
         }
       },
-      "SimpleFramework.Core.Plugins/1.0.0": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
-          "Microsoft.EntityFrameworkCore": "1.0.1",
-          "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-          "MediatR": "2.1.0",
-          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "CacheManager.Core": "0.9.1",
-          "MailKit": "1.4.0",
-          "MimeKit": "1.4.0",
-          "NodaTime": "2.0.0-alpha20160523",
-          "SimpleFramework.Core.Abstraction": "1.0.0",
-          "valueinjecter": "3.1.1.3",
-          "LinqKit": "1.1.7.3",
-          "SimpleFramework.Core": "1.0.0"
-        },
-        "runtime": {
-          "SimpleFramework.Core.Plugins.dll": {}
-        }
-      },
-      "SimpleFramework.Core.Scheduler/1.0.0": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
-          "Microsoft.EntityFrameworkCore": "1.0.1",
-          "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-          "MediatR": "2.1.0",
-          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "CacheManager.Core": "0.9.1",
-          "MailKit": "1.4.0",
-          "MimeKit": "1.4.0",
-          "NodaTime": "2.0.0-alpha20160523",
-          "SimpleFramework.Core.Abstraction": "1.0.0",
-          "valueinjecter": "3.1.1.3",
-          "LinqKit": "1.1.7.3",
-          "SimpleFramework.Core": "1.0.0"
-        },
-        "runtime": {
-          "SimpleFramework.Core.Scheduler.dll": {}
-        }
-      },
       "SimpleFramework.Core.Security/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -3081,31 +3027,6 @@
         },
         "runtime": {
           "SimpleFramework.Core.Security.dll": {}
-        }
-      },
-      "SimpleFramework.Web.BreadCrumb/1.0.0": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
-          "Microsoft.EntityFrameworkCore": "1.0.1",
-          "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-          "MediatR": "2.1.0",
-          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "CacheManager.Core": "0.9.1",
-          "MailKit": "1.4.0",
-          "MimeKit": "1.4.0",
-          "NodaTime": "2.0.0-alpha20160523",
-          "SimpleFramework.Core.Abstraction": "1.0.0",
-          "valueinjecter": "3.1.1.3",
-          "LinqKit": "1.1.7.3",
-          "SimpleFramework.Core": "1.0.0"
-        },
-        "runtime": {
-          "SimpleFramework.Web.BreadCrumb.dll": {}
         }
       },
       "SimpleFramework.Web.Captcha/1.0.0": {
@@ -4308,22 +4229,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "SimpleFramework.Core.Plugins/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SimpleFramework.Core.Scheduler/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "SimpleFramework.Core.Security/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SimpleFramework.Web.BreadCrumb/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

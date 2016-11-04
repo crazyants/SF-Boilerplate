@@ -61,3 +61,112 @@ $.fn.jqGridRow = function () {
     }
     return json;
 }
+$.fn.dataGrid = function (options) {
+    var defaults = {
+        datatype: "json",
+        autowidth: true,
+        rownumbers: true,
+        shrinkToFit: false,
+        gridview: true
+    };
+    var options = $.extend(defaults, options);
+    var $element = $(this);
+    options["onSelectRow"] = function (rowid) {
+        var length = $(this).jqGrid("getGridParam", "selrow").length;
+        var $operate = $(".operate");
+        if (length > 0) {
+            $operate.animate({ "left": 0 }, 200);
+        } else {
+            $operate.animate({ "left": '-100.1%' }, 200);
+        }
+        $operate.find('.close').click(function () {
+            $operate.animate({ "left": '-100.1%' }, 200);
+        })
+    };
+    $element.jqGrid(options);
+};
+
+
+$.fn.GetWebControls = function (keyValue) {
+    var reVal = "";
+    $(this).find('input,select,textarea,.ui-select').each(function (r) {
+        var id = $(this).attr('id');
+        var type = $(this).attr('type');
+        switch (type) {
+            case "checkbox":
+                if ($("#" + id).is(":checked")) {
+                    reVal += '"' + id + '"' + ':' + '"1",'
+                } else {
+                    reVal += '"' + id + '"' + ':' + '"0",'
+                }
+                break;
+            case "select":
+                var value = $("#" + id).attr('data-value');
+                if (value == "") {
+                    value = "&nbsp;";
+                }
+                reVal += '"' + id + '"' + ':' + '"' + $.trim(value) + '",'
+                break;
+            case "selectTree":
+                var value = $("#" + id).attr('data-value');
+                if (value == "") {
+                    value = "&nbsp;";
+                }
+                reVal += '"' + id + '"' + ':' + '"' + $.trim(value) + '",'
+                break;
+            default:
+                var value = $("#" + id).val();
+                if (value == "") {
+                    value = "&nbsp;";
+                }
+                reVal += '"' + id + '"' + ':' + '"' + $.trim(value) + '",'
+                break;
+        }
+    });
+    reVal = reVal.substr(0, reVal.length - 1);
+    if (!keyValue) {
+        reVal = reVal.replace(/&nbsp;/g, '');
+    }
+    reVal = reVal.replace(/\\/g, '\\\\');
+    reVal = reVal.replace(/\n/g, '\\n');
+    var postdata = jQuery.parseJSON('{' + reVal + '}');
+    //×èÖ¹Î±ÔìÇëÇó
+    if ($('[name=__RequestVerificationToken]').length > 0) {
+        postdata["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
+    }
+    return postdata;
+};
+$.fn.SetWebControls = function (data) {
+    var $id = $(this)
+    for (var key in data) {
+        var id = $id.find('#' + key);
+        if (id.attr('id')) {
+            var type = id.attr('type');
+            if (id.hasClass("input-datepicker")) {
+                type = "datepicker";
+            }
+            var value = $.trim(data[key]).replace(/&nbsp;/g, '');
+            switch (type) {
+                case "checkbox":
+                    if (value == 1) {
+                        id.attr("checked", 'checked');
+                    } else {
+                        id.removeAttr("checked");
+                    }
+                    break;
+                    //case "select":
+                    //  id.ComboBoxSetValue(value);
+                    //    break;
+                    // case "selectTree":
+                    //     id.ComboBoxTreeSetValue(value);
+                    //     break;
+                case "datepicker":
+                    id.val(formatDate(value, 'yyyy-MM-dd'));
+                    break;
+                default:
+                    id.val(value);
+                    break;
+            }
+        }
+    }
+}

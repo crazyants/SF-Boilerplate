@@ -28,8 +28,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 services.TryAddSingleton<NavigationOptions, NavigationOptions>();
             }
          
-            services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+         
             services.TryAddScoped<ITreeCacheKeyResolver, DefaultCacheKeyResolver>();
             services.TryAddScoped<ITreeCache, MemoryTreeCache>();
             services.TryAddScoped<INavigationTreeBuilder, XmlNavigationTreeBuilder>();

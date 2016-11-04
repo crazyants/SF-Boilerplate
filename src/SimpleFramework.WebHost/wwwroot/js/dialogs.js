@@ -1,5 +1,5 @@
 (function ($) {
-    window.SF= window.SF|| {};
+    window.SF = window.SF || {};
 
     SF.dialogs = (function () {
         var _dialogs = {},
@@ -73,6 +73,67 @@
                             }
                         }
                     });
+                },
+
+                confirmAjax: function (options) {
+                    var defaults = {
+                        msg: "提示信息",
+                        loading: "正在处理数据...",
+                        url: "",
+                        param: [],
+                        type: "post",
+                        dataType: "json",
+                        success: null
+                    };
+                    var options = $.extend(defaults, options);
+                    bootbox.dialog({
+                        message: options.msg,
+                        buttons: {
+                            ok: {
+                                label: 'OK',
+                                className: 'btn-primary',
+                                callback: function () {
+                                    Loading(true, options.loading);
+                                    window.setTimeout(function () {
+                                        var postdata = options.param;
+                                        if ($('[name=__RequestVerificationToken]').length > 0) {
+                                            postdata["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
+                                        }
+                                        $.ajax({
+                                            url: options.url,
+                                            data: postdata,
+                                            type: options.type,
+                                            dataType: options.dataType,
+                                            success: function (data) {
+                                                Loading(false);
+                                                if (data.state != "success") {
+                                                    dialogs.alert(data.message);
+                                                } else {
+                                                    dialogs.alert(data.message);
+                                                    options.success(data);
+                                                }
+                                            },
+                                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                                Loading(false);
+                                                dialogs.alert(errorThrown);
+                                            },
+                                            beforeSend: function () {
+                                                Loading(true, options.loading);
+                                            },
+                                            complete: function () {
+                                                Loading(false);
+                                            }
+                                        });
+                                    }, 200);
+                                }
+                            },
+                            cancel: {
+                                label: 'Cancel',
+                                className: 'btn-secondary',
+                            }
+                        }
+                    });
+
                 },
 
                 // Updates the modal so that scrolling works

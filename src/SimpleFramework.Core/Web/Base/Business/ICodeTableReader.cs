@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Web.Base.Business
 {
-    public interface ICodetableReader<T>  where T : EntityBase
+    public interface ICodetableReader<T>  where T : IEntityWithTypedId<long>
     {
         Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> GetAll();

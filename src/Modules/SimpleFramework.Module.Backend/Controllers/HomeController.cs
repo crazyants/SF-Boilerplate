@@ -7,11 +7,11 @@ using Audit.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using SimpleFramework.Core.Security;
 using System.Threading.Tasks;
-using SimpleFramework.Web.BreadCrumb;
+
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     //  [BreadCrumb(Title = "Home", UseDefaultRouteUrl = true, Order = 0)]
     public class HomeController : Controller
     {
@@ -26,7 +26,7 @@ namespace SimpleFramework.Module.Backend.Controllers
             _authorizationService = authorizationService;
         }
 
-        // [Audit]
+         [Audit]
         // [BreadCrumb(Title = "Main index", Order = 1)]
         //[ValidateSFCaptcha(ErrorMessage = "Please enter the security code as a number.",
         //                    IsNumericErrorMessage = "The input value should be a number.",
@@ -62,7 +62,7 @@ namespace SimpleFramework.Module.Backend.Controllers
         /// 测试授权
         /// </summary>
         /// <returns></returns>
-        [BreadCrumb(Title = "Authoer", Order = 3)]
+      //  [BreadCrumb(Title = "Authoer", Order = 3)]
         public async Task<ActionResult> Authoer()
         {
             if (!await _authorizationService.AuthorizeAsync(User, GobalPermissions.AccessAdminPanel))
@@ -84,23 +84,23 @@ namespace SimpleFramework.Module.Backend.Controllers
 
             return View();
         }
-        [BreadCrumb(Title = "Posts list", Order = 3)]
+       // [BreadCrumb(Title = "Posts list", Order = 3)]
         public ActionResult Posts()
         {
-            this.SetCurrentBreadCrumbTitle("dynamic title 1");
+            //this.SetCurrentBreadCrumbTitle("dynamic title 1");
 
-            this.AddBreadCrumb(new BreadCrumb
-            {
-                Title = "Wiki",
-                Url = string.Format("{0}?id=1", Url.Action("Index", "Home")),
-                Order = 1
-            });
-            this.AddBreadCrumb(new BreadCrumb
-            {
-                Title = "Lab",
-                Url = string.Format("{0}?id=2", Url.Action("Index", "Home")),
-                Order = 2
-            });
+            //this.AddBreadCrumb(new BreadCrumb
+            //{
+            //    Title = "Wiki",
+            //    Url = string.Format("{0}?id=1", Url.Action("Index", "Home")),
+            //    Order = 1
+            //});
+            //this.AddBreadCrumb(new BreadCrumb
+            //{
+            //    Title = "Lab",
+            //    Url = string.Format("{0}?id=2", Url.Action("Index", "Home")),
+            //    Order = 2
+            //});
 
             return View();
         }

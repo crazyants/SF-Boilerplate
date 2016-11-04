@@ -62,17 +62,11 @@
     "SaasKit.Multitenancy": "1.1.*",
     "IdentityModel": "2.0.0-*",
     "IdentityServer4.AccessTokenValidation": "1.0.1-*",
-    "SimpleFramework.Web.Pagination": "1.0.0-*",
-    "SimpleFramework.Web.Navigation": "1.0.0-*",
-    "SimpleFramework.Web.SiteMap": "1.0.0-*",
     "System.Interactive.Async": "3.0.0",
     "SimpleFramework.Core": "1.0.0-*",
     "SimpleFramework.Core.Security": "1.0.0-*",
-    "SimpleFramework.Core.Plugins": "1.0.0-*",
-    "SimpleFramework.Web.BreadCrumb": "1.0.0-*",
-    "SimpleFramework.Core.Scheduler": "1.0.0-*",
     "SimpleFramework.Web.Control": "1.0.0-*",
-    "SimpleFramework.Web.SimpleAuth": "1.0.0-*"
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0"
   },
 
   "tools": {

@@ -41,6 +41,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace SimpleFramework.Core
 {
@@ -83,7 +84,10 @@ namespace SimpleFramework.Core
         {
             this.serviceProvider.GetService<IHostingEnvironment>().WebRootFileProvider = this.CreateCompositeFileProvider();
         }
-
+        /// <summary>
+        /// 注册MVC服务
+        /// </summary>
+        /// <param name="services"></param>
         private void AddMvc(IServiceCollection services)
         {
 
@@ -241,12 +245,8 @@ namespace SimpleFramework.Core
             services.AddSingleton<ViewRenderer>();
 
             services.AddScoped<HandlerExceptionFilter>();
-            services.AddSingleton<IWidgetInstanceService, WidgetInstanceService>();
-
-            services.AddSingleton<IWidgetInstanceService, WidgetInstanceService>();
-            services.AddSingleton<IWidgetInstanceService, WidgetInstanceService>();
-            services.AddSingleton<IWidgetInstanceService, WidgetInstanceService>();
-            services.AddSingleton<IWidgetInstanceService, WidgetInstanceService>();
+            services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
@@ -346,7 +346,7 @@ namespace SimpleFramework.Core
             applicationBuilder.UseSession(new SessionOptions() { IdleTimeout = TimeSpan.FromMinutes(30) });
             applicationBuilder.UseIdentity();
 
-
+            //注册MVC请求
             applicationBuilder.UseMvc(
               routeBuilder =>
               {

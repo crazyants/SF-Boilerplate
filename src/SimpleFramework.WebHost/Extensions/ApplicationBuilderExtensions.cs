@@ -5,14 +5,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.FileProviders;
-using SimpleFramework.Core.Abstraction;
-using SimpleFramework.Core.Plugins;
 using Hangfire;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Reflection;
 using System;
-using SimpleFramework.Core.Extensions;
 
 namespace SimpleFramework.WebHost.Extensions
 {

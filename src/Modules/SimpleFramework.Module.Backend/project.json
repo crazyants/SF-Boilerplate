@@ -18,10 +18,6 @@
     "Hangfire": "1.6.5",
     "SimpleFramework.Core": "1.0.0-*",
     "SimpleFramework.Core.Security": "1.0.0-*",
-    "SimpleFramework.Core.Plugins": "1.0.0-*",
-    "SimpleFramework.Web.Navigation": "1.0.0-*",
-    "SimpleFramework.Core.Scheduler": "1.0.0-*",
-    "SimpleFramework.Web.BreadCrumb": "1.0.0-*",
     "SimpleFramework.Web.Captcha": "1.0.0-*",
     "SimpleFramework.Web.Control": "1.0.0-*"
   },

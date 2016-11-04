@@ -56,6 +56,7 @@ namespace SimpleFramework.Module.Backend.Controllers
 
         //
         // POST: /Account/Login
+        [Audit]
         [HttpPost]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]

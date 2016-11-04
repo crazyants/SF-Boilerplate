@@ -1,0 +1,270 @@
+﻿@{
+    ViewBag.Title = "用户管理";
+    Layout = "~/Views/Shared/_FlowForm.cshtml";
+}
+<script>
+    var keyValue = request('keyValue');
+    var instanceId = "";
+    var formId = "";
+    $(function () {
+        initControl();
+    })
+    //初始化控件
+    function initControl() {
+        //公司
+        $("#OrganizeId").ComboBoxTree({
+            url: "../../BaseManage/Organize/GetTreeJson",
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true,
+        }).bind("change", function () {
+            var value = $(this).attr('data-value');
+            //加载部门
+            $("#DepartmentId").ComboBoxTree({
+                url: "../../BaseManage/Department/GetTreeJson?organizeId=" + value,
+                description: "==请选择==",
+                allowSearch: true
+            });
+            //加载角色
+            $("#RoleId").ComboBox({
+                url: "../../BaseManage/Role/GetListJson?organizeId=" + value,
+                id: "RoleId",
+                text: "FullName",
+                description: "==请选择==",
+                allowSearch: true
+            });
+            //加载岗位
+            $("#DutyId").ComboBox({
+                url: "../../BaseManage/Post/GetListJson?organizeId=" + value,
+                id: "RoleId",
+                text: "FullName",
+                description: "==请选择==",
+                allowSearch: true
+            });
+        });
+        //部门
+        $("#DepartmentId").ComboBoxTree({
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true
+        }).bind("change", function () {
+            var value = $(this).attr('data-value');
+            //加载职位
+            $("#PostId").ComboBox({
+                url: "../../BaseManage/Job/GetListJson?organizeId=" + value,
+                id: "RoleId",
+                text: "FullName",
+                description: "==请选择==",
+                allowSearch: true
+            });
+            //加载主管
+            $("#ManagerId").ComboBox({
+                url: "../../BaseManage/User/GetListJson?departmentId=" + value,
+                id: "UserId",
+                text: "RealName",
+                title: "Account",
+                description: "==请选择==",
+                allowSearch: true
+            });
+        });
+        //岗位
+        $("#DutyId").ComboBox({
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true
+        });
+        //角色
+        $("#RoleId").ComboBox({
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true
+        });
+        //职位
+        $("#PostId").ComboBox({
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true
+        });
+        //主管
+        $("#ManagerId").ComboBox({
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true
+        });
+        //性别
+        $("#Gender").ComboBox({
+            description: "==请选择==",
+        });
+        //加载自定义表单
+        var moduleId = top.$.cookie('currentmoduleId');
+        $.SetForm({
+            url: "../../AuthorizeManage/ModuleForm/GetEntityJsonByModuleId",
+            param: { "keyValue": moduleId, "objectId": keyValue },
+            async: true,
+            success: function (data) {
+                $('#frmpreview').frmPreview({
+                    tablecotent: data.form.FormJson,
+                    width: 700
+                });
+                formId = data.form.FormId;
+                if (data.instance != null) {
+                    $('#frmpreview').frmSetData(JSON.parse(data.instance.FormInstanceJson));
+                    instanceId = data.instance.FormInstanceId;
+                }
+            }
+        });
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../BaseManage/User/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                    $("#OrganizeId").trigger("change");
+                    $("#DepartmentId").ComboBoxTreeSetValue(data.DepartmentId).trigger("change");
+                    $("#DutyId").ComboBoxSetValue(data.DutyId)
+                    $("#RoleId").ComboBoxSetValue(data.RoleId)
+                    $("#PostId").ComboBoxSetValue(data.PostId)
+                    $("#ManagerId").ComboBoxSetValue(data.ManagerId);
+                    $("#Birthday").val(formatDate(data.Birthday, "yyyy-MM-dd"));
+                    $("#Password").val("******").attr('disabled', 'disabled');
+                }
+            });
+        }
+
+
+    }
+    //保存表单
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        postData["DutyName"] = $("#DutyId").attr('data-text');
+        postData["PostName"] = $("#PostId").attr('data-text');
+        postData["Manager"] = $("#ManagerId").attr('data-text');
+        var _instanceData = $("#frmpreview").frmGetData();
+        var moduleFormInstanceEntity = { "FormId": formId, "FormInstanceJson": JSON.stringify(_instanceData) };
+
+        $.SaveForm({
+            url: "../../BaseManage/User/SaveForm",
+            param: { "keyValue": keyValue, "strUserEntity": JSON.stringify(postData), "FormInstanceId": instanceId, "strModuleFormInstanceEntity": JSON.stringify(moduleFormInstanceEntity) },
+            loading: "正在保存数据...",
+            success: function (data) {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<div style="margin-left: 10px; margin-right: 10px;">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#BaseInfo" data-toggle="tab">基本信息</a></li>
+        <li><a href="#ExpandInfo" data-toggle="tab">扩展属性</a></li>
+    </ul>
+    <div class="tab-content" style="padding-top: 15px;">
+        <div id="BaseInfo" class="tab-pane active" style=" padding-right: 30px;">
+            <table class="form">
+                <tr>
+                    <td class="formTitle">账户<font face="宋体">*</font></td>
+                    <td class="formValue">
+                        <input id="Account" type="text" onblur="$.ExistField(this.id,'../../BaseManage/User/ExistAccount')" class="form-control" placeholder="请输入账户" isvalid="yes" checkexpession="NotNull" />
+                    </td>
+                    <td class="formTitle">密码<font face="宋体">*</font></td>
+                    <td class="formValue">
+                        <input id="Password" type="text" class="form-control" placeholder="请输入密码" isvalid="yes" checkexpession="NotNull" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formTitle">公司<font face="宋体">*</font></td>
+                    <td class="formValue">
+                        <div id="OrganizeId" type="selectTree" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+                    </td>
+                    <td class="formTitle">部门<font face="宋体">*</font></td>
+                    <td class="formValue">
+                        <div id="DepartmentId" type="selectTree" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formTitle">岗位</td>
+                    <td class="formValue">
+                        <div id="DutyId" type="select" class="ui-select"></div>
+                    </td>
+                    <td class="formTitle">职位</td>
+                    <td class="formValue">
+                        <div id="PostId" type="select" class="ui-select"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formTitle">角色</td>
+                    <td class="formValue">
+                        <div id="RoleId" type="select" class="ui-select"></div>
+                    </td>
+                    <td class="formTitle">主管</td>
+                    <td class="formValue">
+                        <div id="ManagerId" type="select" class="ui-select"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formTitle">工号</td>
+                    <td class="formValue">
+                        <input id="EnCode" type="text" class="form-control" /></td>
+                    <td class="formTitle">姓名</td>
+                    <td class="formValue">
+                        <input id="RealName" type="text" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formTitle">性别</td>
+                    <td class="formValue">
+                        <div id="Gender" type="select" class="ui-select">
+                            <ul>
+                                <li data-value="1">男</li>
+                                <li data-value="0">女</li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td class="formTitle">生日</td>
+                    <td class="formValue">
+                        <input id="Birthday" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formTitle">手机</td>
+                    <td class="formValue">
+                        <input id="Mobile" type="text" class="form-control" /></td>
+                    <td class="formTitle">电话</td>
+                    <td class="formValue">
+                        <input id="Telephone" type="text" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td class="formTitle">邮箱</td>
+                    <td class="formValue">
+                        <input id="Email" type="text" class="form-control" /></td>
+
+                    <td class="formTitle">微信</td>
+                    <td class="formValue">
+                        <input id="WeChat" type="text" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td class="formTitle">QQ</td>
+                    <td class="formValue">
+                        <input id="OICQ" type="text" class="form-control" /></td>
+                    <td class="formTitle">MSN</td>
+                    <td class="formValue">
+                        <input id="" type="text" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <th class="formTitle" valign="top" style="padding-top: 4px;">备注
+                    </th>
+                    <td class="formValue" colspan="3">
+                        <textarea id="Description" class="form-control" style="height: 50px;"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="ExpandInfo" class="tab-pane ">
+            <div class="app_layout app_preview" style="border-top: 1px solid #ccc;" id="frmpreview"></div>
+        </div>
+    </div>
+</div>
+

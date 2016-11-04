@@ -407,6 +407,55 @@
           "lib/netstandard1.1/MediatR.dll": {}
         }
       },
+      "Microsoft.ApplicationInsights/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.10",
+          "System.Diagnostics.Debug": "4.0.10",
+          "System.Diagnostics.Tools": "4.0.0",
+          "System.Diagnostics.Tracing": "4.0.20",
+          "System.Globalization": "4.0.10",
+          "System.IO": "4.0.10",
+          "System.IO.Compression": "4.0.0",
+          "System.Linq": "4.0.0",
+          "System.Net.Http": "4.0.0",
+          "System.Reflection": "4.0.10",
+          "System.Reflection.Extensions": "4.0.0",
+          "System.Runtime": "4.0.20",
+          "System.Runtime.Extensions": "4.0.10",
+          "System.Text.Encoding": "4.0.10",
+          "System.Text.Encoding.Extensions": "4.0.10",
+          "System.Text.RegularExpressions": "4.0.10",
+          "System.Threading": "4.0.10",
+          "System.Threading.Tasks": "4.0.10",
+          "System.Xml.XDocument": "4.0.10"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.AspNetCore/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "2.1.0",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
+          "Microsoft.Extensions.Configuration": "1.0.0",
+          "Microsoft.Extensions.DiagnosticAdapter": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
+          "System.Net.NameResolution": "4.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Antiforgery/1.0.1": {
         "type": "package",
         "dependencies": {
@@ -1839,6 +1888,25 @@
         },
         "runtime": {
           "lib/netstandard1.6/Microsoft.Extensions.DependencyModel.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DiagnosticAdapter/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "System.Collections.Concurrent": "4.0.12",
+          "System.ComponentModel": "4.0.1",
+          "System.Diagnostics.DiagnosticSource": "4.0.0",
+          "System.Reflection.Emit": "4.0.1",
+          "System.Reflection.Emit.Lightweight": "4.0.1",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Runtime.Extensions": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/Microsoft.Extensions.DiagnosticAdapter.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/Microsoft.Extensions.DiagnosticAdapter.dll": {}
         }
       },
       "Microsoft.Extensions.FileProviders.Abstractions/1.0.0": {
@@ -5480,66 +5548,6 @@
           "netstandard1.6/SimpleFramework.Core.Abstraction.dll": {}
         }
       },
-      "SimpleFramework.Core.Plugins/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "CacheManager.Core": "0.9.1",
-          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "LinqKit": "1.1.7.3",
-          "MailKit": "1.4.0",
-          "MediatR": "2.1.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "1.0.1",
-          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-          "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
-          "NodaTime": "2.0.0-alpha20160523",
-          "SimpleFramework.Core": "1.0.0",
-          "SimpleFramework.Core.Abstraction": "1.0.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
-          "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "valueinjecter": "3.1.1.3"
-        },
-        "compile": {
-          "netstandard1.6/SimpleFramework.Core.Plugins.dll": {}
-        },
-        "runtime": {
-          "netstandard1.6/SimpleFramework.Core.Plugins.dll": {}
-        }
-      },
-      "SimpleFramework.Core.Scheduler/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "CacheManager.Core": "0.9.1",
-          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "LinqKit": "1.1.7.3",
-          "MailKit": "1.4.0",
-          "MediatR": "2.1.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "1.0.1",
-          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-          "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
-          "NodaTime": "2.0.0-alpha20160523",
-          "SimpleFramework.Core": "1.0.0",
-          "SimpleFramework.Core.Abstraction": "1.0.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
-          "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "valueinjecter": "3.1.1.3"
-        },
-        "compile": {
-          "netstandard1.6/SimpleFramework.Core.Scheduler.dll": {}
-        },
-        "runtime": {
-          "netstandard1.6/SimpleFramework.Core.Scheduler.dll": {}
-        }
-      },
       "SimpleFramework.Core.Security/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
@@ -5568,36 +5576,6 @@
         },
         "runtime": {
           "netstandard1.6/SimpleFramework.Core.Security.dll": {}
-        }
-      },
-      "SimpleFramework.Web.BreadCrumb/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "CacheManager.Core": "0.9.1",
-          "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "LinqKit": "1.1.7.3",
-          "MailKit": "1.4.0",
-          "MediatR": "2.1.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "1.0.1",
-          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-          "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
-          "NodaTime": "2.0.0-alpha20160523",
-          "SimpleFramework.Core": "1.0.0",
-          "SimpleFramework.Core.Abstraction": "1.0.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
-          "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "valueinjecter": "3.1.1.3"
-        },
-        "compile": {
-          "netstandard1.6/SimpleFramework.Web.BreadCrumb.dll": {}
-        },
-        "runtime": {
-          "netstandard1.6/SimpleFramework.Web.BreadCrumb.dll": {}
         }
       },
       "SimpleFramework.Web.Control/1.0.0": {
@@ -5643,52 +5621,6 @@
         },
         "runtime": {
           "netstandard1.6/SimpleFramework.Web.Navigation.dll": {}
-        }
-      },
-      "SimpleFramework.Web.Pagination/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "LinqKit": "1.1.7.3",
-          "Microsoft.AspNetCore.Mvc": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
-          "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-          "NETStandard.Library": "1.6.0"
-        },
-        "compile": {
-          "netstandard1.6/SimpleFramework.Web.Pagination.dll": {}
-        },
-        "runtime": {
-          "netstandard1.6/SimpleFramework.Web.Pagination.dll": {}
-        }
-      },
-      "SimpleFramework.Web.SimpleAuth/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "LinqKit": "1.1.7.3",
-          "Microsoft.AspNetCore.Identity": "1.0.0",
-          "Microsoft.AspNetCore.Mvc": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
-          "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
-          "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
-          "Microsoft.Extensions.Configuration.Json": "1.0.0",
-          "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-          "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
-          "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "SaasKit.Multitenancy": "1.1.0",
-          "SimpleFramework.Core": "1.0.0"
-        },
-        "compile": {
-          "netstandard1.6/SimpleFramework.Web.SimpleAuth.dll": {}
-        },
-        "runtime": {
-          "netstandard1.6/SimpleFramework.Web.SimpleAuth.dll": {}
         }
       },
       "SimpleFramework.Web.SiteMap/1.0.0": {
@@ -6029,6 +5961,37 @@
         "MediatR.nuspec",
         "lib/net45/MediatR.dll",
         "lib/netstandard1.1/MediatR.dll"
+      ]
+    },
+    "Microsoft.ApplicationInsights/2.1.0": {
+      "sha512": "mviO8PLQd3r22Pmv8JfjYzTCQ9ByhkU9wdC4fwd6WmAARwAMgMw9HEbHeYS3r+8pB3w+fZMi7p4LKijzgNybRQ==",
+      "type": "package",
+      "path": "Microsoft.ApplicationInsights/2.1.0",
+      "files": [
+        "Microsoft.ApplicationInsights.2.1.0.nupkg.sha512",
+        "Microsoft.ApplicationInsights.nuspec",
+        "lib/dotnet5.4/Microsoft.ApplicationInsights.XML",
+        "lib/dotnet5.4/Microsoft.ApplicationInsights.dll",
+        "lib/net40/Microsoft.ApplicationInsights.XML",
+        "lib/net40/Microsoft.ApplicationInsights.dll",
+        "lib/net45/Microsoft.ApplicationInsights.XML",
+        "lib/net45/Microsoft.ApplicationInsights.dll",
+        "lib/net46/Microsoft.ApplicationInsights.XML",
+        "lib/net46/Microsoft.ApplicationInsights.dll",
+        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll",
+        "lib/uap10.0/Microsoft.ApplicationInsights.dll",
+        "lib/wp8/Microsoft.ApplicationInsights.dll"
+      ]
+    },
+    "Microsoft.ApplicationInsights.AspNetCore/1.0.0": {
+      "sha512": "t1O4hbatuHU4BJnuBZ4zmx6fNoTryyZO/NwxwqmMUbuHyvil3elkOZvX3pJWlUTOk6/wyRXItGKBiW4uDET6Kw==",
+      "type": "package",
+      "path": "Microsoft.ApplicationInsights.AspNetCore/1.0.0",
+      "files": [
+        "Microsoft.ApplicationInsights.AspNetCore.1.0.0.nupkg.sha512",
+        "Microsoft.ApplicationInsights.AspNetCore.nuspec",
+        "lib/net451/Microsoft.ApplicationInsights.AspNetCore.dll",
+        "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll"
       ]
     },
     "Microsoft.AspNetCore.Antiforgery/1.0.1": {
@@ -7205,6 +7168,17 @@
         "Microsoft.Extensions.DependencyModel.nuspec",
         "lib/net451/Microsoft.Extensions.DependencyModel.dll",
         "lib/netstandard1.6/Microsoft.Extensions.DependencyModel.dll"
+      ]
+    },
+    "Microsoft.Extensions.DiagnosticAdapter/1.0.0": {
+      "sha512": "GGI4Pp9DpRBFlAXDcZRz5e+R+TqLFBWzToTDXqxPjQiRq6DwPvDYuKD10rlJD4QxxeX8fcjakTlKO1RfC+DmFg==",
+      "type": "package",
+      "path": "Microsoft.Extensions.DiagnosticAdapter/1.0.0",
+      "files": [
+        "Microsoft.Extensions.DiagnosticAdapter.1.0.0.nupkg.sha512",
+        "Microsoft.Extensions.DiagnosticAdapter.nuspec",
+        "lib/netstandard1.1/Microsoft.Extensions.DiagnosticAdapter.dll",
+        "lib/netstandard1.1/Microsoft.Extensions.DiagnosticAdapter.xml"
       ]
     },
     "Microsoft.Extensions.FileProviders.Abstractions/1.0.0": {
@@ -13471,25 +13445,10 @@
       "path": "../SimpleFramework.Core.Abstraction/project.json",
       "msbuildProject": "../SimpleFramework.Core.Abstraction/SimpleFramework.Core.Abstraction.xproj"
     },
-    "SimpleFramework.Core.Plugins/1.0.0": {
-      "type": "project",
-      "path": "../SimpleFramework.Core.Plugins/project.json",
-      "msbuildProject": "../SimpleFramework.Core.Plugins/SimpleFramework.Core.Plugins.xproj"
-    },
-    "SimpleFramework.Core.Scheduler/1.0.0": {
-      "type": "project",
-      "path": "../SimpleFramework.Core.Scheduler/project.json",
-      "msbuildProject": "../SimpleFramework.Core.Scheduler/SimpleFramework.Core.Scheduler.xproj"
-    },
     "SimpleFramework.Core.Security/1.0.0": {
       "type": "project",
       "path": "../SimpleFramework.Core.Security/project.json",
       "msbuildProject": "../SimpleFramework.Core.Security/SimpleFramework.Core.Security.xproj"
-    },
-    "SimpleFramework.Web.BreadCrumb/1.0.0": {
-      "type": "project",
-      "path": "../SimpleFramework.Web.BreadCrumb/project.json",
-      "msbuildProject": "../SimpleFramework.Web.BreadCrumb/SimpleFramework.Web.BreadCrumb.xproj"
     },
     "SimpleFramework.Web.Control/1.0.0": {
       "type": "project",
@@ -13500,16 +13459,6 @@
       "type": "project",
       "path": "../SimpleFramework.Web.Navigation/project.json",
       "msbuildProject": "../SimpleFramework.Web.Navigation/SimpleFramework.Web.Navigation.xproj"
-    },
-    "SimpleFramework.Web.Pagination/1.0.0": {
-      "type": "project",
-      "path": "../SimpleFramework.Web.Pagination/project.json",
-      "msbuildProject": "../SimpleFramework.Web.Pagination/SimpleFramework.Web.Pagination.xproj"
-    },
-    "SimpleFramework.Web.SimpleAuth/1.0.0": {
-      "type": "project",
-      "path": "../SimpleFramework.Web.SimpleAuth/project.json",
-      "msbuildProject": "../SimpleFramework.Web.SimpleAuth/SimpleFramework.Web.SimpleAuth.xproj"
     },
     "SimpleFramework.Web.SiteMap/1.0.0": {
       "type": "project",
@@ -13531,6 +13480,7 @@
       "IdentityServer4.AccessTokenValidation >= 1.0.1-*",
       "LinqKit >= 1.1.7.3",
       "MediatR >= 2.1.0",
+      "Microsoft.ApplicationInsights.AspNetCore >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.Cookies >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.Facebook >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.Google >= 1.0.0",
@@ -13562,15 +13512,8 @@
       "SaasKit.Multitenancy >= 1.1.*",
       "SimpleFramework.Core >= 1.0.0-*",
       "SimpleFramework.Core.Abstraction >= 1.0.0-*",
-      "SimpleFramework.Core.Plugins >= 1.0.0-*",
-      "SimpleFramework.Core.Scheduler >= 1.0.0-*",
       "SimpleFramework.Core.Security >= 1.0.0-*",
-      "SimpleFramework.Web.BreadCrumb >= 1.0.0-*",
       "SimpleFramework.Web.Control >= 1.0.0-*",
-      "SimpleFramework.Web.Navigation >= 1.0.0-*",
-      "SimpleFramework.Web.Pagination >= 1.0.0-*",
-      "SimpleFramework.Web.SimpleAuth >= 1.0.0-*",
-      "SimpleFramework.Web.SiteMap >= 1.0.0-*",
       "System.Interactive.Async >= 3.0.0"
     ],
     ".NETCoreApp,Version=v1.0": []

@@ -4,35 +4,49 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using SimpleFramework.Core.Abstraction.Entitys;
 using SimpleFramework.Core.Web.Base.Datatypes;
 using SimpleFramework.Core.Web.Base.Business;
 using SimpleFramework.Core.Errors.Exceptions;
 using SimpleFramework.Core.Web.Base.DataContractMapper;
+using SimpleFramework.Core.Abstraction.Data;
 
 namespace SimpleFramework.Core.Web.Base.Controllers
 {
-    public class CodetableControllerBase<TCodeTabelEntity, TCodeTabelModel> : ControllerBase
-        where TCodeTabelEntity : EntityBase
+    /// <summary>
+    /// 控制器基类，实现增删改查基础功能
+    /// </summary>
+    /// <typeparam name="TCodeTabelEntity"></typeparam>
+    /// <typeparam name="TCodeTabelModel"></typeparam>
+    public class CrudControllerBase<TCodeTabelEntity, TCodeTabelModel> : ControllerBase
+        where TCodeTabelEntity : IEntityWithTypedId<long>
         where TCodeTabelModel : EntityModelBase
     {
         private readonly ICodetableReader<TCodeTabelEntity> _reader;
         private ICodetableWriter<TCodeTabelEntity> _writer;
-
+        protected readonly IRepositoryAsync<TCodeTabelEntity> _repository;
         /// <summary>
-        /// 数据转换
+        /// 数据转换器
         /// </summary>
         /// <returns></returns>
         public ICrudDtoMapper<TCodeTabelEntity, TCodeTabelModel> CrudDtoMapper { get; set; }
-
-        public CodetableControllerBase(IServiceCollection service, ILogger<Controller> logger) : base(logger)
+        /// <summary>
+        /// 初始化构造
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="logger"></param>
+        public CrudControllerBase(IServiceCollection service, ILogger<Controller> logger) : base(service,logger)
         {
             _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity>>();
             _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity>>();
+            _repository = service.BuildServiceProvider().GetService<IRepositoryAsync<TCodeTabelEntity>>();
         }
-
+        /// <summary>
+        /// 异步获取模型数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetAsync(int id)
         {
@@ -50,7 +64,10 @@ namespace SimpleFramework.Core.Web.Base.Controllers
                 return InternalServerError(ex, "Error while loading {0} with id '{0}'", typeof(TCodeTabelModel).Name, id);
             }
         }
-
+        /// <summary>
+        /// 异步获取所有模型数据
+        /// </summary>
+        /// <returns></returns>
         [HttpGet()]
         public async Task<IActionResult> GetAllAsync()
         {
@@ -70,7 +87,11 @@ namespace SimpleFramework.Core.Web.Base.Controllers
                 return InternalServerError(ex, "Error while loading {0}", typeof(TCodeTabelModel).Name);
             }
         }
-
+        /// <summary>
+        /// 异步插入表单到数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost()]
         public async Task<IActionResult> InsertAsync([FromBody]TCodeTabelModel model)
         {
@@ -94,7 +115,12 @@ namespace SimpleFramework.Core.Web.Base.Controllers
                 return InternalServerError(ex, "Error while inserting {0}", typeof(TCodeTabelModel).Name);
             }
         }
-
+        /// <summary>
+        /// 异步更新表单到数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateAsync(int id, [FromBody]TCodeTabelModel model)
         {
@@ -123,7 +149,11 @@ namespace SimpleFramework.Core.Web.Base.Controllers
                 return InternalServerError(ex, "Error while updating {0}", typeof(TCodeTabelModel).Name);
             }
         }
-
+        /// <summary>
+        /// 异步删除数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {

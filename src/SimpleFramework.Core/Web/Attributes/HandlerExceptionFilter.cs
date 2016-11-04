@@ -17,9 +17,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using SimpleFramework.Core.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Web.Attributes
 {
@@ -45,7 +42,7 @@ namespace SimpleFramework.Core.Web.Attributes
             {
                 // Unhandled errors
 #if !DEBUG
-                var msg = "An unhandled error occurred.";                
+                 msg = "An unhandled error occurred.";                
                 string stack = null;
 #else
                 msg = context.Exception.GetBaseException().Message;

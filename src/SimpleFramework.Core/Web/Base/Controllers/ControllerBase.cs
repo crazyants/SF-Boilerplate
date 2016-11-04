@@ -13,10 +13,10 @@ namespace SimpleFramework.Core.Web.Base.Controllers
     public abstract class ControllerBase : Controller
     {
         private readonly IExceptionMapper _exceptionMapper;
-        protected ControllerBase(ILogger<Controller> logger)
+        protected ControllerBase(IServiceCollection service, ILogger<Controller> logger)
         {
             this.Logger = logger;
-            _exceptionMapper = this.HttpContext.RequestServices.GetService<IExceptionMapper>();
+            _exceptionMapper = service.BuildServiceProvider().GetService<IExceptionMapper>();
         }
 
         protected ILogger<Controller> Logger { get; private set; }

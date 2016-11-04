@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Web.Base.Business
 {
-    public interface ICodetableWriter<T> where T : EntityBase
+    public interface ICodetableWriter<T> where T : IEntityWithTypedId<long>
     {
         Task<T> InsertAsync(T entity);
         Task UpdateAsync(T entity);

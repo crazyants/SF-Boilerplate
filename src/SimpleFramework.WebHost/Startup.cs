@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SimpleFramework.Core.Abstraction;
 using SimpleFramework.WebHost.Extensions;
-using SimpleFramework.Core.Plugins;
 using simpleGlobal = SimpleFramework.Core;
 using SimpleFramework.Core.Web;
 using System.Reflection;
@@ -64,14 +63,18 @@ namespace SimpleFramework.WebHost
 
         public void ConfigureServices(IServiceCollection services)
         {
-         
+
             this.DiscoverAssemblies();
 
             simpleGlobal.GlobalConfiguration.WebRootPath = _hostingEnvironment.WebRootPath;
             simpleGlobal.GlobalConfiguration.ContentRootPath = _hostingEnvironment.ContentRootPath;
 
             services.AddAuditStorageProviders(Configuration, _hostingEnvironment);
-            services.AddCloudscribePagination();
+            // Add Application Insights data collection services to the services container.
+            services.AddApplicationInsightsTelemetry(Configuration);
+            //services.AddSingleton(_ => Configuration);
+            //services.AddSingleton(_ => services);
+            services.AddSingleton(typeof(IServiceCollection), (o) => { return services; });
 
             foreach (IModuleInitializer extension in ExtensionManager.Extensions)
             {
@@ -99,7 +102,7 @@ namespace SimpleFramework.WebHost
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
-       
+
             app.UseCustomizedRequestLocalization();
             app.UseCustomizedHangfire(Configuration);
 

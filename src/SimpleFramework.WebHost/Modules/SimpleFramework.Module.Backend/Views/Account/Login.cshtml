@@ -177,6 +177,7 @@
         if (top.$.cookie('learn_password') == "" || top.$.cookie('learn_password') == null) {
             // password = $.md5(password);
         }
+        SF.utility.loading(true);
         $.ajax({
             url: contentPath + "/Login",
             data: { Email: $.trim(username), password: $.trim(password), verifycode: verifycode, rememberMe: autologin, returnUrl: "" },
@@ -188,8 +189,8 @@
                         top.$.cookie('learn_username', $.trim(username), { path: "/", expires: 7 });
                         top.$.cookie('learn_password', $.trim(password), { path: "/", expires: 7 });
                     }
-                    if (returnUrl = "")
-                        window.location.href = contentPath + '/Admin';
+                    if (returnUrl == "")
+                        window.location.href = contentPath ;
                     else
                         window.location.href = returnUrl;
                 } else {
@@ -202,6 +203,7 @@
                     $("#btnlogin").find('span').show();
                     $("#login_verifycode").trigger("click");
                 }
+                SF.utility.loading(false);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 //通常情况下textStatus和errorThrown只有其中一个包含信息
@@ -210,6 +212,7 @@
                 formMessage(data.message);
                 $("#btnlogin").removeClass('active').removeAttr('disabled');
                 $("#btnlogin").find('span').show();
+                SF.utility.loading(false);
             }
         });
     }
