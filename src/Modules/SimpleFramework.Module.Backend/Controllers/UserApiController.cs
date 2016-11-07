@@ -8,6 +8,9 @@ using SimpleFramework.Core.Web.SmartTable;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
+using SimpleFramework.Core.Security;
+using SimpleFramework.Core.Common;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
@@ -16,12 +19,14 @@ namespace SimpleFramework.Module.Backend.Controllers
     public class UserApiController : Core.Web.Base.Controllers.ControllerBase
     {
         private readonly IRepositoryWithTypedId<UserEntity, long> userRepository;
-
+        private readonly ISecurityService _securityService;
         public UserApiController(IRepositoryWithTypedId<UserEntity, long> userRepository,
-            IServiceCollection service, 
-            ILogger<UserApiController> logger) : base(service,logger)
+            ISecurityService securityService,
+            IServiceCollection service,
+            ILogger<UserApiController> logger) : base(service, logger)
         {
             this.userRepository = userRepository;
+            this._securityService = securityService;
         }
 
         [HttpPost("grid")]
@@ -79,18 +84,12 @@ namespace SimpleFramework.Module.Backend.Controllers
             return Json(users);
         }
 
+
         [HttpGet("{id}")]
-        public ActionResult Get(long id)
+        public async Task<ActionResult> GetUserById(string id)
         {
-            var user = userRepository.Queryable().FirstOrDefault(x => x.Id == id);
-
-            var model = new
-            {
-                Id = user.Id,
-                FullName = user.FullName
-            };
-
-            return Json(model);
+            var retVal = await _securityService.FindByIdAsync(id, UserDetails.Full);
+            return Content(retVal.ToJson());
         }
 
         [HttpDelete("{id}")]
@@ -105,6 +104,45 @@ namespace SimpleFramework.Module.Backend.Controllers
             user.IsDeleted = true;
             userRepository.SaveChange();
             return Json(true);
+        }
+
+        /// <summary>
+        /// Get current user details
+        /// </summary>
+        [HttpGet]
+        [Route("currentuser")]
+        public async Task<ActionResult> GetCurrentUser()
+        {
+            var retVal = await _securityService.FindByNameAsync(User.Identity.Name, UserDetails.Full);
+            return Content(retVal.ToJson());
+        }
+
+        /// <summary>
+        /// Get user details by user name
+        /// </summary>
+        /// <param name="userName"></param>
+        [HttpGet]
+        [Route("{userName}")]
+        public async Task<ActionResult> GetUserByName(string userName)
+        {
+            var retVal = await _securityService.FindByNameAsync(userName, UserDetails.Full);
+            return Content(retVal.ToJson());
+        }
+
+
+        /// <summary>
+        /// Check specified user has passed permissions in specified scope
+        /// </summary>
+        /// <param name="userName">security account name</param>
+        /// <param name="permissions">checked permissions Example: ?permissions=read&amp;permissions=write </param>
+        /// <param name="scopes">security bounded scopes. Read mode: http://docs.virtocommerce.com/display/vc2devguide/Working+with+platform+security </param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{userName}/hasPermissions")]
+        public ActionResult UserHasAnyPermission(string userName, string[] permissions, string[] scopes)
+        {
+            var retVal = new { Result = _securityService.UserHasAnyPermission(userName, scopes, permissions) };
+            return Content(retVal.ToJson());
         }
     }
 }

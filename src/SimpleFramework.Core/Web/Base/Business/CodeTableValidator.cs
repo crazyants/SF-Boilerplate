@@ -4,7 +4,7 @@ using System;
 
 namespace SimpleFramework.Core.Web.Base.Business
 {
-    public class CodeTabelValidator<T> : ICodeTabelValidator<T> where T : EntityBase
+    public class CodeTabelValidator<T> : ICodeTabelValidator<T> where T : BaseEntity
     {
         public void CanUserDelete(T entity)
         {

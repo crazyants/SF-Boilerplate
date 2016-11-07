@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace SimpleFramework.Core.Data
 {
     public class RepositoryAsync<TEntity> : Repository<TEntity>, IRepositoryAsync<TEntity>
-       where TEntity : EntityBase
+       where TEntity : BaseEntity
     {
         private readonly IUnitOfWorkAsync _unitOfWork;
         public RepositoryAsync(DbContext context, IUnitOfWorkAsync unitOfWork) : base(context, unitOfWork)

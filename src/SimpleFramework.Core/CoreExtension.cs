@@ -37,10 +37,6 @@ using SimpleFramework.Core.Web.Base.Business;
 using SimpleFramework.Core.Errors;
 using SimpleFramework.Core.Web.Formatters.CsvImportExport;
 using SimpleFramework.Core.Web.Attributes;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace SimpleFramework.Core

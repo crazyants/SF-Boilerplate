@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SimpleFramework.Core.Abstraction.Entitys
 {
-    public abstract class AuditableEntity : EntityBase, IAuditable
+    public abstract class AuditableEntity : BaseEntity, IAuditable
     {
 	    #region IAuditable Members
         public DateTimeOffset CreatedDate { get; set; }

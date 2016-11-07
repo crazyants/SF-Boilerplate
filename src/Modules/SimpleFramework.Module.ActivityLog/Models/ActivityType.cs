@@ -2,7 +2,7 @@
 
 namespace SimpleFramework.Module.ActivityLog.Models
 {
-    public class ActivityType : EntityBase
+    public class ActivityType : BaseEntity
     {
         public string Name { get; set; }
     }

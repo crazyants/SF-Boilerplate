@@ -10,7 +10,7 @@ namespace SimpleFramework.Core.Abstraction.Entitys
     ///     base class leverages this assumption.  If you want an entity with a type other
     ///     than int, such as string, then use <see cref="EntityWithTypedId{IdT}" /> instead.
     /// </summary>
-    public abstract class EntityBase : EntityWithTypedId<long>
+    public abstract class BaseEntity : EntityWithTypedId<long>
     {
         /// <summary>
         /// A Serial number for the value in the code table.  This can be used to sort (required).

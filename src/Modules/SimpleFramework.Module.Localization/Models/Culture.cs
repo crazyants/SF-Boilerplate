@@ -3,7 +3,7 @@ using SimpleFramework.Core.Abstraction.Entitys;
 
 namespace SimpleFramework.Module.Localization.Models
 {
-    public class Culture : EntityBase
+    public class Culture : BaseEntity
     {
         public string Name { get; set; }
 

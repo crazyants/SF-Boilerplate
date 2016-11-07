@@ -13,7 +13,7 @@ namespace SimpleFramework.Core.Web.Base.Business
     /// 写入处理
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CodeTabelWriter<T> : ICodetableWriter<T> where T : EntityBase
+    public class CodeTabelWriter<T> : ICodetableWriter<T> where T : BaseEntity
     {
         #region Fields
         protected readonly IUnitOfWorkAsync _unitOfWorkAsync;

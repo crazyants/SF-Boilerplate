@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Plugins.Models
 {
-    public class InstalledPlugin : EntityBase
+    public class InstalledPlugin : BaseEntity
     {
         public string PluginName { get; set; }
 

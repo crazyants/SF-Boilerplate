@@ -1,0 +1,37 @@
+{
+  "EventType": "POST Account/Login",
+  "Environment": {
+    "UserName": "tomny",
+    "MachineName": "DESKTOP-K2FDV9J",
+    "Culture": "zh"
+  },
+  "StartDate": "2016-11-07T18:00:38.7782586+08:00",
+  "EndDate": "2016-11-07T18:04:10.2866413+08:00",
+  "Duration": 211508,
+  "Action": {
+    "HttpMethod": "POST",
+    "ControllerName": "Account",
+    "ActionName": "Login",
+    "ViewName": "Login",
+    "FormVariables": {
+      "Email": "admin@admin.com",
+      "password": "123456",
+      "verifycode": "",
+      "rememberMe": "0",
+      "returnUrl": ""
+    },
+    "ActionParameters": {
+      "model": {
+        "Email": "admin@admin.com",
+        "Password": "123456",
+        "RememberMe": false
+      },
+      "returnUrl": null
+    },
+    "UserName": null,
+    "RequestUrl": "http://localhost:49229/Login",
+    "IpAddress": "::1",
+    "ResponseStatus": "200",
+    "ResponseStatusCode": 200
+  }
+}

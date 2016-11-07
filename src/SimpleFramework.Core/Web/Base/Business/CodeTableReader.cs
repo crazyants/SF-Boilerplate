@@ -13,7 +13,7 @@ namespace SimpleFramework.Core.Web.Base.Business
     /// 读取处理
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CodetableReader<T> : ICodetableReader<T> where T : EntityBase
+    public class CodetableReader<T> : ICodetableReader<T> where T : BaseEntity
     {
         #region Fields
 

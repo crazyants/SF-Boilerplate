@@ -28,7 +28,7 @@ namespace SimpleFramework.Core.Settings
         #region ISettingsManager Members
 
 
-        public void LoadEntitySettingsValues(EntityBase entity)
+        public void LoadEntitySettingsValues(BaseEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("entity");
@@ -74,7 +74,7 @@ namespace SimpleFramework.Core.Settings
             }
         }
 
-        public void SaveEntitySettingsValues(EntityBase entity)
+        public void SaveEntitySettingsValues(BaseEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("entity");
@@ -101,7 +101,7 @@ namespace SimpleFramework.Core.Settings
             }
         }
 
-        public void RemoveEntitySettings(EntityBase entity)
+        public void RemoveEntitySettings(BaseEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("entity");

@@ -2,7 +2,7 @@
 
 namespace SimpleFramework.Module.Localization.Models
 {
-    public class Resource : EntityBase
+    public class Resource : BaseEntity
     {
         public string Key { get; set; }
 

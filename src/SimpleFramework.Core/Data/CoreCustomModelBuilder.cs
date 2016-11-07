@@ -142,6 +142,29 @@ namespace SimpleFramework.Core.Data
 
             #endregion
 
+            #region System
+
+            modelBuilder.Entity<DataItemEntity>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.Property(u => u.Description).HasMaxLength(1000);
+                b.ToTable("Core_DataItem");
+            });
+
+            modelBuilder.Entity<DataItemDetailEntity>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.Property(u => u.Description).HasMaxLength(1000);
+                b.ToTable("Core_DataItemDetail");
+            });
+
+            modelBuilder.Entity<DataItemDetailEntity>()
+            .HasOne(x => x.DataItem)
+            .WithMany(x => x.DataItemDetailEntitys)
+            .HasForeignKey(x => x.ItemId);
+
+
+            #endregion
 
 
             // enable auto history
