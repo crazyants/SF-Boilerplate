@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="/css/bootstrap.css" />
         <link rel="stylesheet" href="/css/theme.css" />
         <link rel="stylesheet" href="/css/sf-about.css" />
+        <link href="/lib/jqgrid/jqgrid.css" rel="stylesheet" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="/css/developer.css" asp-append-version="true" />
@@ -49,10 +50,13 @@
         <script src="/lib/jcrop.min.js"></script>
         <script src="/lib/ResizeSensor.js"></script>
         <script src="/lib/ion.rangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+        <script src="/lib/jqgrid/jqgrid.min.js"></script>
+        <script src="/lib/jqgrid/grid.locale-cn.js"></script>
+
+        <script src="/js/jqGridUtility.js"></script>
         <script src="/js/Extensions/sfList.js"></script>
         <script src="/js/Extensions/sfTree.js"></script>
         <script src="/js/Extensions/sfUi.js"></script>
-
         <script src="/js/dialogs.js"></script>
         <script src="/js/settings.js"></script>
         <script src="/js/utility.js"></script>
@@ -83,9 +87,7 @@
         <script src="/js/Controls/util.js"></script>
         <script src="/js/Controls/yearPicker.js"></script>
 
-        <script src="/js/Validate/ajaxClientErrorHandler.js"></script>
-        <script src="/js/Validate/validation.js"></script>
-
+        <script src="/js/Validate/validator.js"></script>
         <script src="/js/Admin/pageAdmin.js"></script>
         <script src="/js/indextab.js"></script>
     </environment>
@@ -114,14 +116,15 @@
                 <p><strong>Error</strong></p>
                 <span class="ajax-error-message"></span>
             </div>
-            @RenderBody()
+            <div class="block-content">
+                @RenderBody()
+            </div>
         </div>
         <div class="modal-footer">
             <a onclick="window.parent.SF.controls.modal.close($(this).closest('.modal-content').find('.modal-close-message').first().val());" id="btnCancel" class="btn btn-link">Cancel</a>
             <a id="btnSave" class="btn btn-primary">Save</a>
         </div>
     </div>
-
 
     <script>
 

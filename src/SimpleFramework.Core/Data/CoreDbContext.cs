@@ -21,6 +21,7 @@ namespace SimpleFramework.Core.Data
         {
        
             Database.EnsureCreated();
+            Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

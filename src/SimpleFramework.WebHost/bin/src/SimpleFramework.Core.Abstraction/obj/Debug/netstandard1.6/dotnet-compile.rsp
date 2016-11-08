@@ -177,7 +177,7 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFr
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core.Abstraction\Data\UnitOfWork\IUnitOfWorkAsync.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core.Abstraction\Entitys\Alert.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core.Abstraction\Entitys\AuditableEntity.cs
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core.Abstraction\Entitys\EntityBase.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core.Abstraction\Entitys\BaseEntity.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core.Abstraction\Entitys\EntityWithTypedId.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core.Abstraction\Entitys\IAuditable.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core.Abstraction\Entitys\IEntityWithTypedId.cs

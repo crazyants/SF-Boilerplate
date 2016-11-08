@@ -217,6 +217,94 @@ namespace SimpleFramework.WebHost.Migrations
                     b.ToTable("Entitys_CountryEntity");
                 });
 
+            modelBuilder.Entity("SimpleFramework.Core.Entitys.DataItemDetailEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedBy")
+                        .HasAnnotation("MaxLength", 64);
+
+                    b.Property<DateTimeOffset>("CreatedDate");
+
+                    b.Property<int?>("DeleteMark");
+
+                    b.Property<string>("Description")
+                        .HasAnnotation("MaxLength", 1000);
+
+                    b.Property<int?>("EnabledMark");
+
+                    b.Property<int?>("IsDefault");
+
+                    b.Property<string>("ItemCode");
+
+                    b.Property<long>("ItemId");
+
+                    b.Property<string>("ItemName");
+
+                    b.Property<string>("ItemValue");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasAnnotation("MaxLength", 64);
+
+                    b.Property<DateTimeOffset?>("ModifiedDate");
+
+                    b.Property<long?>("ParentId");
+
+                    b.Property<string>("QuickQuery");
+
+                    b.Property<string>("SimpleSpelling");
+
+                    b.Property<int?>("SortCode");
+
+                    b.Property<int>("Sortindex");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("Core_DataItemDetail");
+                });
+
+            modelBuilder.Entity("SimpleFramework.Core.Entitys.DataItemEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedBy")
+                        .HasAnnotation("MaxLength", 64);
+
+                    b.Property<DateTimeOffset>("CreatedDate");
+
+                    b.Property<int?>("DeleteMark");
+
+                    b.Property<string>("Description")
+                        .HasAnnotation("MaxLength", 1000);
+
+                    b.Property<int?>("EnabledMark");
+
+                    b.Property<int?>("IsNav");
+
+                    b.Property<int?>("IsTree");
+
+                    b.Property<string>("ItemCode");
+
+                    b.Property<string>("ItemName");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasAnnotation("MaxLength", 64);
+
+                    b.Property<DateTimeOffset?>("ModifiedDate");
+
+                    b.Property<long?>("ParentId");
+
+                    b.Property<int>("Sortindex");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Core_DataItem");
+                });
+
             modelBuilder.Entity("SimpleFramework.Core.Entitys.DistrictEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -904,34 +992,6 @@ namespace SimpleFramework.WebHost.Migrations
                     b.ToTable("Entitys_WidgetZoneEntity");
                 });
 
-            modelBuilder.Entity("SimpleFramework.Core.Plugins.Models.InstalledPlugin", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<DateTime>("DateActivated");
-
-                    b.Property<DateTime>("DateDeactivated");
-
-                    b.Property<DateTime>("DateInstalled");
-
-                    b.Property<bool>("Installed");
-
-                    b.Property<string>("PluginAssemblyName");
-
-                    b.Property<string>("PluginName");
-
-                    b.Property<string>("PluginVersion");
-
-                    b.Property<int>("Sortindex");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Plugins_InstalledPlugin");
-                });
-
             modelBuilder.Entity("SimpleFramework.Module.ActivityLog.Models.Activity", b =>
                 {
                     b.Property<long>("Id")
@@ -1046,6 +1106,14 @@ namespace SimpleFramework.WebHost.Migrations
                     b.HasOne("SimpleFramework.Core.Entitys.UserEntity", "Account")
                         .WithMany("ApiAccounts")
                         .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SimpleFramework.Core.Entitys.DataItemDetailEntity", b =>
+                {
+                    b.HasOne("SimpleFramework.Core.Entitys.DataItemEntity", "DataItem")
+                        .WithMany("DataItemDetailEntitys")
+                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

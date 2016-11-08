@@ -35,10 +35,6 @@ namespace SimpleFramework.Core.Entitys
         /// </summary>		
         public int? IsNav { get; set; }
         /// <summary>
-        /// 排序码
-        /// </summary>		
-        public int? SortCode { get; set; }
-        /// <summary>
         /// 删除标记
         /// </summary>		
         public int? DeleteMark { get; set; }

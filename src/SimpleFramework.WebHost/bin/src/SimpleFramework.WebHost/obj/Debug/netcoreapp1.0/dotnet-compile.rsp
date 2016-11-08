@@ -33,6 +33,8 @@
 --reference:C:\Users\tomny.tang\.nuget\packages\LinqKit\1.1.7.3\lib\netstandard1.3\LinqKit.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\MailKit\1.4.0\lib\netstandard1.3\MailKit.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\MediatR\2.1.0\lib\netstandard1.1\MediatR.dll
+--reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.ApplicationInsights\2.1.0\lib\dotnet5.4\Microsoft.ApplicationInsights.dll
+--reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.ApplicationInsights.AspNetCore\1.0.0\lib\netstandard1.6\Microsoft.ApplicationInsights.AspNetCore.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.AspNetCore.Antiforgery\1.0.1\lib\netstandard1.3\Microsoft.AspNetCore.Antiforgery.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.AspNetCore.Authentication\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Authentication.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.AspNetCore.Authentication.Cookies\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Authentication.Cookies.dll
@@ -121,6 +123,7 @@
 --reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.Extensions.DependencyInjection\1.0.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.Extensions.DependencyInjection.Abstractions\1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.Extensions.DependencyModel\1.0.0\lib\netstandard1.6\Microsoft.Extensions.DependencyModel.dll
+--reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.Extensions.DiagnosticAdapter\1.0.0\lib\netstandard1.1\Microsoft.Extensions.DiagnosticAdapter.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.Extensions.FileProviders.Abstractions\1.0.0\lib\netstandard1.0\Microsoft.Extensions.FileProviders.Abstractions.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.Extensions.FileProviders.Composite\1.0.0\lib\netstandard1.0\Microsoft.Extensions.FileProviders.Composite.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\Microsoft.Extensions.FileProviders.Embedded\1.0.0\lib\netstandard1.0\Microsoft.Extensions.FileProviders.Embedded.dll
@@ -298,14 +301,9 @@
 --reference:C:\Users\tomny.tang\.nuget\packages\valueinjecter\3.1.1.3\lib\netstandard1.6\Omu.ValueInjecter.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Core\bin\Debug\netstandard1.6\SimpleFramework.Core.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Core.Abstraction\bin\Debug\netstandard1.6\SimpleFramework.Core.Abstraction.dll
---reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Core.Plugins\bin\Debug\netstandard1.6\SimpleFramework.Core.Plugins.dll
---reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Core.Scheduler\bin\Debug\netstandard1.6\SimpleFramework.Core.Scheduler.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Core.Security\bin\Debug\netstandard1.6\SimpleFramework.Core.Security.dll
---reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Web.BreadCrumb\bin\Debug\netstandard1.6\SimpleFramework.Web.BreadCrumb.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Web.Control\bin\Debug\netstandard1.6\SimpleFramework.Web.Control.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Web.Navigation\bin\Debug\netstandard1.6\SimpleFramework.Web.Navigation.dll
---reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Web.Pagination\bin\Debug\netstandard1.6\SimpleFramework.Web.Pagination.dll
---reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Web.SimpleAuth\bin\Debug\netstandard1.6\SimpleFramework.Web.SimpleAuth.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.Web.SiteMap\bin\Debug\netstandard1.6\SimpleFramework.Web.SiteMap.dll
 --resource:"E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\bin\src\SimpleFramework.WebHost\obj\Debug\netcoreapp1.0\SimpleFramework.WebHostdotnet-compile.deps.json",SimpleFramework.WebHost.deps.json
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\Program.cs
@@ -313,6 +311,6 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFr
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\Extensions\ApplicationBuilderExtensions.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\Extensions\MediatorExtensions.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\Extensions\ServiceCollectionExtensions.cs
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\Migrations\20161103075138_InitialSchema.cs
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\Migrations\20161103075138_InitialSchema.Designer.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\Migrations\20161108074447_InitialCreate.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\Migrations\20161108074447_InitialCreate.Designer.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.WebHost\Migrations\CoreDbContextModelSnapshot.cs

@@ -316,6 +316,12 @@
                 reload: function () {
                     location.reload();
                     return false;
+                },
+                windowWidth: function () {
+                    return $(window).width();
+                },
+                windowHeight: function () {
+                    return $(window).height();
                 }
             };
 

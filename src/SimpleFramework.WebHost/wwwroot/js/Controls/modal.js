@@ -5,13 +5,13 @@
 
     SF.controls.modal = (function () {
         // shows the IFrame #modal-popup modal
-        var _showModalPopup = function (sender, popupUrl) {
+        var _showModalPopup = function (options) {
             var $modalPopup = $('#modal-popup');
             var $modalPopupIFrame = $modalPopup.find('iframe');
 
             // Use the anchor tag's title attribute as the title of the dialog box
-            if (sender.attr('title') != undefined) {
-                $('#modal-popup_panel h3').html(sender.attr('title') + ' <small></small>');
+            if (options.sender.attr('title') != undefined) {
+                $('#modal-popup_panel h3').html(options.sender.attr('title') + ' <small></small>');
             }
 
             $modalPopupIFrame.height('auto');
@@ -21,10 +21,11 @@
                 // now that the iframe is loaded, show it, set it's initial height and do a modal layout
                 $('#modal-popup').fadeTo(0, 1);
 
-                var newHeight = $(this.contentWindow.document).height();
-                if ($(this).height() != newHeight) {
-                    $(this).height(newHeight);
-                }
+                //var newHeight = $(this.contentWindow.document).height();
+                //if ($(this).height() != newHeight) {
+                //    $(this).height(newHeight);
+                //}
+                $(this).height(options.height);
 
                 $('body').addClass('modal-open');
                 $('#modal-popup').modal('layout');
@@ -33,7 +34,7 @@
             // Use the anchor tag's href attribute as the source for the iframe
             // this will trigger the load event (above) which will show the popup
             $('#modal-popup').fadeTo(0, 0);
-            $modalPopupIFrame.attr('src', popupUrl);
+            $modalPopupIFrame.attr('src', options.popupUrl);
             $('#modal-popup').modal({
                 show: true,
                 backdrop: 'static',
@@ -118,8 +119,21 @@
                 $('body').removeClass('modal-open');
             },
             // shows the #modal-popup modal (IFrame Modal)
-            show: function (sender, popupUrl, detailsId, postbackUrl) {
-                _showModalPopup(sender, popupUrl);
+            show: function (options) {
+                var defaults = {
+                    sender: null,
+                    popupUrl: '',
+                    width: "100px",
+                    height: "100px",
+                    detailsId: '',
+                    postbackUrl: '',
+                    title: 'ÏµÍ³´°¿Ú',
+                };
+                var options = $.extend(defaults, options);
+                var _width = SF.utility.windowWidth() > parseInt(options.width.replace('px', '')) ? options.width : SF.utility.windowWidth() + 'px';
+                var _height = SF.utility.windowHeight() > parseInt(options.height.replace('px', '')) ? options.height : SF.utility.windowHeight() + 'px';
+
+                _showModalPopup(options);
             },
             // shows a ModalDialog control (non-IFrame Modal) 
             showModalDialog: function ($modalDialog, managerId) {

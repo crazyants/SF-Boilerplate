@@ -1,4 +1,25 @@
-﻿GO
+﻿USE [SFramework_Base]
+GO
+/****** Object:  Table [dbo].[Event]    Script Date: 2016/11/8 15:42:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Event](
+	[EventId] [bigint] IDENTITY(1,1) NOT NULL,
+	[InsertedDate] [datetime] NOT NULL,
+	[LastUpdatedDate] [datetime] NULL,
+	[Data] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Event] PRIMARY KEY CLUSTERED 
+(
+	[EventId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Event] ADD  DEFAULT (getutcdate()) FOR [InsertedDate]
+GO
+
+GO
 SET IDENTITY_INSERT [dbo].[Core_Role] ON 
 
 GO
@@ -13,12 +34,13 @@ GO
 SET IDENTITY_INSERT [dbo].[Core_User] ON 
 
 GO
-INSERT [dbo].[Core_User] ([Id], [AccessFailedCount], [AccountState], [ConcurrencyStamp], [CreatedBy], [CreatedDate], [CurrentShippingAddressId], [Email], [EmailConfirmed], [FullName], [IsAdministrator], [IsDeleted], [LockoutEnabled], [LockoutEnd], [ModifiedBy], [ModifiedDate], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserGuid], [UserName], [UserType]) VALUES (1, 0, NULL, N'8620916f-e6b6-4f12-9041-83737154b338', NULL, CAST(0x07105622F6C65F3B0B0000 AS DateTimeOffset), NULL, N'admin@SimpleFramework.com', 0, N'Shop Admin', 1, 0, 1, NULL, NULL, CAST(0x07105622F6C65F3B0B0000 AS DateTimeOffset), N'ADMIN@SimpleFramework.COM', N'ADMIN@SimpleFramework.COM', N'AQAAAAEAACcQAAAAEAEqSCV8Bpg69irmeg8N86U503jGEAYf75fBuzvL00/mr/FGEsiUqfR0rWBbBUwqtw==', NULL, 0, N'9e87ce89-64c0-45b9-8b52-6e0eaa79e5b7', 0, N'1fff10ce-0231-43a2-8b7d-c8db18504f65', N'admin@SimpleFramework.com', NULL)
+INSERT [dbo].[Core_User] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [FullName], [IsDeleted], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserGuid], [UserName],[CreatedDate],[IsAdministrator]) VALUES (1, 0, N'adfeea54-cee5-4a6f-9c0f-a8fc47883971', N'admin@admin.com', 0, N'admin', 0, 0, NULL, N'ADMIN@ADMIN.COM', N'ADMIN@ADMIN.COM', N'AQAAAAEAACcQAAAAEIt+m8p/mFcVlh8N7V8hoNaBEQuejYWsrZnK45oB4syrCkYv3SDr7l1JbsCxJoC0tA==', NULL, 0, N'e74db142-844b-4369-b9d1-c867ebb05198', 0, N'00000000-0000-0000-0000-000000000000', N'admin@admin.com',getdate(),0)
 GO
 SET IDENTITY_INSERT [dbo].[Core_User] OFF
 GO
 INSERT [dbo].[Core_UserRole] ([UserId], [RoleId]) VALUES (1, 1)
 GO
+
 SET IDENTITY_INSERT [dbo].[Plugins_InstalledPlugin] ON 
 
 GO

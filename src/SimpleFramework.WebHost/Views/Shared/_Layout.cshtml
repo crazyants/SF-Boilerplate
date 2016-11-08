@@ -217,27 +217,7 @@
         </footer>
     </div>
 </div>
-@* 全局Loading Start*@
-<div id="updateProgress" style="display:none;">
-    <div class="updateprogress-status">
-        <div class="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
-        </div>
-    </div>
-    <div class="updateprogress-bg modal-backdrop"></div>
-</div>
-@* 全局LoadingEnd *@
-@* 全局弹出框Start *@
-<div id="modal-popup" class="modal container modal-content sf-modal sf-modal-frame">
-    <div id="modal-popup_contentPanel" class="iframe">
-        <iframe id="modal-popup_iframe" scrolling="no" style="height:auto;"></iframe>
-    </div>
-</div>
-@* 全局弹出框End *@
+
 @* 底部工具栏Start *@
 <div id="cms-admin-footer">
     <span>Page Load Time: 0.06s </span>
@@ -252,41 +232,3 @@
 </div>
 @* 底部工具栏End *@
 
-<script>
-    $(function ($) {
-       
-        //$("body").css("overflow","hidden");
-        $("#content-wrapper").find('.mainContent').height($(window).height() - 100);
-        $(window).resize(function (e) {
-            $("#content-wrapper").find('.mainContent').height($(window).height() - 100);
-        });
-        $('.navbar-side > li').hover(function () {
-            if (!$('body').hasClass('zone-highlight')) {
-                $(this).doTimeout('hover', 250, 'addClass', 'open');
-            }
-        }, function () {
-            $(this).doTimeout('hover', 250, 'removeClass', 'open');
-        });
-    });
-    $(document).ready(function () {
-
-        // enable sidbar sub menus
-        $('.navbar-side li').click(function () {
-            $('.navbar-side li').removeClass('open');
-            $(this).addClass('open');
-        });
-
-        $('#content-wrapper').click(function () {
-            $('.navbar-side li').removeClass('open');
-        });
-
-        // show/hide sidebar nav
-        $('.navbar-minimize').click(function () {
-            if ($('.navbar-static-side').is(":visible")) {
-                $('body').addClass('navbar-side-close').removeClass('navbar-side-open');
-            } else {
-                $('body').addClass('navbar-side-open').removeClass('navbar-side-close');
-            }
-        });
-    });
-</script>

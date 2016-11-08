@@ -47,17 +47,17 @@
 		_mapArrayDefault = function (arr) {
 		    return $.map(arr, function (item) {
 		        var node = {
-		            id: item.Guid || item.Id,
-		            name: item.Name || item.Title,
-		            iconCssClass: item.IconCssClass,
-		            parentId: item.ParentId,
-		            hasChildren: item.HasChildren,
-		            isActive: item.IsActive,
-                    countInfo: item.CountInfo
+		            id: item.Guid || item.id,
+		            name: item.name || item.title,
+		            iconCssClass: item.iconCssClass,
+		            parentId: item.parentId,
+		            hasChildren: item.hasChildren,
+		            isActive: item.isActive,
+                    countInfo: item.countInfo
 		        };
 
-		        if (item.Children && typeof item.Children.length === 'number') {
-		            node.children = _mapArrayDefault(item.Children);
+		        if (item.children && typeof item.children.length === 'number') {
+		            node.children = _mapArrayDefault(item.children);
 		        }
 
 		        return node;
