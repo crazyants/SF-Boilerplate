@@ -3,7 +3,7 @@ using SimpleFramework.Core.Abstraction.Entitys;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class WidgetInstanceEntity :AuditableEntity
+    public class WidgetInstanceEntity : EntityWithCreatedAndUpdatedMeta<long>
     {
         public WidgetInstanceEntity()
         {

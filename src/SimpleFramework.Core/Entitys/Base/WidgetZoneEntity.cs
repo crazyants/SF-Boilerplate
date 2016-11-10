@@ -2,7 +2,7 @@
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class WidgetZoneEntity :AuditableEntity
+    public class WidgetZoneEntity : EntityWithCreatedAndUpdatedMeta<long>
     {
         public string Name { get; set; }
 

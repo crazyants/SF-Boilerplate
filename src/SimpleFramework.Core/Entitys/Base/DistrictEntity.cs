@@ -2,7 +2,7 @@
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class DistrictEntity :AuditableEntity
+    public class DistrictEntity : EntityWithCreatedAndUpdatedMeta<long>
     {
         public long StateOrProvinceId { get; set; }
 

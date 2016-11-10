@@ -2,7 +2,7 @@
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class UrlSlugEntity :AuditableEntity
+    public class UrlSlugEntity : EntityWithCreatedAndUpdatedMeta<long>
     {
         public string Slug { get; set; }
 

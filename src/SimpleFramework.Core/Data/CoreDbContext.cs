@@ -32,8 +32,8 @@ namespace SimpleFramework.Core.Data
             {
                 // typeToRegisters.AddRange(assemblie.DefinedTypes.Select(t => t.AsType()));
 
-                var entityClassTypes = assemblie.ExportedTypes.Where(x => 
-                (x.GetTypeInfo().IsSubclassOf(typeof(BaseEntity)) || x.GetTypeInfo().IsSubclassOf(typeof(EntityWithTypedId<>)) || x.GetTypeInfo().IsSubclassOf(typeof(AuditableEntity)))
+                var entityClassTypes = assemblie.ExportedTypes.Where(x => typeof(IEntity).IsAssignableFrom(x)||
+                (x.GetTypeInfo().IsSubclassOf(typeof(BaseEntity)) || x.GetTypeInfo().IsSubclassOf(typeof(EntityWithTypedId<>)) || x.GetTypeInfo().IsSubclassOf(typeof(EntityWithCreatedAndUpdatedMeta<>)))
                 && !x.GetTypeInfo().IsAbstract && x.GetTypeInfo().IsClass);
                 typeToRegisterEntitys.AddRange(entityClassTypes);
 

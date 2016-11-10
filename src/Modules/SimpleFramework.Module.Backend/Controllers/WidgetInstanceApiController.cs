@@ -32,7 +32,7 @@ namespace SimpleFramework.Module.Backend.Controllers
                     Name = x.Name,
                     WidgetType = x.Widget.Name,
                     WidgetZone = x.WidgetZone.Name,
-                    CreatedOn = x.CreatedDate,
+                    CreatedOn = x.CreatedOn,
                     EditUrl = x.Widget.EditUrl,
                     PublishStart = x.PublishStart,
                     PublishEnd = x.PublishEnd

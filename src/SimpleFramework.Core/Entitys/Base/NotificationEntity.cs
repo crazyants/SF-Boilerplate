@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Entitys
 {
-	public class NotificationEntity : AuditableEntity
+	public class NotificationEntity : EntityWithCreatedAndUpdatedMeta<long>
 	{
 		/// <summary>
 		/// Must be made sending

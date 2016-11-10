@@ -18,14 +18,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-using SimpleFramework.Core.Common.RouteConventions;
 
 namespace SimpleFramework.Core.Tests
 {
     public class Startup
     {
-
-
         [Fact]
         public void UseCentralRoutePrefixTest()
         {

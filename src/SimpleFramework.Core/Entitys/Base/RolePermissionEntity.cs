@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class RolePermissionEntity : AuditableEntity
+    public class RolePermissionEntity : EntityWithCreatedAndUpdatedMeta<long>
     {
         public RolePermissionEntity()
         {

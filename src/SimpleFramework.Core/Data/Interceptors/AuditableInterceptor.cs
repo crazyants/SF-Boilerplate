@@ -5,7 +5,7 @@ using System;
 
 namespace SimpleFramework.Core.Interceptors
 {
-    public class AuditableInterceptor : ChangeInterceptor<IAuditable>
+    public class AuditableInterceptor : ChangeInterceptor<EntityWithCreatedAndUpdatedMeta<long>>
     {
         private readonly IUserNameResolver _userNameResolver;
 
@@ -14,24 +14,24 @@ namespace SimpleFramework.Core.Interceptors
             _userNameResolver = userNameResolver;
         }
 
-        public override void OnBeforeInsert(EntityEntry entry, IAuditable item)
+        public override void OnBeforeInsert(EntityEntry entry, EntityWithCreatedAndUpdatedMeta<long> item)
         {
             base.OnBeforeInsert(entry, item);
 
             var currentTime = DateTime.UtcNow;
             var currentUser = GetCurrentUserName();
-            item.CreatedDate = item.CreatedDate == default(DateTime) ? currentTime : item.CreatedDate;
-            item.ModifiedDate = item.ModifiedDate ?? currentTime;
+            item.CreatedOn = item.CreatedOn == default(DateTime) ? currentTime : item.CreatedOn;
+            item.UpdatedOn = item.UpdatedOn == default(DateTime) ? currentTime : item.CreatedOn;
             item.CreatedBy = item.CreatedBy ?? currentUser;
-            item.ModifiedBy = item.ModifiedBy ?? currentUser;
+            item.UpdatedBy = item.UpdatedBy ?? currentUser;
         }
 
-        public override void OnBeforeUpdate(EntityEntry entry, IAuditable item)
+        public override void OnBeforeUpdate(EntityEntry entry, EntityWithCreatedAndUpdatedMeta<long> item)
         {
             base.OnBeforeUpdate(entry, item);
             var currentTime = DateTime.UtcNow;
-            item.ModifiedDate = currentTime;
-            item.ModifiedBy = GetCurrentUserName();
+            item.UpdatedOn = currentTime;
+            item.UpdatedBy = GetCurrentUserName();
         }
 
         private string GetCurrentUserName()

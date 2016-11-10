@@ -2,7 +2,7 @@
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class EntityType :AuditableEntity
+    public class EntityType : EntityWithCreatedAndUpdatedMeta<long>
     {
         public string Name { get; set; }
 

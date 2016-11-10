@@ -3,7 +3,7 @@ using SimpleFramework.Core.Abstraction.Entitys;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class WidgetEntity :AuditableEntity
+    public class WidgetEntity : EntityWithCreatedAndUpdatedMeta<long>
     {
         public string Code { get; set; }
 
