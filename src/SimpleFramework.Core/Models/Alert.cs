@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace SimpleFramework.Core.Abstraction.Entitys
+namespace SimpleFramework.Core.Models
 {
     //[Serializable]
     public class Alert

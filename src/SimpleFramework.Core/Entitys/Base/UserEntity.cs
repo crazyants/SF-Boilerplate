@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class UserEntity : IdentityUser<long, IdentityUserClaim<long>, UserRoleEntity, IdentityUserLogin<long>>, IEntityWithTypedId<long>, IAuditable
+    public class UserEntity : IdentityUser<long, IdentityUserClaim<long>, UserRoleEntity, IdentityUserLogin<long>>, IEntityWithTypedId<long>, IHaveCreatedMeta<string>, IHaveUpdatedMeta<string>
     {
         public UserEntity()
         {
@@ -31,17 +31,49 @@ namespace SimpleFramework.Core.Entitys
 
         public long? CurrentShippingAddressId { get; set; }
 
-        public string CreatedBy { get; set; }
-        public string ModifiedBy { get; set; }
-
-        public DateTimeOffset CreatedDate { get; set; }
-
-        public DateTimeOffset? ModifiedDate { get; set; }
-
         public virtual IList<UserAddressEntity> UserAddresses { get; set; } = new List<UserAddressEntity>();
 
         public virtual UserAddressEntity CurrentShippingAddress { get; set; }
 
         public virtual IList<ApiAccountEntity> ApiAccounts { get; set; }
+
+        private DateTimeOffset _createdOn;
+        private DateTimeOffset _updatedOn;
+
+        #region Implementation of IHaveCreatedMeta<TCreatedBy>
+
+        /// <summary>
+        /// The <see cref="DateTimeOffset"/> when it was created
+        /// </summary>
+        public virtual DateTimeOffset CreatedOn
+        {
+            get { return _createdOn; }
+            set { _createdOn = value; }
+        }
+
+        /// <summary>
+        /// The identifier (or entity) which first created this entity
+        /// </summary>
+        public virtual string CreatedBy { get; set; }
+
+        #endregion
+
+        #region Implementation of IHaveUpdatedMeta<TUpdatedBy>
+
+        /// <summary>
+        /// The <see cref="DateTimeOffset"/> when it was last updated
+        /// </summary>
+        public virtual DateTimeOffset UpdatedOn
+        {
+            get { return _updatedOn; }
+            set { _updatedOn = value; }
+        }
+
+        /// <summary>
+        /// The identifier (or entity) which last updated this entity
+        /// </summary>
+        public virtual string UpdatedBy { get; set; }
+
+        #endregion
     }
 }

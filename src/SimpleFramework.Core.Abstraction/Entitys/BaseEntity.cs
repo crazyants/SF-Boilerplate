@@ -12,10 +12,20 @@ namespace SimpleFramework.Core.Abstraction.Entitys
     /// </summary>
     public abstract class BaseEntity : EntityWithTypedId<long>
     {
+        
         /// <summary>
         /// A Serial number for the value in the code table.  This can be used to sort (required).
         /// </summary>
         [Required]
         public int Sortindex { get; set; }
+    }
+
+
+    /// <summary>
+    /// Represents an entity without any unique identifier
+    /// </summary>
+    public abstract class Entity : IEntity
+    {
+
     }
 }

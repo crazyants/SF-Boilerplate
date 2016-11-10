@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace SimpleFramework.Core.Abstraction.Entitys
+namespace SimpleFramework.Core.Models
 {
     public class RecaptchaResponse
     {

@@ -238,6 +238,10 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFr
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\Net\RemoteIpParser.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\Net\ReversProxyIpParser.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\Razor\ViewRenderer.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\RouteHelper\MvcOptionsExtensions.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\RouteHelper\RouteConventions\RouteConvention.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\RouteHelper\TypedRouting\TypedRoute.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\RouteHelper\TypedRouting\TypedRoutingApplicationModelConvention.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\ServiceAgents\AgentBase.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\ServiceAgents\HttpClientFactory.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Common\ServiceAgents\IAuthContext.cs
@@ -286,6 +290,12 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFr
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Data\Interceptors\IInterceptor.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Data\Interceptors\InterceptionContext.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Data\Interceptors\TypeInterceptor.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Data\Maps\Fluent\CodeFirstMappingExtensions-Concurrency.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Data\Maps\Fluent\CodeFirstMappingExtensions-CreatedMeta.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Data\Maps\Fluent\CodeFirstMappingExtensions-DeletedMeta.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Data\Maps\Fluent\CodeFirstMappingExtensions-HasIdentityKey.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Data\Maps\Fluent\CodeFirstMappingExtensions-UpdatedMeta.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Data\Maps\Fluent\CodeFirstMappingExtensions.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Entitys\InitialData.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Entitys\Base\AddressEntity.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Entitys\Base\AddressType.cs
@@ -345,6 +355,8 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFr
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Extensions\WorkContext.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Localization\ITimeZoneHelper.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Localization\TimeZoneHelper.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Models\Alert.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Models\RecaptchaResponse.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Models\GridTree\TreeGridEntity.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Models\GridTree\TreeGridJson.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SimpleFrameworkV1.1.3\src\SimpleFramework.Core\Models\Tree\TreeViewItem.cs
