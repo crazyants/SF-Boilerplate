@@ -28,6 +28,8 @@ namespace SimpleFramework.Core.Data.WorkArea
             User = new UserRepository(context);
             Media = new MediaRespository(context);
             DataItem = new DataItemRepository(context);
+            Setting = new SettingRepository(context);
+            UrlSlug= new UrlSlugRepository(context); 
         }
         public IUserRepository User { get; }
 
@@ -35,5 +37,9 @@ namespace SimpleFramework.Core.Data.WorkArea
 
         public IDataItemRepository DataItem { get; }
 
+        public ISettingRepository Setting { get; }
+
+        public IUrlSlugRepository UrlSlug { get; }
+        
     }
 }

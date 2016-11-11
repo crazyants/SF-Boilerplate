@@ -11,6 +11,7 @@ using SimpleFramework.Core.Web.Base.Business;
 using SimpleFramework.Core.Errors.Exceptions;
 using SimpleFramework.Core.Web.Base.DataContractMapper;
 using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Data.UoW;
 
 namespace SimpleFramework.Core.Web.Base.Controllers
 {
@@ -25,7 +26,7 @@ namespace SimpleFramework.Core.Web.Base.Controllers
     {
         private readonly ICodetableReader<TCodeTabelEntity> _reader;
         private ICodetableWriter<TCodeTabelEntity> _writer;
-        protected readonly IRepositoryAsync<TCodeTabelEntity> _repository;
+        protected readonly IEFCoreAsyncQueryable<TCodeTabelEntity> _repository;
         /// <summary>
         /// 数据转换器
         /// </summary>
@@ -40,7 +41,7 @@ namespace SimpleFramework.Core.Web.Base.Controllers
         {
             _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity>>();
             _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity>>();
-            _repository = service.BuildServiceProvider().GetService<IRepositoryAsync<TCodeTabelEntity>>();
+            _repository = service.BuildServiceProvider().GetService<IEFCoreAsyncQueryable<TCodeTabelEntity>>();
         }
         /// <summary>
         /// 异步获取模型数据
