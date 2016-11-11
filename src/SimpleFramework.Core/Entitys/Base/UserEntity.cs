@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class UserEntity : IdentityUser<long, IdentityUserClaim<long>, UserRoleEntity, IdentityUserLogin<long>>, IEntityWithTypedId<long>, IHaveCreatedMeta<string>, IHaveUpdatedMeta<string>
+    public class UserEntity : IdentityUser<long, IdentityUserClaim<long>, UserRoleEntity, IdentityUserLogin<long>>, IEntityWithTypedId<long>, IHaveCreatedMeta<string>, IHaveUpdatedMeta<string>, IHaveDeletedMeta<string>
     {
         public UserEntity()
         {
@@ -39,7 +39,7 @@ namespace SimpleFramework.Core.Entitys
 
         private DateTimeOffset _createdOn;
         private DateTimeOffset _updatedOn;
-
+        private DateTimeOffset? _deletedOn;
         #region Implementation of IHaveCreatedMeta<TCreatedBy>
 
         /// <summary>
@@ -74,6 +74,27 @@ namespace SimpleFramework.Core.Entitys
         /// </summary>
         public virtual string UpdatedBy { get; set; }
 
+     
+
+        #endregion
+
+        #region Implementation of IHaveDeletedMeta<TCreatedBy>
+
+        /// <summary>
+        /// The <see cref="DateTimeOffset"/> when it was created
+        /// </summary>
+        public virtual DateTimeOffset? DeletedOn
+        {
+            get { return _deletedOn; }
+            set { _deletedOn = value; }
+        }
+
+        /// <summary>
+        /// The identifier (or entity) which first created this entity
+        /// </summary>
+        public virtual string DeletedBy { get; set; }
+
+      
         #endregion
     }
 }

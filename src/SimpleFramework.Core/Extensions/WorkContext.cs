@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Data;
 
 namespace SimpleFramework.Core.Extensions
 {
@@ -15,15 +16,15 @@ namespace SimpleFramework.Core.Extensions
         private const long GuestRoleId = 3;
 
         private UserEntity _currentUser;
-        private UserManager<UserEntity> _userManager;
-        private HttpContext _httpContext;
-        private IRepositoryWithTypedId<UserEntity,long> _userRepository;
+        private readonly UserManager<UserEntity> _userManager;
+        private readonly HttpContext _httpContext;
+        private readonly IBaseUnitOfWork _baseUnitOfWork;
 
-        public WorkContext(UserManager<UserEntity> userManager, IHttpContextAccessor contextAccessor, IRepositoryWithTypedId<UserEntity,long> userRepository)
+        public WorkContext(UserManager<UserEntity> userManager, IHttpContextAccessor contextAccessor, IBaseUnitOfWork baseUnitOfWork)
         {
             _userManager = userManager;
             _httpContext = contextAccessor.HttpContext;
-            _userRepository = userRepository;
+            _baseUnitOfWork = baseUnitOfWork;
         }
 
         public async Task<UserEntity> GetCurrentUser()
@@ -49,7 +50,8 @@ namespace SimpleFramework.Core.Extensions
             var userGuid = GetUserGuidFromCookies();
             if (userGuid.HasValue)
             {
-                _currentUser = _userRepository.Queryable().Include(x => x.Roles).FirstOrDefault(x => x.UserGuid == userGuid);
+                
+                _currentUser = _baseUnitOfWork.BaseWorkArea.User.Query().Include(x => x.Roles).FirstOrDefault(x => x.UserGuid == userGuid);
             }
 
             if (_currentUser != null && _currentUser.Roles.Count == 1 && _currentUser.Roles.First().RoleId == GuestRoleId)

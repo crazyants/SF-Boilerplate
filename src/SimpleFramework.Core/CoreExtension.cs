@@ -14,12 +14,8 @@ using Microsoft.CodeAnalysis;
 using SimpleFramework.Core.Extensions;
 using SimpleFramework.Core.Services;
 using SimpleFramework.Core.Settings;
-using SimpleFramework.Core.Components.Messaging;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Data;
-using MediatR;
-using SimpleFramework.Core.Abstraction.Data.UnitOfWork;
 using SimpleFramework.Core.Interceptors;
 using SimpleFramework.Core.Entitys;
 using Microsoft.AspNetCore.Identity;
@@ -38,6 +34,10 @@ using SimpleFramework.Core.Errors;
 using SimpleFramework.Core.Web.Formatters.CsvImportExport;
 using SimpleFramework.Core.Web.Attributes;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using SimpleFramework.Core.Abstraction.UoW;
+using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.Common.Message.Email;
+using SimpleFramework.Core.Common.Message.Sms;
 
 namespace SimpleFramework.Core
 {
@@ -143,7 +143,7 @@ namespace SimpleFramework.Core
             //services.AddDbContext<CoreDbContext>(options =>
             //    options.UseMySql(configuration.GetConnectionString("MMysqlDatabase"),
             //        b => b.MigrationsAssembly("SimpleFramework.WebHost")));
-            services.AddSingleton<DbContext, CoreDbContext>();
+            services.AddSingleton<CoreDbContext>();
 
         }
         /// <summary>
@@ -244,18 +244,18 @@ namespace SimpleFramework.Core
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
-            services.AddTransient(typeof(IRepositoryWithTypedId<,>), typeof(RepositoryWithTypedId<,>));
-
             services.AddSingleton<ICurrentUser, CurrentUser>();
             services.AddSingleton<IUserNameResolver, UserNameResolver>();
-            services.AddSingleton<IUnitOfWorkAsync>(sp =>
+
+            services.AddTransient(typeof(IEFCoreQueryableRepository<,>), typeof(EFCoreQueryableRepository<,>));
+            services.AddSingleton<IBaseUnitOfWork>(sp =>
             {
                 var simpleDbContext = sp.GetService<CoreDbContext>();
                 var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new UnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
+                return new BaseUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
             });
+            services.AddSingleton<IUnitOfWorkFactory>(uow => new UnitOfWorkFactory(services.BuildServiceProvider()));
+
             services.TryAddScoped<IWorkContext, WorkContext>();
             services.TryAddScoped<ISiteContext, SiteContext>();
             services.TryAddScoped<IMediaService, LocalMediaService>();
@@ -268,8 +268,6 @@ namespace SimpleFramework.Core
             services.TryAddScoped<IExceptionMapper, BaseExceptionMapper>();
             services.AddTransient(typeof(ICodetableWriter<>), typeof(CodeTabelWriter<>));
             services.AddTransient(typeof(ICodetableReader<>), typeof(CodetableReader<>));
-
-
 
         }
 

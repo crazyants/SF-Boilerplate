@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Data.Maps.Fluent;
 using SimpleFramework.Core.Entitys;
 
 namespace SimpleFramework.Core.Data
@@ -10,8 +11,11 @@ namespace SimpleFramework.Core.Data
     {
         public void Build(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserEntity>()
-                .ToTable("Core_User");
+            modelBuilder.Entity<UserEntity>(cfg =>
+            {
+                cfg.MapCreatedMeta().MapUpdatedMeta().MapDeletedMeta();
+                cfg.ToTable("Core_User");
+            });
 
             modelBuilder.Entity<RoleEntity>()
                 .ToTable("Core_Role");
@@ -73,27 +77,34 @@ namespace SimpleFramework.Core.Data
                 x.HasOne(d => d.Country)
                     .WithMany()
                     .OnDelete(DeleteBehavior.Restrict);
+
+                x.MapCreatedMeta().MapUpdatedMeta();
             });
             #region Security
 
             modelBuilder.Entity<ApiAccountEntity>(b =>
             {
                 b.HasKey(uc => uc.Id);
+                b.MapCreatedMeta().MapUpdatedMeta();
                 b.ToTable("Core_ApiAccount");
+
             });
             modelBuilder.Entity<PermissionEntity>(b =>
             {
                 b.HasKey(uc => uc.Id);
+                b.MapCreatedMeta().MapUpdatedMeta();
                 b.ToTable("Core_Permission");
             });
             modelBuilder.Entity<RolePermissionEntity>(b =>
             {
                 b.HasKey(uc => uc.Id);
+                b.MapCreatedMeta().MapUpdatedMeta();
                 b.ToTable("Core_RolePermission");
             });
             modelBuilder.Entity<PermissionScopeEntity>(b =>
             {
                 b.HasKey(uc => uc.Id);
+
                 b.ToTable("Core_PermissionScope");
             });
 
@@ -127,11 +138,13 @@ namespace SimpleFramework.Core.Data
             modelBuilder.Entity<SettingEntity>(b =>
             {
                 b.HasKey(uc => uc.Id);
+                b.MapCreatedMeta().MapUpdatedMeta();
                 b.ToTable("Core_Setting");
             });
             modelBuilder.Entity<SettingEntity>(b =>
             {
                 b.HasKey(uc => uc.Id);
+                b.MapCreatedMeta().MapUpdatedMeta();
                 b.ToTable("Core_SettingValue");
             });
 
@@ -148,6 +161,7 @@ namespace SimpleFramework.Core.Data
             {
                 b.HasKey(x => x.Id);
                 b.Property(u => u.Description).HasMaxLength(1000);
+                b.MapCreatedMeta().MapUpdatedMeta();
                 b.ToTable("Core_DataItem");
             });
 
@@ -155,6 +169,7 @@ namespace SimpleFramework.Core.Data
             {
                 b.HasKey(x => x.Id);
                 b.Property(u => u.Description).HasMaxLength(1000);
+                b.MapCreatedMeta().MapUpdatedMeta();
                 b.ToTable("Core_DataItemDetail");
             });
 

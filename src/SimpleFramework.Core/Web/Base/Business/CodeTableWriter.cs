@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.Extensions.Logging;
-using SimpleFramework.Core.Abstraction.Data;
-using SimpleFramework.Core.Abstraction.Data.UnitOfWork;
 using SimpleFramework.Core.Abstraction.Entitys;
+using SimpleFramework.Core.Abstraction.UoW;
+using SimpleFramework.Core.Abstraction.UoW.Helper;
 using SimpleFramework.Core.Errors.Exceptions;
 using System;
 using System.Threading.Tasks;
@@ -16,19 +16,19 @@ namespace SimpleFramework.Core.Web.Base.Business
     public class CodeTabelWriter<T> : ICodetableWriter<T> where T : BaseEntity
     {
         #region Fields
-        protected readonly IUnitOfWorkAsync _unitOfWorkAsync;
-        private readonly IRepositoryAsync<T> _repository;
+        protected readonly IUnitOfWork _unitOfWork;
+        private readonly IRepository<T> _repository;
         protected readonly ILogger _logger;
 
         #endregion
 
         #region Constructors
-        public CodeTabelWriter(ILogger<T> logger, IRepositoryAsync<T> repository, IUnitOfWorkAsync unitOfWorkAsync)
+        public CodeTabelWriter(ILogger<T> logger, IRepository<T> repository, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _repository = repository;
-            _unitOfWorkAsync = unitOfWorkAsync;
-            unitOfWorkAsync.AutoCommitEnabled = false;
+            _unitOfWork = unitOfWork;
+
         }
 
         #endregion
@@ -46,14 +46,11 @@ namespace SimpleFramework.Core.Web.Base.Business
         {
             if (entity == null) throw new ArgumentException("No codetable provided", nameof(entity));
 
-            using (var uow = _unitOfWorkAsync)
+            await _unitOfWork.ExecuteAndCommitAsync(() =>
             {
-                IRepository<T> repo = uow.Repository<T>();
-                repo.Insert(entity);
-                await uow.SaveChangesAsync();
-                return entity;
-            }
-
+                return _repository.AddAsync(entity);
+            });
+            return entity;
         }
         /// <summary>
         /// 异步更新
@@ -63,13 +60,11 @@ namespace SimpleFramework.Core.Web.Base.Business
         public async Task UpdateAsync(T entity)
         {
             if (entity == null) throw new EntityNotFoundException(nameof(entity), 0);
-            using (var uow = _unitOfWorkAsync)
-            {
-                IRepository<T> repo = uow.Repository<T>();
-                repo.Update(entity);
-                await uow.SaveChangesAsync();
 
-            }
+            await _unitOfWork.ExecuteAndCommitAsync(() =>
+            {
+                return _repository.UpdateAsync(entity);
+            });
 
         }
         /// <summary>
@@ -79,14 +74,12 @@ namespace SimpleFramework.Core.Web.Base.Business
         /// <returns></returns>
         public async Task DeleteAsync(int id)
         {
-            using (var uow = _unitOfWorkAsync)
+            await _unitOfWork.ExecuteAndCommitAsync(() =>
             {
-                IRepositoryAsync<T> repo = uow.RepositoryAsync<T>();
-                var entity = await repo.FindAsync(id);
+                var entity = _repository.GetById(id);
                 if (entity == null) throw new EntityNotFoundException(typeof(T).Name, id);
-                repo.Delete(entity);
-                await uow.SaveChangesAsync();
-            }
+                return _repository.DeleteAsync(entity);
+            });
         }
         #endregion
     }

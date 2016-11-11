@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Logging;
 using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Abstraction.Entitys;
+using SimpleFramework.Core.Abstraction.UoW;
 using SimpleFramework.Core.Data.Extensions;
+using SimpleFramework.Core.Data.UoW;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,13 +19,14 @@ namespace SimpleFramework.Core.Web.Base.Business
     {
         #region Fields
 
-        private readonly IRepositoryAsync<T> _repository;
+        protected readonly IUnitOfWork _unitOfWork;
+        private readonly IEFCoreAsyncQueryable<T> _repository;
         protected readonly ILogger _logger;
 
         #endregion
 
         #region Constructors
-        public CodetableReader(ILogger<T> logger, IRepositoryAsync<T> repository)
+        public CodetableReader(ILogger<T> logger, IEFCoreAsyncQueryable<T> repository)
         {
             _logger = logger;
             _repository = repository;
@@ -42,7 +45,7 @@ namespace SimpleFramework.Core.Web.Base.Business
         /// <returns></returns>
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _repository.FilterAsync(orderBy: Ordering.Expression);
+            return await _repository.GetAll(orderBy: Ordering.Expression);
         }
         /// <summary>
         /// 获取所有数据
@@ -50,7 +53,7 @@ namespace SimpleFramework.Core.Web.Base.Business
         /// <returns></returns>
         public IEnumerable<T> GetAll()
         {
-            return _repository.Filter(orderBy: Ordering.Expression);
+            return _repository.QueryFilter(orderBy: Ordering.Expression);
         }
         /// <summary>
         /// 根据ID获取实体数据
@@ -59,7 +62,7 @@ namespace SimpleFramework.Core.Web.Base.Business
         /// <returns></returns>
         public T Get(int id)
         {
-            return _repository.Find(id);
+            return _repository.GetById(id);
         }
         /// <summary>
         /// 异步根据ID获取实体数据
@@ -68,7 +71,7 @@ namespace SimpleFramework.Core.Web.Base.Business
         /// <returns></returns>
         public async Task<T> GetAsync(int id)
         {
-            return await _repository.FindAsync(id);
+            return await _repository.GetByIdAsync(id);
         }
         #endregion
 
