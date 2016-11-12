@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class SettingValueEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public class SettingValueEntity : BaseEntity
     {
         public const string TypeShortText = "ShortText";
         public const string TypeLongText = "LongText";

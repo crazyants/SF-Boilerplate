@@ -15,13 +15,10 @@ namespace SimpleFramework.Module.Backend.Controllers
     //  [BreadCrumb(Title = "Home", UseDefaultRouteUrl = true, Order = 0)]
     public class HomeController : Controller
     {
-        private IWidgetInstanceService _widgetInstanceService;
         private readonly IStringLocalizer<HomeController> _localizer;
         private readonly IAuthorizationService _authorizationService;
-        public HomeController(IWidgetInstanceService widgetInstanceService,
-               IStringLocalizer<HomeController> localizer, IAuthorizationService authorizationService)
+        public HomeController( IStringLocalizer<HomeController> localizer, IAuthorizationService authorizationService)
         {
-            _widgetInstanceService = widgetInstanceService;
             _localizer = localizer;
             _authorizationService = authorizationService;
         }
@@ -34,18 +31,6 @@ namespace SimpleFramework.Module.Backend.Controllers
         public IActionResult Index()
         {
             var model = new HomeViewModel();
-
-            model.WidgetInstances = _widgetInstanceService.GetPublished().Select(x => new WidgetInstanceViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                ViewComponentName = x.Widget.ViewComponentName,
-                WidgetId = x.WidgetId,
-                WidgetZoneId = x.WidgetZoneId,
-                Data = x.Data,
-                HtmlData = x.HtmlData
-            }).ToList();
-
             //测试多语言
             ViewData["Message"] = _localizer["Your application description page."];
 

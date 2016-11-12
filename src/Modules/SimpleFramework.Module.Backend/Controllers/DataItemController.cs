@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Omu.ValueInjecter;
 using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Common;
+using SimpleFramework.Core.Data;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Models;
 using SimpleFramework.Core.Models.Tree;
@@ -31,12 +32,12 @@ namespace SimpleFramework.Module.Backend.Controllers
     public class DataItemController : Core.Web.Base.Controllers.ControllerBase
     {
 
-        private readonly IRepositoryAsync<DataItemEntity> _repositoryAsync;
+        private readonly IBaseUnitOfWork _baseUnitOfWork;
         public DataItemController(IServiceCollection collection, ILogger<DataItemController> logger,
-           IRepositoryAsync<DataItemEntity> repositoryAsync)
+           IBaseUnitOfWork baseUnitOfWork)
             : base(collection, logger)
         {
-            this._repositoryAsync = repositoryAsync;
+            this._baseUnitOfWork = baseUnitOfWork;
         }
         public ActionResult Index()
         {
@@ -49,8 +50,8 @@ namespace SimpleFramework.Module.Backend.Controllers
           int rootDataItemId = 0,
           TreeViewItem.GetCountsType countsType = TreeViewItem.GetCountsType.None)
         {
-
-            var qry = _repositoryAsync.GetChildren(id, rootDataItemId);
+           
+            var qry = this._baseUnitOfWork.BaseWorkArea.DataItem.GetChildren(id, rootDataItemId);
 
             List<DataItemEntity> dataItemEntityList = new List<DataItemEntity>();
             List<TreeViewItem> groupNameList = new List<TreeViewItem>();
@@ -68,7 +69,7 @@ namespace SimpleFramework.Module.Backend.Controllers
 
                 if (countsType == TreeViewItem.GetCountsType.ChildGroups)
                 {
-                    treeViewItem.CountInfo = _repositoryAsync.Queryable().Where(a => a.ParentId.HasValue && a.ParentId == group.Id).Count();
+                    treeViewItem.CountInfo = this._baseUnitOfWork.BaseWorkArea.DataItem.Query().Where(a => a.ParentId.HasValue && a.ParentId == group.Id).Count();
                 }
 
                 groupNameList.Add(treeViewItem);
@@ -77,7 +78,7 @@ namespace SimpleFramework.Module.Backend.Controllers
 
             //快速找出哪些项目有子级
             List<long> resultIds = dataItemEntityList.Select(a => a.Id).ToList();
-            var qryHasChildrenList = _repositoryAsync.Queryable()
+            var qryHasChildrenList = this._baseUnitOfWork.BaseWorkArea.DataItem.Query()
                 .Where(g =>
                    g.ParentId.HasValue &&
                    resultIds.Contains(g.ParentId.Value)).Select(g => g.ParentId.Value)

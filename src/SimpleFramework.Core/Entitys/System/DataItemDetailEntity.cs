@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class DataItemDetailEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public class DataItemDetailEntity : BaseEntity
     {
         #region 实体成员
      

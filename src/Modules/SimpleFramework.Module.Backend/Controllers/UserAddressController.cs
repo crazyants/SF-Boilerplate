@@ -6,18 +6,19 @@ using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Module.Backend.ViewModels;
 using SimpleFramework.Core.Extensions;
+using SimpleFramework.Core.Data;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
     [Authorize]
     public class UserAddressController : Controller
     {
-        private IRepository<UserAddressEntity> _userAddressRepository;
+        private IBaseUnitOfWork _baseUnitOfWork;
         private IWorkContext _workContext;
 
-        public UserAddressController(IRepository<UserAddressEntity> userAddressRepository, IWorkContext workContext)
+        public UserAddressController(IBaseUnitOfWork baseUnitOfWork, IWorkContext workContext)
         {
-            _userAddressRepository = userAddressRepository;
+            _baseUnitOfWork = baseUnitOfWork;
             _workContext = workContext;
         }
 
@@ -25,8 +26,8 @@ namespace SimpleFramework.Module.Backend.Controllers
         public async Task<IActionResult> List()
         {
             var currentUser = await _workContext.GetCurrentUser();
-            var model = _userAddressRepository
-                .Queryable()
+            var model = _baseUnitOfWork.BaseWorkArea.UserAddress
+                .Query()
                 .Where(x => x.AddressType == AddressType.Shipping && x.UserId == currentUser.Id)
                 .Select(x => new UserAddressListItem
                 {

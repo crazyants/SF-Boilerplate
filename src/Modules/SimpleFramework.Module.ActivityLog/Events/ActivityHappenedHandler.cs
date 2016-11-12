@@ -2,6 +2,8 @@
 using SimpleFramework.Core.Events;
 using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Module.ActivityLog.Models;
+using SimpleFramework.Module.ActivityLog.Data;
+using SimpleFramework.Core.Abstraction.UoW.Helper;
 
 namespace SimpleFramework.Module.ActivityLog.Events
 {
@@ -11,24 +13,27 @@ namespace SimpleFramework.Module.ActivityLog.Events
     /// </summary>
     public class ActivityHappenedHandler : INotificationHandler<ActivityHappened>
     {
-        private readonly IRepository<Activity> _activityRepository;
+        private readonly IActivityUnitOfWork _unitOfWork;
 
-        public ActivityHappenedHandler(IRepository<Activity> activityRepository)
+        public ActivityHappenedHandler(IActivityUnitOfWork unitOfWork)
         {
-            _activityRepository = activityRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public void Handle(ActivityHappened notification)
         {
-            var activity = new Activity
+            var activity = new ActivityEntity
             {
                 ActivityTypeId = notification.ActivityTypeId,
                 EntityId = notification.EntityId,
                 EntityTypeId = notification.EntityTypeId,
                 CreatedOn = notification.TimeHappened
             };
+            _unitOfWork.ExecuteAndCommit(uow =>
+            {
+                return uow.Activity.Update(activity);
+            });
 
-            _activityRepository.Insert(activity);
         }
     }
 }

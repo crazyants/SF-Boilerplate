@@ -218,6 +218,10 @@ D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Abs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Abstraction\IPluginRoute.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Abstraction\IPluginRouteCollection.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Abstraction\IPluginSettingsManager.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Data\IPluginsUnitOfWork.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Data\PluginsUnitOfWork.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Data\Repository\IPluginRepository.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Data\Repository\Implementation\PluginRepository.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Extensions\AssemblyExtensions.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Extensions\PluginExtensions.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.Core.Plugins\Models\InstalledPlugin.cs

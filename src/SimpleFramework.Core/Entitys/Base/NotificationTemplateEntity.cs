@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class NotificationTemplateEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public class NotificationTemplateEntity : BaseEntity
     {
         /// <summary>
         /// Id of object that create notification

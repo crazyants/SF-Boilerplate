@@ -16,10 +16,10 @@ namespace SimpleFramework.Core.Data
 {
     public class CoreDbContext : IdentityDbContext<UserEntity, RoleEntity, long, IdentityUserClaim<long>, UserRoleEntity, IdentityUserLogin<long>, IdentityRoleClaim<long>, IdentityUserToken<long>>
     {
-        
+
         public CoreDbContext(DbContextOptions options) : base(options)
         {
-       
+
             Database.EnsureCreated();
             Database.Migrate();
         }
@@ -30,22 +30,20 @@ namespace SimpleFramework.Core.Data
             List<Type> typeToRegisterEntitys = new List<Type>();
             foreach (var assemblie in ExtensionManager.Assemblies)
             {
-                // typeToRegisters.AddRange(assemblie.DefinedTypes.Select(t => t.AsType()));
-
-                var entityClassTypes = assemblie.ExportedTypes.Where(x => typeof(IEntity).IsAssignableFrom(x)||
+                //获取所有继承BaseEntity的实体
+                var entityClassTypes = assemblie.ExportedTypes.Where(x => typeof(IEntity).IsAssignableFrom(x) ||
                 (x.GetTypeInfo().IsSubclassOf(typeof(BaseEntity)) || x.GetTypeInfo().IsSubclassOf(typeof(EntityWithTypedId<>)) || x.GetTypeInfo().IsSubclassOf(typeof(EntityWithCreatedAndUpdatedMeta<>)))
                 && !x.GetTypeInfo().IsAbstract && x.GetTypeInfo().IsClass);
                 typeToRegisterEntitys.AddRange(entityClassTypes);
 
+                //获取所有继承ICustomModelBuilder的实体映射
                 var customModelBuilderClassTypes = assemblie.ExportedTypes.Where(x => typeof(ICustomModelBuilder).IsAssignableFrom(x) && x.GetTypeInfo().IsClass);
                 typeToRegisterCustomModelBuilders.AddRange(customModelBuilderClassTypes);
-
-            
             }
 
-
+            //把实体注册到模型构建中
             RegisterEntities(modelBuilder, typeToRegisterEntitys);
-
+            //构建所有继承ICustomModelBuilder的实体映射
             RegiserConvention(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
@@ -56,7 +54,7 @@ namespace SimpleFramework.Core.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-      //      optionsBuilder.UseSqlServer(tenant.ConnectionString);
+            //      optionsBuilder.UseSqlServer(tenant.ConnectionString);
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -75,8 +73,8 @@ namespace SimpleFramework.Core.Data
 
         private static void RegisterEntities(ModelBuilder modelBuilder, IEnumerable<Type> typeToRegisters)
         {
-            
-         //   var entityTypes = typeToRegisters.Where(x => (x.GetTypeInfo().IsSubclassOf(typeof(Entity))|| x.GetTypeInfo().IsSubclassOf(typeof(EntityWithTypedId<>))) && !x.GetTypeInfo().IsAbstract);
+
+            //   var entityTypes = typeToRegisters.Where(x => (x.GetTypeInfo().IsSubclassOf(typeof(Entity))|| x.GetTypeInfo().IsSubclassOf(typeof(EntityWithTypedId<>))) && !x.GetTypeInfo().IsAbstract);
             foreach (var type in typeToRegisters)
             {
                 modelBuilder.Entity(type);
@@ -85,7 +83,7 @@ namespace SimpleFramework.Core.Data
 
         private static void RegisterCustomMappings(ModelBuilder modelBuilder, IEnumerable<Type> typeToRegisters)
         {
-          //  var customModelBuilderTypes = typeToRegisters.Where(x => typeof(ICustomModelBuilder).IsAssignableFrom(x));
+            //  var customModelBuilderTypes = typeToRegisters.Where(x => typeof(ICustomModelBuilder).IsAssignableFrom(x));
             foreach (var builderType in typeToRegisters)
             {
                 if (builderType != null && builderType != typeof(ICustomModelBuilder))

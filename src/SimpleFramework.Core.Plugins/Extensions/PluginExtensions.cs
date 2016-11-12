@@ -17,6 +17,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SimpleFramework.Core.Abstraction;
+using SimpleFramework.Core.Plugins.Data;
+using SimpleFramework.Core.Data;
+using SimpleFramework.Core.Interceptors;
+using SimpleFramework.Core.Abstraction.UoW.Helper;
 
 namespace SimpleFramework.Core.Plugins
 {
@@ -102,7 +106,12 @@ namespace SimpleFramework.Core.Plugins
             services.AddSingleton<IActionDescriptorCollectionProvider, PluginActionDescriptorCollectionProvider>();
 
             services.Configure<RazorViewEngineOptions>(options => { options.ViewLocationExpanders.Add(new PluginViewLocationExpander()); });
-
+            services.AddSingleton<IPluginsUnitOfWork>(sp =>
+            {
+                var simpleDbContext = sp.GetService<CoreDbContext>();
+                var userNameResolver = sp.GetService<IUserNameResolver>();
+                return new PluginsUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
+            });
         }
         /// <summary>
         /// 插件管理服务注册
@@ -117,10 +126,10 @@ namespace SimpleFramework.Core.Plugins
             services.AddSingleton<IPluginManager, PluginManager>(srcProvider =>
             {
                 var assbly = srcProvider.GetRequiredService<IAssemblyManager>();
-                var repos = srcProvider.GetRequiredService<IRepository<InstalledPlugin>>();
+                var uow = srcProvider.GetRequiredService<IPluginsUnitOfWork>();
                 var appMgr = srcProvider.GetRequiredService<ApplicationPartManager>();
 
-                return new PluginManager(assbly, this.configurationRoot, this.hostingEnvironment, repos, appMgr);
+                return new PluginManager(assbly, this.configurationRoot, this.hostingEnvironment, uow, appMgr);
             });
 
         }
@@ -130,17 +139,20 @@ namespace SimpleFramework.Core.Plugins
         /// <param name="services"></param>
         public static void RunTestData(IServiceProvider services)
         {
-            var repos = services.GetService<IRepository<InstalledPlugin>>();
+            var unitOfWork = services.GetService<IPluginsUnitOfWork>();
+            unitOfWork.ExecuteAndCommit(uow =>
+          {
+              uow.Plugin.Add(new InstalledPlugin
+              {
+                  Active = false,
+                  DateInstalled = DateTime.UtcNow,
+                  Installed = true,
+                  PluginAssemblyName = "SimpleFramework.Plugin.Blog",
+                  PluginName = "BlogPlugin",
+                  PluginVersion = "1.0"
+              });
+          });
 
-            repos.Insert(new InstalledPlugin
-            {
-                Active = false,
-                DateInstalled = DateTime.UtcNow,
-                Installed = true,
-                PluginAssemblyName = "SimpleFramework.Plugin.Blog",
-                PluginName = "BlogPlugin",
-                PluginVersion = "1.0"
-            });
         }
     }
 }

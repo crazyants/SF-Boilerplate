@@ -38,6 +38,7 @@ using SimpleFramework.Core.Abstraction.UoW;
 using SimpleFramework.Core.Data.UoW;
 using SimpleFramework.Core.Common.Message.Email;
 using SimpleFramework.Core.Common.Message.Sms;
+using SimpleFramework.Core.Data.Repository;
 
 namespace SimpleFramework.Core
 {
@@ -247,7 +248,8 @@ namespace SimpleFramework.Core
             services.AddSingleton<ICurrentUser, CurrentUser>();
             services.AddSingleton<IUserNameResolver, UserNameResolver>();
 
-            services.AddTransient(typeof(IEFCoreQueryableRepository<,>), typeof(EFCoreQueryableRepository<,>));
+            services.AddTransient(typeof(IEFCoreQueryableRepository<>), typeof(EFCoreBaseRepository<>));
+            services.AddTransient(typeof(IEFCoreQueryableRepository<,>), typeof(EFCoreBaseRepository<,>));
             services.AddSingleton<IBaseUnitOfWork>(sp =>
             {
                 var simpleDbContext = sp.GetService<CoreDbContext>();
@@ -260,7 +262,6 @@ namespace SimpleFramework.Core
             services.TryAddScoped<ISiteContext, SiteContext>();
             services.TryAddScoped<IMediaService, LocalMediaService>();
             services.TryAddScoped<IUrlSlugService, UrlSlugService>();
-            services.TryAddScoped<IWidgetInstanceService, WidgetInstanceService>();
             services.TryAddScoped<ISettingsManager, SettingsManager>();
             services.TryAddScoped<ISiteMessageEmailSender, SiteEmailMessageSender>();
             services.TryAddScoped<ISmsSender, SiteSmsSender>();

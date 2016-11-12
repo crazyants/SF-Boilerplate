@@ -3,7 +3,7 @@ using SimpleFramework.Core.Abstraction.Entitys;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class UserAddressEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public class UserAddressEntity : BaseEntity
     {
         public long UserId { get; set; }
 

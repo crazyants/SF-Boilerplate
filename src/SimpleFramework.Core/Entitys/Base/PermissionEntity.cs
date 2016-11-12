@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class PermissionEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public class PermissionEntity : BaseEntity
     {
         public PermissionEntity()
         {

@@ -2,23 +2,23 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Entitys;
+using SimpleFramework.Core.Data;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
     public class LocationController : Controller
     {
-        private readonly IRepository<DistrictEntity> districtRepository;
+        private readonly IBaseUnitOfWork _baseUnitOfWork;
 
-        public LocationController(IRepository<DistrictEntity> districtRepository)
+        public LocationController(IBaseUnitOfWork baseUnitOfWork)
         {
-            this.districtRepository = districtRepository;
+            this._baseUnitOfWork = baseUnitOfWork;
         }
 
         [Route("location/getdistricts/{stateOrProvinceId}")]
         public IActionResult GetDistricts(long stateOrProvinceId)
         {
-            var districts = districtRepository
-                .Queryable()
+            var districts = _baseUnitOfWork.BaseWorkArea.District.Query()
                 .Where(x => x.StateOrProvinceId == stateOrProvinceId)
                 .OrderBy(x => x.Name)
                 .Select(x => new

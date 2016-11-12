@@ -208,11 +208,15 @@ D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.L
 D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\ResourceString.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Controllers\LocalizationApiController.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Controllers\LocalizationController.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Data\IResourceUnitOfWork.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Data\ResourceUnitOfWork.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Data\Repository\IResourceRepository.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Data\Repository\Implementation\ResourceRepository.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Localization\GlobalResourceManagerStringLocalizer.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Localization\GlobalResourceManagerStringLocalizerFactory.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Localization\GlobalResourceManagerWithCultureStringLocalizer.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Localization\GlobalResourceOptions.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Localization\PatchedResourceManagerStringLocalizerFactory.cs
-D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Models\Culture.cs
-D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Models\Resource.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Models\CultureEntity.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Models\ResourceEntity.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\Modules\SimpleFramework.Module.Localization\Properties\AssemblyInfo.cs

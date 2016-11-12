@@ -20,13 +20,13 @@ namespace SimpleFramework.Core.Web.Base.Business
         #region Fields
 
         protected readonly IUnitOfWork _unitOfWork;
-        private readonly IEFCoreAsyncQueryable<T> _repository;
+        private readonly IEFCoreQueryableRepository<T> _repository;
         protected readonly ILogger _logger;
 
         #endregion
 
         #region Constructors
-        public CodetableReader(ILogger<T> logger, IEFCoreAsyncQueryable<T> repository)
+        public CodetableReader(ILogger<T> logger, IEFCoreQueryableRepository<T> repository)
         {
             _logger = logger;
             _repository = repository;
@@ -45,7 +45,7 @@ namespace SimpleFramework.Core.Web.Base.Business
         /// <returns></returns>
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _repository.GetAll(orderBy: Ordering.Expression);
+            return await Task.FromResult(_repository.QueryFilter(orderBy: Ordering.Expression));
         }
         /// <summary>
         /// 获取所有数据

@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using SimpleFramework.Core.Abstraction;
 using SimpleFramework.Core;
+using SimpleFramework.Module.Localization.Data;
+using SimpleFramework.Core.Data;
+using SimpleFramework.Core.Interceptors;
 
 namespace SimpleFramework.Module.Localization
 {
@@ -19,12 +22,19 @@ namespace SimpleFramework.Module.Localization
             {
                 return new Dictionary<int, Action<IServiceCollection>>()
                 {
-                    [0] = this.AddLocalizationService
+                    [10000] = this.AddLocalizationService
                 };
             }
         }
         public void AddLocalizationService(IServiceCollection services)
         {
+            services.AddSingleton<IResourceUnitOfWork>(sp =>
+            {
+                var simpleDbContext = sp.GetService<CoreDbContext>();
+                var userNameResolver = sp.GetService<IUserNameResolver>();
+                return new ResourceUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
+            });
+
             var globalFirst = this.configurationRoot.GetSection("GlobalResourceOptions").GetValue<bool>("TryGlobalFirst");
 
             if (!globalFirst)

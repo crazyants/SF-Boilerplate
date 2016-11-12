@@ -26,12 +26,16 @@ namespace SimpleFramework.Core.Data.WorkArea
         public BaseWorkArea(CoreDbContext context) : base(context)
         {
             User = new UserRepository(context);
+            UserAddress = new UserAddressRepository(context);
             Media = new MediaRespository(context);
             DataItem = new DataItemRepository(context);
             Setting = new SettingRepository(context);
-            UrlSlug= new UrlSlugRepository(context); 
+            UrlSlug= new UrlSlugRepository(context);
+            District = new DistrictRepository(context);
         }
         public IUserRepository User { get; }
+
+        public IUserAddressRepository UserAddress { get; }
 
         public IMediaRespository Media { get; }
 
@@ -40,6 +44,8 @@ namespace SimpleFramework.Core.Data.WorkArea
         public ISettingRepository Setting { get; }
 
         public IUrlSlugRepository UrlSlug { get; }
-        
+
+        public IDistrictRepository District { get; }
+
     }
 }

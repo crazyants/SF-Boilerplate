@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Entitys
 {
-	public class NotificationEntity : EntityWithCreatedAndUpdatedMeta<long>
-	{
+	public class NotificationEntity : BaseEntity
+    {
 		/// <summary>
 		/// Must be made sending
 		/// </summary>

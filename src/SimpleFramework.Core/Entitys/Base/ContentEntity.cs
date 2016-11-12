@@ -3,7 +3,7 @@ using SimpleFramework.Core.Abstraction.Entitys;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public abstract class ContentEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public abstract class ContentEntity : BaseEntity
     {
         private bool isDeleted;
 

@@ -2,7 +2,7 @@
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class UrlSlugEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public class UrlSlugEntity : BaseEntity
     {
         public string Slug { get; set; }
 

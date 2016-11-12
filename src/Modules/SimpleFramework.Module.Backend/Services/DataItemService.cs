@@ -13,6 +13,7 @@
 * Website：http://www.mayisite.com
 *********************************************************************************/
 using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Data.Repository;
 using SimpleFramework.Core.Entitys;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,9 @@ namespace SimpleFramework.Module.Backend.Services
 {
     public static class DataItemService
     {
-        public static IQueryable<DataItemEntity> GetChildren(this IRepositoryAsync<DataItemEntity> repository, int id, int rootDataItemId)
+        public static IQueryable<DataItemEntity> GetChildren(this IDataItemRepository repository, int id, int rootDataItemId)
         {
-            var qry = repository.Queryable();
+            var qry = repository.Query();
 
             if (id == 0)
             {

@@ -26,6 +26,8 @@ namespace SimpleFramework.Core.Data.WorkArea
     {
         IUserRepository User { get; }
 
+        IUserAddressRepository UserAddress { get; }
+
         IMediaRespository Media { get; }
 
         IDataItemRepository DataItem { get; }
@@ -33,5 +35,9 @@ namespace SimpleFramework.Core.Data.WorkArea
         ISettingRepository Setting { get; }
 
         IUrlSlugRepository UrlSlug { get; }
+
+        IDistrictRepository District { get; }
+
+  
     }
 }

@@ -8,24 +8,25 @@ using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Extensions;
 using Microsoft.AspNetCore.Identity;
 using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Data;
 
 namespace SimpleFramework.Core.Security
 {
     public class SecurityService : ISecurityService
     {
-        private readonly IRepositoryWithTypedId<UserEntity,long> _repository;
+        private readonly IBaseUnitOfWork _baseUnitOfWork;
         private readonly UserManager<UserEntity> _userManagerFactory;
         private readonly ICacheManager<object> _cacheManager;
         private readonly IPermissionScopeService _permissionScopeService;
         private readonly IEnumerable<IPermissionProvider> _permissionProviders;
 
-        public SecurityService(IRepositoryWithTypedId<UserEntity,long> repository,
+        public SecurityService(IBaseUnitOfWork baseUnitOfWork,
                                UserManager<UserEntity> userManagerFactory,
                                IPermissionScopeService permissionScopeService,
                                ICacheManager<object> cacheManager,
                                IEnumerable<IPermissionProvider> permissionProviders)
         {
-            _repository = repository;
+            _baseUnitOfWork = baseUnitOfWork;
             _userManagerFactory = userManagerFactory;
             _cacheManager = cacheManager;
             _permissionScopeService = permissionScopeService;
@@ -258,7 +259,7 @@ namespace SimpleFramework.Core.Security
             var result = new UserSearchResponse();
 
 
-            var query = _repository.Queryable();
+            var query = _baseUnitOfWork.BaseWorkArea.User.Query();
 
             if (request.Keyword != null)
             {
@@ -466,7 +467,7 @@ namespace SimpleFramework.Core.Security
                 {
                     ApplicationUserExtended retVal;
 
-                    var user = _repository.Find(x => x.UserName == applicationUser.UserName);
+                    var user = _baseUnitOfWork.BaseWorkArea.User.Query().First(x => x.UserName == applicationUser.UserName);
                     retVal = applicationUser.ToCoreModel(user, _permissionScopeService);
                     //Populate available permission scopes
                     if (retVal.Roles != null)

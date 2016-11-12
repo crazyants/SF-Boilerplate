@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class SettingEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public class SettingEntity : BaseEntity
     {
         public SettingEntity()
         {

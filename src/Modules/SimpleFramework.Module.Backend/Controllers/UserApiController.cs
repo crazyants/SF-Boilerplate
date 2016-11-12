@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using SimpleFramework.Core.Security;
 using SimpleFramework.Core.Common;
+using SimpleFramework.Core.Data;
+using SimpleFramework.Core.Abstraction.UoW.Helper;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
@@ -18,21 +20,21 @@ namespace SimpleFramework.Module.Backend.Controllers
     [Route("api/users")]
     public class UserApiController : Core.Web.Base.Controllers.ControllerBase
     {
-        private readonly IRepositoryWithTypedId<UserEntity, long> userRepository;
+        private readonly IBaseUnitOfWork _baseUnitOfWork;
         private readonly ISecurityService _securityService;
-        public UserApiController(IRepositoryWithTypedId<UserEntity, long> userRepository,
+        public UserApiController(IBaseUnitOfWork baseUnitOfWork,
             ISecurityService securityService,
             IServiceCollection service,
             ILogger<UserApiController> logger) : base(service, logger)
         {
-            this.userRepository = userRepository;
+            this._baseUnitOfWork = baseUnitOfWork;
             this._securityService = securityService;
         }
 
         [HttpPost("grid")]
         public ActionResult List([FromBody] SmartTableParam param)
         {
-            var query = userRepository.Queryable()
+            var query = _baseUnitOfWork.BaseWorkArea.User.Query()
                 // .Include(x => x.Roles).ThenInclude(r => r.Role)
                 .Where(x => !x.IsDeleted);
 
@@ -95,14 +97,14 @@ namespace SimpleFramework.Module.Backend.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(long id)
         {
-            var user = userRepository.Queryable().FirstOrDefault(x => x.Id == id);
+            var user = _baseUnitOfWork.BaseWorkArea.User.GetById(id);
             if (user == null)
             {
                 return new NotFoundResult();
             }
 
             user.IsDeleted = true;
-            userRepository.SaveChange();
+            _baseUnitOfWork.ExecuteAndCommit(uow => { _baseUnitOfWork.BaseWorkArea.User.Update(user); });
             return Json(true);
         }
 

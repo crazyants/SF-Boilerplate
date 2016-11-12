@@ -5,17 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Module.Localization.Models;
+using SimpleFramework.Module.Localization.Data;
 
 namespace SimpleFramework.Module.Localization
 {
     public class EfStringLocalizerFactory : IStringLocalizerFactory
     {
-        private readonly IRepository<Resource> _resourceRepository;
+        private readonly IResourceUnitOfWork _unitOfWork;
         private IList<ResourceString> _resourceStrings;
 
-        public EfStringLocalizerFactory(IRepository<Resource> resourceRepository)
+        public EfStringLocalizerFactory(IResourceUnitOfWork unitOfWork)
         {
-            _resourceRepository = resourceRepository;
+            _unitOfWork = unitOfWork;
             LoadResources();
         }
 
@@ -31,7 +32,7 @@ namespace SimpleFramework.Module.Localization
 
         private void LoadResources()
         {
-            _resourceStrings = _resourceRepository.Query().Include(x => x.Culture).Select(x => new ResourceString
+            _resourceStrings = _unitOfWork.Resource.Query().Include(x => x.Culture).Select(x => new ResourceString
             {
                 Culture = x.Culture.Name,
                 Key = x.Key,

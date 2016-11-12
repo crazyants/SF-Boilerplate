@@ -10,20 +10,24 @@ using Microsoft.EntityFrameworkCore;
 using SimpleFramework.Core.Settings.Converters;
 using SimpleFramework.Core.Common;
 using SimpleFramework.Core.Extensions;
+using SimpleFramework.Core.Data;
+using SimpleFramework.Core.Abstraction.UoW.Helper;
 
 namespace SimpleFramework.Core.Settings
 {
     public class SettingsManager : ISettingsManager
     {
-        private readonly IRepository<SettingEntity> _repository;
+
         private readonly ICacheManager<object> _cacheManager;
         private readonly IDictionary<string, List<SettingEntry>> _runtimeModuleSettingsMap = new Dictionary<string, List<SettingEntry>>();
+        private readonly IBaseUnitOfWork _baseUnitOfWork;
 
-        public SettingsManager(IRepository<SettingEntity> repository, ICacheManager<object> cacheManager)
+        public SettingsManager(IBaseUnitOfWork baseUnitOfWork, ICacheManager<object> cacheManager)
         {
-            _repository = repository;
             _cacheManager = cacheManager;
+            _baseUnitOfWork = baseUnitOfWork;
         }
+
 
         #region ISettingsManager Members
 
@@ -37,7 +41,7 @@ namespace SimpleFramework.Core.Settings
             var storedSettings = new List<SettingEntry>();
             var entityType = entity.GetType().Name;
 
-            var settings = _repository.Queryable()
+            var settings = _baseUnitOfWork.BaseWorkArea.Setting.Query()
                 .Include(s => s.SettingValues)
                 .Where(x => x.Id == entity.Id && x.ObjectType == entityType)
                 .OrderBy(x => x.Name)
@@ -66,7 +70,7 @@ namespace SimpleFramework.Core.Settings
                         }
                         else if (setting.Value == null && setting.ArrayValues == null)
                         {
-                          
+
                         }
 
                     }
@@ -109,15 +113,15 @@ namespace SimpleFramework.Core.Settings
                 throw new ArgumentNullException("entity transistent");
 
             var objectType = entity.GetType().Name;
-           
-                var settings = _repository.Queryable().Include(s => s.SettingValues)
-                                                  .Where(x => x.Id == entity.Id && x.ObjectType == objectType).ToList();
-                foreach (var setting in settings)
-                {
-                    _repository.Delete(setting);
-                }
-               
-            
+
+            var settings = _baseUnitOfWork.BaseWorkArea.Setting.Query().Include(s => s.SettingValues)
+                                              .Where(x => x.Id == entity.Id && x.ObjectType == objectType).ToList();
+            foreach (var setting in settings)
+            {
+                _baseUnitOfWork.ExecuteAndCommit(uow => { uow.BaseWorkArea.Setting.Delete(setting); });
+            }
+
+
 
         }
 
@@ -130,14 +134,14 @@ namespace SimpleFramework.Core.Settings
 
                 using (var changeTracker = new ObservableChangeTracker())
                 {
-                    var alreadyExistSettings = _repository.Queryable()
+                    var alreadyExistSettings = _baseUnitOfWork.BaseWorkArea.Setting.Query()
                         .Include(s => s.SettingValues)
                         .Where(x => settingKeys.Contains(x.Name + "-" + x.ObjectType + "-" + x.Id))
                         .ToList();
 
-                    changeTracker.AddAction = x => _repository.Insert((SettingEntity)x);
+                    changeTracker.AddAction = x => _baseUnitOfWork.ExecuteAndCommit(uow => { uow.BaseWorkArea.Setting.Add((SettingEntity)x); });
                     //Need for real remove object from nested collection (because EF default remove references only)
-                    changeTracker.RemoveAction = x => _repository.Delete((SettingEntity)x);
+                    changeTracker.RemoveAction = x => _baseUnitOfWork.ExecuteAndCommit(uow => { uow.BaseWorkArea.Setting.Delete((SettingEntity)x); });
 
                     var target = new { Settings = new List<SettingEntity>(alreadyExistSettings) };
                     var source = new { Settings = new List<SettingEntity>(settings.Select(x => x.ToEntity())) };
@@ -200,8 +204,8 @@ namespace SimpleFramework.Core.Settings
 
         private List<SettingEntity> LoadAllEntities()
         {
-            return _repository.Queryable()
-                    .Where(x => x.ObjectType == null )
+            return _baseUnitOfWork.BaseWorkArea.Setting.Query()
+                    .Where(x => x.ObjectType == null)
                     .Include(s => s.SettingValues)
                     .ToList();
 

@@ -44,7 +44,7 @@ namespace SimpleFramework.Module.Backend.Controllers
         [HttpGet]
         public ActionResult GetTreeListJson(string keyword)
         {
-            var data = _repository.GetAll().ToList();
+            var data = _repository.Query().ToList();
 
             if (!string.IsNullOrEmpty(keyword))
             {
@@ -77,13 +77,13 @@ namespace SimpleFramework.Module.Backend.Controllers
         [HttpGet]
         public ActionResult GetPageListJson(JqGridRequest request, string queryJson)
         {
-            int totalRecords = 0;
-            var query = _repository.Query().SelectPage(request.PageIndex, request.RecordsCount, out totalRecords);
+            
+            var query = _repository.QueryPage(page:request.PageIndex,pageSize: request.RecordsCount);
             JqGridResponse response = new JqGridResponse()
             {
-                TotalPagesCount = (int)Math.Ceiling((float)totalRecords / (float)request.RecordsCount),
+                TotalPagesCount = query.TotalPages,
                 PageIndex = request.PageIndex,
-                TotalRecordsCount = totalRecords,
+                TotalRecordsCount = query.TotalCount,
             };
             foreach (DataItemEntity userEntity in query)
             {

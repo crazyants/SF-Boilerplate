@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleFramework.Core.Abstraction.Data;
+using SimpleFramework.Core.Abstraction.UoW.Helper;
 using SimpleFramework.Core.Plugins.Abstraction;
+using SimpleFramework.Core.Plugins.Data;
 using SimpleFramework.Core.Plugins.Models;
 using System;
 using System.Collections.Generic;
@@ -22,7 +24,7 @@ namespace SimpleFramework.Core.Plugins
         private IAssemblyManager _assemblyManager;
         private IConfigurationRoot _configurationRoot;
         private IHostingEnvironment _hostingEnvironment;
-        private IRepository<InstalledPlugin> _repository;
+        private IPluginsUnitOfWork _unitOfWork;
         private ApplicationPartManager _appPartManager;
 
         private IList<IPlugin> _availablePlugins;
@@ -100,7 +102,7 @@ namespace SimpleFramework.Core.Plugins
             {
                 if (_installedPluginAssemblies == null)
                 {
-                    var installedFromDb = _repository.Query(x => x.Installed == true).Select();
+                    var installedFromDb = _unitOfWork.Plugin.Query().Where(x => x.Installed == true);
                     _installedPluginAssemblies = new List<Tuple<IPlugin, IList<Assembly>>>();
 
                     foreach (var pluginPair in AvailablePluginAssemblies)
@@ -122,7 +124,7 @@ namespace SimpleFramework.Core.Plugins
             {
                 if (_activePluginAssemnies == null)
                 {
-                    var fromDb = _repository.Query(x => x.Installed && x.Active).Select();
+                    var fromDb = _unitOfWork.Plugin.Query().Where(x => x.Installed && x.Active);
                     _activePluginAssemnies = new List<Tuple<IPlugin, IList<Assembly>>>();
 
                     foreach (var pluginPair in InstalledPluginAssemblies)
@@ -160,7 +162,7 @@ namespace SimpleFramework.Core.Plugins
         }
 
         public PluginManager(IAssemblyManager assemblyManager, IConfigurationRoot configurationRoot,
-            IHostingEnvironment hostingEnvironment, IRepository<InstalledPlugin> repository,
+            IHostingEnvironment hostingEnvironment, IPluginsUnitOfWork unitOfWork,
             ApplicationPartManager appPartManager)
 
         {
@@ -169,7 +171,7 @@ namespace SimpleFramework.Core.Plugins
             _hostingEnvironment = hostingEnvironment;
             _appPartManager = appPartManager;
 
-            _repository = repository;
+            _unitOfWork = unitOfWork;
 
             var pluginDir = _configurationRoot.GetValue<string>("PluginDir");
             _pluginDirPath = Path.Combine(_hostingEnvironment.ContentRootPath, pluginDir);
@@ -182,14 +184,16 @@ namespace SimpleFramework.Core.Plugins
 
         public void ActivatePlugin(IPlugin plugin)
         {
-            var installedPlugin = _repository.Find(x => x.PluginAssemblyName == plugin.AssemblyName);
+            var installedPlugin = _unitOfWork.Plugin.Query().First(x => x.PluginAssemblyName == plugin.AssemblyName);
             if (installedPlugin == null)
                 throw new NullReferenceException($"Can not find installed plugin for {plugin.Name}");
 
             installedPlugin.Active = true;
             installedPlugin.DateActivated = DateTime.UtcNow;
-            _repository.Update(installedPlugin);
-
+              _unitOfWork.ExecuteAndCommit(uow =>
+            {
+                return uow.Plugin.Update(installedPlugin);
+            });
             RegisterAssemblyInPartManager(plugin);
 
             Refresh();
@@ -197,14 +201,17 @@ namespace SimpleFramework.Core.Plugins
 
         public void DeactivatePlugin(IPlugin plugin)
         {
-            var installedPlugin = _repository.Find(x => x.PluginAssemblyName == plugin.AssemblyName);
+            var installedPlugin = _unitOfWork.Plugin.Query().First(x => x.PluginAssemblyName == plugin.AssemblyName);
             if (installedPlugin == null)
                 throw new NullReferenceException($"Can not find installed plugin for {plugin.Name}");
 
             installedPlugin.Active = false;
             installedPlugin.DateDeactivated = DateTime.UtcNow;
-            _repository.Update(installedPlugin);
-
+           
+            _unitOfWork.ExecuteAndCommit(uow =>
+            {
+                return uow.Plugin.Update(installedPlugin);
+            });
             RemoveFromAssemblyInPartManager(plugin);
 
             Refresh();

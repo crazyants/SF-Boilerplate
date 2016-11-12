@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class ApiAccountEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public class ApiAccountEntity : BaseEntity
     {
         [StringLength(128)]
         public string Name { get; set; }

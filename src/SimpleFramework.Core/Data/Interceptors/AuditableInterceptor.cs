@@ -5,7 +5,7 @@ using System;
 
 namespace SimpleFramework.Core.Interceptors
 {
-    public class AuditableInterceptor : ChangeInterceptor<EntityWithCreatedAndUpdatedMeta<long>>
+    public class AuditableInterceptor : ChangeInterceptor<BaseEntity>
     {
         private readonly IUserNameResolver _userNameResolver;
 
@@ -14,7 +14,7 @@ namespace SimpleFramework.Core.Interceptors
             _userNameResolver = userNameResolver;
         }
 
-        public override void OnBeforeInsert(EntityEntry entry, EntityWithCreatedAndUpdatedMeta<long> item)
+        public override void OnBeforeInsert(EntityEntry entry, BaseEntity item)
         {
             base.OnBeforeInsert(entry, item);
 
@@ -26,7 +26,7 @@ namespace SimpleFramework.Core.Interceptors
             item.UpdatedBy = item.UpdatedBy ?? currentUser;
         }
 
-        public override void OnBeforeUpdate(EntityEntry entry, EntityWithCreatedAndUpdatedMeta<long> item)
+        public override void OnBeforeUpdate(EntityEntry entry, BaseEntity item)
         {
             base.OnBeforeUpdate(entry, item);
             var currentTime = DateTime.UtcNow;

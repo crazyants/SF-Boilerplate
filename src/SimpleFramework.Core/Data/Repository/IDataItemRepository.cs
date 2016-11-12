@@ -14,6 +14,7 @@
 *********************************************************************************/
 using SimpleFramework.Core.Abstraction.Entitys.Pages;
 using SimpleFramework.Core.Abstraction.UoW;
+using SimpleFramework.Core.Data.UoW;
 using SimpleFramework.Core.Entitys;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace SimpleFramework.Core.Data.Repository
     /// 
     /// </summary>
     public interface IDataItemRepository :
-       IRepository<DataItemEntity, long>
+       IEFCoreQueryableRepository<DataItemEntity, long>
     {
         IPagedList<DataItemEntity> QueryFilterByLevelWithPagination(string itemName, int page = 0, int pageSize = 50, CancellationToken ct = new CancellationToken());
     }

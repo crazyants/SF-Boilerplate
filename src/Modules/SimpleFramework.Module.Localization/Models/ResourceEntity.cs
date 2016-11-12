@@ -2,12 +2,12 @@
 
 namespace SimpleFramework.Module.Localization.Models
 {
-    public class Resource : BaseEntity
+    public class ResourceEntity : BaseEntity
     {
         public string Key { get; set; }
 
         public string Value { get; set; }
 
-        public Culture Culture { get; set; }
+        public CultureEntity Culture { get; set; }
     }
 }

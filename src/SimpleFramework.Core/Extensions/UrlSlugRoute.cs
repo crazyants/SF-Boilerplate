@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Entitys;
+using SimpleFramework.Core.Data;
 
 namespace SimpleFramework.Core.Extensions
 {
@@ -26,10 +27,10 @@ namespace SimpleFramework.Core.Extensions
                 requestPath = requestPath.Substring(1);
             }
 
-            var urlSlugRepository = context.HttpContext.RequestServices.GetService<IRepository<UrlSlugEntity>>();
+            var unitOfWork = context.HttpContext.RequestServices.GetService<IBaseUnitOfWork>();
 
             // Get the slug that matches.
-            var urlSlug = await urlSlugRepository.Queryable().Include(x => x.EntityType).FirstOrDefaultAsync(x => x.Slug == requestPath);
+            var urlSlug = await unitOfWork.BaseWorkArea.UrlSlug.Query().Include(x => x.EntityType).FirstOrDefaultAsync(x => x.Slug == requestPath);
 
             // Invoke MVC controller/action
             var oldRouteData = context.RouteData;

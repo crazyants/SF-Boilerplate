@@ -2,7 +2,7 @@
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class EntityType : EntityWithCreatedAndUpdatedMeta<long>
+    public class EntityType : BaseEntity
     {
         public string Name { get; set; }
 

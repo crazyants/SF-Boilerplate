@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using SimpleFramework.Core.Abstraction.Entitys;
 using SimpleFramework.Core.Abstraction.UoW;
 using SimpleFramework.Core.Abstraction.UoW.Helper;
+using SimpleFramework.Core.Data.UoW;
 using SimpleFramework.Core.Errors.Exceptions;
 using System;
 using System.Threading.Tasks;
@@ -17,13 +18,13 @@ namespace SimpleFramework.Core.Web.Base.Business
     {
         #region Fields
         protected readonly IUnitOfWork _unitOfWork;
-        private readonly IRepository<T> _repository;
+        private readonly IEFCoreQueryableRepository<T> _repository;
         protected readonly ILogger _logger;
 
         #endregion
 
         #region Constructors
-        public CodeTabelWriter(ILogger<T> logger, IRepository<T> repository, IUnitOfWork unitOfWork)
+        public CodeTabelWriter(ILogger<T> logger, IEFCoreQueryableRepository<T> repository, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _repository = repository;

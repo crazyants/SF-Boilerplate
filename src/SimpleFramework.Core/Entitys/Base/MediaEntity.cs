@@ -2,7 +2,7 @@
 
 namespace SimpleFramework.Core.Entitys
 {
-    public class MediaEntity : EntityWithCreatedAndUpdatedMeta<long>
+    public class MediaEntity : BaseEntity
     {
         public string Caption { get; set; }
 

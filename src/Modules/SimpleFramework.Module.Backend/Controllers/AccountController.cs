@@ -10,10 +10,11 @@ using SimpleFramework.Module.Backend.ViewModels.Account;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Services;
 using Audit.Mvc;
-using SimpleFramework.Core.Components.Messaging;
 using SimpleFramework.Core.Extensions;
 using SimpleFramework.Core.Web;
 using SimpleFramework.Core.Common;
+using SimpleFramework.Core.Common.Message.Email;
+using SimpleFramework.Core.Common.Message.Sms;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
