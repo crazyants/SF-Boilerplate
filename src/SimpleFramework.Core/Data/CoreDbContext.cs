@@ -21,7 +21,7 @@ namespace SimpleFramework.Core.Data
         {
 
             Database.EnsureCreated();
-            Database.Migrate();
+        //    Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,9 +31,10 @@ namespace SimpleFramework.Core.Data
             foreach (var assemblie in ExtensionManager.Assemblies)
             {
                 //获取所有继承BaseEntity的实体
-                var entityClassTypes = assemblie.ExportedTypes.Where(x => typeof(IEntity).IsAssignableFrom(x) ||
-                (x.GetTypeInfo().IsSubclassOf(typeof(BaseEntity)) || x.GetTypeInfo().IsSubclassOf(typeof(EntityWithTypedId<>)) || x.GetTypeInfo().IsSubclassOf(typeof(EntityWithCreatedAndUpdatedMeta<>)))
-                && !x.GetTypeInfo().IsAbstract && x.GetTypeInfo().IsClass);
+                var entityClassTypes = assemblie.ExportedTypes.Where(x =>
+                //( x.GetTypeInfo().IsSubclassOf(typeof(BaseEntity)) && !x.GetTypeInfo().IsAbstract)||
+                typeof(IEntityWithTypedId<long>).IsAssignableFrom(x) && !x.GetTypeInfo().IsAbstract
+                );
                 typeToRegisterEntitys.AddRange(entityClassTypes);
 
                 //获取所有继承ICustomModelBuilder的实体映射

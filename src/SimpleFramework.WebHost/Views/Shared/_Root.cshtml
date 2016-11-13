@@ -13,9 +13,13 @@
         <link rel="stylesheet" href="/css/theme.css" />
         <link rel="stylesheet" href="/css/account.css" />
         <link rel="stylesheet" href="/css/sf-about.css" />
-        <link href="/lib/jqgrid/jqgrid.css" rel="stylesheet" />
+        @*<link href="/lib/jqgrid/jqgrid.css" rel="stylesheet" />*@
     </environment>
     <environment names="Staging,Production">
+        @* 给静态文件生成唯一的版本号如果静态文件发生改变，
+            Tag Helper就是重新计算文件的哈希值，它采用 SHA256的哈希值。
+            当然以前服务器缓存的文件版本也随之失效了。
+            这个asp-append-version Tag Helper可以支持Img、Script和Link元素。 *@
         <link rel="stylesheet" href="/css/developer.css" asp-append-version="true" />
         <link rel="stylesheet" href="/css/bootstrap.css" asp-append-version="true" />
         <link rel="stylesheet" href="/css/theme.css" asp-append-version="true" />
@@ -97,6 +101,10 @@
         <script src="/js/indextab.js"></script>
     </environment>
     <environment names="Staging,Production">
+        @* 使用CDN时，因为还要进行开发任务，一般我们都要有两套地址，
+            一套是CDN上的文件地址，一套是本地调试开发用的地址。
+            Tag Helper：asp-fallback-* 解决开发时使用的文件地址问题。
+             当然它也可以asp-append-version 两个Tag Helper一起使用,这样就实现了，在CDN文件缓存的同步问题。 *@
         @*<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
                     asp-fallback-src="~/lib/jquery/jquery.min.js"
                     asp-fallback-test="window.jQuery">

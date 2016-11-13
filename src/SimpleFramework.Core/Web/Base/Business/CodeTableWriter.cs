@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SimpleFramework.Core.Abstraction.Entitys;
 using SimpleFramework.Core.Abstraction.UoW;
@@ -14,7 +15,7 @@ namespace SimpleFramework.Core.Web.Base.Business
     /// 写入处理
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CodeTabelWriter<T> : ICodetableWriter<T> where T : BaseEntity
+    public class CodeTableWriter<T> : ICodetableWriter<T> where T : BaseEntity
     {
         #region Fields
         protected readonly IUnitOfWork _unitOfWork;
@@ -24,7 +25,7 @@ namespace SimpleFramework.Core.Web.Base.Business
         #endregion
 
         #region Constructors
-        public CodeTabelWriter(ILogger<T> logger, IEFCoreQueryableRepository<T> repository, IUnitOfWork unitOfWork)
+        public CodeTableWriter(ILogger<Controller> logger, IEFCoreQueryableRepository<T> repository, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _repository = repository;

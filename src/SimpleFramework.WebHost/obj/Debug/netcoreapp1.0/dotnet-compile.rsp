@@ -27,9 +27,9 @@
 --reference:C:\Users\tomny\.nuget\packages\Hangfire.Core\1.6.5\lib\netstandard1.3\Hangfire.Core.dll
 --reference:C:\Users\tomny\.nuget\packages\Hangfire.SqlServer\1.6.5\lib\netstandard1.3\Hangfire.SqlServer.dll
 --reference:C:\Users\tomny\.nuget\packages\IdentityModel\2.0.0\lib\netstandard1.3\IdentityModel.dll
---reference:C:\Users\tomny\.nuget\packages\IdentityModel.AspNetCore.OAuth2Introspection\1.0.1-rc2\lib\netstandard1.3\IdentityModel.AspNetCore.OAuth2Introspection.dll
---reference:C:\Users\tomny\.nuget\packages\IdentityModel.AspNetCore.ScopeValidation\1.0.0-rc2\lib\netstandard1.3\IdentityModel.AspNetCore.ScopeValidation.dll
---reference:C:\Users\tomny\.nuget\packages\IdentityServer4.AccessTokenValidation\1.0.1-rc2\lib\netstandard1.4\IdentityServer4.AccessTokenValidation.dll
+--reference:C:\Users\tomny\.nuget\packages\IdentityModel.AspNetCore.OAuth2Introspection\1.0.1\lib\netstandard1.3\IdentityModel.AspNetCore.OAuth2Introspection.dll
+--reference:C:\Users\tomny\.nuget\packages\IdentityModel.AspNetCore.ScopeValidation\1.0.0\lib\netstandard1.3\IdentityModel.AspNetCore.ScopeValidation.dll
+--reference:C:\Users\tomny\.nuget\packages\IdentityServer4.AccessTokenValidation\1.0.1-rc3\lib\netstandard1.4\IdentityServer4.AccessTokenValidation.dll
 --reference:C:\Users\tomny\.nuget\packages\LinqKit\1.1.7.3\lib\netstandard1.3\LinqKit.dll
 --reference:C:\Users\tomny\.nuget\packages\MailKit\1.4.0\lib\netstandard1.3\MailKit.dll
 --reference:C:\Users\tomny\.nuget\packages\MediatR\2.1.0\lib\netstandard1.1\MediatR.dll
@@ -311,6 +311,6 @@ D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.WebHost\Startup.
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.WebHost\Extensions\ApplicationBuilderExtensions.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.WebHost\Extensions\MediatorExtensions.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.WebHost\Extensions\ServiceCollectionExtensions.cs
-D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.WebHost\Migrations\20161108074447_InitialCreate.cs
-D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.WebHost\Migrations\20161108074447_InitialCreate.Designer.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.WebHost\Migrations\20161113085614_InitialCreate.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.WebHost\Migrations\20161113085614_InitialCreate.Designer.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SimpleFramework.WebHost\Migrations\CoreDbContextModelSnapshot.cs

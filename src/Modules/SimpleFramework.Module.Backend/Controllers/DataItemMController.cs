@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Omu.ValueInjecter;
 using SimpleFramework.Core.Common;
+using SimpleFramework.Core.Data;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Models.GridTree;
 using SimpleFramework.Core.Web.Base.Controllers;
@@ -27,21 +28,26 @@ namespace SimpleFramework.Module.Backend.Controllers
     [Route("DataItemM/")]
     public class DataItemMController : CrudControllerBase<DataItemEntity, DataItemViewModel>
     {
-        public DataItemMController(IServiceCollection collection, ILogger<UserCrudController> logger) : base(collection, logger)
+        public DataItemMController(IServiceCollection collection, ILogger<UserCrudController> logger,
+            CoreDbContext dbContext, IBaseUnitOfWork baseUnitOfWork)
+            : base(dbContext, baseUnitOfWork, collection, logger)
         {
             CrudDtoMapper = new DataItemDtoMapper();
         }
+
         [Route("List")]
         public ActionResult List()
         {
             return View();
         }
+
         /// <summary>
         /// 分类列表
         /// </summary>
         /// <param name="keyword">关键字查询</param>
         /// <returns>返回树形列表Json</returns>
         [HttpGet]
+        [Route("GetTreeList")]
         public ActionResult GetTreeListJson(string keyword)
         {
             var data = _repository.Query().ToList();
@@ -68,6 +74,7 @@ namespace SimpleFramework.Module.Backend.Controllers
             }
             return Content(TreeList.TreeJson());
         }
+
         /// <summary>
         /// 用户列表
         /// </summary>
@@ -75,10 +82,11 @@ namespace SimpleFramework.Module.Backend.Controllers
         /// <param name="queryJson">查询参数</param>
         /// <returns>返回分页列表Json</returns>
         [HttpGet]
+        [Route("GetPageList")]
         public ActionResult GetPageListJson(JqGridRequest request, string queryJson)
         {
-            
-            var query = _repository.QueryPage(page:request.PageIndex,pageSize: request.RecordsCount);
+
+            var query = _repository.QueryPage(page: request.PageIndex, pageSize: request.RecordsCount);
             JqGridResponse response = new JqGridResponse()
             {
                 TotalPagesCount = query.TotalPages,

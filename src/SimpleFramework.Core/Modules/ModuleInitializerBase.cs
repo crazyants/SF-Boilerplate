@@ -15,11 +15,11 @@ namespace SimpleFramework.Core
 {
     public abstract class ModuleInitializerBase : IModuleInitializer
     {
-        protected IHostingEnvironment hostingEnvironment; 
+        protected IHostingEnvironment hostingEnvironment;
         protected IServiceProvider serviceProvider;
         protected IConfigurationRoot configurationRoot;
         protected ILogger<ModuleInitializerBase> logger;
- 
+
         public virtual IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities
         {
             get
@@ -60,7 +60,9 @@ namespace SimpleFramework.Core
             get
             {
                 return null;
+              
             }
+
         }
 
         public virtual IEnumerable<KeyValuePair<int, Action<IRouteBuilder>>> UseMvcActionsByPriorities
@@ -68,6 +70,13 @@ namespace SimpleFramework.Core
             get
             {
                 return null;
+                //return new Dictionary<int, Action<IRouteBuilder>>()
+                //{
+                //    [2000] = routeBuilder =>
+                //    {
+                //        routeBuilder.MapRoute(name: "Extension B", template: "extension-b", defaults: new { controller = "ExtensionB", action = "Index" });
+                //    }
+                //};
             }
         }
 

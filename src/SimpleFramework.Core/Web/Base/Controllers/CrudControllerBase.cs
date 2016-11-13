@@ -13,6 +13,8 @@ using SimpleFramework.Core.Web.Base.DataContractMapper;
 using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Data.UoW;
 using SimpleFramework.Core.Abstraction.UoW;
+using SimpleFramework.Core.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimpleFramework.Core.Web.Base.Controllers
 {
@@ -22,14 +24,14 @@ namespace SimpleFramework.Core.Web.Base.Controllers
     /// <typeparam name="TCodeTabelEntity"></typeparam>
     /// <typeparam name="TCodeTabelModel"></typeparam>
     public class CrudControllerBase<TCodeTabelEntity, TCodeTabelModel> : ControllerBase
-        where TCodeTabelEntity : EntityWithCreatedAndUpdatedMeta<long>
-        where TCodeTabelModel : EntityModelBase 
+        where TCodeTabelEntity : BaseEntity
+        where TCodeTabelModel : EntityModelBase
     {
         private readonly ICodetableReader<TCodeTabelEntity> _reader;
-        private ICodetableWriter<TCodeTabelEntity> _writer;
-
+        private readonly ICodetableWriter<TCodeTabelEntity> _writer;
         protected readonly IUnitOfWork _unitOfWork;
         protected readonly IEFCoreQueryableRepository<TCodeTabelEntity> _repository;
+
         /// <summary>
         /// 数据转换器
         /// </summary>
@@ -37,14 +39,42 @@ namespace SimpleFramework.Core.Web.Base.Controllers
         public ICrudDtoMapper<TCodeTabelEntity, TCodeTabelModel> CrudDtoMapper { get; set; }
         /// <summary>
         /// 初始化构造
+        /// 使用注入的同一个上下文
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="logger"></param>
+        /// <param name="service">服务集合</param>
+        /// <param name="logger">日志</param>
         public CrudControllerBase(IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
         {
             _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity>>();
             _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity>>();
             _repository = service.BuildServiceProvider().GetService<IEFCoreQueryableRepository<TCodeTabelEntity>>();
+        }
+        /// <summary>
+        /// 初始化构造
+        /// 用于不同的个上下文，使用注入的工作单元
+        /// </summary>
+        /// <param name="dbContext">上下文实例</param>
+        /// <param name="service">服务集合</param>
+        /// <param name="logger">日志</param>
+        public CrudControllerBase(DbContext dbContext, IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
+        {
+            _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity>>();
+            _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity>>();
+            _repository = new EFCoreBaseRepository<TCodeTabelEntity>(dbContext);
+        }
+        /// <summary>
+        /// 初始化构造
+        /// 用于不同的上下文示例、不同的工作单元
+        /// </summary>
+        /// <param name="dbContext">上下文实例</param>
+        /// <param name="unitOfWork">工作单元</param>
+        /// <param name="service">服务集合</param>
+        /// <param name="logger">日志</param>
+        public CrudControllerBase(DbContext dbContext, IUnitOfWork unitOfWork, IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
+        {
+            _repository = new EFCoreBaseRepository<TCodeTabelEntity>(dbContext);
+            _reader = new CodetableReader<TCodeTabelEntity>(logger, _repository);
+            _writer = new CodeTableWriter<TCodeTabelEntity>(logger, _repository, unitOfWork);
         }
         /// <summary>
         /// 异步获取模型数据

@@ -34,7 +34,7 @@ GO
 SET IDENTITY_INSERT [dbo].[Core_User] ON 
 
 GO
-INSERT [dbo].[Core_User] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [FullName], [IsDeleted], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserGuid], [UserName],[CreatedDate],[IsAdministrator]) VALUES (1, 0, N'adfeea54-cee5-4a6f-9c0f-a8fc47883971', N'admin@admin.com', 0, N'admin', 0, 0, NULL, N'ADMIN@ADMIN.COM', N'ADMIN@ADMIN.COM', N'AQAAAAEAACcQAAAAEIt+m8p/mFcVlh8N7V8hoNaBEQuejYWsrZnK45oB4syrCkYv3SDr7l1JbsCxJoC0tA==', NULL, 0, N'e74db142-844b-4369-b9d1-c867ebb05198', 0, N'00000000-0000-0000-0000-000000000000', N'admin@admin.com',getdate(),0)
+INSERT [dbo].[Core_User] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [FullName], [IsDeleted], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserGuid], [UserName],[CreatedOn],[CreatedBy],[UpdatedOn],[UpdatedBy],[IsAdministrator]) VALUES (1, 0, N'adfeea54-cee5-4a6f-9c0f-a8fc47883971', N'admin@admin.com', 0, N'admin', 0, 0, NULL, N'ADMIN@ADMIN.COM', N'ADMIN@ADMIN.COM', N'AQAAAAEAACcQAAAAEIt+m8p/mFcVlh8N7V8hoNaBEQuejYWsrZnK45oB4syrCkYv3SDr7l1JbsCxJoC0tA==', NULL, 0, N'e74db142-844b-4369-b9d1-c867ebb05198', 0, N'00000000-0000-0000-0000-000000000000', N'admin@admin.com',getdate(),'Admin',getdate(),'Admin',0)
 GO
 SET IDENTITY_INSERT [dbo].[Core_User] OFF
 GO

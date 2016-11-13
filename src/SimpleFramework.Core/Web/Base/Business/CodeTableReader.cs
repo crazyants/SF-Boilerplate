@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Abstraction.Entitys;
@@ -19,14 +20,14 @@ namespace SimpleFramework.Core.Web.Base.Business
     {
         #region Fields
 
-        protected readonly IUnitOfWork _unitOfWork;
+ 
         private readonly IEFCoreQueryableRepository<T> _repository;
         protected readonly ILogger _logger;
 
         #endregion
 
         #region Constructors
-        public CodetableReader(ILogger<T> logger, IEFCoreQueryableRepository<T> repository)
+        public CodetableReader(ILogger<Controller> logger, IEFCoreQueryableRepository<T> repository)
         {
             _logger = logger;
             _repository = repository;

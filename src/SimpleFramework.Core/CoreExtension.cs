@@ -137,14 +137,29 @@ namespace SimpleFramework.Core
         public void AddCustomizedDataStore(IServiceCollection services)
         {
 
-            services.AddDbContext<CoreDbContext>(options =>
-                options.UseSqlServer(this.configurationRoot.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly("SimpleFramework.WebHost")));
-
+            //services.AddDbContext<CoreDbContext>(options =>
+            //    options.UseSqlServer(this.configurationRoot.GetConnectionString("DefaultConnection"),
+            //        b => b.MigrationsAssembly("SimpleFramework.WebHost")));
             //services.AddDbContext<CoreDbContext>(options =>
             //    options.UseMySql(configuration.GetConnectionString("MMysqlDatabase"),
             //        b => b.MigrationsAssembly("SimpleFramework.WebHost")));
-            services.AddSingleton<CoreDbContext>();
+            services.AddEntityFrameworkSqlServer()
+               .AddDbContext<CoreDbContext>((serviceProvider, options) =>
+               options.UseSqlServer(this.configurationRoot.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly("SimpleFramework.WebHost"))
+                      .UseInternalServiceProvider(serviceProvider));
+
+            services.AddEntityFrameworkMySql()
+             .AddDbContext<CoreDbContext>((serviceProvider, options) =>
+             options.UseMySql(this.configurationRoot.GetConnectionString("DefaultConnection"))
+                    .UseInternalServiceProvider(serviceProvider)
+                    );
+            services.AddEntityFrameworkNpgsql()
+              .AddDbContext<CoreDbContext>((serviceProvider, options) =>
+              options.UseNpgsql(this.configurationRoot.GetConnectionString("DefaultConnection"))
+                     .UseInternalServiceProvider(serviceProvider)
+                     );
+            services.AddSingleton<DbContext, CoreDbContext>();
 
         }
         /// <summary>
@@ -250,6 +265,7 @@ namespace SimpleFramework.Core
 
             services.AddTransient(typeof(IEFCoreQueryableRepository<>), typeof(EFCoreBaseRepository<>));
             services.AddTransient(typeof(IEFCoreQueryableRepository<,>), typeof(EFCoreBaseRepository<,>));
+
             services.AddSingleton<IBaseUnitOfWork>(sp =>
             {
                 var simpleDbContext = sp.GetService<CoreDbContext>();
@@ -267,7 +283,7 @@ namespace SimpleFramework.Core
             services.TryAddScoped<ISmsSender, SiteSmsSender>();
 
             services.TryAddScoped<IExceptionMapper, BaseExceptionMapper>();
-            services.AddTransient(typeof(ICodetableWriter<>), typeof(CodeTabelWriter<>));
+            services.AddTransient(typeof(ICodetableWriter<>), typeof(CodeTableWriter<>));
             services.AddTransient(typeof(ICodetableReader<>), typeof(CodetableReader<>));
 
         }

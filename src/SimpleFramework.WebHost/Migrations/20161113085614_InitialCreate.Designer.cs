@@ -8,7 +8,7 @@ using SimpleFramework.Core.Data;
 namespace SimpleFramework.WebHost.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20161108074447_InitialCreate")]
+    [Migration("20161113085614_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,22 +127,24 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<long>("CountryId");
 
                     b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<long>("DistrictId");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
 
                     b.Property<string>("Phone");
 
                     b.Property<int>("Sortindex");
 
                     b.Property<long>("StateOrProvinceId");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -169,16 +171,12 @@ namespace SimpleFramework.WebHost.Migrations
                         .HasAnnotation("MaxLength", 128);
 
                     b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<bool>("IsActive");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
 
                     b.Property<string>("Name")
                         .HasAnnotation("MaxLength", 128);
@@ -186,6 +184,12 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<string>("SecretKey");
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -199,19 +203,17 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -224,9 +226,10 @@ namespace SimpleFramework.WebHost.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<int?>("DeleteMark");
 
@@ -245,11 +248,6 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<string>("ItemValue");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
                     b.Property<long?>("ParentId");
 
                     b.Property<string>("QuickQuery");
@@ -259,6 +257,12 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<int?>("SortCode");
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -273,9 +277,10 @@ namespace SimpleFramework.WebHost.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<int?>("DeleteMark");
 
@@ -292,14 +297,15 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<string>("ItemName");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
                     b.Property<long?>("ParentId");
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -311,17 +317,11 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<string>("Location");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
 
                     b.Property<string>("Name");
 
@@ -330,6 +330,10 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<long>("StateOrProvinceId");
 
                     b.Property<string>("Type");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -343,15 +347,9 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<string>("Name");
 
@@ -360,6 +358,10 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<string>("RoutingController");
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -373,10 +375,9 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<string>("Caption");
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<string>("FileName");
 
@@ -384,12 +385,11 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<int>("MediaType");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -405,10 +405,9 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<string>("Body");
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<bool>("IsActive");
 
@@ -422,11 +421,6 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<string>("LastFailAttemptMessage");
 
                     b.Property<int>("MaxAttemptCount");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
 
                     b.Property<string>("ObjectId")
                         .HasAnnotation("MaxLength", 128);
@@ -455,6 +449,10 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<string>("Type")
                         .HasAnnotation("MaxLength", 128);
 
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
+
                     b.HasKey("Id");
 
                     b.ToTable("Entitys_NotificationEntity");
@@ -467,20 +465,14 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<string>("Body");
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<bool>("IsDefault");
 
                     b.Property<string>("Language")
                         .HasAnnotation("MaxLength", 10);
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
 
                     b.Property<string>("NotificationTypeId")
                         .HasAnnotation("MaxLength", 128);
@@ -502,6 +494,10 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<string>("TemplateEngine")
                         .HasAnnotation("MaxLength", 64);
 
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
+
                     b.HasKey("Id");
 
                     b.ToTable("Entitys_NotificationTemplateEntity");
@@ -513,22 +509,24 @@ namespace SimpleFramework.WebHost.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<string>("Description");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 256);
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -539,6 +537,10 @@ namespace SimpleFramework.WebHost.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<string>("Label")
                         .HasAnnotation("MaxLength", 1024);
@@ -553,6 +555,10 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<string>("Type")
                         .HasAnnotation("MaxLength", 255);
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -591,20 +597,22 @@ namespace SimpleFramework.WebHost.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
 
-                    b.Property<DateTimeOffset>("CreatedDate");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<long>("PermissionId");
 
                     b.Property<long>("RoleId");
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -621,9 +629,10 @@ namespace SimpleFramework.WebHost.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<string>("Description")
                         .HasAnnotation("MaxLength", 1024);
@@ -635,11 +644,6 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<bool>("IsMultiValue");
 
                     b.Property<bool>("IsSystem");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
 
                     b.Property<string>("Name")
                         .HasAnnotation("MaxLength", 128);
@@ -653,6 +657,12 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<int>("Sortindex");
 
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
+
                     b.HasKey("Id");
 
                     b.ToTable("Core_SettingValue");
@@ -665,10 +675,9 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<bool>("BooleanValue");
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<DateTime?>("DateTimeValue");
 
@@ -681,17 +690,16 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<string>("LongTextValue");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
                     b.Property<long>("SettingId");
 
                     b.Property<string>("ShortTextValue")
                         .HasAnnotation("MaxLength", 512);
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.Property<string>("ValueType")
                         .IsRequired()
@@ -711,21 +719,19 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<long>("CountryId");
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Sortindex");
 
                     b.Property<string>("Type");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -739,23 +745,21 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<long>("EntityId");
 
                     b.Property<long>("EntityTypeId");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
                     b.Property<string>("Slug");
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
@@ -773,19 +777,17 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<int>("AddressType");
 
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
+                    b.Property<string>("CreatedBy");
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<DateTimeOffset?>("LastUsedOn");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.Property<long>("UserId");
 
@@ -811,11 +813,18 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("CreatedBy");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
 
-                    b.Property<DateTimeOffset>("CreatedDate");
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<long?>("CurrentShippingAddressId");
+
+                    b.Property<string>("DeletedBy")
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<string>("Email")
                         .HasAnnotation("MaxLength", 256);
@@ -832,10 +841,6 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<string>("ModifiedBy");
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
                     b.Property<string>("NormalizedEmail")
                         .HasAnnotation("MaxLength", 256);
 
@@ -851,6 +856,12 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 128);
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.Property<Guid>("UserGuid");
 
@@ -889,116 +900,14 @@ namespace SimpleFramework.WebHost.Migrations
                     b.ToTable("Core_UserRole");
                 });
 
-            modelBuilder.Entity("SimpleFramework.Core.Entitys.WidgetEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Code");
-
-                    b.Property<string>("CreateUrl");
-
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset>("CreatedDate");
-
-                    b.Property<DateTimeOffset>("CreatedOn");
-
-                    b.Property<string>("EditUrl");
-
-                    b.Property<bool>("IsPublished");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("Sortindex");
-
-                    b.Property<string>("ViewComponentName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Entitys_WidgetEntity");
-                });
-
-            modelBuilder.Entity("SimpleFramework.Core.Entitys.WidgetInstanceEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset>("CreatedDate");
-
-                    b.Property<string>("Data");
-
-                    b.Property<int>("DisplayOrder");
-
-                    b.Property<string>("HtmlData");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
-                    b.Property<string>("Name");
-
-                    b.Property<DateTimeOffset?>("PublishEnd");
-
-                    b.Property<DateTimeOffset?>("PublishStart");
-
-                    b.Property<int>("Sortindex");
-
-                    b.Property<long>("WidgetId");
-
-                    b.Property<long>("WidgetZoneId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WidgetId");
-
-                    b.HasIndex("WidgetZoneId");
-
-                    b.ToTable("Entitys_WidgetInstanceEntity");
-                });
-
-            modelBuilder.Entity("SimpleFramework.Core.Entitys.WidgetZoneEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CreatedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset>("CreatedDate");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasAnnotation("MaxLength", 64);
-
-                    b.Property<DateTimeOffset?>("ModifiedDate");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("Sortindex");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Entitys_WidgetZoneEntity");
-                });
-
-            modelBuilder.Entity("SimpleFramework.Module.ActivityLog.Models.Activity", b =>
+            modelBuilder.Entity("SimpleFramework.Module.ActivityLog.Models.ActivityEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<long>("ActivityTypeId");
+
+                    b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
@@ -1008,11 +917,15 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<int>("Sortindex");
 
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityTypeId");
 
-                    b.ToTable("ActivityLog_Activity");
+                    b.ToTable("ActivityLog_ActivityEntity");
                 });
 
             modelBuilder.Entity("SimpleFramework.Module.ActivityLog.Models.ActivityType", b =>
@@ -1020,33 +933,53 @@ namespace SimpleFramework.WebHost.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTimeOffset>("CreatedOn");
+
                     b.Property<string>("Name");
 
                     b.Property<int>("Sortindex");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.HasKey("Id");
 
                     b.ToTable("ActivityLog_ActivityType");
                 });
 
-            modelBuilder.Entity("SimpleFramework.Module.Localization.Models.Culture", b =>
+            modelBuilder.Entity("SimpleFramework.Module.Localization.Models.CultureEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Sortindex");
 
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Localization_Culture");
+                    b.ToTable("Localization_CultureEntity");
                 });
 
-            modelBuilder.Entity("SimpleFramework.Module.Localization.Models.Resource", b =>
+            modelBuilder.Entity("SimpleFramework.Module.Localization.Models.ResourceEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<long?>("CultureId");
 
@@ -1054,13 +987,17 @@ namespace SimpleFramework.WebHost.Migrations
 
                     b.Property<int>("Sortindex");
 
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTimeOffset>("UpdatedOn");
+
                     b.Property<string>("Value");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CultureId");
 
-                    b.ToTable("Localization_Resource");
+                    b.ToTable("Localization_ResourceEntity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<long>", b =>
@@ -1200,20 +1137,7 @@ namespace SimpleFramework.WebHost.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SimpleFramework.Core.Entitys.WidgetInstanceEntity", b =>
-                {
-                    b.HasOne("SimpleFramework.Core.Entitys.WidgetEntity", "Widget")
-                        .WithMany()
-                        .HasForeignKey("WidgetId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SimpleFramework.Core.Entitys.WidgetZoneEntity", "WidgetZone")
-                        .WithMany()
-                        .HasForeignKey("WidgetZoneId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SimpleFramework.Module.ActivityLog.Models.Activity", b =>
+            modelBuilder.Entity("SimpleFramework.Module.ActivityLog.Models.ActivityEntity", b =>
                 {
                     b.HasOne("SimpleFramework.Module.ActivityLog.Models.ActivityType", "ActivityType")
                         .WithMany()
@@ -1221,9 +1145,9 @@ namespace SimpleFramework.WebHost.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SimpleFramework.Module.Localization.Models.Resource", b =>
+            modelBuilder.Entity("SimpleFramework.Module.Localization.Models.ResourceEntity", b =>
                 {
-                    b.HasOne("SimpleFramework.Module.Localization.Models.Culture", "Culture")
+                    b.HasOne("SimpleFramework.Module.Localization.Models.CultureEntity", "Culture")
                         .WithMany("Resources")
                         .HasForeignKey("CultureId");
                 });

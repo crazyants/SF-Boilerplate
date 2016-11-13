@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "e22e815e91839be12d2b9b1e73c09cf17b8ebf55"
+    "signature": "b4a83548868155506e43c3661d9ff7ad5b5dea21"
   },
   "compilationOptions": {
     "defines": [
@@ -53,7 +53,7 @@
           "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
           "SaasKit.Multitenancy": "1.1.4",
           "IdentityModel": "2.0.0",
-          "IdentityServer4.AccessTokenValidation": "1.0.1-rc2",
+          "IdentityServer4.AccessTokenValidation": "1.0.1-rc3",
           "System.Interactive.Async": "3.0.0",
           "SimpleFramework.Core": "1.0.0",
           "SimpleFramework.Core.Security": "1.0.0",
@@ -257,7 +257,7 @@
           "lib/netstandard1.3/IdentityModel.dll": {}
         }
       },
-      "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1-rc2": {
+      "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1": {
         "dependencies": {
           "IdentityModel": "2.0.0",
           "Microsoft.AspNetCore.Authentication": "1.0.0",
@@ -268,7 +268,7 @@
           "lib/netstandard1.3/IdentityModel.AspNetCore.OAuth2Introspection.dll": {}
         }
       },
-      "IdentityModel.AspNetCore.ScopeValidation/1.0.0-rc2": {
+      "IdentityModel.AspNetCore.ScopeValidation/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0"
@@ -277,10 +277,10 @@
           "lib/netstandard1.3/IdentityModel.AspNetCore.ScopeValidation.dll": {}
         }
       },
-      "IdentityServer4.AccessTokenValidation/1.0.1-rc2": {
+      "IdentityServer4.AccessTokenValidation/1.0.1-rc3": {
         "dependencies": {
-          "IdentityModel.AspNetCore.OAuth2Introspection": "1.0.1-rc2",
-          "IdentityModel.AspNetCore.ScopeValidation": "1.0.0-rc2",
+          "IdentityModel.AspNetCore.OAuth2Introspection": "1.0.1",
+          "IdentityModel.AspNetCore.ScopeValidation": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0"
         },
         "compile": {
@@ -3746,11 +3746,12 @@
           "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
           "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
+          "Pomelo.EntityFrameworkCore.MySql": "1.0.0",
           "SimpleFramework.Core.Abstraction": "1.0.0",
           "CoreCompat.System.Drawing": "1.0.0-beta006",
           "SaasKit.Multitenancy": "1.1.4",
           "IdentityModel": "2.0.0",
-          "IdentityServer4.AccessTokenValidation": "1.0.1-rc2",
+          "IdentityServer4.AccessTokenValidation": "1.0.1-rc3",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.Extensions.Configuration.Json": "1.0.0",
           "protobuf-net": "2.1.0",
@@ -3899,7 +3900,7 @@
           "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
           "SaasKit.Multitenancy": "1.1.4",
           "IdentityModel": "2.0.0",
-          "IdentityServer4.AccessTokenValidation": "1.0.1-rc2",
+          "IdentityServer4.AccessTokenValidation": "1.0.1-rc3",
           "System.Interactive.Async": "3.0.0",
           "SimpleFramework.Core": "1.0.0",
           "SimpleFramework.Core.Security": "1.0.0",
@@ -4119,7 +4120,7 @@
           "lib/netstandard1.3/IdentityModel.dll": {}
         }
       },
-      "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1-rc2": {
+      "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1": {
         "dependencies": {
           "IdentityModel": "2.0.0",
           "Microsoft.AspNetCore.Authentication": "1.0.0",
@@ -4130,7 +4131,7 @@
           "lib/netstandard1.3/IdentityModel.AspNetCore.OAuth2Introspection.dll": {}
         }
       },
-      "IdentityModel.AspNetCore.ScopeValidation/1.0.0-rc2": {
+      "IdentityModel.AspNetCore.ScopeValidation/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0"
@@ -4139,10 +4140,10 @@
           "lib/netstandard1.3/IdentityModel.AspNetCore.ScopeValidation.dll": {}
         }
       },
-      "IdentityServer4.AccessTokenValidation/1.0.1-rc2": {
+      "IdentityServer4.AccessTokenValidation/1.0.1-rc3": {
         "dependencies": {
-          "IdentityModel.AspNetCore.OAuth2Introspection": "1.0.1-rc2",
-          "IdentityModel.AspNetCore.ScopeValidation": "1.0.0-rc2",
+          "IdentityModel.AspNetCore.OAuth2Introspection": "1.0.1",
+          "IdentityModel.AspNetCore.ScopeValidation": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0"
         },
         "runtime": {
@@ -7484,11 +7485,12 @@
           "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
           "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
+          "Pomelo.EntityFrameworkCore.MySql": "1.0.0",
           "SimpleFramework.Core.Abstraction": "1.0.0",
           "CoreCompat.System.Drawing": "1.0.0-beta006",
           "SaasKit.Multitenancy": "1.1.4",
           "IdentityModel": "2.0.0",
-          "IdentityServer4.AccessTokenValidation": "1.0.1-rc2",
+          "IdentityServer4.AccessTokenValidation": "1.0.1-rc3",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.Extensions.Configuration.Json": "1.0.0",
           "protobuf-net": "2.1.0",
@@ -7679,20 +7681,20 @@
       "serviceable": true,
       "sha512": "sha512-c5+zB+ADJ7QB2LC4tE5p4ESMHfR8HCBOD/LOjkNUiEh4AtbBgcZHYMKbBw/+rS5QyXNmMT0c+IMF1xb49XcYlQ=="
     },
-    "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1-rc2": {
+    "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Q/OSjxJe7J7/em5bauP2verPeVG6+zi09nknxrnkcddKpUSH7YvigVL9cbb6hAjxrCEtpdRph2B06bF6/CTfiA=="
+      "sha512": "sha512-QxmDpffncXXl/MWEAFoQDCM/3vCvwz+cy0iul12hxvfnBTLhaug687PMBv7BAodInmbQxsRZpKxu9dFjdaNJAQ=="
     },
-    "IdentityModel.AspNetCore.ScopeValidation/1.0.0-rc2": {
+    "IdentityModel.AspNetCore.ScopeValidation/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-DNoeTJu8a4u7WtmawpWvq/B04HZ6BEsrkRj1cpuWKwv21a8WQpk53kMyDptLh37jweFOlsRJnAYCpOs5M5cGdw=="
+      "sha512": "sha512-xffIiCCBi9CqBWVmjUhFizxyZa7Tr2sVW84oR93HixBnjim8jpVhiPak3T+xQ9OGIE9m53SFnUx7zExOXGUVAg=="
     },
-    "IdentityServer4.AccessTokenValidation/1.0.1-rc2": {
+    "IdentityServer4.AccessTokenValidation/1.0.1-rc3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LYErR9MJwqwB/wqWhpOl/0ftOl7VKJEaLadWVY5uD6Q6EMesK0pVCMV6nWsVXvAK1c1oKY8hyEH0MPHovjVf9g=="
+      "sha512": "sha512-hLuQ6S3RFanKfaA8/xy5Qi6AyePA7ilXfR3w/iNI4PjgZMfcYx3XNrz6/jdBHyO6QC6vbzukQaLgV83zgbqOKw=="
     },
     "Libuv/1.9.0": {
       "type": "package",

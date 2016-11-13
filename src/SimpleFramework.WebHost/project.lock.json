@@ -261,7 +261,7 @@
           "lib/netstandard1.3/IdentityModel.dll": {}
         }
       },
-      "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1-rc2": {
+      "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1": {
         "type": "package",
         "dependencies": {
           "IdentityModel": "2.0.0",
@@ -276,7 +276,7 @@
           "lib/netstandard1.3/IdentityModel.AspNetCore.OAuth2Introspection.dll": {}
         }
       },
-      "IdentityModel.AspNetCore.ScopeValidation/1.0.0-rc2": {
+      "IdentityModel.AspNetCore.ScopeValidation/1.0.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
@@ -289,11 +289,11 @@
           "lib/netstandard1.3/IdentityModel.AspNetCore.ScopeValidation.dll": {}
         }
       },
-      "IdentityServer4.AccessTokenValidation/1.0.1-rc2": {
+      "IdentityServer4.AccessTokenValidation/1.0.1-rc3": {
         "type": "package",
         "dependencies": {
-          "IdentityModel.AspNetCore.OAuth2Introspection": "1.0.1-rc2",
-          "IdentityModel.AspNetCore.ScopeValidation": "1.0.0-rc2",
+          "IdentityModel.AspNetCore.OAuth2Introspection": "1.0.1",
+          "IdentityModel.AspNetCore.ScopeValidation": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0"
         },
         "compile": {
@@ -5503,6 +5503,7 @@
           "MimeKit": "1.4.0",
           "NETStandard.Library": "1.6.0",
           "NodaTime": "2.0.0-alpha20160523",
+          "Pomelo.EntityFrameworkCore.MySql": "1.0.0",
           "SaasKit.Multitenancy": "1.1.0",
           "SimpleFramework.Core.Abstraction": "1.0.0",
           "System.ComponentModel.Annotations": "4.1.0",
@@ -5843,34 +5844,34 @@
         "lib/netstandard1.3/IdentityModel.dll"
       ]
     },
-    "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1-rc2": {
-      "sha512": "Q/OSjxJe7J7/em5bauP2verPeVG6+zi09nknxrnkcddKpUSH7YvigVL9cbb6hAjxrCEtpdRph2B06bF6/CTfiA==",
+    "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1": {
+      "sha512": "QxmDpffncXXl/MWEAFoQDCM/3vCvwz+cy0iul12hxvfnBTLhaug687PMBv7BAodInmbQxsRZpKxu9dFjdaNJAQ==",
       "type": "package",
-      "path": "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1-rc2",
+      "path": "IdentityModel.AspNetCore.OAuth2Introspection/1.0.1",
       "files": [
-        "IdentityModel.AspNetCore.OAuth2Introspection.1.0.1-rc2.nupkg.sha512",
+        "IdentityModel.AspNetCore.OAuth2Introspection.1.0.1.nupkg.sha512",
         "IdentityModel.AspNetCore.OAuth2Introspection.nuspec",
         "lib/net452/IdentityModel.AspNetCore.OAuth2Introspection.dll",
         "lib/netstandard1.3/IdentityModel.AspNetCore.OAuth2Introspection.dll"
       ]
     },
-    "IdentityModel.AspNetCore.ScopeValidation/1.0.0-rc2": {
-      "sha512": "DNoeTJu8a4u7WtmawpWvq/B04HZ6BEsrkRj1cpuWKwv21a8WQpk53kMyDptLh37jweFOlsRJnAYCpOs5M5cGdw==",
+    "IdentityModel.AspNetCore.ScopeValidation/1.0.0": {
+      "sha512": "xffIiCCBi9CqBWVmjUhFizxyZa7Tr2sVW84oR93HixBnjim8jpVhiPak3T+xQ9OGIE9m53SFnUx7zExOXGUVAg==",
       "type": "package",
-      "path": "IdentityModel.AspNetCore.ScopeValidation/1.0.0-rc2",
+      "path": "IdentityModel.AspNetCore.ScopeValidation/1.0.0",
       "files": [
-        "IdentityModel.AspNetCore.ScopeValidation.1.0.0-rc2.nupkg.sha512",
+        "IdentityModel.AspNetCore.ScopeValidation.1.0.0.nupkg.sha512",
         "IdentityModel.AspNetCore.ScopeValidation.nuspec",
         "lib/net452/IdentityModel.AspNetCore.ScopeValidation.dll",
         "lib/netstandard1.3/IdentityModel.AspNetCore.ScopeValidation.dll"
       ]
     },
-    "IdentityServer4.AccessTokenValidation/1.0.1-rc2": {
-      "sha512": "LYErR9MJwqwB/wqWhpOl/0ftOl7VKJEaLadWVY5uD6Q6EMesK0pVCMV6nWsVXvAK1c1oKY8hyEH0MPHovjVf9g==",
+    "IdentityServer4.AccessTokenValidation/1.0.1-rc3": {
+      "sha512": "hLuQ6S3RFanKfaA8/xy5Qi6AyePA7ilXfR3w/iNI4PjgZMfcYx3XNrz6/jdBHyO6QC6vbzukQaLgV83zgbqOKw==",
       "type": "package",
-      "path": "IdentityServer4.AccessTokenValidation/1.0.1-rc2",
+      "path": "IdentityServer4.AccessTokenValidation/1.0.1-rc3",
       "files": [
-        "IdentityServer4.AccessTokenValidation.1.0.1-rc2.nupkg.sha512",
+        "IdentityServer4.AccessTokenValidation.1.0.1-rc3.nupkg.sha512",
         "IdentityServer4.AccessTokenValidation.nuspec",
         "lib/net452/IdentityServer4.AccessTokenValidation.dll",
         "lib/netstandard1.4/IdentityServer4.AccessTokenValidation.dll"

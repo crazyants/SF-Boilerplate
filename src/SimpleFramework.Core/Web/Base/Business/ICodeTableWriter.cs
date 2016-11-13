@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Web.Base.Business
 {
+    /// <summary>
+    /// 写入处理
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface ICodetableWriter<T> where T : IEntityWithTypedId<long>
     {
         Task<T> InsertAsync(T entity);

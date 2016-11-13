@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Web.Base.Business
 {
+    /// <summary>
+    /// 读取处理
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface ICodetableReader<T>  where T : IEntityWithTypedId<long>
     {
         Task<IEnumerable<T>> GetAllAsync();
