@@ -69,7 +69,9 @@
 --reference:C:\Users\tomny\.nuget\packages\Microsoft.CSharp\4.0.1\ref\netstandard1.0\Microsoft.CSharp.dll
 --reference:C:\Users\tomny\.nuget\packages\Microsoft.DotNet.InternalAbstractions\1.0.0\lib\netstandard1.3\Microsoft.DotNet.InternalAbstractions.dll
 --reference:C:\Users\tomny\.nuget\packages\Microsoft.EntityFrameworkCore\1.0.1\lib\netstandard1.3\Microsoft.EntityFrameworkCore.dll
+--reference:C:\Users\tomny\.nuget\packages\Microsoft.EntityFrameworkCore.Design.Core\1.0.0-preview2-final\lib\netstandard1.3\Microsoft.EntityFrameworkCore.Design.Core.dll
 --reference:C:\Users\tomny\.nuget\packages\Microsoft.EntityFrameworkCore.Relational\1.0.1\lib\netstandard1.3\Microsoft.EntityFrameworkCore.Relational.dll
+--reference:C:\Users\tomny\.nuget\packages\Microsoft.EntityFrameworkCore.Relational.Design\1.0.1\lib\netstandard1.3\Microsoft.EntityFrameworkCore.Relational.Design.dll
 --reference:C:\Users\tomny\.nuget\packages\Microsoft.EntityFrameworkCore.SqlServer\1.0.1\lib\netstandard1.3\Microsoft.EntityFrameworkCore.SqlServer.dll
 --reference:C:\Users\tomny\.nuget\packages\Microsoft.Extensions.Caching.Abstractions\1.0.0\lib\netstandard1.0\Microsoft.Extensions.Caching.Abstractions.dll
 --reference:C:\Users\tomny\.nuget\packages\Microsoft.Extensions.Caching.Memory\1.0.0\lib\netstandard1.3\Microsoft.Extensions.Caching.Memory.dll
@@ -108,6 +110,10 @@
 --reference:C:\Users\tomny\.nuget\packages\MimeKit\1.4.0\lib\netstandard1.3\MimeKit.dll
 --reference:C:\Users\tomny\.nuget\packages\Newtonsoft.Json\9.0.1\lib\netstandard1.0\Newtonsoft.Json.dll
 --reference:C:\Users\tomny\.nuget\packages\NodaTime\2.0.0-alpha20160523\lib\netstandard1.3\NodaTime.dll
+--reference:C:\Users\tomny\.nuget\packages\NoDb\1.0.2\lib\netstandard1.6\NoDb.dll
+--reference:C:\Users\tomny\.nuget\packages\Npgsql\3.1.8\lib\netstandard1.3\Npgsql.dll
+--reference:C:\Users\tomny\.nuget\packages\Npgsql.EntityFrameworkCore.PostgreSQL\1.0.2\lib\netstandard1.3\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+--reference:C:\Users\tomny\.nuget\packages\Npgsql.EntityFrameworkCore.PostgreSQL.Design\1.0.2\lib\netstandard1.3\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll
 --reference:C:\Users\tomny\.nuget\packages\Pomelo.Data.MySql\1.0.0\lib\netstandard1.3\Pomelo.Data.MySql.dll
 --reference:C:\Users\tomny\.nuget\packages\Pomelo.EntityFrameworkCore.MySql\1.0.0\lib\netstandard1.3\Pomelo.EntityFrameworkCore.MySql.dll
 --reference:C:\Users\tomny\.nuget\packages\Portable.BouncyCastle\1.8.1.1\lib\netstandard1.3\crypto.dll

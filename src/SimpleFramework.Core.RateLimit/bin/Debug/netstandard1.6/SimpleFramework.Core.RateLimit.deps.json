@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "d5e030b2f8958cc84af07dbf93a6bfa792ad96a5"
+    "signature": "a0e8fa2f616b3d081a969e0a8517d5dc46061cdf"
   },
   "compilationOptions": {},
   "targets": {
@@ -811,6 +811,19 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.Design.Core/1.0.0-preview2-final": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
+          "Microsoft.EntityFrameworkCore.Relational.Design": "1.0.1",
+          "System.AppContext": "4.1.0",
+          "System.Collections.NonGeneric": "4.0.1",
+          "System.IO": "4.1.0",
+          "System.IO.FileSystem": "4.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.Core.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/1.0.1": {
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
@@ -821,6 +834,14 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.dll": {}
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Relational.Design/1.0.1": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "1.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll": {}
         }
       },
       "Microsoft.EntityFrameworkCore.SqlServer/1.0.1": {
@@ -1351,6 +1372,78 @@
         },
         "runtime": {
           "lib/netstandard1.3/NodaTime.dll": {}
+        }
+      },
+      "NoDb/1.0.2": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Logging": "1.0.0",
+          "Microsoft.Extensions.Options": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.6/NoDb.dll": {}
+        }
+      },
+      "Npgsql/3.1.8": {
+        "dependencies": {
+          "Microsoft.Win32.Primitives": "4.0.1",
+          "System.Collections.Concurrent": "4.0.12",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Console": "4.0.0",
+          "System.Data.Common": "4.1.0",
+          "System.Diagnostics.Contracts": "4.0.1",
+          "System.Globalization.Extensions": "4.0.1",
+          "System.Linq": "4.1.0",
+          "System.Net.NameResolution": "4.0.0",
+          "System.Net.NetworkInformation": "4.1.0",
+          "System.Net.Primitives": "4.0.11",
+          "System.Net.Security": "4.0.0",
+          "System.Net.Sockets": "4.1.0",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.0.0",
+          "System.Runtime.Numerics": "4.0.1",
+          "System.Text.Encoding.Extensions": "4.0.11",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading": "4.0.11",
+          "System.Threading.Thread": "4.0.0",
+          "System.Threading.Timer": "4.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Npgsql.dll": {}
+        }
+      },
+      "Npgsql.EntityFrameworkCore.PostgreSQL/1.0.2": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "1.0.1",
+          "Microsoft.EntityFrameworkCore.Relational": "1.0.1",
+          "Microsoft.Extensions.DependencyInjection": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "Npgsql": "3.1.8"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
+        }
+      },
+      "Npgsql.EntityFrameworkCore.PostgreSQL.Design/1.0.2": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "1.0.1",
+          "Microsoft.EntityFrameworkCore.Design.Core": "1.0.0-preview2-final",
+          "Microsoft.EntityFrameworkCore.Relational": "1.0.1",
+          "Microsoft.EntityFrameworkCore.Relational.Design": "1.0.1",
+          "Microsoft.Extensions.DependencyInjection": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "Npgsql": "3.1.8",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.2"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll": {}
         }
       },
       "Pomelo.Data.MySql/1.0.0": {
@@ -2834,6 +2927,9 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
           "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
           "Pomelo.EntityFrameworkCore.MySql": "1.0.0",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.2",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.0.2",
+          "NoDb": "1.0.2",
           "SimpleFramework.Core.Abstraction": "1.0.0",
           "CoreCompat.System.Drawing": "1.0.0-beta006",
           "SaasKit.Multitenancy": "1.1.4",
@@ -3170,10 +3266,20 @@
       "serviceable": true,
       "sha512": "sha512-bprn1t+6muzkNzh64Art4w20L1FKDFac/Tx4h+4d7Sd9ivRqAaec6MqU700CFo6h6CHjAjWeqzYjQFroCouECQ=="
     },
+    "Microsoft.EntityFrameworkCore.Design.Core/1.0.0-preview2-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-H3pHksGErQSEwWyvISlDYMslIXftS4XB2m0AvqBS08ECGHagh27mqm/oIyUetzzRad+C2V0zpguJmR14eMiRaA=="
+    },
     "Microsoft.EntityFrameworkCore.Relational/1.0.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-2LZ746BTMSoAHsqsxFAVYVzo/ziS682z2evAxDnwwg1Fw27MuxqEjl38YWz5OE1TchmtEPxWWVcup+sL6rjPXg=="
+    },
+    "Microsoft.EntityFrameworkCore.Relational.Design/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GBN8QmrqcQo4WB4rKsPfzVaVKeHN6GSRF+eOTZWqK1vJ7T5kpG4PtxOkqOw8aZDRJbehAleD+dHYBOkngFzafA=="
     },
     "Microsoft.EntityFrameworkCore.SqlServer/1.0.1": {
       "type": "package",
@@ -3379,6 +3485,26 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-z7BPLfekcC2HnpM1QpYm5CCsill3dV/I56MbjI7q06PiIH/yU8I7N4BQVUdRo3j77AFG6uvCMB33lhQLyfdvDw=="
+    },
+    "NoDb/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CLDO1kQjD0eXF7bz83x6XLCpygF9QyKNIImOCGo0Hr+5MYx7Ep4nBP+N4XXW/ZrYS46HYprE2qKnso67WA1etg=="
+    },
+    "Npgsql/3.1.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KkIIz4b4wQptzQsROXHv3dlnSfejuoSQ4I0a5BeRMLWCrxQ46pHPZIWBT/pJvb6i7wR2IYhw460d7Zq7IcYwWg=="
+    },
+    "Npgsql.EntityFrameworkCore.PostgreSQL/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Tf/0TttWsgqsNs3a1m3G6aDWOBchpiLi2yJG7XooLX/KeP6W8xg5VWpeMtg2ogF3JzhLbDGSRVv8Z827uC4h4Q=="
+    },
+    "Npgsql.EntityFrameworkCore.PostgreSQL.Design/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KyyvKnyhOzjpxoYejeeO6Gbvghe6KINfc9ugma7HcQ6PBL+HNXRswpsM4iBX0zJ9jgDMArP1+SbBcqbZ84gdUg=="
     },
     "Pomelo.Data.MySql/1.0.0": {
       "type": "package",
