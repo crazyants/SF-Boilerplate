@@ -1,4 +1,8 @@
-﻿/*
+﻿body {
+     overflow-x : hidden;   /*去掉横条*/
+     /*overflow-y : hidden;   去掉竖条*/
+}
+/*
 
   SF's Core CSS
 
@@ -1022,7 +1026,7 @@ body.modal-open,
 }
 .modal-backdrop.modal-absolute {
   position: absolute;
-  z-index: 940;
+  z-index: 9900;
 }
 .modal-backdrop,
 .modal-backdrop.fade.in {
@@ -1616,7 +1620,7 @@ td.wrap-contents {
   display: none;
 }
 .grid-filter {
-  padding: 6px 12px;
+  padding: 0px 12px;
   color: #6a6a6a;
   background-color: #edeae6;
   border-bottom: 1px solid #d8d1c8;
@@ -4774,7 +4778,7 @@ fieldset .actions {
   position: fixed;
   top: 40%;
   left: 50%;
-  z-index: 1140;
+  z-index: 10000;
   padding: 15px 10px;
   margin-left: -30px;
   background-color: #debe18;

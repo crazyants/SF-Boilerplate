@@ -3,73 +3,58 @@
     Layout = "~/Views/Shared/_Dialog.cshtml";
 }
 
-    <div class="row"> 
-        <div class="col-md-12">
-
-                    <div class="block-content">
-                        <div class="block-configuration config-bar">
-                            <a href="#"><i class="fa fa-arrow-circle-right"></i></a>
-                            <div class="block-configuration-bar">
-                                <span>列表</span>
-                                <a class="properties" height="500px" href="javascript: SF.controls.modal.show($(this), '/BlockProperties/175?t=Block Properties')" title="Block Properties"><i class="fa fa-cog"></i></a><a id="ctl00_main_ctl23_ctl01_aSecureBlock" class="security" height="500px" href="javascript: SF.controls.modal.show($(this), '/Secure/9/175?t=Block Security&amp;pb=&amp;sb=Done')" title="Block Security"><i class="fa fa-lock"></i></a><a class="block-move block-move" href="175" data-zone="Main" data-zone-location="Page" title="Move Block"><i class="fa fa-external-link"></i></a>
-                                <div class="delete block-delete disabled js-disabled">
-                                    <i class="fa fa-times-circle-o"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-block">
-                            <div class="panel-heading">
-                                <h1 class="panel-title"><i class="fa fa-exchange"></i> Route List</h1>
-                                <div class="grid-actions pull-right">
-                                    <a id="gridActions_lbAdd" accesskey="n" title="新增" class="btn-add btn btn-default btn-sm" href="/Route/Edit"><i class="fa fa-plus-circle"></i></a>
-                                    <a id="gridActions_lbExcelExport" title="导出" class="btn-excelexport btn btn-default btn-sm"><i class="fa fa-table"></i></a>
-
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <div class="grid grid-panel">
-                                    <div class="grid-filter">
-                                        <header>
-                                            <h3>
-                                                筛选选择
-                                            </h3>
-                                            <input type="hidden" id="rFilter_hfVisible" /><i class="fa fa-chevron-down toggle-filter"></i>
-                                        </header>
-                                        <div class="grid-filter-overview">
-
-                                        </div>
-                                        <div class="grid-filter-entry" style="display:none;">
-                                            <fieldset>
-                                                <h4>筛选选择</h4>
-                                                <div class="row">
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group sf-text-box ">
-                                                            <label class="control-label" for="Account">关键字"</label>
-                                                            <div class="control-wrapper">
-                                                                <input name="txt_Keyword" type="text" id="txt_Keyword" class="form-control" placeholder="请输入要查询关键字"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                  
-                                                </div>
-                                            </fieldset>
-                                            <a id="btn_Search" title="Apply Filter" class="filter btn btn-action btn-xs">查询</a>
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <div class="gridPanel">
-                                            <table id="gridTable"></table>
-                                            <div id="gridPager"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-               
+<div class="block-content">
+    <div class="block-configuration config-bar">
+        <a href="#"><i class="fa fa-arrow-circle-right"></i></a>
+        <div class="block-configuration-bar">
+            <span>列表</span>
+            <a class="properties" height="500px" href="javascript: SF.controls.modal.show($(this), '/BlockProperties/175?t=Block Properties')" title="Block Properties"><i class="fa fa-cog"></i></a><a id="ctl00_main_ctl23_ctl01_aSecureBlock" class="security" height="500px" href="javascript: SF.controls.modal.show($(this), '/Secure/9/175?t=Block Security&amp;pb=&amp;sb=Done')" title="Block Security"><i class="fa fa-lock"></i></a><a class="block-move block-move" href="175" data-zone="Main" data-zone-location="Page" title="Move Block"><i class="fa fa-external-link"></i></a>
+            <div class="delete block-delete disabled js-disabled">
+                <i class="fa fa-times-circle-o"></i>
+            </div>
         </div>
     </div>
+    <div class="panel panel-block">
+        <div class="panel-heading">
+            <header>
+                <h1 class="panel-title pull-right filter">筛选选择<i class="fa fa-chevron-down toggle-filter"></i></h1>
+            </header>
+            <div class="grid-actions pull-left">
+                <a id="gridActions_lbAdd" accesskey="n" title="新增" class="btn-add btn btn-default btn-sm" href="/Route/Edit"><i class="fa fa-plus-circle"></i></a>
+                <a id="gridActions_lbExcelExport" title="导出" class="btn-excelexport btn btn-default btn-sm"><i class="fa fa-table"></i></a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="grid grid-panel">
+                <div class="grid-filter">
+                    <div class="grid-filter-entry" style="display:none;">
+                        <fieldset>
+                            <h4>筛选选择</h4>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group sf-text-box ">
+                                        <label class="control-label" for="Account">关键字"</label>
+                                        <div class="control-wrapper">
+                                            <input name="txt_Keyword" type="text" id="txt_Keyword" class="form-control" placeholder="请输入要查询关键字" />
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </fieldset>
+                        <a id="btn_Search" title="Apply Filter" class="filter btn btn-action btn-xs">查询</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <div class="gridPanel">
+                        <table id="gridTable"></table>
+                        <div id="gridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(function () {
@@ -78,14 +63,27 @@
     });
     //初始化页面
     function InitialPage() {
+
         //resize重设(表格、树形)宽高
         $(window).resize(function (e) {
             window.setTimeout(function () {
                 $('#gridTable').setGridWidth(($('.gridPanel').width()));
-                $("#gridTable").setGridHeight($(window).height() - 114.5);
+                $("#gridTable").setGridHeight($(window).height() - 300);
+                SF.controls.modal.resize($(document).height());
             }, 200);
             e.stopPropagation();
         });
+
+        $('div.panel-heading header h1.filter').click(function () {
+            $('i.toggle-filter', this).toggleClass('fa-chevron-down fa-chevron-up');
+            var $filterToggle = $('.grid-filter .grid-filter-entry');
+            $filterToggle.slideToggle();
+
+        });
+    }
+    function ResizeFun() {
+
+
     }
     //加载表格
     function GetGrid() {
@@ -94,7 +92,7 @@
         $gridTable.jqGrid({
             url: "/DataItemM/GetTreeList",
             datatype: "json",
-            height: $(window).height() - 114.5,
+            height: $(window).height() - 213,
             autowidth: true,
             colModel: [
                 { label: '主键', name: 'Id', hidden: true },
@@ -133,6 +131,22 @@
                 postData: { keyword: $("#txt_Keyword").val() },
             }).trigger('reloadGrid');
         });
+    }
+
+    //保存表单
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        $.SaveForm({
+            url: "../../BaseManage/Role/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
     }
 
 </script>

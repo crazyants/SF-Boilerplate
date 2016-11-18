@@ -93,7 +93,7 @@
                                 label: 'OK',
                                 className: 'btn-primary',
                                 callback: function () {
-                                    Loading(true, options.loading);
+                                    SF.utility.loading(true, options.loading);
                                     window.setTimeout(function () {
                                         var postdata = options.param;
                                         if ($('[name=__RequestVerificationToken]').length > 0) {
@@ -105,7 +105,7 @@
                                             type: options.type,
                                             dataType: options.dataType,
                                             success: function (data) {
-                                                Loading(false);
+                                                SF.utility.loading(false);
                                                 if (data.state != "success") {
                                                     dialogs.alert(data.message);
                                                 } else {
@@ -114,14 +114,14 @@
                                                 }
                                             },
                                             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                Loading(false);
+                                                SF.utility.loading(false);
                                                 dialogs.alert(errorThrown);
                                             },
                                             beforeSend: function () {
-                                                Loading(true, options.loading);
+                                                SF.utility.loading(true, options.loading);
                                             },
                                             complete: function () {
-                                                Loading(false);
+                                                SF.utility.loading(false);
                                             }
                                         });
                                     }, 200);

@@ -190,7 +190,7 @@
                         top.$.cookie('learn_password', $.trim(password), { path: "/", expires: 7 });
                     }
                     if (returnUrl == "")
-                        window.location.href = contentPath ;
+                        window.location.href = contentPath == "" ? '/' : contentPath;
                     else
                         window.location.href = returnUrl;
                 } else {
@@ -227,4 +227,3 @@
         $('.login_tips').show();
     }
 </script>
- 

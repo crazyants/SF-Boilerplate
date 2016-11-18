@@ -13,7 +13,8 @@
         <link rel="stylesheet" href="/css/theme.css" />
         <link rel="stylesheet" href="/css/account.css" />
         <link rel="stylesheet" href="/css/sf-about.css" />
-        @*<link href="/lib/jqgrid/jqgrid.css" rel="stylesheet" />*@
+        <link href="/lib/jqgrid/jqgrid.css" rel="stylesheet" />
+        <link href="/lib/dialog/dialog.css" rel="stylesheet" />
     </environment>
     <environment names="Staging,Production">
         @* 给静态文件生成唯一的版本号如果静态文件发生改变，
@@ -59,6 +60,7 @@
         <script src="/lib/ion.rangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
         <script src="/lib/jqgrid/jqgrid.min.js"></script>
         <script src="/lib/jqgrid/grid.locale-cn.js"></script>
+        <script src="/lib/dialog/dialog.js"></script>
 
         <script src="/js/jqGridUtility.js"></script>
         <script src="/js/Extensions/sfList.js"></script>
@@ -92,13 +94,11 @@
         <script src="/js/Controls/timePicker.js"></script>
         <script src="/js/Controls/toggleButton.js"></script>
         <script src="/js/Controls/util.js"></script>
-
         <script src="/js/Controls/yearPicker.js"></script>
       
         <script src="/lib/jquery.md5.js"></script>
         <script src="/js/Validate/validator.js"></script>
         <script src="/js/Admin/pageAdmin.js"></script>
-        <script src="/js/indextab.js"></script>
     </environment>
     <environment names="Staging,Production">
         @* 使用CDN时，因为还要进行开发任务，一般我们都要有两套地址，
@@ -133,7 +133,7 @@
     @* 全局弹出框Start *@
     <div id="modal-popup" class="modal container modal-content sf-modal sf-modal-frame">
         <div id="modal-popup_contentPanel" class="iframe">
-            <iframe id="modal-popup_iframe" scrolling="no" style="height:auto;"></iframe>
+            <iframe id="modal-popup_iframe" scrolling="yes" style="height:auto;"></iframe>
         </div>
     </div>
     @* 全局弹出框End *@

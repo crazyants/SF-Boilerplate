@@ -1,6 +1,6 @@
-(function ($) {
+﻿(function ($) {
     'use strict';
-    window.SF= window.SF|| {};
+    window.SF = window.SF || {};
     SF.controls = SF.controls || {};
 
     SF.controls.modal = (function () {
@@ -13,22 +13,26 @@
             if (options.sender.attr('title') != undefined) {
                 $('#modal-popup_panel h3').html(options.sender.attr('title') + ' <small></small>');
             }
+            //$(window).resize(function () {
+            //    _resize($modalPopupIFrame, options);
+            //});
 
-            $modalPopupIFrame.height('auto');
+            _resize($modalPopupIFrame, options);
 
             $modalPopupIFrame.one('load', function () {
 
                 // now that the iframe is loaded, show it, set it's initial height and do a modal layout
                 $('#modal-popup').fadeTo(0, 1);
 
-                //var newHeight = $(this.contentWindow.document).height();
-                //if ($(this).height() != newHeight) {
-                //    $(this).height(newHeight);
-                //}
-                $(this).height(options.height);
+                // $(this).height(options.height);
+               // _resize($modalPopupIFrame, options);
 
                 $('body').addClass('modal-open');
                 $('#modal-popup').modal('layout');
+
+                if (options.title != "")
+                    $modalPopupIFrame.contents().find(".modal-title").html(options.title);
+
             });
 
             // Use the anchor tag's href attribute as the source for the iframe
@@ -43,6 +47,28 @@
                 modalOverflow: true
             });
         },
+
+         _resize = function (iframe, opts) {
+             var $cur = $(iframe);
+             //设置高度  
+             if (opts.height != 0) {
+                 var height = $(window).height();
+                 if (opts.height < 0) {
+                     height = height + opts.height;
+                     if ($(window).height() - height + opts.height < 4) {
+                         //解决IE的4像素问题，IE的应用可能有一些限制  
+                         $("html").css("overflow-y", "hidden");
+                     }
+                 } else {
+                     height = (height > opts.height) ? opts.height : $(window).height();
+                     if ($(window).height() - height < 4) {
+                         //解决IE的4像素问题，IE的应用可能有一些限制  
+                         $("html").css("overflow-y", "hidden");
+                     }
+                 }
+                 $cur.height(height);
+             }
+         },
 
         // shows a non-IFrame modal dialog control
         _showModalControl = function ($modalDialog, managerId) {
@@ -123,15 +149,15 @@
                 var defaults = {
                     sender: null,
                     popupUrl: '',
-                    width: "100px",
-                    height: "100px",
+                    width: "100",
+                    height: "100",
                     detailsId: '',
                     postbackUrl: '',
-                    title: 'ϵͳ����',
+                    title: '系统窗口',
                 };
                 var options = $.extend(defaults, options);
-                var _width = SF.utility.windowWidth() > parseInt(options.width.replace('px', '')) ? options.width : SF.utility.windowWidth() + 'px';
-                var _height = SF.utility.windowHeight() > parseInt(options.height.replace('px', '')) ? options.height : SF.utility.windowHeight() + 'px';
+                //var _width = SF.utility.windowWidth() > parseInt(options.width.replace('px', '')) ? options.width : SF.utility.windowWidth() + 'px';
+                //var _height = SF.utility.windowHeight() > parseInt(options.height.replace('px', '')) ? options.height : SF.utility.windowHeight() + 'px';
 
                 _showModalPopup(options);
             },
@@ -146,7 +172,15 @@
                 var $modalPopupIFrame = $modalPopup.find('iframe');
 
                 return $modalPopupIFrame;
-            }
+            },
+
+            resize: function (height) {
+                var $modalPopup = top.$('#modal-popup');
+                var $modalPopupIFrame = $modalPopup.find('iframe');
+                $modalPopupIFrame.height(height);
+            },
+
+
         };
 
         return exports;

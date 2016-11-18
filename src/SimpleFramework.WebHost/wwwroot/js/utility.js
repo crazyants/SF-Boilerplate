@@ -26,6 +26,7 @@
                     } else {
                         // if ($loadingtext.attr('istableloading') == undefined) {
                         $loadingpage.hide();
+                        top.$(".ajax-loader").remove();
                         // }
                     }
                     if (!!text) {
@@ -65,7 +66,7 @@
                         close: true
                     };
                     var options = $.extend(defaults, options);
-                    Loading(true, options.loading);
+                    SF.utility.loading(true, options.loading);
                     if ($('[name=__RequestVerificationToken]').length > 0) {
                         options.param["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
                     }
@@ -79,7 +80,7 @@
                                 if (data.state != "success") {
                                     SF.dialogs.alert(data.message);
                                 } else {
-                                    Loading(false);
+                                    SF.utility.loading(false);
                                     SF.dialogs.alert(data.message);
                                     options.success(data);
                                     if (options.close == true) {
@@ -88,14 +89,14 @@
                                 }
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                Loading(false);
+                                SF.utility.loading(false);
                                 SF.dialogs.alert(errorThrown);
                             },
                             beforeSend: function () {
-                                Loading(true, options.loading);
+                                SF.utility.loading(true, options.loading);
                             },
                             complete: function () {
-                                Loading(false);
+                                SF.utility.loading(false);
                             }
                         });
                     }, 500);
@@ -126,10 +127,10 @@
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             SF.dialogs.alert(errorThrown, -1);
                         }, beforeSend: function () {
-                            Loading(true);
+                            SF.utility.loading(true);
                         },
                         complete: function () {
-                            Loading(false);
+                            SF.utility.loading(false);
                         }
                     });
                 },
@@ -151,7 +152,7 @@
                                 label: 'OK',
                                 className: 'btn-primary',
                                 callback: function () {
-                                    Loading(true, options.loading);
+                                    SF.utility.loading(true, options.loading);
                                     window.setTimeout(function () {
                                         var postdata = options.param;
                                         if ($('[name=__RequestVerificationToken]').length > 0) {
@@ -171,14 +172,14 @@
                                                 }
                                             },
                                             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                Loading(false);
+                                                SF.utility.loading(false);
                                                 SF.dialogs.alert(errorThrown);
                                             },
                                             beforeSend: function () {
-                                                Loading(true, options.loading);
+                                                SF.utility.loading(true, options.loading);
                                             },
                                             complete: function () {
-                                                Loading(false);
+                                                SF.utility.loading(false);
                                             }
                                         });
                                     }, 500);
@@ -316,6 +317,105 @@
                 reload: function () {
                     location.reload();
                     return false;
+                },
+                dialogOpen: function (options) {
+                    SF.utility.loading(true);
+                    var defaults = {
+                        id: null,
+                        title: '系统窗口',
+                        width: "100px",
+                        height: "100px",
+                        url: '',
+                        shade: 0.3,
+                        btn: ['确认', '关闭'],
+                        callBack: null
+                    };
+                    var options = $.extend(defaults, options);
+                    var _url = options.url;
+                    var _width = SF.utility.windowWidth() > parseInt(options.width.replace('px', '')) ? options.width : SF.utility.windowWidth() + 'px';
+                    var _height = SF.utility.windowHeight() > parseInt(options.height.replace('px', '')) ? options.height : SF.utility.windowHeight() + 'px';
+                    top.layer.open({
+                        id: options.id,
+                        type: 2,
+                        shade: options.shade,
+                        title: options.title,
+                        fix: false,
+                        area: [_width, _height],
+                        content: _url,
+                        btn: options.btn,
+                        yes: function () {
+                            options.callBack(options.id)
+                        }, cancel: function () {
+                            return true;
+                        }
+                    });
+                },
+                dialogContent: function (options) {
+                    var defaults = {
+                        id: null,
+                        title: '系统窗口',
+                        width: "100px",
+                        height: "100px",
+                        content: '',
+                        btn: ['确认', '关闭'],
+                        callBack: null
+                    };
+                    var options = $.extend(defaults, options);
+                    top.layer.open({
+                        id: options.id,
+                        type: 1,
+                        title: options.title,
+                        fix: false,
+                        area: [options.width, options.height],
+                        content: options.content,
+                        btn: options.btn,
+                        yes: function () {
+                            options.callBack(options.id)
+                        }
+                    });
+                },
+                dialogAlert: function (content, type) {
+                    if (type == -1) {
+                        type = 2;
+                    }
+                    top.layer.alert(content, {
+                        icon: type,
+                        title: "提示"
+                    });
+                },
+                dialogConfirm: function (content, callBack) {
+                    top.layer.confirm(content, {
+                        icon: 7,
+                        title: "提示",
+                        btn: ['确认', '取消'],
+                    }, function () {
+                        callBack(true);
+                    }, function () {
+                        callBack(false)
+                    });
+                },
+                dialogMsg: function (content, type) {
+                    if (type == -1) {
+                        type = 2;
+                    }
+                    top.layer.msg(content, { icon: type, time: 4000, shift: 5 });
+                },
+                dialogClose: function () {
+                    try {
+                        var index = top.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        var $IsdialogClose = top.$("#layui-layer" + index).find('.layui-layer-btn').find("#IsdialogClose");
+                        var IsClose = $IsdialogClose.is(":checked");
+                        if ($IsdialogClose.length == 0) {
+                            IsClose = true;
+                        }
+                        if (IsClose) {
+                            top.layer.close(index);
+                        } else {
+                            location.reload();
+                        }
+                    } catch (e) {
+                        alert(e)
+                    }
                 },
                 windowWidth: function () {
                     return $(window).width();

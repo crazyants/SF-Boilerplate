@@ -86,7 +86,6 @@ $.fn.dataGrid = function (options) {
     $element.jqGrid(options);
 };
 
-
 $.fn.GetWebControls = function (keyValue) {
     var reVal = "";
     $(this).find('input,select,textarea,.ui-select').each(function (r) {
@@ -170,3 +169,18 @@ $.fn.SetWebControls = function (data) {
         }
     }
 }
+
+//$('body').ajaxComplete(function (e, xhr, settings) {
+//    if (xhr.status == 200) {
+//        var redirect = null;
+//        try {
+//            redirect = $.parseJSON(xhr.responseText).redirect;
+//            if (redirect) {
+//                window.location.href = redirect.replace(/\?.*$/, "?ReturnUrl=" + window.location.pathname);
+//            }
+//        }
+//        catch (e) {
+//            return;
+//        }
+//    }
+//});
