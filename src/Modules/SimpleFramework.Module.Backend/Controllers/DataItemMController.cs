@@ -6,6 +6,7 @@ using Omu.ValueInjecter;
 using SimpleFramework.Core.Common;
 using SimpleFramework.Core.Data;
 using SimpleFramework.Core.Entitys;
+using SimpleFramework.Core.Extensions;
 using SimpleFramework.Core.Models.GridTree;
 using SimpleFramework.Core.Web.Base.Controllers;
 using SimpleFramework.Core.Web.Base.DataContractMapper;
@@ -17,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-
+using System.Linq.Expressions;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {
@@ -34,13 +35,23 @@ namespace SimpleFramework.Module.Backend.Controllers
         {
             CrudDtoMapper = new DataItemDtoMapper();
         }
-
+        #region 视图功能
         [Route("List")]
         public ActionResult List()
         {
             return View();
         }
-
+        /// <summary>
+        /// 分类表单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Form()
+        {
+            return View();
+        }
+        #endregion
+        #region 获取数据
         /// <summary>
         /// 分类列表
         /// </summary>
@@ -101,6 +112,48 @@ namespace SimpleFramework.Module.Backend.Controllers
             response.Reader.RepeatItems = false;
             return new JqGridJsonResult(response);
         }
+        #endregion
+        #region 验证数据
+        /// <summary>
+        /// 分类编号不能重复
+        /// </summary>
+        /// <param name="ItemCode">编号</param>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ExistItemCode(string itemCode, string keyValue)
+        {
+            var query = _repository.Query();
+            Expression<Func<DataItemEntity, bool>> pi = d => d.ItemCode == itemCode;
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                Expression<Func<DataItemEntity, bool>> pk = d => d.Id != keyValue.TryParse();
+                pi.And(pk);
+            }
+            bool IsOk = query.Where(pi).Count() == 0 ? true : false;
+            return Content(IsOk.ToString());
+        }
+        /// <summary>
+        /// 分类名称不能重复
+        /// </summary>
+        /// <param name="ItemName">名称</param>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ExistItemName(string itemName, string keyValue)
+        {
+
+            var query = _repository.Query();
+            Expression<Func<DataItemEntity, bool>> pi = d => d.ItemName == itemName;
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                Expression<Func<DataItemEntity, bool>> pk = d => d.Id != keyValue.TryParse();
+                pi.And(pk);
+            }
+            bool IsOk = query.Where(pi).Count() == 0 ? true : false;
+            return Content(IsOk.ToString());
+        }
+        #endregion
     }
     /// <summary>
     /// 字典据映射

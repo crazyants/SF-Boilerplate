@@ -1,0 +1,204 @@
+@{
+    ViewBag.Title = "分类管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = request('keyValue');
+    var parentId = request('parentId');
+    $(function () {
+        initControl();
+    })
+    //初始化控件
+    function initControl() {
+        //上级
+        SF.controls.itemPicker.initialize({
+            controlId: 'ParentId',
+            restUrl: '/DataItem/GetChildren/',
+            allowMultiSelect: false,
+            defaultText: '',
+            expandedIds: [0]
+        });
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../SystemManage/DataItem/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                }
+            });
+        } else {
+            // $("#ParentId").ComboBoxTreeSetValue(parentId);
+            $("#hfItemId").val(parentId);
+        }
+
+
+    }
+    //保存表单
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        if (postData["ParentId"] == "") {
+            postData["ParentId"] = 0;
+        }
+        $.SaveForm({
+            url: "/DataItem/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                top.DataItemSort.$("#gridTable").resetSelection();
+                top.DataItemSort.$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+
+
+</script>
+<div class="block-content">
+    <div class="panel panel-block">
+        <div class="panel-body">
+            <div class="alert alert-danger" style="display:none;">
+            </div>
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group data-text-box  required">
+                            <label class="control-label" for="tbCampusName">Name</label>
+                            <div class="control-wrapper">
+                                <input name="tbCampusName" type="text" value="Main Campus" id="tbCampusName" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group page-picker  required">
+                            <label class="control-label" for="ppPage">上级</label>
+                            <div class="control-wrapper">
+                                <div id="ParentId" class="picker picker-select rollover-container ">
+                                    <input class="js-item-id-value" type="hidden" name="hfItemId" id="hfItemId" value="0" />
+                                    <input class="js-initial-item-parent-ids-value" type="hidden" name="hfInitialItemParentIds" id="hfInitialItemParentIds" />
+                                    <input class="js-item-name-value" type="hidden" name="hfItemName" id="hfItemName" />
+                                    <input class="js-item-rest-url-extra-params-value" type="hidden" name="hfItemRestUrlExtraParams" />
+                                    <a class='picker-label' href='#'>
+                                        <i class='fa fa-file icon-fw'></i>
+                                        <span id='selectedItemLabel_ppPage' class='selected-names'></span>
+                                        <b class='fa fa-caret-down pull-right'></b>
+                                    </a>
+                                    <a id="btnSelectNone" class="picker-select-none" style="display:none;"><i class='fa fa-times'></i></a>
+                                    <div class="picker-menu dropdown-menu">
+                                        <div id='treeview-scroll-container_ppPage' class='scroll-container scroll-container-vertical scroll-container-picker'>
+                                            <div class='scrollbar'>
+                                                <div class='track'>
+                                                    <div class='thumb'>
+                                                        <div class='end'></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='viewport'>
+                                                <div class='overview'>
+                                                    <div id='treeviewItems_ppPage' class='treeview treeview-items'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="picker-actions">
+                                            <a id="btnSelect" class="btn btn-xs btn-primary picker-btn">选择</a>
+                                            <a class='btn btn-xs btn-link picker-cancel' id='btnCancel_ppPage'>取消</a>
+                                            <a id="btnSelectCurrentPage" title="选择当前页" class="btn btn-xs btn-link pull-right"><i class='fa fa-file-o'></i></a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="rfv" class="validation-error help-inline" style="display:none;">Page is Required.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group data-text-box  required">
+                            <label class="control-label" for="tbCampusName">名称</label>
+                            <div class="control-wrapper">
+                                <input id="ItemName" type="text" onblur="SF.utility.ExistField(this.id, '/DataItemM/ExistItemName')" class="form-control" placeholder="请输入名称" isvalid="yes" checkexpession="NotNull" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group data-text-box  required">
+                            <label class="control-label" for="tbCampusName">编号</label>
+                            <div class="control-wrapper">
+                                <input id="ItemCode" type="text" onblur="SF.utility.ExistField(this.id,'/DataItemM/ExistItemCode')" class="form-control" placeholder="请输入编号" isvalid="yes" checkexpession="NotNull" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group data-text-box  required">
+                            <label class="control-label" for="tbCampusName">排序</label>
+                            <div class="control-wrapper">
+                                <input id="SortCode" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group data-text-box  required">
+                            <label class="control-label" for="tbCampusName"></label>
+                            <div class="control-wrapper">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="IsTree" type="checkbox" />
+                                        树型
+                                    </label>
+                                    <label>
+                                        <input id="EnabledMark" type="checkbox" checked="checked" />
+                                        有效
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group data-text-box ">
+                            <label class="control-label" for="tbCampusName"></label>
+                            <div class="control-wrapper">
+                                <textarea id="Description" class="form-control" style="height: 70px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group data-text-box  required">
+                                <label class="control-label" for="tbCampusName"></label>
+                                <div class="control-wrapper">
+                                    <div class="controls">
+                                        <div class="js-requirement-check-type">
+                                            <input class="js-hidden-selected" type="hidden" name="hfRequirementCheckType" id="hfRequirementCheckType" value="1" />
+                                            <div class="btn-group">
+                                                <a id="btnRequirementCheckTypeSQL" class="btn btn-default active" data-val="0">SQL</a>
+                                                <a id="btnRequirementCheckTypeDataview" class="btn btn-default" data-val="1">Dataview</a>
+                                                <a id="btnRequirementCheckTypeManual" class="btn btn-default" data-val="2">Manual</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+

@@ -20,8 +20,9 @@
                 <h1 class="panel-title pull-right filter">筛选选择<i class="fa fa-chevron-down toggle-filter"></i></h1>
             </header>
             <div class="grid-actions pull-left">
-                <a id="gridActions_lbAdd" accesskey="n" title="新增" class="btn-add btn btn-default btn-sm" href="/Route/Edit"><i class="fa fa-plus-circle"></i></a>
-                <a id="gridActions_lbExcelExport" title="导出" class="btn-excelexport btn btn-default btn-sm"><i class="fa fa-table"></i></a>
+                <a   accesskey="n" title="新增" class="btn-add btn btn-default btn-sm"  onclick="btn_add()"<i class="fa fa-plus-circle"></i></a>
+                <a accesskey="n" title="编辑" class="btn-add btn btn-default btn-sm" onclick="btn_edit()"<i class="fa fa-pencil-square-o"></i></a>
+                <a  title="导出" class="btn-excelexport btn btn-default btn-sm"><i class="fa fa-table"></i></a>
             </div>
         </div>
         <div class="panel-body">
@@ -81,10 +82,7 @@
 
         });
     }
-    function ResizeFun() {
 
-
-    }
     //加载表格
     function GetGrid() {
         var selectedRowIndex = 0;
@@ -133,20 +131,35 @@
         });
     }
 
-    //保存表单
-    function AcceptClick() {
-        if (!$('#form1').Validform()) {
-            return false;
-        }
-        var postData = $("#form1").GetWebControls(keyValue);
-        $.SaveForm({
-            url: "../../BaseManage/Role/SaveForm?keyValue=" + keyValue,
-            param: postData,
-            loading: "正在保存数据...",
-            success: function () {
-                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+    //新增
+    function btn_add() {
+        var parentId = $("#gridTable").jqGridRowValue("ItemId");
+        SF.utility.dialogOpen({
+            id: "Form",
+            title: '添加分类',
+            url: '/DataItem/Form?parentId=' + parentId,
+            width: "500px",
+            height: "400px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick();
             }
-        })
+        });
+    };
+    //编辑
+    function btn_edit() {
+        var keyValue = $("#gridTable").jqGridRowValue("ItemId");
+        if (checkedRow(keyValue)) {
+            dialogOpen({
+                id: "Form",
+                title: '编辑分类',
+                url: '/DataItem/Form?keyValue=' + keyValue,
+                width: "500px",
+                height: "400px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick();
+                }
+            });
+        }
     }
-
+   
 </script>

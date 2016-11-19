@@ -13,12 +13,13 @@
             if (options.sender.attr('title') != undefined) {
                 $('#modal-popup_panel h3').html(options.sender.attr('title') + ' <small></small>');
             }
+            if (options.hideFooter)
+                $('.modal-footer').hide();
             //$(window).resize(function () {
             //    _resize($modalPopupIFrame, options);
             //});
 
             _resize($modalPopupIFrame, options);
-
             $modalPopupIFrame.one('load', function () {
 
                 // now that the iframe is loaded, show it, set it's initial height and do a modal layout
@@ -34,7 +35,7 @@
                     $modalPopupIFrame.contents().find(".modal-title").html(options.title);
 
             });
-
+     
             // Use the anchor tag's href attribute as the source for the iframe
             // this will trigger the load event (above) which will show the popup
             $('#modal-popup').fadeTo(0, 0);
@@ -154,6 +155,7 @@
                     detailsId: '',
                     postbackUrl: '',
                     title: '系统窗口',
+                    hideFooter:true,
                 };
                 var options = $.extend(defaults, options);
                 //var _width = SF.utility.windowWidth() > parseInt(options.width.replace('px', '')) ? options.width : SF.utility.windowWidth() + 'px';

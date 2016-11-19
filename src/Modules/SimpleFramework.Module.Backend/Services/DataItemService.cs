@@ -36,7 +36,7 @@ namespace SimpleFramework.Module.Backend.Services
                 }
                 else
                 {
-                    qry = qry.Where(a => a.ParentId == null);
+                    qry = qry.Where(a => a.ParentId == null || a.ParentId == 0);
                 }
             }
             else

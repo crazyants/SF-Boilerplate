@@ -102,7 +102,10 @@
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
             </script>*@
     </environment>
-           @RenderBody()
+    <form id="form1">
+        @RenderBody()
+        @Html.AntiForgeryToken()
+    </form>
       
     <script>
 
