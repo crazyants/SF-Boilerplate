@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace SimpleFramework.Core.Models
+namespace SimpleFramework.Core.Web.Models
 {
     //[Serializable]
     public class Alert

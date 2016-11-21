@@ -34,7 +34,8 @@
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "protobuf-net": "2.1.0",
-    "Microsoft.AspNetCore.Session": "1.0.0"
+    "Microsoft.AspNetCore.Session": "1.0.0",
+    "FluentValidation": "6.4.0-beta3"
   },
 
   "frameworks": {

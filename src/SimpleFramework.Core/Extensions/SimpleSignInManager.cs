@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MediatR;
 using SimpleFramework.Core.Events;
+using SimpleFramework.Core.Web.Validation;
 
 namespace SimpleFramework.Core.Extensions
 {
@@ -51,6 +52,7 @@ namespace SimpleFramework.Core.Extensions
         {
             var userId = await UserManager.GetUserIdAsync(user);
             _mediator.Publish(new UserSignedIn { UserId = long.Parse(userId) });
+            //await _mediator.SendAsync(new AsyncValidationRequestHandler();
             await base.SignInAsync(user, isPersistent, authenticationMethod);
         }
     }

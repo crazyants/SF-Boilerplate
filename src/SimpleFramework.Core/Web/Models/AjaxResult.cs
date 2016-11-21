@@ -1,5 +1,5 @@
 ﻿ 
-namespace SimpleFramework.Core.Web
+namespace SimpleFramework.Core.Web.Models
 {
     public class AjaxResult
     {

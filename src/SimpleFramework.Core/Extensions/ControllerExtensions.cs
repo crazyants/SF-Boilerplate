@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
 using SimpleFramework.Core.Abstraction.Entitys;
-using SimpleFramework.Core.Models;
+using SimpleFramework.Core.Web.Models;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;

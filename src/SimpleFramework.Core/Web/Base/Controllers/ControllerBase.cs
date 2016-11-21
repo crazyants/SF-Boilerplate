@@ -7,6 +7,7 @@ using SimpleFramework.Core.Errors;
 using SimpleFramework.Core.Errors.Exceptions;
 using SimpleFramework.Core.Web.Base.Datatypes;
 using System;
+using SimpleFramework.Core.Web.Models;
 
 namespace SimpleFramework.Core.Web.Base.Controllers
 {

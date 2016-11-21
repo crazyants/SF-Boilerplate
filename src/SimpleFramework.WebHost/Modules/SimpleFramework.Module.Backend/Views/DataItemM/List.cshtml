@@ -1,6 +1,6 @@
 @{
     ViewData["Title"] = "Address book";
-    Layout = "~/Views/Shared/_Dialog.cshtml";
+    Layout = "~/Views/Shared/_Index.cshtml";
 }
 
 <div class="block-content">
@@ -20,8 +20,8 @@
                 <h1 class="panel-title pull-right filter">筛选选择<i class="fa fa-chevron-down toggle-filter"></i></h1>
             </header>
             <div class="grid-actions pull-left">
-                <a   accesskey="n" title="新增" class="btn-add btn btn-default btn-sm"  onclick="btn_add()"<i class="fa fa-plus-circle"></i></a>
-                <a accesskey="n" title="编辑" class="btn-add btn btn-default btn-sm" onclick="btn_edit()"<i class="fa fa-pencil-square-o"></i></a>
+                <a  title="新增" class="btn-add btn btn-default btn-sm" onclick="btn_add()"<i class="fa fa-plus-circle"></i></a>
+                <a  title="编辑" class="btn-add btn btn-default btn-sm" onclick="btn_edit()"<i class="fa  a-edit"></i></a>
                 <a  title="导出" class="btn-excelexport btn btn-default btn-sm"><i class="fa fa-table"></i></a>
             </div>
         </div>
@@ -69,7 +69,7 @@
         $(window).resize(function (e) {
             window.setTimeout(function () {
                 $('#gridTable').setGridWidth(($('.gridPanel').width()));
-                $("#gridTable").setGridHeight($(window).height() - 300);
+                $("#gridTable").setGridHeight($(window).height() - 145.5);
                 SF.controls.modal.resize($(document).height());
             }, 200);
             e.stopPropagation();
@@ -90,7 +90,7 @@
         $gridTable.jqGrid({
             url: "/DataItemM/GetTreeList",
             datatype: "json",
-            height: $(window).height() - 213,
+            height: $(window).height() - 87,
             autowidth: true,
             colModel: [
                 { label: '主键', name: 'Id', hidden: true },
@@ -137,7 +137,7 @@
         SF.utility.dialogOpen({
             id: "Form",
             title: '添加分类',
-            url: '/DataItem/Form?parentId=' + parentId,
+            url: '/DataItemM/Form?parentId=' + parentId,
             width: "500px",
             height: "400px",
             callBack: function (iframeId) {
@@ -152,7 +152,7 @@
             dialogOpen({
                 id: "Form",
                 title: '编辑分类',
-                url: '/DataItem/Form?keyValue=' + keyValue,
+                url: '/DataItemM/Form?keyValue=' + keyValue,
                 width: "500px",
                 height: "400px",
                 callBack: function (iframeId) {

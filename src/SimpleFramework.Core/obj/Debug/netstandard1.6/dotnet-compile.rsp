@@ -15,6 +15,7 @@
 --reference:C:\Users\tomny.tang\.nuget\packages\CacheManager.Core\0.9.1\lib\netstandard1.1\CacheManager.Core.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\CoreCompat.Microsoft.Practices.ServiceLocation\1.3.0-r2\lib\netstandard1.3\CoreCompat.Microsoft.Practices.ServiceLocation.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\CoreCompat.System.Drawing\1.0.0-beta006\lib\netstandard1.3\CoreCompat.System.Drawing.dll
+--reference:C:\Users\tomny.tang\.nuget\packages\FluentValidation\6.4.0-beta3\lib\netstandard1.0\FluentValidation.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\IdentityModel\2.0.0\lib\netstandard1.3\IdentityModel.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\IdentityModel.AspNetCore.OAuth2Introspection\1.0.1\lib\netstandard1.3\IdentityModel.AspNetCore.OAuth2Introspection.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\IdentityModel.AspNetCore.ScopeValidation\1.0.0\lib\netstandard1.3\IdentityModel.AspNetCore.ScopeValidation.dll
@@ -392,11 +393,6 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramewo
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Extensions\WorkContext.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Localization\ITimeZoneHelper.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Localization\Implementation\TimeZoneHelper.cs
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Models\Alert.cs
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Models\RecaptchaResponse.cs
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Models\GridTree\TreeGridEntity.cs
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Models\GridTree\TreeGridJson.cs
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Models\Tree\TreeViewItem.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Modules\IModuleInitializer.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Modules\ModuleInfo.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Modules\ModuleInitializerBase.cs
@@ -417,11 +413,11 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramewo
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Settings\Converters\SettingConverter.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Settings\Converters\SettingValueConverter.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Settings\Implementation\SettingsManager.cs
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\AjaxResult.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\ModuleViewLocationExpander.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Attributes\FormValueRequiredAttribute.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Attributes\HandlerAjaxOnlyAttribute.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Attributes\HandlerExceptionFilter.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Attributes\ValidationExceptionHandlerErrorAttribute.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Base\Business\CodeTableReader.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Base\Business\CodeTableValidator.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Base\Business\CodeTableWriter.cs
@@ -439,6 +435,13 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramewo
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Formatters\CsvImportExport\CsvInputFormatter.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Formatters\CsvImportExport\CsvOutputFormatter.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Middleware\RequestLoggerMiddleWare.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Models\AjaxResult.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Models\Alert.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Models\ErrorViewModel.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Models\RecaptchaResponse.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Models\GridTree\TreeGridEntity.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Models\GridTree\TreeGridJson.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Models\Tree\TreeViewItem.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\SmartTable\Pagination.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\SmartTable\Search.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\SmartTable\SmartTableExtension.cs
@@ -451,3 +454,5 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramewo
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\UI\Backends\BackendScript.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\UI\Backends\BackendStyleSheet.cs
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\UI\Backends\IBackendMetadata.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Validations\AsyncValidationRequestHandler.cs
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\Web\Validations\ValidationRequestHandler.cs

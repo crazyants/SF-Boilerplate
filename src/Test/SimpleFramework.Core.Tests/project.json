@@ -16,7 +16,8 @@
     "Moq": "4.6.38-alpha",
     "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-preview1-final",
-    "Microsoft.AspNetCore.Mvc": "1.0.1"
+    "Microsoft.AspNetCore.Mvc": "1.0.1",
+    "SimpleFramework.Core": "1.0.0-*"
   },
     "testRunner": "xunit",
     "frameworks": {
@@ -25,13 +26,7 @@
               "Microsoft.NETCore.App": {
                 "type": "platform",
                 "version": "1.0.0"
-              },
-              "SimpleFramework.Core": "1.0.0-*"
-            }
-        },
-        "net451": {
-            "dependencies": {
-                "Microsoft.NETCore.Platforms": "1.0.1"
+              }
             }
         }
     },

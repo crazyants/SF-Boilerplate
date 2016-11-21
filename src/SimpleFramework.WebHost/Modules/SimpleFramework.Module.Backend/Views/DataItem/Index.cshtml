@@ -139,24 +139,24 @@
 
                                 //字典分类
                                 function btn_datacategory() {
-                                    SF.controls.modal.show({
-                                        sender: $(this),
-                                        title: '字典分类',
-                                        popupUrl: '/DataItemM/List',
-                                        width: "800",
-                                        height: "500",
-                                    });
-                                    //新增
-                                    //SF.utility.dialogOpen({
-                                    //    id: "Form",
+                                    //SF.controls.modal.show({
+                                    //    sender: $(this),
                                     //    title: '字典分类',
-                                    //    url: '/DataItemM/List',
-                                    //    width: "500px",
-                                    //    height: "360px",
-                                    //    callBack: function (iframeId) {
-                                    //        top.frames[iframeId].AcceptClick();
-                                    //    }
+                                    //    popupUrl: '/DataItemM/List',
+                                    //    width: "800",
+                                    //    height: "500",
                                     //});
+                                    //新增
+                                    SF.utility.dialogOpen({
+                                        id: "Form",
+                                        title: '字典分类',
+                                        url: '/DataItemM/List',
+                                        width: "800px",
+                                        height: "500px",
+                                        callBack: function (iframeId) {
+                                            top.frames[iframeId].AcceptClick();
+                                        }
+                                    });
 
                                 }
                             </script>

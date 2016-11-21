@@ -67,9 +67,10 @@ namespace SimpleFramework.WebHost.Extensions
         {
 
             services.AddScoped<IMediator, Mediator>();
-            services.AddMediatorHandlers(typeof(Startup).GetTypeInfo().Assembly);
             services.AddScoped<SingleInstanceFactory>(p => t => p.GetRequiredService(t));
             services.AddScoped<MultiInstanceFactory>(p => t => p.GetRequiredServices(t));
+            services.AddMediatorHandlers(typeof(Startup).GetTypeInfo().Assembly);
+        
 
             //AutoFac第三方DI
             //builder.RegisterModule(new AutofacModule());

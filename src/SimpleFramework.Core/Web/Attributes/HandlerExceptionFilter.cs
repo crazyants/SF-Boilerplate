@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using SimpleFramework.Core.Common;
+using SimpleFramework.Core.Web.Models;
 using System;
 
 namespace SimpleFramework.Core.Web.Attributes

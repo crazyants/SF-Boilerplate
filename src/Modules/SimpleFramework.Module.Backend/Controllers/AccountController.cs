@@ -15,6 +15,7 @@ using SimpleFramework.Core.Web;
 using SimpleFramework.Core.Common;
 using SimpleFramework.Core.Common.Message.Email;
 using SimpleFramework.Core.Common.Message.Sms;
+using SimpleFramework.Core.Web.Models;
 
 namespace SimpleFramework.Module.Backend.Controllers
 {

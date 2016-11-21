@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleFramework.Core.Models.Tree
+namespace SimpleFramework.Core.Web.Models.Tree
 {
     public class TreeViewItem
     {

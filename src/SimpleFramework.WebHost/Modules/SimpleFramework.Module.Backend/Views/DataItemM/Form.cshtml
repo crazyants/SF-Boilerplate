@@ -3,8 +3,8 @@
     Layout = "~/Views/Shared/_Form.cshtml";
 }
 <script>
-    var keyValue = request('keyValue');
-    var parentId = request('parentId');
+    var keyValue = SF.utility.request('keyValue');
+    var parentId = SF.utility.request('parentId');
     $(function () {
         initControl();
     })
@@ -20,8 +20,8 @@
         });
         //获取表单
         if (!!keyValue) {
-            $.SetForm({
-                url: "../../SystemManage/DataItem/GetFormJson",
+            SF.utility.SetForm({
+                url: "/DataItem/GetFormJson",
                 param: { keyValue: keyValue },
                 success: function (data) {
                     $("#form1").SetWebControls(data);
@@ -43,8 +43,8 @@
         if (postData["ParentId"] == "") {
             postData["ParentId"] = 0;
         }
-        $.SaveForm({
-            url: "/DataItem/SaveForm?keyValue=" + keyValue,
+        SF.utility.SaveForm({
+            url: "/DataItemM/SaveForm?keyValue=" + keyValue,
             param: postData,
             loading: "正在保存数据...",
             success: function () {

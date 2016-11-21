@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimpleFramework.Core.Models.GridTree
+namespace SimpleFramework.Core.Web.Models.GridTree
 {
     /// <summary>
     /// 构造树形表格Json
