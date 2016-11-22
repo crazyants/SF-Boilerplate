@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using SimpleFramework.Core.Abstraction.Entitys;
 using SimpleFramework.Core.Abstraction.UoW;
 using SimpleFramework.Core.Abstraction.UoW.Helper;
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using SimpleFramework.Core.Errors.Exceptions;
 using System;
 using System.Threading.Tasks;

@@ -13,7 +13,7 @@
 * Website：http://www.mayisite.com
 *********************************************************************************/
 using SimpleFramework.Core.Data.Repository;
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using System;
 using System.Collections.Generic;
 using System.Linq;

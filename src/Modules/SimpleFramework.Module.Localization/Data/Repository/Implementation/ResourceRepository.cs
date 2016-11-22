@@ -13,7 +13,7 @@
 * Website：http://www.mayisite.com
 *********************************************************************************/
 using Microsoft.EntityFrameworkCore;
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using SimpleFramework.Module.Localization.Models;
 using System.Linq;
 

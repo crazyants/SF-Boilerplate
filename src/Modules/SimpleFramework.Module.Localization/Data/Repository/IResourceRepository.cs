@@ -13,7 +13,7 @@
 * Website：http://www.mayisite.com
 *********************************************************************************/
 
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using SimpleFramework.Module.Localization.Models;
  
 namespace SimpleFramework.Module.Localization.Data.Repository

@@ -15,7 +15,7 @@
 using Microsoft.EntityFrameworkCore;
 using SimpleFramework.Core.Abstraction.Entitys.Pages;
 using SimpleFramework.Core.Abstraction.UoW;
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Plugins.Models;
 using System;

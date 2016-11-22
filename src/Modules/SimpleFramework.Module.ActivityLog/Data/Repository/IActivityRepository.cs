@@ -14,7 +14,7 @@
 *********************************************************************************/
 
 
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using SimpleFramework.Module.ActivityLog.Models;
 
 namespace SimpleFramework.Module.ActivityLog.Data.Repository

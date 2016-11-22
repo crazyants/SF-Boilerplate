@@ -35,10 +35,11 @@ using SimpleFramework.Core.Web.Formatters.CsvImportExport;
 using SimpleFramework.Core.Web.Attributes;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using SimpleFramework.Core.Abstraction.UoW;
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using SimpleFramework.Core.Common.Message.Email;
 using SimpleFramework.Core.Common.Message.Sms;
 using SimpleFramework.Core.Data.Repository;
+using SimpleFramework.Core.EFCore.Repository;
 
 namespace SimpleFramework.Core
 {

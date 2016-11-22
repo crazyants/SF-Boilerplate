@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
+using SimpleFramework.Core.Abstraction.Interceptors;
 
 namespace SimpleFramework.Core.Interceptors
 {

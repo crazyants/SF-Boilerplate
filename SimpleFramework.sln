@@ -66,6 +66,10 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Tests"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Module.SimpleData", "src\Modules\SimpleFramework.Module.SimpleData\SimpleFramework.Module.SimpleData.xproj", "{88C02D31-3C08-4174-9D38-47FF51CE8951}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.EFCore", "src\SimpleFramework.Core.EFCore\SimpleFramework.Core.EFCore.xproj", "{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Dapper", "src\SimpleFramework.Core.NH\SimpleFramework.Core.Dapper.xproj", "{421B695F-1458-433B-8DFA-1F899408BF9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -156,6 +160,14 @@ Global
 		{88C02D31-3C08-4174-9D38-47FF51CE8951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88C02D31-3C08-4174-9D38-47FF51CE8951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88C02D31-3C08-4174-9D38-47FF51CE8951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421B695F-1458-433B-8DFA-1F899408BF9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421B695F-1458-433B-8DFA-1F899408BF9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421B695F-1458-433B-8DFA-1F899408BF9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421B695F-1458-433B-8DFA-1F899408BF9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,5 +199,7 @@ Global
 		{21C78113-0993-4781-AAEB-3FD19922AEED} = {3C593EDB-AB76-4467-9884-707C3754A796}
 		{46C59885-FD59-48D3-B400-CFDB460F738C} = {6A7EE3A2-1748-4CCA-B939-9D7F782B1CDE}
 		{88C02D31-3C08-4174-9D38-47FF51CE8951} = {7EFA2FA7-32DD-4047-B021-50E77A83D714}
+		{DFD5CDDC-C302-4306-8067-78C36C4BB3CC} = {3C593EDB-AB76-4467-9884-707C3754A796}
+		{421B695F-1458-433B-8DFA-1F899408BF9C} = {3C593EDB-AB76-4467-9884-707C3754A796}
 	EndGlobalSection
 EndGlobal

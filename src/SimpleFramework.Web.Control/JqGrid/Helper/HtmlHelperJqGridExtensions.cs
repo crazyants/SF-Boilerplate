@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -82,9 +83,8 @@ namespace SimpleFramework.Web.Control.JqGrid.Helper
                 .AppendJavaScriptObjectStringArrayField(JqGridOptionsNames.COLUMNS_NAMES_FIELD, options.ColumnsNames)
                 .AppendColumnsModels(options)
                 .AppendOptions(options)
-                .Append("})");
-
-            javaScriptBuilder.AppendLine(";");
+                .AppendJavaScriptObjectClosing()
+                .AppendLine(");");
 
             return new HtmlString(javaScriptBuilder.ToString());
         }
@@ -370,6 +370,7 @@ namespace SimpleFramework.Web.Control.JqGrid.Helper
                 .AppendParametersNames(options.ParametersNames)
                 .AppendJsonReader(options.JsonReader)
                 .AppendPager(options)
+                .AppendSubgrid(options)
                 .AppendTreeGrid(options)
                 .AppendDynamicScrolling(options)
                 .AppendJavaScriptObjectStringField(JqGridOptionsNames.SORTING_NAME, options.SortingName)
@@ -438,6 +439,30 @@ namespace SimpleFramework.Web.Control.JqGrid.Helper
                         .AppendJavaScriptObjectStringField(JqGridOptionsNames.GroupingView.MINUS_ICON, options.GroupingView.MinusIcon, JqGridOptionsDefaults.GroupingView.MinusIcon)
                         .AppendJavaScriptObjectFieldClosing();
                 }
+            }
+
+            return javaScriptBuilder;
+        }
+
+        private static StringBuilder AppendSubgrid(this StringBuilder javaScriptBuilder, JqGridOptions options)
+        {
+            if (options.SubgridEnabled && !String.IsNullOrWhiteSpace(options.SubgridUrl) && (options.SubgridModel != null))
+            {
+                javaScriptBuilder.AppendJavaScriptObjectBooleanField(JqGridOptionsNames.SUBGRID_ENABLED, true)
+                    .AppendJavaScriptObjectStringField(JqGridOptionsNames.SUBGRID_ULR, options.SubgridUrl)
+                    .AppendJavaScriptObjectIntegerField(JqGridOptionsNames.SUBGRID_WIDTH, options.SubgridColumnWidth, JqGridOptionsDefaults.SubgridColumnWidth)
+                    .AppendJavaScriptObjectFunctionField(JqGridOptionsNames.SUBGRID_BEFORE_EXPAND, options.SubGridBeforeExpand)
+                    .AppendJavaScriptObjectFunctionField(JqGridOptionsNames.SUBGRID_ROW_EXPANDED, options.SubGridRowExpanded)
+                    .AppendJavaScriptObjectFunctionField(JqGridOptionsNames.SUBGRID_ROW_COLAPSED, options.SubGridRowColapsed)
+                    .AppendJavaScriptArrayFieldOpening(JqGridOptionsNames.SUBGRID_MODEL)
+                    .AppendJavaScriptObjectOpening()
+                    .AppendJavaScriptObjectStringArrayField(JqGridOptionsNames.SubgridModel.NAMES, options.SubgridModel.ColumnsModels.Select(c => c.Name))
+                    .AppendJavaScriptObjectIntegerArrayField(JqGridOptionsNames.SubgridModel.WIDTHS, options.SubgridModel.ColumnsModels.Select(c => c.Width))
+                    .AppendJavaScriptObjectEnumArrayField(JqGridOptionsNames.SubgridModel.ALIGNMENTS, options.SubgridModel.ColumnsModels.Select(c => c.Alignment))
+                    .AppendJavaScriptObjectStringArrayField(JqGridOptionsNames.SubgridModel.MAPPINGS, options.SubgridModel.ColumnsModels.Select(c => c.Mapping))
+                    .AppendJavaScriptObjectStringArrayField(JqGridOptionsNames.SubgridModel.PARAMETERS, options.SubgridModel.Parameters)
+                    .AppendJavaScriptObjectFieldClosing()
+                    .AppendJavaScriptArrayFieldClosing();
             }
 
             return javaScriptBuilder;

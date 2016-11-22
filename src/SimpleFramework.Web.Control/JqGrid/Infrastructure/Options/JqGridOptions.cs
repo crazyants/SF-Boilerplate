@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SimpleFramework.Web.Control.JqGrid.Infrastructure.Enums;
 using SimpleFramework.Web.Control.JqGrid.Infrastructure.Options.ColumnModel;
 using SimpleFramework.Web.Control.JqGrid.Infrastructure.Constants;
+using SimpleFramework.Web.Control.JqGrid.Infrastructure.Options.Subgrid;
 
 namespace SimpleFramework.Web.Control.JqGrid.Infrastructure.Options
 {
@@ -128,6 +129,41 @@ namespace SimpleFramework.Web.Control.JqGrid.Infrastructure.Options
         public JqGridSortingOrders SortingOrder { get; set; }
 
         /// <summary>
+        /// Gets or sets the value which defines if subgrid is enabled.
+        /// </summary>
+        public bool SubgridEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the subgrid model.
+        /// </summary>
+        public JqGridSubgridModel SubgridModel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the url for subgrid data requests.
+        /// </summary>
+        public string SubgridUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the width of subgrid expand/colapse column.
+        /// </summary>
+        public int SubgridColumnWidth { get; set; }
+
+        /// <summary>
+        /// Gets or sets the function for event which is raised just before expanding the subgrid.
+        /// </summary>
+        public string SubGridBeforeExpand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the function for event which is raised when the user clicks on the plus icon of the grid.
+        /// </summary>
+        public string SubGridRowExpanded { get; set; }
+
+        /// <summary>
+        /// Gets or sets the function for event which is raised when the user clicks on the minus icon of the grid.
+        /// </summary>
+        public string SubGridRowColapsed { get; set; }
+
+        /// <summary>
         /// Gets or sets the value which defines if TreeGrid is enabled.
         /// </summary>
         public bool TreeGridEnabled { get; set; }
@@ -180,6 +216,13 @@ namespace SimpleFramework.Web.Control.JqGrid.Infrastructure.Options
             RowsNumber = JqGridOptionsDefaults.RowsNumber;
             SortingName = null;
             SortingOrder = JqGridOptionsDefaults.SortingOrder;
+            SubgridColumnWidth = JqGridOptionsDefaults.SubgridColumnWidth;
+            SubgridEnabled = JqGridOptionsDefaults.SubgridEnabled;
+            SubgridModel = null;
+            SubgridUrl = null;
+            SubGridBeforeExpand = null;
+            SubGridRowColapsed = null;
+            SubGridRowExpanded = null;
             TreeGridEnabled = JqGridOptionsDefaults.TreeGridEnabled;
             TreeGridModel = JqGridOptionsDefaults.TreeGridModel;
             Url = null;

@@ -36,7 +36,9 @@
     "protobuf-net": "2.1.0",
     "Microsoft.AspNetCore.Session": "1.0.0",
     "FluentValidation": "6.4.0-beta3",
-    "Z.EntityFramework.Plus.EFCore": "1.4.10"
+    "Z.EntityFramework.Plus.EFCore": "1.4.10",
+    "EPPlus.Core": "1.0.2",
+    "SimpleFramework.Core.EFCore": "1.0.0-*"
   },
 
   "frameworks": {

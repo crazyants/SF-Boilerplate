@@ -129,7 +129,7 @@ namespace SimpleFramework.Module.Backend.Controllers
             Expression<Func<DataItemEntity, bool>> pi = d => d.ItemCode == itemCode;
             if (!string.IsNullOrEmpty(keyValue))
             {
-                Expression<Func<DataItemEntity, bool>> pk = d => d.Id != keyValue.TryParse();
+                Expression<Func<DataItemEntity, bool>> pk = d => d.Id != keyValue.AsInteger(0);
                 pi.And(pk);
             }
             bool IsOk = query.Where(pi).Count() == 0 ? true : false;
@@ -149,7 +149,7 @@ namespace SimpleFramework.Module.Backend.Controllers
             Expression<Func<DataItemEntity, bool>> pi = d => d.ItemName == itemName;
             if (!string.IsNullOrEmpty(keyValue))
             {
-                Expression<Func<DataItemEntity, bool>> pk = d => d.Id != keyValue.TryParse();
+                Expression<Func<DataItemEntity, bool>> pk = d => d.Id != keyValue.AsInteger(0);
                 pi.And(pk);
             }
             bool IsOk = query.Where(pi).Count() == 0 ? true : false;

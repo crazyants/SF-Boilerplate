@@ -5,7 +5,7 @@ using SimpleFramework.Core.Abstraction.Data;
 using SimpleFramework.Core.Abstraction.Entitys;
 using SimpleFramework.Core.Abstraction.UoW;
 using SimpleFramework.Core.Data.Extensions;
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

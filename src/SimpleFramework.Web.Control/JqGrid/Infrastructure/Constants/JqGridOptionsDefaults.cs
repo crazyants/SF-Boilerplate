@@ -526,6 +526,16 @@ namespace SimpleFramework.Web.Control.JqGrid.Infrastructure.Constants
         public const JqGridSortingOrders SortingOrder = JqGridSortingOrders.Asc;
 
         /// <summary>
+        /// The width of subgrid expand/colapse column.
+        /// </summary>
+        public const int SubgridColumnWidth = 20;
+
+        /// <summary>
+        /// The value which defines if subgrid is enabled.
+        /// </summary>
+        public const bool SubgridEnabled = false;
+
+        /// <summary>
         /// The value which defines if TreeGrid is enabled.
         /// </summary>
         public const bool TreeGridEnabled = false;

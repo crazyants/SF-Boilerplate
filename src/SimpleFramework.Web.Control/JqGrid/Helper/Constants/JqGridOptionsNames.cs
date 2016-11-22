@@ -23,6 +23,13 @@
         internal const string ROWS_NUMBER = "rowNum";
         internal const string SORTING_NAME = "sortname";
         internal const string SORTING_ORDER = "sortorder";
+        internal const string SUBGRID_ENABLED = "subGrid";
+        internal const string SUBGRID_ULR = "subGridUrl";
+        internal const string SUBGRID_WIDTH = "subGridWidth";
+        internal const string SUBGRID_BEFORE_EXPAND = "subGridBeforeExpand";
+        internal const string SUBGRID_ROW_EXPANDED = "subGridRowExpanded";
+        internal const string SUBGRID_ROW_COLAPSED = "subGridRowColapsed";
+        internal const string SUBGRID_MODEL = "subGridModel";
         internal const string TREE_GRID_ENABLED = "treeGrid";
         internal const string TREE_GRID_MODEL = "treeGridModel";
         internal const string URL = "url";
@@ -111,6 +118,19 @@
             internal const string EXTRA_PARAM = "extraparam";
         }
 
+        internal static class JsonReader
+        {
+            internal const string PAGE_INDEX = "page";
+            internal const string RECORDS = "root";
+            internal const string RECORD_ID = "id";
+            internal const string RECORD_VALUES = "cell";
+            internal const string REPEAT_ITEMS = "repeatitems";
+            internal const string SUBGRID = "subgrid";
+            internal const string TOTAL_PAGES_COUNT = "total";
+            internal const string TOTAL_RECORDS_COUNT = "records";
+            internal const string USER_DATA = "userdata";
+        }
+
         internal static class Navigator
         {
             internal const string ADDED_ROW_POSITION = "addedrow";
@@ -165,19 +185,6 @@
             internal const string VIEW_PAGER_BUTTONS = "viewPagerButtons";
         }
 
-        internal static class JsonReader
-        {
-            internal const string PAGE_INDEX = "page";
-            internal const string RECORDS = "root";
-            internal const string RECORD_ID = "id";
-            internal const string RECORD_VALUES = "cell";
-            internal const string REPEAT_ITEMS = "repeatitems";
-            internal const string SUBGRID = "subgrid";
-            internal const string TOTAL_PAGES_COUNT = "total";
-            internal const string TOTAL_RECORDS_COUNT = "records";
-            internal const string USER_DATA = "userdata";
-        }
-
         internal static class ParametersNames
         {
             internal const string PAGE_INDEX = "page";
@@ -193,6 +200,15 @@
             internal const string SUBGRID_ID = "subgridid";
             internal const string PAGES_COUNT = "npage";
             internal const string TOTAL_ROWS = "totalrows";
+        }
+
+        internal static class SubgridModel
+        {
+            internal const string NAMES = "name";
+            internal const string WIDTHS = "width";
+            internal const string ALIGNMENTS = "align";
+            internal const string MAPPINGS = "mapping";
+            internal const string PARAMETERS = "params";
         }
     }
 }

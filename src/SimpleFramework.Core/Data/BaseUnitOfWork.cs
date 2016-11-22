@@ -12,13 +12,14 @@
 * Description: SimpleFramework快速开发平台
 * Website：http://www.mayisite.com
 *********************************************************************************/
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using SimpleFramework.Core.Data.WorkArea;
 using SimpleFramework.Core.Interceptors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SimpleFramework.Core.Abstraction.Interceptors;
 
 namespace SimpleFramework.Core.Data
 {

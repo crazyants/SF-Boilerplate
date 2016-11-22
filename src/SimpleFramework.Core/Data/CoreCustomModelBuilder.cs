@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SimpleFramework.Core.Abstraction.Data;
-using SimpleFramework.Core.Data.Maps.Fluent;
+using SimpleFramework.Core.EFCore.Maps.Fluent;
 using SimpleFramework.Core.Entitys;
 
 namespace SimpleFramework.Core.Data

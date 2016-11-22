@@ -11,87 +11,43 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Extensions
 {
-	public static class StringExtensions
-	{
-	
-      
+    public static class StringExtensions
+    {
 
-        public static Decimal TryParse(this string u, Decimal defaultValue)
-		{
-			var retVal = defaultValue;
+        #region String Extensions
 
-			if (!string.IsNullOrEmpty(u))
-			{
-				Decimal.TryParse(u, NumberStyles.Any, CultureInfo.InvariantCulture, out retVal);
-			}
+        /// <summary>
+        /// Like null coalescing operator (??) but including empty strings
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static string IfNullOrEmpty(this string a, string b)
+        {
+            return string.IsNullOrEmpty(a) ? b : a;
+        }
 
-			return retVal;
+        /// <summary>
+        /// If <paramref name="a"/> is empty, returns null
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static string EmptyToNull(this string a)
+        {
+            return string.IsNullOrEmpty(a) ? null : a;
+        }
 
-		}
-
-		public static bool TryParse(this string u, bool defaultValue)
-		{
-			var retVal = defaultValue;
-
-			if (!string.IsNullOrEmpty(u))
-			{
-				Boolean.TryParse(u, out retVal);
-			}
-
-			return retVal;
-
-		}
-
-		public static int TryParse(this string u, int defaultValue)
-		{
-			var retVal = defaultValue;
-
-			if (!string.IsNullOrEmpty(u))
-			{
-				int.TryParse(u, out retVal);
-			}
-
-			return retVal;
-
-		}
-
-		public static int TryParse(this string u)
-		{
-			return TryParse(u, 0);
-		}
-
-		/// <summary>
-		/// Like null coalescing operator (??) but including empty strings
-		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
-		/// <returns></returns>
-		public static string IfNullOrEmpty(this string a, string b)
-		{
-			return string.IsNullOrEmpty(a) ? b : a;
-		}
-
-		/// <summary>
-		/// If <paramref name="a"/> is empty, returns null
-		/// </summary>
-		/// <param name="a"></param>
-		/// <returns></returns>
-		public static string EmptyToNull(this string a)
-		{
-			return string.IsNullOrEmpty(a) ? null : a;
-		}
-
-		/// <summary>
-		/// Equalses the or null empty.
-		/// </summary>
-		/// <param name="str1">The STR1.</param>
-		/// <param name="str2">The STR2.</param>
-		/// <param name="comparisonType">Type of the comparison.</param>
-		/// <returns></returns>
-		public static bool EqualsOrNullEmpty(this string str1, string str2, StringComparison comparisonType)
-		{
-			return String.Compare(str1 ?? "", str2 ?? "", comparisonType) == 0;
-		}
+        /// <summary>
+        /// Equalses the or null empty.
+        /// </summary>
+        /// <param name="str1">The STR1.</param>
+        /// <param name="str2">The STR2.</param>
+        /// <param name="comparisonType">Type of the comparison.</param>
+        /// <returns></returns>
+        public static bool EqualsOrNullEmpty(this string str1, string str2, StringComparison comparisonType)
+        {
+            return String.Compare(str1 ?? "", str2 ?? "", comparisonType) == 0;
+        }
 
         /// <summary>
         /// Equals invariant
@@ -104,55 +60,55 @@ namespace SimpleFramework.Core.Extensions
             return string.Equals(str1, str2, StringComparison.OrdinalIgnoreCase);
         }
 
-		public static string Truncate(this string value, int maxLength, string suffix = "...")
-		{
-			if (string.IsNullOrEmpty(value))
-				return value;
-			return value.Length <= maxLength ? value : value.Substring(0, maxLength) + suffix;
-		}
+        public static string Truncate(this string value, int maxLength, string suffix = "...")
+        {
+            if (string.IsNullOrEmpty(value))
+                return value;
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength) + suffix;
+        }
 
-		public static string EscapeSearchTerm(this string term)
-		{
-			char[] specialCharcters = { '+', '-', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\' };
-			var retVal = "";
-			//'&&', '||',
-			foreach (var ch in term)
-			{
-				if (specialCharcters.Any(x => x == ch))
-				{
-					retVal += "\\";
-				}
-				retVal += ch;
-			}
-			retVal = retVal.Replace("&&", @"\&&");
-			retVal = retVal.Replace("||", @"\||");
-			retVal = retVal.Trim();
+        public static string EscapeSearchTerm(this string term)
+        {
+            char[] specialCharcters = { '+', '-', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\' };
+            var retVal = "";
+            //'&&', '||',
+            foreach (var ch in term)
+            {
+                if (specialCharcters.Any(x => x == ch))
+                {
+                    retVal += "\\";
+                }
+                retVal += ch;
+            }
+            retVal = retVal.Replace("&&", @"\&&");
+            retVal = retVal.Replace("||", @"\||");
+            retVal = retVal.Trim();
 
-			return retVal;
-		}
+            return retVal;
+        }
 
-		/// <summary>
-		/// Escapes the selector. Query requires special characters to be escaped in query
-		/// http://api.jquery.com/category/selectors/
-		/// </summary>
-		/// <param name="attribute">The attribute.</param>
-		/// <returns></returns>
-		public static string EscapeSelector(this string attribute)
-		{
-			return Regex.Replace(attribute, string.Format("([{0}])", "/[!\"#$%&'()*+,./:;<=>?@^`{|}~\\]"), @"\\$1");
-		}
+        /// <summary>
+        /// Escapes the selector. Query requires special characters to be escaped in query
+        /// http://api.jquery.com/category/selectors/
+        /// </summary>
+        /// <param name="attribute">The attribute.</param>
+        /// <returns></returns>
+        public static string EscapeSelector(this string attribute)
+        {
+            return Regex.Replace(attribute, string.Format("([{0}])", "/[!\"#$%&'()*+,./:;<=>?@^`{|}~\\]"), @"\\$1");
+        }
 
-		public static string GenerateSlug(this string phrase)
-		{
-			string str = phrase.RemoveAccent().ToLower();
+        public static string GenerateSlug(this string phrase)
+        {
+            string str = phrase.RemoveAccent().ToLower();
 
-			str = Regex.Replace(str, @"[^a-z0-9\s-]", ""); // invalid chars           
-			str = Regex.Replace(str, @"\s+", " ").Trim(); // convert multiple spaces into one space   
-			str = str.Substring(0, str.Length <= 240 ? str.Length : 240).Trim(); // cut and trim it   
-			str = Regex.Replace(str, @"\s", "-"); // hyphens   
+            str = Regex.Replace(str, @"[^a-z0-9\s-]", ""); // invalid chars           
+            str = Regex.Replace(str, @"\s+", " ").Trim(); // convert multiple spaces into one space   
+            str = str.Substring(0, str.Length <= 240 ? str.Length : 240).Trim(); // cut and trim it   
+            str = Regex.Replace(str, @"\s", "-"); // hyphens   
 
-			return str;
-		}
+            return str;
+        }
 
         /// <summary>
         /// Only english characters,
@@ -175,58 +131,58 @@ namespace SimpleFramework.Core.Extensions
         }
 
         public static string RemoveAccent(this string txt)
-		{
-			byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(txt);
-			return System.Text.Encoding.ASCII.GetString(bytes);
-		}
+        {
+            byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(txt);
+            return System.Text.Encoding.ASCII.GetString(bytes);
+        }
 
-		/// <summary>
-		/// Compute the distance between two strings.
-		/// </summary>
-		public static int ComputeLevenshteinDistance(this string s, string t)
-		{
-			int n = s.Length;
-			int m = t.Length;
-			int[,] d = new int[n + 1, m + 1];
+        /// <summary>
+        /// Compute the distance between two strings.
+        /// </summary>
+        public static int ComputeLevenshteinDistance(this string s, string t)
+        {
+            int n = s.Length;
+            int m = t.Length;
+            int[,] d = new int[n + 1, m + 1];
 
-			// Step 1
-			if (n == 0)
-			{
-				return m;
-			}
+            // Step 1
+            if (n == 0)
+            {
+                return m;
+            }
 
-			if (m == 0)
-			{
-				return n;
-			}
+            if (m == 0)
+            {
+                return n;
+            }
 
-			// Step 2
-			for (int i = 0; i <= n; d[i, 0] = i++)
-			{
-			}
+            // Step 2
+            for (int i = 0; i <= n; d[i, 0] = i++)
+            {
+            }
 
-			for (int j = 0; j <= m; d[0, j] = j++)
-			{
-			}
+            for (int j = 0; j <= m; d[0, j] = j++)
+            {
+            }
 
-			// Step 3
-			for (int i = 1; i <= n; i++)
-			{
-				//Step 4
-				for (int j = 1; j <= m; j++)
-				{
-					// Step 5
-					int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
+            // Step 3
+            for (int i = 1; i <= n; i++)
+            {
+                //Step 4
+                for (int j = 1; j <= m; j++)
+                {
+                    // Step 5
+                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
 
-					// Step 6
-					d[i, j] = Math.Min(
-						Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
-						d[i - 1, j - 1] + cost);
-				}
-			}
-			// Step 7
-			return d[n, m];
-		}
+                    // Step 6
+                    d[i, j] = Math.Min(
+                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                        d[i - 1, j - 1] + cost);
+                }
+            }
+            // Step 7
+            return d[n, m];
+        }
 
         public static Nullable<T> ToNullable<T>(this string s) where T : struct
         {
@@ -643,5 +599,621 @@ namespace SimpleFramework.Core.Extensions
                        ? rough.Substring(0, rough.Length - trim.Length)
                        : rough;
         }
+
+
+
+        /// <summary>
+        /// Removes special characters from the string so that only Alpha, Numeric, '.' and '_' remain;
+        /// </summary>
+        /// <param name="str">The identifier.</param>
+        /// <returns></returns>
+        public static string RemoveSpecialCharacters(this string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in str)
+            {
+                if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// removes any invalid FileName chars in a filename
+        /// from http://stackoverflow.com/a/14836763/1755417
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
+        public static string MakeValidFileName(this string name)
+        {
+            string invalidChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+            string invalidReStr = string.Format(@"[{0}]+", invalidChars);
+            string replace = Regex.Replace(name, invalidReStr, "_").Replace(";", "").Replace(",", "");
+            return replace;
+        }
+
+        /// <summary>
+        /// Splits a Camel or Pascal cased identifier into seperate words.
+        /// </summary>
+        /// <param name="str">The identifier.</param>
+        /// <returns></returns>
+        public static string SplitCase(this string str)
+        {
+            if (str == null)
+                return null;
+
+            return Regex.Replace(Regex.Replace(str, @"(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"), @"(\p{Ll})(\P{Ll})", "$1 $2");
+        }
+
+        /// <summary>
+        /// Returns a string array that contains the substrings in this string that are delimited by any combination of whitespace, comma, semi-colon, or pipe characters.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="whitespace">if set to <c>true</c> whitespace will be treated as a delimiter</param>
+        /// <returns></returns>
+        public static string[] SplitDelimitedValues(this string str, bool whitespace = true)
+        {
+            if (str == null)
+                return new string[0];
+
+            string regex = whitespace ? @"[\s\|,;]+" : @"[\|,;]+";
+
+            char[] delimiter = new char[] { ',' };
+            return Regex.Replace(str, regex, ",").Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        /// <summary>
+        /// Replaces every instance of oldValue (regardless of case) with the newValue.
+        /// (from http://www.codeproject.com/Articles/10890/Fastest-C-Case-Insenstive-String-Replace)
+        /// </summary>
+        /// <param name="str">The source string.</param>
+        /// <param name="oldValue">The value to replace.</param>
+        /// <param name="newValue">The value to insert.</param>
+        /// <returns></returns>
+        public static string ReplaceCaseInsensitive(this string str, string oldValue, string newValue)
+        {
+            if (str == null)
+                return null;
+
+            int count, position0, position1;
+            count = position0 = position1 = 0;
+            string upperString = str.ToUpper();
+            string upperPattern = oldValue.ToUpper();
+            int inc = (str.Length / oldValue.Length) *
+                      (newValue.Length - oldValue.Length);
+            char[] chars = new char[str.Length + Math.Max(0, inc)];
+            while ((position1 = upperString.IndexOf(upperPattern,
+                                              position0)) != -1)
+            {
+                for (int i = position0; i < position1; ++i)
+                    chars[count++] = str[i];
+                for (int i = 0; i < newValue.Length; ++i)
+                    chars[count++] = newValue[i];
+                position0 = position1 + oldValue.Length;
+            }
+            if (position0 == 0) return str;
+            for (int i = position0; i < str.Length; ++i)
+                chars[count++] = str[i];
+            return new string(chars, 0, count);
+        }
+
+        /// <summary>
+        /// Replaces every instance of oldValue with newValue.  Will continue to replace
+        /// values after each replace until the oldValue does not exist.
+        /// </summary>
+        /// <param name="str">The source string.</param>
+        /// <param name="oldValue">The value to replace.</param>
+        /// <param name="newValue">The value to insert.</param>
+        /// <returns>System.String.</returns>
+        public static string ReplaceWhileExists(this string str, string oldValue, string newValue)
+        {
+            string newstr = str;
+
+            if (oldValue != newValue)
+            {
+                while (newstr.Contains(oldValue))
+                {
+                    newstr = newstr.Replace(oldValue, newValue);
+                }
+            }
+
+            return newstr;
+        }
+
+        /// <summary>
+        /// Adds escape character for quotes in a string.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string EscapeQuotes(this string str)
+        {
+            if (str == null)
+                return null;
+
+            return str.Replace("'", "\\'").Replace("\"", "\\\"");
+        }
+
+        /// <summary>
+        /// Adds Quotes around the specified string and escapes any quotes that are already in the string.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="QuoteChar">The quote character.</param>
+        /// <returns></returns>
+        public static string Quoted(this string str, string QuoteChar = "'")
+        {
+            var result = QuoteChar + str.EscapeQuotes() + QuoteChar;
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the specified number of characters, starting at the left side of the string.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="length">The desired length.</param>
+        /// <returns></returns>
+        public static string Left(this string str, int length)
+        {
+            if (str == null)
+            {
+                return null;
+            }
+            else if (str.Length <= length)
+            {
+                return str;
+            }
+            else
+            {
+                return str.Substring(0, length);
+            }
+        }
+
+        /// <summary>
+        /// Truncates a string after a max length and adds ellipsis.  Truncation will occur at first space prior to maxLength.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="maxLength"></param>
+        /// <returns></returns>
+        public static string Truncate(this string str, int maxLength)
+        {
+            if (str == null)
+                return null;
+
+            if (str.Length <= maxLength)
+                return str;
+
+            maxLength -= 3;
+            var truncatedString = str.Substring(0, maxLength);
+            var lastSpace = truncatedString.LastIndexOf(' ');
+            if (lastSpace > 0)
+                truncatedString = truncatedString.Substring(0, lastSpace);
+
+            return truncatedString + "...";
+        }
+
+        /// <summary>
+        /// Removes any non-numeric characters.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string AsNumeric(this string str)
+        {
+            return Regex.Replace(str, @"[^0-9]", "");
+        }
+
+        /// <summary>
+        /// Replaces the last occurrence of a given string with a new value
+        /// </summary>
+        /// <param name="Source">The string.</param>
+        /// <param name="Find">The search parameter.</param>
+        /// <param name="Replace">The replacement parameter.</param>
+        /// <returns></returns>
+        public static string ReplaceLastOccurrence(this string Source, string Find, string Replace)
+        {
+            int Place = Source.LastIndexOf(Find);
+            string result = Source.Remove(Place, Find.Length).Insert(Place, Replace);
+            return result;
+        }
+
+        /// <summary>
+        /// The true strings for AsBoolean and AsBooleanOrNull.
+        /// </summary>
+        private static string[] trueStrings = new string[] { "true", "yes", "t", "y", "1" };
+
+        /// <summary>
+        /// Returns True for 'True', 'Yes', 'T', 'Y', '1' (case-insensitive).
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="resultIfNullOrEmpty">if set to <c>true</c> [result if null or empty].</param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerStepThrough()]
+        public static bool AsBoolean(this string str, bool resultIfNullOrEmpty = false)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return resultIfNullOrEmpty;
+            }
+
+            return trueStrings.Contains(str.ToLower());
+        }
+
+        /// <summary>
+        /// Returns True for 'True', 'Yes', 'T', 'Y', '1' (case-insensitive), null for emptystring/null.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        public static bool? AsBooleanOrNull(this string str)
+        {
+            string[] trueStrings = new string[] { "true", "yes", "t", "y", "1" };
+
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return null;
+            }
+
+            return trueStrings.Contains(str.ToLower());
+        }
+
+        /// <summary>
+        /// Attempts to convert string to an dictionary using the |/comma and ^ delimiter Key/Value syntax.  Returns an empty dictionary if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>                     
+        public static System.Collections.Generic.Dictionary<string, string> AsDictionary(this string str)
+        {
+            var dictionary = new System.Collections.Generic.Dictionary<string, string>();
+            string[] nameValues = str.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            // If we haven't found any pipes, check for commas
+            if (nameValues.Count() == 1 && nameValues[0] == str)
+            {
+                nameValues = str.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            foreach (string nameValue in nameValues)
+            {
+                string[] nameAndValue = nameValue.Split(new char[] { '^' }, 2);
+                if (nameAndValue.Count() == 2)
+                {
+                    dictionary[nameAndValue[0]] = nameAndValue[1];
+                }
+            }
+            return dictionary;
+        }
+
+        /// <summary>
+        /// Attempts to convert string to an dictionary using the |/comma and ^ delimiter Key/Value syntax.  Returns null if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerStepThrough()]
+        public static System.Collections.Generic.Dictionary<string, string> AsDictionaryOrNull(this string str)
+        {
+            var dictionary = AsDictionary(str);
+            if (dictionary.Count() > 0)
+            {
+                return dictionary;
+            }
+            return null;
+        }
+
+
+        /// <summary>
+        /// Attempts to convert string to integer.  Returns 0 if unsuccessful.
+        /// </summary>
+        /// <param name="str">The STR.</param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerStepThrough()]
+        public static int AsInteger(this string str, int defaultValue=0)
+        {
+            return str.AsIntegerOrNull(defaultValue) ?? 0;
+        }
+
+        /// <summary>
+        /// Attempts to convert string to an integer.  Returns null if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerStepThrough()]
+        public static int? AsIntegerOrNull(this string str, int defaultValue=0)
+        {
+            var value = defaultValue;
+            if (int.TryParse(str, out value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
+
+
+
+        }
+
+        /// <summary>
+        /// Attempts to convert string to Guid.  Returns Guid.Empty if unsuccessful.
+        /// </summary>
+        /// <param name="str">The STR.</param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerStepThrough()]
+        public static Guid AsGuid(this string str)
+        {
+            return str.AsGuidOrNull() ?? Guid.Empty;
+        }
+
+        /// <summary>
+        /// Attempts to convert string to Guid.  Returns null if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerStepThrough()]
+        public static Guid? AsGuidOrNull(this string str)
+        {
+            Guid value;
+            if (Guid.TryParse(str, out value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified unique identifier is Guid.Empty.
+        /// </summary>
+        /// <param name="guid">The unique identifier.</param>
+        /// <returns></returns>
+        public static bool IsEmpty(this Guid guid)
+        {
+            return guid.Equals(Guid.Empty);
+        }
+
+        /// <summary>
+        /// Attempts to convert string to decimal.  Returns 0 if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        public static decimal AsDecimal(this string str)
+        {
+            return str.AsDecimalOrNull() ?? 0;
+        }
+
+        /// <summary>
+        /// Attempts to convert string to decimal.  Returns null if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        public static decimal? AsDecimalOrNull(this string str)
+        {
+            if (!string.IsNullOrWhiteSpace(str))
+            {
+                // strip off non numeric and characters (for example, currency symbols)
+                str = Regex.Replace(str, @"[^0-9\.-]", "");
+            }
+
+            decimal value;
+            if (decimal.TryParse(str, out value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Attempts to convert string to double.  Returns 0 if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        public static double AsDouble(this string str)
+        {
+            return str.AsDoubleOrNull() ?? 0;
+        }
+
+        /// <summary>
+        /// Attempts to convert string to double.  Returns null if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        public static double? AsDoubleOrNull(this string str)
+        {
+            if (!string.IsNullOrWhiteSpace(str))
+            {
+                // strip off non numeric and characters (for example, currency symbols)
+                str = Regex.Replace(str, @"[^0-9\.-]", "");
+            }
+
+            double value;
+            if (double.TryParse(str, out value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Attempts to convert string to DateTime.  Returns null if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerStepThrough()]
+        public static DateTime? AsDateTime(this string str)
+        {
+            DateTime value;
+            if (DateTime.TryParse(str, out value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Attempts to convert string to TimeSpan.  Returns null if unsuccessful.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        public static TimeSpan? AsTimeSpan(this string str)
+        {
+            TimeSpan value;
+            if (TimeSpan.TryParse(str, out value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Converts the value to Type, or if unsuccessful, returns the default value of Type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static T AsType<T>(this string value)
+        {
+            var converter = TypeDescriptor.GetConverter(typeof(T));
+            return converter.IsValid(value)
+                ? (T)converter.ConvertFrom(value)
+                : default(T);
+        }
+
+        /// <summary>
+        /// Masks the specified value if greater than 4 characters (such as a credit card number).
+        /// For example, the return string becomes "************6789".
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static string Masked(this string value)
+        {
+            if (value.Length > 4)
+            {
+                return string.Concat(new string('*', 12), value.Substring(value.Length - 4));
+            }
+            else
+            {
+                return value;
+            }
+        }
+
+        /// <summary>
+        /// Ensures the trailing backslash. Handy when combining folder paths.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static string EnsureTrailingBackslash(this string value)
+        {
+            return value.TrimEnd(new char[] { '\\', '/' }) + "\\";
+        }
+
+        /// <summary>
+        /// Ensures the trailing forward slash. Handy when combining url paths.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static string EnsureTrailingForwardslash(this string value)
+        {
+            return value.TrimEnd(new char[] { '\\', '/' }) + "/";
+        }
+
+        /// <summary>
+        /// Ensures the leading forward slash. Handy when combining url paths.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static string RemoveLeadingForwardslash(this string value)
+        {
+            return value.TrimStart(new char[] { '/' });
+        }
+
+        /// <summary>
+        /// Evaluates string, and if null or empty, returns nullValue instead.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="nullValue">The null value.</param>
+        /// <returns></returns>
+        public static string IfEmpty(this string value, string nullValue)
+        {
+            return !string.IsNullOrWhiteSpace(value) ? value : nullValue;
+        }
+
+        /// <summary>
+        /// Replaces special Microsoft Word chars with standard chars
+        /// For example, smart quotes will be replaced with apostrophes
+        /// from http://www.andornot.com/blog/post/Replace-MS-Word-special-characters-in-javascript-and-C.aspx
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns></returns>
+        public static string ReplaceWordChars(this string text)
+        {
+            var s = text;
+            // smart single quotes and apostrophe
+            s = Regex.Replace(s, "[\u2018\u2019\u201A]", "'");
+            // smart double quotes
+            s = Regex.Replace(s, "[\u201C\u201D\u201E]", "\"");
+            // ellipsis
+            s = Regex.Replace(s, "\u2026", "...");
+            // dashes
+            s = Regex.Replace(s, "[\u2013\u2014]", "-");
+            // circumflex
+            s = Regex.Replace(s, "\u02C6", "^");
+            // open angle bracket
+            s = Regex.Replace(s, "\u2039", "<");
+            // close angle bracket
+            s = Regex.Replace(s, "\u203A", ">");
+            // spaces
+            s = Regex.Replace(s, "[\u02DC\u00A0]", " ");
+
+            return s;
+        }
+
+        /// <summary>
+        /// Returns a list of KeyValuePairs from a serialized list of Rock KeyValuePairs (e.g. 'Item1^Value1|Item2^Value2')
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns></returns>
+        public static List<KeyValuePair<string, object>> ToKeyValuePairList(this string input)
+        {
+            List<KeyValuePair<string, object>> keyPairs = new List<KeyValuePair<string, object>>();
+
+            if (!string.IsNullOrWhiteSpace(input))
+            {
+                var items = input.Split('|');
+
+                foreach (var item in items)
+                {
+                    var parts = item.Split('^');
+                    if (parts.Length == 2)
+                    {
+                        keyPairs.Add(new KeyValuePair<string, object>(parts[0], parts[1]));
+                    }
+                }
+            }
+
+            return keyPairs;
+        }
+
+        /// <summary>
+        /// Removes the spaces.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns></returns>
+        public static string RemoveSpaces(this string input)
+        {
+            return input.Replace(" ", "");
+        }
+
+        #endregion String Extensions
     }
 }

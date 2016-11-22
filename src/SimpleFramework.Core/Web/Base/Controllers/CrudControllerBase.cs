@@ -11,10 +11,11 @@ using SimpleFramework.Core.Web.Base.Business;
 using SimpleFramework.Core.Errors.Exceptions;
 using SimpleFramework.Core.Web.Base.DataContractMapper;
 using SimpleFramework.Core.Abstraction.Data;
-using SimpleFramework.Core.Data.UoW;
+using SimpleFramework.Core.EFCore.UoW;
 using SimpleFramework.Core.Abstraction.UoW;
 using SimpleFramework.Core.Data.Repository;
 using Microsoft.EntityFrameworkCore;
+using SimpleFramework.Core.EFCore.Repository;
 
 namespace SimpleFramework.Core.Web.Base.Controllers
 {
