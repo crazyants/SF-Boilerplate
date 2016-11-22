@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="/css/sf-about.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
+<body class="form-body">
     <environment names="Development">
         <script src="/lib/jquery-1.12.4.min.js"></script>
         <script src="/lib/jquery.jquery-dotimeout.js"></script>
@@ -102,17 +102,13 @@
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
             </script>*@
     </environment>
-           @RenderBody()
-      
+    <form id="form1">
+        @RenderBody()
+    </form>
     <script>
-
         $(document).ready(function () {
-
-
         });
     </script>
-
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

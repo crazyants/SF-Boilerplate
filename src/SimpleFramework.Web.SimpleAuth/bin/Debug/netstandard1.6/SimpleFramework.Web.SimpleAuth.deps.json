@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "f955b9b0492fe870dd2ccf663403d4098d163271"
+    "signature": "98719115ff07a1ff7db0f462424158eecfe8b84d"
   },
   "compilationOptions": {},
   "targets": {
@@ -2989,6 +2989,11 @@
           "lib/netstandard1.6/Omu.ValueInjecter.dll": {}
         }
       },
+      "Z.EntityFramework.Plus.EFCore/1.4.10": {
+        "runtime": {
+          "lib/netstandard1.3/Z.EntityFramework.Plus.EFCore.dll": {}
+        }
+      },
       "SimpleFramework.Core/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -3024,7 +3029,8 @@
           "Microsoft.Extensions.Configuration.Json": "1.0.0",
           "protobuf-net": "2.1.0",
           "Microsoft.AspNetCore.Session": "1.0.0",
-          "FluentValidation": "6.4.0-beta3"
+          "FluentValidation": "6.4.0-beta3",
+          "Z.EntityFramework.Plus.EFCore": "1.4.10"
         },
         "runtime": {
           "SimpleFramework.Core.dll": {}
@@ -4156,6 +4162,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-4xcg4w9/Ri/gDLxyJRwDu+flBmaN2keQTgcoPGpCgby+ooL8xFbAmr/jWBZD4IglmuaZZ3fWmxAR7laM3ptVkw=="
+    },
+    "Z.EntityFramework.Plus.EFCore/1.4.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lGy9FP4Lmyp5bFftTYLOB1ZkSGlrYSp7ht8Mz+8lGaG/aMCUrPwyMbmJ5jPQWbjfPQ6d18nEDA1Ww3plVnDVtw=="
     },
     "SimpleFramework.Core/1.0.0": {
       "type": "project",

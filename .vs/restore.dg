@@ -1,8 +1,5 @@
 #:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.Abstraction\SimpleFramework.Core.Abstraction.xproj
-#:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\Test\SimpleFramework.Core.Tests\SimpleFramework.Core.Tests.xproj
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\Test\SimpleFramework.Core.Tests\SimpleFramework.Core.Tests.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj
-E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.Abstraction\SimpleFramework.Core.Abstraction.xproj
 #:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.Security\SimpleFramework.Core.Security.xproj
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.Security\SimpleFramework.Core.Security.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.Security\SimpleFramework.Core.Security.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.Abstraction\SimpleFramework.Core.Abstraction.xproj
@@ -70,6 +67,9 @@ E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramewo
 #:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.RateLimit\SimpleFramework.Core.RateLimit.xproj
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.RateLimit\SimpleFramework.Core.RateLimit.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.RateLimit\SimpleFramework.Core.RateLimit.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.Abstraction\SimpleFramework.Core.Abstraction.xproj
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.Abstraction\SimpleFramework.Core.Abstraction.xproj
+#:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\Test\SimpleFramework.Core.Tests\SimpleFramework.Core.Tests.xproj
+E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\Test\SimpleFramework.Core.Tests\SimpleFramework.Core.Tests.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core.Abstraction\SimpleFramework.Core.Abstraction.xproj
 #:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\Modules\SimpleFramework.Module.SimpleData\SimpleFramework.Module.SimpleData.xproj
 E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\Modules\SimpleFramework.Module.SimpleData\SimpleFramework.Module.SimpleData.xproj|E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SimpleFramework.Core\SimpleFramework.Core.xproj

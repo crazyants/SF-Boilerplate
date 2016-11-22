@@ -4775,10 +4775,10 @@ fieldset .actions {
   opacity: 0.3;
 }
 .updateprogress-status {
-  position: fixed;
+  position: absolute;
   top: 40%;
   left: 50%;
-  z-index: 19891016;
+  z-index:19891025;
   padding: 15px 10px;
   margin-left: -30px;
   background-color: #debe18;
@@ -4786,6 +4786,7 @@ fieldset .actions {
   box-shadow: 5px 5px 12px 3px rgba(0, 0, 0, 0.1);
   opacity: 1;
 }
+
 .updateprogress-status .spinner {
   width: 40px;
   height: 30px;
@@ -7107,6 +7108,14 @@ main {
 body {
   background-color: #282526;
 }
+.content-body
+{
+  background-color: #EDEAE6;
+}
+.form-body
+{
+  background-color: #FDFDFD;
+}
 h1,
 h2,
 h3,
@@ -7186,9 +7195,18 @@ h4,
   background-color: transparent;
 }
 .panel {
-  border-top-width: 3px;
+  border-top-width: 2px;
   border-radius: 0;
 }
+.panel_no_boder {
+  margin-bottom: 0px;
+  background-color: #FDFDFD;
+   border: 0px solid transparent; 
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.05); 
+}
+
 .panel .panel-heading .panel-title {
   font-size: 18px;
   font-weight: 600;
@@ -7344,7 +7362,7 @@ a.link-block,
 #content-wrapper {
   position: relative;
   min-width: 320px;
-  background-color: #edeae6;
+  background-color: #EDEAE6;
 }
 @media screen {
   #content-wrapper {
@@ -7580,7 +7598,7 @@ body#splash.error #content #logo {
 .navbar-static-side .navbar-side > li {
   margin-top: 0;
   text-align: center;
-  border-top: 1px solid #3b3638;
+  border-top: 1px solid #3A3A3A;
 }
 .navbar-static-side .navbar-side > li:last-child {
   border-bottom: 1px solid #3b3638;

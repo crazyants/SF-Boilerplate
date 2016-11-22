@@ -35,7 +35,8 @@
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "protobuf-net": "2.1.0",
     "Microsoft.AspNetCore.Session": "1.0.0",
-    "FluentValidation": "6.4.0-beta3"
+    "FluentValidation": "6.4.0-beta3",
+    "Z.EntityFramework.Plus.EFCore": "1.4.10"
   },
 
   "frameworks": {

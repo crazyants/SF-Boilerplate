@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleFramework.Core.Data.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -150,29 +151,6 @@ namespace SimpleFramework.Core.Common
             return source.Skip(Math.Max(0, source.Count() - N));
         }
 
-
-        public static Expression Property(this Expression expression, string propertyName)
-        {
-            return Expression.Property(expression, propertyName);
-        }
-        public static Expression AndAlso(this Expression left, Expression right)
-        {
-            return Expression.AndAlso(left, right);
-        }
-        public static Expression Call(this Expression instance, string methodName, params Expression[] arguments)
-        {
-            return Expression.Call(instance, instance.Type.GetMethod(methodName), arguments);
-        }
-        public static Expression GreaterThan(this Expression left, Expression right)
-        {
-            return Expression.GreaterThan(left, right);
-        }
-        public static Expression<T> ToLambda<T>(this Expression body, params ParameterExpression[] parameters)
-        {
-            return Expression.Lambda<T>(body, parameters);
-        }
-        public static Expression<Func<T, bool>> True<T>() { return param => true; }
-        public static Expression<Func<T, bool>> False<T>() { return param => false; }
         /// <summary>
         /// 组合And
         /// </summary>
@@ -257,7 +235,7 @@ namespace SimpleFramework.Core.Common
         /// <param name="primaryKey">主键</param>
         /// <param name="parentId"></param>
         /// <returns></returns>
-        public static List<T> TreeWhere<T>(this List<T> entityList, Predicate<T> condition, string primaryKey, string parentId = "ParentId") where T : class
+        public static List<T> TreeWhere<T>(this List<T> entityList, Predicate<T> condition, string primaryKey="Id", string parentId = "ParentId") where T : class
         {
             List<T> locateList = entityList.FindAll(condition);
             var parameter = Expression.Parameter(typeof(T), "t");
@@ -275,8 +253,9 @@ namespace SimpleFramework.Core.Common
                     {
                         break;
                     }
-                    Predicate<T> upLambda = (Expression.Equal(parameter.Property(primaryKey), Expression.Constant(pId))).ToLambda<Predicate<T>>(parameter).Compile();
-                    T upRecord = entityList.Find(upLambda);
+                  
+                   // Predicate<T> upLambda = (Expression.Equal(parameter.Property(primaryKey), Expression.Constant(pId))).ToLambda<Predicate<T>>(parameter).Compile();
+                    T upRecord = entityList.AsQueryable().Where(primaryKey, DynamicCompare.Equal, pId).FirstOrDefault();
                     if (upRecord != null)
                     {
                         treeList.Add(upRecord);

@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Address book";
-    Layout = "~/Views/Shared/_Dialog.cshtml";
+    Layout = "~/Views/Shared/_Index.cshtml";
 }
 
 <div class="block-content">
@@ -14,38 +14,28 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-block">
+    <div class="panel panel_no_boder panel-block">
         <div class="panel-heading">
-            <header>
-                <h1 class="panel-title pull-right filter">筛选选择<i class="fa fa-chevron-down toggle-filter"></i></h1>
-            </header>
-            <div class="grid-actions pull-left">
-                <a  title="新增" class="btn-add btn btn-default btn-sm" onclick="btn_add()"<i class="fa fa-plus-circle"></i></a>
-                <a  title="编辑" class="btn-add btn btn-default btn-sm" onclick="btn_edit()"<i class="fa  a-edit"></i></a>
-                <a  title="导出" class="btn-excelexport btn btn-default btn-sm"><i class="fa fa-table"></i></a>
+            <div class="pull-left">
+                <table>
+                    <tr>
+                        <td>
+                            <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;" />
+                        </td>
+                        <td style="padding-left: 5px;">
+                            <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;查询</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="grid-actions pull-right">
+                <a title="新增" class="btn-add btn btn-default btn-sm" onclick="btn_add()"><i class="fa fa-plus-circle"></i></a>
+                <a title="编辑" class="btn-add btn btn-default btn-sm" onclick="btn_edit()"><i class="fa  fa-edit"></i></a>
+                <a title="导出" class="btn-excelexport btn btn-default btn-sm"><i class="fa fa-table"></i></a>
             </div>
         </div>
         <div class="panel-body">
             <div class="grid grid-panel">
-                <div class="grid-filter">
-                    <div class="grid-filter-entry" style="display:none;">
-                        <fieldset>
-                            <h4>筛选选择</h4>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group sf-text-box ">
-                                        <label class="control-label" for="Account">关键字"</label>
-                                        <div class="control-wrapper">
-                                            <input name="txt_Keyword" type="text" id="txt_Keyword" class="form-control" placeholder="请输入要查询关键字" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </fieldset>
-                        <a id="btn_Search" title="Apply Filter" class="filter btn btn-action btn-xs">查询</a>
-                    </div>
-                </div>
                 <div class="table-responsive">
                     <div class="gridPanel">
                         <table id="gridTable"></table>
@@ -69,17 +59,10 @@
         $(window).resize(function (e) {
             window.setTimeout(function () {
                 $('#gridTable').setGridWidth(($('.gridPanel').width()));
-                $("#gridTable").setGridHeight($(window).height() - 300);
+                $("#gridTable").setGridHeight($(window).height() - 87.5);
                 SF.controls.modal.resize($(document).height());
             }, 200);
             e.stopPropagation();
-        });
-
-        $('div.panel-heading header h1.filter').click(function () {
-            $('i.toggle-filter', this).toggleClass('fa-chevron-down fa-chevron-up');
-            var $filterToggle = $('.grid-filter .grid-filter-entry');
-            $filterToggle.slideToggle();
-
         });
     }
 
@@ -90,7 +73,7 @@
         $gridTable.jqGrid({
             url: "/DataItemM/GetTreeList",
             datatype: "json",
-            height: $(window).height() - 213,
+            height: $(window).height() - 87.5,
             autowidth: true,
             colModel: [
                 { label: '主键', name: 'Id', hidden: true },
@@ -135,13 +118,13 @@
     function btn_add() {
         var parentId = $("#gridTable").jqGridRowValue("ItemId");
         SF.utility.dialogOpen({
-            id: "Form",
+            id: "DataItem_Form",
             title: '添加分类',
             url: '/DataItemM/Form?parentId=' + parentId,
-            width: "500px",
-            height: "400px",
+            width: "1000px",
+            height: "500px",
             callBack: function (iframeId) {
-                top.frames[iframeId].AcceptClick();
+                top.frames[iframeId].AcceptClick("POST");
             }
         });
     };
@@ -149,17 +132,33 @@
     function btn_edit() {
         var keyValue = $("#gridTable").jqGridRowValue("ItemId");
         if (checkedRow(keyValue)) {
-            dialogOpen({
-                id: "Form",
+            SF.utility.dialogOpen({
+                id: "DataItem_Form",
                 title: '编辑分类',
                 url: '/DataItemM/Form?keyValue=' + keyValue,
-                width: "500px",
-                height: "400px",
+                width: "1000px",
+                height: "500px",
                 callBack: function (iframeId) {
-                    top.frames[iframeId].AcceptClick();
+                    top.frames[iframeId].AcceptClick("PUT");
                 }
             });
         }
     }
-   
+    //删除
+    function btn_delete() {
+        var keyValue = $("#gridTable").jqGridRowValue("ItemId");
+        if (keyValue) {
+            SF.utility.removeForm({
+                type:"Delete",
+                url: "/DataItem/" + keyValue,
+               // param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#gridTable").resetSelection();
+                    $("#gridTable").trigger("reloadGrid");
+                }
+            })
+        } else {
+            dialogMsg('请选择需要删除的分类！', 0);
+        }
+    }
 </script>

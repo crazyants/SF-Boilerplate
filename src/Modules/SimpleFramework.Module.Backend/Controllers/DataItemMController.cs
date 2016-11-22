@@ -7,6 +7,7 @@ using SimpleFramework.Core.Common;
 using SimpleFramework.Core.Data;
 using SimpleFramework.Core.Entitys;
 using SimpleFramework.Core.Extensions;
+using SimpleFramework.Core.Web.Attributes;
 using SimpleFramework.Core.Web.Base.Controllers;
 using SimpleFramework.Core.Web.Base.DataContractMapper;
 using SimpleFramework.Core.Web.Models.GridTree;
@@ -44,12 +45,13 @@ namespace SimpleFramework.Module.Backend.Controllers
         /// 分类表单
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [Route("Form")]
         public ActionResult Form()
         {
             return View();
         }
         #endregion
+
         #region 获取数据
         /// <summary>
         /// 分类列表
@@ -64,7 +66,7 @@ namespace SimpleFramework.Module.Backend.Controllers
 
             if (!string.IsNullOrEmpty(keyword))
             {
-                data = data.TreeWhere(t => t.ItemName.Contains(keyword), "");
+                data = data.TreeWhere(t => t.ItemName.Contains(keyword));
             }
             JqGridResponse response = new JqGridResponse();
 
@@ -112,6 +114,7 @@ namespace SimpleFramework.Module.Backend.Controllers
             return new JqGridJsonResult(response);
         }
         #endregion
+
         #region 验证数据
         /// <summary>
         /// 分类编号不能重复
@@ -152,6 +155,37 @@ namespace SimpleFramework.Module.Backend.Controllers
             bool IsOk = query.Where(pi).Count() == 0 ? true : false;
             return Content(IsOk.ToString());
         }
+        #endregion
+
+        #region 提交数据
+        /// <summary>
+        /// 删除分类
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <returns></returns>
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[HandlerAjaxOnly]
+        //public ActionResult RemoveForm(string keyValue)
+        //{
+        //    dataItemBLL.RemoveForm(keyValue);
+        //    base.UpdateAsync
+        //    return Success("删除成功。");
+        //}
+        /// <summary>
+        /// 保存分类表单（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <param name="dataItemEntity">分类实体</param>
+        /// <returns></returns>
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[HandlerAjaxOnly]
+        //public ActionResult SaveForm(string keyValue, DataItemEntity dataItemEntity)
+        //{
+        //    dataItemBLL.SaveForm(keyValue, dataItemEntity);
+        //    return Success("操作成功。");
+        //}
         #endregion
     }
     /// <summary>

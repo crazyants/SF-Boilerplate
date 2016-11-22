@@ -4037,6 +4037,15 @@
           "lib/netstandard1.6/Omu.ValueInjecter.dll": {}
         }
       },
+      "Z.EntityFramework.Plus.EFCore/1.4.10": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.3/Z.EntityFramework.Plus.EFCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Z.EntityFramework.Plus.EFCore.dll": {}
+        }
+      },
       "SimpleFramework.Core/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
@@ -4073,6 +4082,7 @@
           "System.Globalization.Extensions": "4.0.1",
           "System.Linq.Queryable": "4.0.1",
           "System.Reflection.TypeExtensions": "4.1.0",
+          "Z.EntityFramework.Plus.EFCore": "1.4.10",
           "protobuf-net": "2.1.0",
           "valueinjecter": "3.1.1.3"
         },
@@ -10379,6 +10389,17 @@
         "lib/uap/Omu.ValueInjecter.pdb",
         "lib/uap/Omu.ValueInjecter.pri",
         "lib/uap/Properties/ValueInjecter_Universal.rd.xml"
+      ]
+    },
+    "Z.EntityFramework.Plus.EFCore/1.4.10": {
+      "sha512": "lGy9FP4Lmyp5bFftTYLOB1ZkSGlrYSp7ht8Mz+8lGaG/aMCUrPwyMbmJ5jPQWbjfPQ6d18nEDA1Ww3plVnDVtw==",
+      "type": "package",
+      "path": "Z.EntityFramework.Plus.EFCore/1.4.10",
+      "files": [
+        "Z.EntityFramework.Plus.EFCore.1.4.10.nupkg.sha512",
+        "Z.EntityFramework.Plus.EFCore.nuspec",
+        "lib/net451/Z.EntityFramework.Plus.EFCore.dll",
+        "lib/netstandard1.3/Z.EntityFramework.Plus.EFCore.dll"
       ]
     },
     "SimpleFramework.Core/1.0.0": {

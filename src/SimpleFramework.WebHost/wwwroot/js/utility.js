@@ -332,14 +332,17 @@
                     };
                     var options = $.extend(defaults, options);
                     var _url = options.url;
-                    var _width = SF.utility.windowWidth() > parseInt(options.width.replace('px', '')) ? options.width : SF.utility.windowWidth() + 'px';
-                    var _height = SF.utility.windowHeight() > parseInt(options.height.replace('px', '')) ? options.height : SF.utility.windowHeight() + 'px';
+                    var _width = top.SF.utility.windowWidth() > parseInt(options.width.replace('px', '')) ? options.width : top.SF.utility.windowWidth() + 'px';
+                    var _height = top.SF.utility.windowHeight() > parseInt(options.height.replace('px', '')) ? options.height : top.SF.utility.windowHeight() + 'px';
+                    //var _width = top.$.windowWidth() > parseInt(options.width.replace('px', '')) ? options.width : top.$.windowWidth() + 'px';
+                    //var _height = top.$.windowHeight() > parseInt(options.height.replace('px', '')) ? options.height : top.$.windowHeight() + 'px';
                     top.layer.open({
                         id: options.id,
-                        type: 2,
+                        type: 2,//此处以iframe
                         shade: options.shade,
                         title: options.title,
                         fix: false,
+                        zIndex: top.layer.zIndex, //重点1
                         area: [_width, _height],
                         content: _url,
                         btn: options.btn,
@@ -347,6 +350,8 @@
                             options.callBack(options.id)
                         }, cancel: function () {
                             return true;
+                        }, success: function (layero) {
+                            top.layer.setTop(layero); //重点2
                         }
                     });
                 },
@@ -366,6 +371,7 @@
                         type: 1,
                         title: options.title,
                         fix: false,
+                        zIndex: top.layer.zIndex, //重点1
                         area: [options.width, options.height],
                         content: options.content,
                         btn: options.btn,
@@ -423,7 +429,7 @@
                 windowHeight: function () {
                     return $(window).height();
                 },
-                request : function (keyValue) {
+                request: function (keyValue) {
                     var search = location.search.slice(1);
                     var arr = search.split("&");
                     for (var i = 0; i < arr.length; i++) {
@@ -437,6 +443,90 @@
                         }
                     }
                     return "";
+                },
+                getWebControls: function (formId, keyValue) {
+                    var reVal = "";
+                    var $id = $('#' + formId)
+                   $id.find('input,select,textarea,.ui-select').each(function (r) {
+                        var id = $(this).attr('id');
+                        var type = $(this).attr('type');
+                        switch (type) {
+                            case "checkbox":
+                                if ($("#" + id).is(":checked")) {
+                                    reVal += '"' + id + '"' + ':' + '"1",'
+                                } else {
+                                    reVal += '"' + id + '"' + ':' + '"0",'
+                                }
+                                break;
+                            case "select":
+                                var value = $("#" + id).attr('data-value');
+                                if (value == "") {
+                                    value = "&nbsp;";
+                                }
+                                reVal += '"' + id + '"' + ':' + '"' + $.trim(value) + '",'
+                                break;
+                            case "selectTree":
+                                var value = $("#" + id).attr('data-value');
+                                if (value == "") {
+                                    value = "&nbsp;";
+                                }
+                                reVal += '"' + id + '"' + ':' + '"' + $.trim(value) + '",'
+                                break;
+                            default:
+                                var value = $("#" + id).val();
+                                if (value == "") {
+                                    value = "&nbsp;";
+                                }
+                                reVal += '"' + id + '"' + ':' + '"' + $.trim(value) + '",'
+                                break;
+                        }
+                    });
+                    reVal = reVal.substr(0, reVal.length - 1);
+                    if (!keyValue) {
+                        reVal = reVal.replace(/&nbsp;/g, '');
+                    }
+                    reVal = reVal.replace(/\\/g, '\\\\');
+                    reVal = reVal.replace(/\n/g, '\\n');
+                    var postdata = jQuery.parseJSON('{' + reVal + '}');
+                    //阻止伪造请求
+                    //if ($('[name=__RequestVerificationToken]').length > 0) {
+                    //    postdata["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
+                    //}
+                    return postdata;
+                },
+                setWebControls: function (formId,data) {
+                    var $id = $('#'+formId)
+                    for (var key in data) {
+                        var id = $id.find('#' + key);
+                        if (id.attr('id')) {
+                            var type = id.attr('type');
+                            if (id.hasClass("input-datepicker")) {
+                                type = "datepicker";
+                            }
+                            var value = $.trim(data[key]).replace(/&nbsp;/g, '');
+                            switch (type) {
+                                case "checkbox":
+                                    if (value == 1) {
+                                        id.attr("checked", 'checked');
+                                    } else {
+                                        id.removeAttr("checked");
+                                    }
+                                    break;
+                                case "select":
+                                 //   id.ComboBoxSetValue(value);
+                                    break;
+                                case "selectTree":
+                                  //  id.ComboBoxTreeSetValue(value);
+                                    break;
+                                case "datepicker":
+                                    id.val(SF.utility.formatDate(value, 'yyyy-MM-dd'));
+                                    break;
+                                default:
+                                    id.val(value);
+                                    break;
+                            }
+                        }
+                    }
                 }
             };
 

@@ -1,5 +1,6 @@
 @{
     ViewData["Title"] = "Address book";
+    Layout = "~/Views/Shared/_Index.cshtml";
 }
 
 <section id="page-title">
@@ -35,11 +36,11 @@
 
                                     <div class="btn-group pull-left margin-r-sm">
                                         <button type="button" class="btn btn-action btn-xs dropdown-toggle" data-toggle="dropdown">
-                                            <i class="fa fa-plus-circle"></i> 新增分类 <span class="fa fa-caret-down"></span>
+                                            <i class="fa fa-plus-circle"></i> 操作 <span class="fa fa-caret-down"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                                <a id="lbAddGroupRoot" onclick="btn_datacategory()">Add Top-Level</a>
+                                                <a id="lbAddGroupRoot" onclick="btn_datacategory()">分类管理</a>
                                             </li>
                                         </ul>
                                     </div>

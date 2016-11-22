@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/css/developer.css" />
         <link rel="stylesheet" href="/css/bootstrap.css" />
         <link rel="stylesheet" href="/css/theme.css" />
+        <link rel="stylesheet" href="/css/account.css" />
         <link rel="stylesheet" href="/css/sf-about.css" />
         <link href="/lib/jqgrid/jqgrid.css" rel="stylesheet" />
         <link href="/lib/dialog/default/layer.css" rel="stylesheet" />
@@ -22,7 +23,7 @@
         <link rel="stylesheet" href="/css/sf-about.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
+<body class="content-body">
     <environment names="Development">
         <script src="/lib/jquery-1.12.4.min.js"></script>
         <script src="/lib/jquery.jquery-dotimeout.js"></script>
@@ -103,10 +104,16 @@
             </script>*@
     </environment>
     <form id="form1">
-        @RenderBody()
-        @Html.AntiForgeryToken()
+        <div id="page-wrapper">
+            <div id="content-wrapper" style="margin-left:0px;height:100%;min-height:100%;">
+                <main>
+                    @RenderBody()
+                    @Html.AntiForgeryToken()
+                </main>
+            </div>
+        </div>
     </form>
-      
+
     <script>
 
         $(document).ready(function () {
