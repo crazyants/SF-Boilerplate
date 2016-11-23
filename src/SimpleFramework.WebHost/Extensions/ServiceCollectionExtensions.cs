@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.CodeAnalysis;
@@ -89,46 +87,46 @@ namespace SimpleFramework.WebHost.Extensions
         /// <summary>
         /// AutoFac 注入模块
         /// </summary>
-        public class AutofacModule : Autofac.Module
-        {
-            protected override void Load(ContainerBuilder builder)
-            {
+        //public class AutofacModule : Autofac.Module
+        //{
+        //    protected override void Load(ContainerBuilder builder)
+        //    {
 
-                //builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
-                //builder.RegisterGeneric(typeof(RepositoryAsync<>)).As(typeof(IRepositoryAsync<>));
-                //builder.RegisterGeneric(typeof(RepositoryWithTypedId<,>)).As(typeof(IRepositoryWithTypedId<,>));
-                //// Sets the delegate resolver factories for Mediatr.
-                //// These factories are used by Mediatr to find the appropriate Handlers
-                //builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
+        //        //builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
+        //        //builder.RegisterGeneric(typeof(RepositoryAsync<>)).As(typeof(IRepositoryAsync<>));
+        //        //builder.RegisterGeneric(typeof(RepositoryWithTypedId<,>)).As(typeof(IRepositoryWithTypedId<,>));
+        //        //// Sets the delegate resolver factories for Mediatr.
+        //        //// These factories are used by Mediatr to find the appropriate Handlers
+        //        //builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
 
-                //builder.Register<SingleInstanceFactory>(ctx =>
-                //{
-                //    var c = ctx.Resolve<IComponentContext>();
-                //    return t => c.Resolve(t);
-                //});
+        //        //builder.Register<SingleInstanceFactory>(ctx =>
+        //        //{
+        //        //    var c = ctx.Resolve<IComponentContext>();
+        //        //    return t => c.Resolve(t);
+        //        //});
+//}
+        //        //builder.Register<MultiInstanceFactory>(ctx =>
+        //        //{
+        //        //    var c = ctx.Resolve<IComponentContext>();
+        //        //    return t => (IEnumerable<object>)c.Resolve(typeof(IEnumerable<>).MakeGenericType(t));
+        //        //});
 
-                //builder.Register<MultiInstanceFactory>(ctx =>
-                //{
-                //    var c = ctx.Resolve<IComponentContext>();
-                //    return t => (IEnumerable<object>)c.Resolve(typeof(IEnumerable<>).MakeGenericType(t));
-                //});
+        //        //foreach (var module in GlobalConfiguration.Modules)
+        //        //{
+        //        //    builder.RegisterAssemblyTypes(module.Assembly).AsImplementedInterfaces();
+        //        //}
 
-                //foreach (var module in GlobalConfiguration.Modules)
-                //{
-                //    builder.RegisterAssemblyTypes(module.Assembly).AsImplementedInterfaces();
-                //}
+        //        //builder.RegisterType<CurrentUser>().As<ICurrentUser>();
+        //        //builder.RegisterType<UserNameResolver>().As<IUserNameResolver>();
+        //        //builder.Register<IUnitOfWorkAsync>(c =>
+        //        //{
+        //        //    var simpleDbContext = c.Resolve<CoreDbContext>();
+        //        //    var userNameResolver = c.Resolve<IUserNameResolver>();
+        //        //    return new UnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
+        //        //});
 
-                //builder.RegisterType<CurrentUser>().As<ICurrentUser>();
-                //builder.RegisterType<UserNameResolver>().As<IUserNameResolver>();
-                //builder.Register<IUnitOfWorkAsync>(c =>
-                //{
-                //    var simpleDbContext = c.Resolve<CoreDbContext>();
-                //    var userNameResolver = c.Resolve<IUserNameResolver>();
-                //    return new UnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
-                //});
-
-            }
-        }
+        //    }
+        
 
 
     }

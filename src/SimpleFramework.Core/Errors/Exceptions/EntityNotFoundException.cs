@@ -24,7 +24,7 @@ namespace SimpleFramework.Core.Errors.Exceptions
             : base(message, exception, messages)
         { }
 
-        public EntityNotFoundException(string entityName, int entityKey) : base(Defaults.EntityNotFoundException.Title, null, null)
+        public EntityNotFoundException(string entityName, object entityKey) : base(Defaults.EntityNotFoundException.Title, null, null)
         {
             base.AddMessage(String.Format("Entity of type '{0}' and key {1} not found in the current context.", entityName, entityKey));
 

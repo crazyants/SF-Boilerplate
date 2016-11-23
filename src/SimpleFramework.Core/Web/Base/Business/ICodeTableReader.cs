@@ -9,11 +9,11 @@ namespace SimpleFramework.Core.Web.Base.Business
     /// 读取处理
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ICodetableReader<T>  where T : IEntityWithTypedId<long>
+    public interface ICodetableReader<T,TKey>  where T : IEntityWithTypedId<TKey>
     {
         Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> GetAll();
-        T Get(int id);
-        Task<T> GetAsync(int id);
+        T Get(TKey id);
+        Task<T> GetAsync(TKey id);
     }
 }

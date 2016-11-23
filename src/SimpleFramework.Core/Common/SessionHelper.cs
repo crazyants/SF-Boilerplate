@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFramework.Core.Common
 {
-    public static class SessionExtensions
+    public static class SessionHelper
     {
         public static bool? GetBoolean(this ISession session, string key)
         {

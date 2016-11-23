@@ -71,7 +71,7 @@
         var selectedRowIndex = 0;
         var $gridTable = $("#gridTable");
         $gridTable.jqGrid({
-            url: "/DataItemM/GetTreeList",
+            url: "/Api/DataItemM/GetTreeList",
             datatype: "json",
             height: $(window).height() - 87.5,
             autowidth: true,
@@ -120,7 +120,7 @@
         SF.utility.dialogOpen({
             id: "DataItem_Form",
             title: '添加分类',
-            url: '/DataItemM/Form?parentId=' + parentId,
+            url: '/Api/DataItemM/Form?parentId=' + parentId,
             width: "1000px",
             height: "500px",
             callBack: function (iframeId) {
@@ -135,7 +135,7 @@
             SF.utility.dialogOpen({
                 id: "DataItem_Form",
                 title: '编辑分类',
-                url: '/DataItemM/Form?keyValue=' + keyValue,
+                url: '/Api/DataItemM/Form?keyValue=' + keyValue,
                 width: "1000px",
                 height: "500px",
                 callBack: function (iframeId) {
@@ -150,7 +150,7 @@
         if (keyValue) {
             SF.utility.removeForm({
                 type:"Delete",
-                url: "/DataItem/" + keyValue,
+                url: "/Api/DataItemM/" + keyValue,
                // param: { keyValue: keyValue },
                 success: function (data) {
                     $("#gridTable").resetSelection();

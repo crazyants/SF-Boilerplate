@@ -8,10 +8,10 @@ namespace SimpleFramework.Core.Web.Base.Business
     /// 写入处理
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ICodetableWriter<T> where T : IEntityWithTypedId<long>
+    public interface ICodetableWriter<T, TKey> where T : IEntityWithTypedId<TKey>
     {
         Task<T> InsertAsync(T entity);
         Task UpdateAsync(T entity);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(TKey id);
     }
 }

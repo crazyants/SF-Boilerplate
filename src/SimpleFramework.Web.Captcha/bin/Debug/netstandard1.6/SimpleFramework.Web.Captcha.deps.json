@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "13b9c9f8ba6472b49a3dc5529292a2568d2c8a4c"
+    "signature": "9e761bc51383bc2e1b797465593b7d9b67fb3c37"
   },
   "compilationOptions": {},
   "targets": {
@@ -622,6 +622,16 @@
         },
         "runtime": {
           "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.Formatters.Json.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.Formatters.Xml/1.0.1": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
+          "System.Runtime.Serialization.Xml": "4.1.1",
+          "System.Xml.XmlSerializer": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.Formatters.Xml.dll": {}
         }
       },
       "Microsoft.AspNetCore.Mvc.Localization/1.0.1": {
@@ -1436,7 +1446,7 @@
         "dependencies": {
           "System.Linq": "4.3.0",
           "System.Runtime.Numerics": "4.3.0",
-          "System.Runtime.Serialization.Xml": "4.1.1-rc2-24027",
+          "System.Runtime.Serialization.Xml": "4.1.1",
           "System.Threading": "4.3.0",
           "System.Threading.Thread": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0",
@@ -2366,9 +2376,10 @@
           "lib/netstandard1.3/System.ObjectModel.dll": {}
         }
       },
-      "System.Private.DataContractSerialization/4.1.1-rc2-24027": {
+      "System.Private.DataContractSerialization/4.1.1": {
         "dependencies": {
           "System.Collections": "4.3.0",
+          "System.Collections.Concurrent": "4.3.0",
           "System.Diagnostics.Debug": "4.3.0",
           "System.Globalization": "4.3.0",
           "System.IO": "4.3.0",
@@ -2576,10 +2587,10 @@
           "lib/netstandard1.3/System.Runtime.Serialization.Primitives.dll": {}
         }
       },
-      "System.Runtime.Serialization.Xml/4.1.1-rc2-24027": {
+      "System.Runtime.Serialization.Xml/4.1.1": {
         "dependencies": {
           "System.IO": "4.3.0",
-          "System.Private.DataContractSerialization": "4.1.1-rc2-24027",
+          "System.Private.DataContractSerialization": "4.1.1",
           "System.Runtime": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.1.1",
           "System.Text.Encoding": "4.3.0",
@@ -3083,7 +3094,8 @@
           "FluentValidation": "6.4.0-beta3",
           "Z.EntityFramework.Plus.EFCore": "1.4.10",
           "EPPlus.Core": "1.0.2",
-          "SimpleFramework.Core.EFCore": "1.0.0"
+          "SimpleFramework.Core.EFCore": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.0.1"
         },
         "runtime": {
           "SimpleFramework.Core.dll": {}
@@ -3356,6 +3368,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-wM12hSUlF0Eqed44psOYT4fY/RRjMx049A4bBUfqiGr1UFU54zTR8djRLW0dIp1w7Xv5WQ/bgG9jyqiaRbv6jg=="
+    },
+    "Microsoft.AspNetCore.Mvc.Formatters.Xml/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ozi6J3WaTtPB1XxBfU/KoeafOIBwJajqCfhfrRhdkh1vWF894Br3eWXzIJSCg4PkjK/9xL5ZIJ6bsUOeC7l6/Q=="
     },
     "Microsoft.AspNetCore.Mvc.Localization/1.0.1": {
       "type": "package",
@@ -4047,10 +4064,10 @@
       "serviceable": true,
       "sha512": "sha512-tAgJM1xt3ytyMoW4qn4wIqgJYm7L7TShRZG4+Q4Qsi2PCcj96pXN7nRywS9KkB3p/xDUjc2HSwP9SROyPYDYKQ=="
     },
-    "System.Private.DataContractSerialization/4.1.1-rc2-24027": {
+    "System.Private.DataContractSerialization/4.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6IFDhUBOTvUC+xlT/1zjAbyXr8VbfCrxH35KoQb3n0/jgKAejOprCpyT5xj1CTHAIFX02QqmCS8ULzjcXUy7Og=="
+      "sha512": "sha512-lcqFBUaCZxPiUkA4dlSOoPZGtZsAuuElH2XHgLwGLxd7ZozWetV5yiz0qGAV2AUYOqw97MtZBjbLMN16Xz4vXA=="
     },
     "System.Reflection/4.3.0": {
       "type": "package",
@@ -4142,10 +4159,10 @@
       "serviceable": true,
       "sha512": "sha512-HZ6Du5QrTG8MNJbf4e4qMO3JRAkIboGT5Fk804uZtg3Gq516S7hAqTm2UZKUHa7/6HUGdVy3AqMQKbns06G/cg=="
     },
-    "System.Runtime.Serialization.Xml/4.1.1-rc2-24027": {
+    "System.Runtime.Serialization.Xml/4.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-dBbTKau0yDuAVR4F+2xxFbyufmHTyI7qdJf2oAn3qKWScXRVQ9vj25P6t/VPNvfXu+LjMWt/FDPM/6Yclw3ahQ=="
+      "sha512": "sha512-yqfKHkWUAdI0hdDIdD9KDzluKtZ8IIqLF3O7xIZlt6UTs1bOvFRpCvRTvGQva3Ak/ZM9/nq9IHBJ1tC4Ybcrjg=="
     },
     "System.Security.Claims/4.3.0": {
       "type": "package",

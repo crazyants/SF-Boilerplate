@@ -61,6 +61,7 @@
                         param: [],
                         type: "post",
                         dataType: "json",
+                      //  contentType: "application/json",
                         loading: "正在处理数据...",
                         success: null,
                         close: true
@@ -76,6 +77,7 @@
                             data: options.param,
                             type: options.type,
                             dataType: options.dataType,
+                          //  contentType: options.contentType,
                             success: function (data) {
                                 if (data.state != "success") {
                                     SF.dialogs.alert(data.message);
@@ -198,7 +200,7 @@
                         return false;
                     }
                     var data = {
-                        keyValue: request('keyValue')
+                        keyValue: SF.utility.request('keyValue')
                     };
                     data[controlId] = $control.val();
                     var options = $.extend(data, param);
@@ -428,21 +430,6 @@
                 },
                 windowHeight: function () {
                     return $(window).height();
-                },
-                request: function (keyValue) {
-                    var search = location.search.slice(1);
-                    var arr = search.split("&");
-                    for (var i = 0; i < arr.length; i++) {
-                        var ar = arr[i].split("=");
-                        if (ar[0] == keyValue) {
-                            if (unescape(ar[1]) == 'undefined') {
-                                return "";
-                            } else {
-                                return unescape(ar[1]);
-                            }
-                        }
-                    }
-                    return "";
                 },
                 getWebControls: function (formId, keyValue) {
                     var reVal = "";

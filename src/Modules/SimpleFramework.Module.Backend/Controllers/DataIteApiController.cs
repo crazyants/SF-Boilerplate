@@ -11,6 +11,8 @@ using SimpleFramework.Core.Web.Attributes;
 using SimpleFramework.Core.Web.Base.Controllers;
 using SimpleFramework.Core.Web.Base.DataContractMapper;
 using SimpleFramework.Core.Web.Models.GridTree;
+using SimpleFramework.Core.Web.Models.Tree;
+using SimpleFramework.Module.Backend.Services;
 using SimpleFramework.Module.Backend.ViewModels;
 using SimpleFramework.Web.Control.JqGrid.Core.Json;
 using SimpleFramework.Web.Control.JqGrid.Core.Request;
@@ -23,36 +25,80 @@ using System.Linq.Expressions;
 namespace SimpleFramework.Module.Backend.Controllers
 {
     /// <summary>
-    /// 字典管理
+    /// 字典管理API
     /// </summary>
     [Authorize]
-    [Route("DataItemM/")]
-    public class DataItemMController : CrudControllerBase<DataItemEntity, DataItemViewModel>
+    [Route("Api/DataItem/")]
+    public class DataIteApiController : CrudControllerBase<DataItemEntity, DataItemViewModel>
     {
-        public DataItemMController(IServiceCollection collection, ILogger<UserCrudController> logger,
+        private readonly IBaseUnitOfWork _baseUnitOfWork;
+        public DataIteApiController(IServiceCollection collection, ILogger<UserCrudController> logger,
             CoreDbContext dbContext, IBaseUnitOfWork baseUnitOfWork)
             : base(dbContext, baseUnitOfWork, collection, logger)
         {
+            this._baseUnitOfWork = baseUnitOfWork;
             CrudDtoMapper = new DataItemDtoMapper();
+
         }
-        #region 视图功能
-        [Route("List")]
-        public ActionResult List()
-        {
-            return View();
-        }
-        /// <summary>
-        /// 分类表单
-        /// </summary>
-        /// <returns></returns>
-        [Route("Form")]
-        public ActionResult Form()
-        {
-            return View();
-        }
-        #endregion
+
 
         #region 获取数据
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="rootDataItemId"></param>
+        /// <param name="countsType"></param>
+        /// <returns></returns>
+        [Route("GetChildren/{id}")]
+        public IQueryable<TreeViewItem> GetChildren(
+        int id,
+        int rootDataItemId = 0,
+        TreeViewItem.GetCountsType countsType = TreeViewItem.GetCountsType.None)
+        {
+
+            var qry = this._baseUnitOfWork.BaseWorkArea.DataItem.GetChildren(id, rootDataItemId);
+
+            List<DataItemEntity> dataItemEntityList = new List<DataItemEntity>();
+            List<TreeViewItem> groupNameList = new List<TreeViewItem>();
+
+            foreach (var group in qry.OrderBy(g => g.ItemName))
+            {
+
+                dataItemEntityList.Add(group);
+                var treeViewItem = new TreeViewItem();
+                treeViewItem.Id = group.Id.ToString();
+                treeViewItem.Name = group.ItemName;
+                treeViewItem.IsActive = (group.EnabledMark ?? 0) > 0;
+
+                treeViewItem.IconCssClass = "fa fa-sitemap";
+
+                if (countsType == TreeViewItem.GetCountsType.ChildGroups)
+                {
+                    treeViewItem.CountInfo = this._baseUnitOfWork.BaseWorkArea.DataItem.Query().Where(a => a.ParentId.HasValue && a.ParentId == group.Id).Count();
+                }
+
+                groupNameList.Add(treeViewItem);
+
+            }
+
+            //快速找出哪些项目有子级
+            List<long> resultIds = dataItemEntityList.Select(a => a.Id).ToList();
+            var qryHasChildrenList = this._baseUnitOfWork.BaseWorkArea.DataItem.Query()
+                .Where(g =>
+                   g.ParentId.HasValue &&
+                   resultIds.Contains(g.ParentId.Value)).Select(g => g.ParentId.Value)
+                .Distinct()
+                .ToList();
+
+            foreach (var g in groupNameList)
+            {
+                int groupId = g.Id.AsInteger();
+                g.HasChildren = qryHasChildrenList.Any(a => a == groupId);
+            }
+
+            return groupNameList.AsQueryable();
+        }
         /// <summary>
         /// 分类列表
         /// </summary>
@@ -123,6 +169,7 @@ namespace SimpleFramework.Module.Backend.Controllers
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         [HttpGet]
+        [Route("ExistItemCode")]
         public ActionResult ExistItemCode(string itemCode, string keyValue)
         {
             var query = _repository.Query();
@@ -142,6 +189,7 @@ namespace SimpleFramework.Module.Backend.Controllers
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         [HttpGet]
+        [Route("ExistItemName")]
         public ActionResult ExistItemName(string itemName, string keyValue)
         {
 
@@ -188,8 +236,9 @@ namespace SimpleFramework.Module.Backend.Controllers
         //}
         #endregion
     }
+
     /// <summary>
-    /// 字典据映射
+    /// 字典映射
     /// </summary>
     public class DataItemDtoMapper : CrudDtoMapper<DataItemEntity, DataItemViewModel>
     {

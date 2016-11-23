@@ -16,18 +16,19 @@ namespace SimpleFramework.Core.Web.Base.Business
     /// 读取处理
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CodetableReader<T> : ICodetableReader<T> where T : BaseEntity
+    public class CodetableReader<T, TKey> : ICodetableReader<T, TKey> where T : BaseEntity<TKey>
+        
     {
         #region Fields
 
  
-        private readonly IEFCoreQueryableRepository<T> _repository;
+        private readonly IEFCoreQueryableRepository<T, TKey> _repository;
         protected readonly ILogger _logger;
 
         #endregion
 
         #region Constructors
-        public CodetableReader(ILogger<Controller> logger, IEFCoreQueryableRepository<T> repository)
+        public CodetableReader(ILogger<Controller> logger, IEFCoreQueryableRepository<T, TKey> repository)
         {
             _logger = logger;
             _repository = repository;
@@ -61,7 +62,7 @@ namespace SimpleFramework.Core.Web.Base.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public T Get(int id)
+        public T Get(TKey id)
         {
             return _repository.GetById(id);
         }
@@ -70,7 +71,7 @@ namespace SimpleFramework.Core.Web.Base.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<T> GetAsync(int id)
+        public async Task<T> GetAsync(TKey id)
         {
             return await _repository.GetByIdAsync(id);
         }

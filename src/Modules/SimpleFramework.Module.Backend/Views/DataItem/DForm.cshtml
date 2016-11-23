@@ -13,7 +13,7 @@
         //上级
         SF.controls.itemPicker.initialize({
             controlId: 'ParentId',
-            restUrl: '/DataItem/GetChildren/',
+            restUrl: '/Api/DataItem/GetChildren/',
             allowMultiSelect: false,
             defaultText: '',
             expandedIds: [0]
@@ -21,7 +21,7 @@
         //获取表单
         if (!!keyValue) {
             SF.utility.SetForm({
-                url: "/DataItem/GetFormJson",
+                url: "/Api/DataItem/GetFormJson",
                 param: { keyValue: keyValue },
                 success: function (data) {
                     SF.utility.setWebControls('form1', data);
@@ -43,7 +43,7 @@
         if (postData["ParentId"] == "") {
             postData["ParentId"] = 0;
         }
-        var url = "/DataItemM/";
+        var url = "/Api/DataItem/";
         if (type == "PUT")
             url = url + keyValue;
         else if (type == "POST")
@@ -72,7 +72,7 @@
                     <label class="col-md-3 control-label" for="ppPage">上级</label>
                     <div class="col-md-9 control-wrapper">
                         <div id="ParentId" class="picker picker-select rollover-container ">
-                            <input class="js-item-id-value" type="hidden" name="hfItemId" id="hfItemId" value="0" />
+                            <input class="js-item-id-value" type="hidden" name="hfItemId" id="ParentId"/>
                             <input class="js-initial-item-parent-ids-value" type="hidden" name="hfInitialItemParentIds" id="hfInitialItemParentIds" />
                             <input class="js-item-name-value" type="hidden" name="hfItemName" id="hfItemName" />
                             <input class="js-item-rest-url-extra-params-value" type="hidden" name="hfItemRestUrlExtraParams" />

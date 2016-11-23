@@ -15,17 +15,17 @@ namespace SimpleFramework.Core.Web.Base.Business
     /// 写入处理
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CodeTableWriter<T> : ICodetableWriter<T> where T : BaseEntity
+    public class CodeTableWriter<T,TKey> : ICodetableWriter<T, TKey> where T : BaseEntity<TKey>
     {
         #region Fields
         protected readonly IUnitOfWork _unitOfWork;
-        private readonly IEFCoreQueryableRepository<T> _repository;
+        private readonly IEFCoreQueryableRepository<T, TKey> _repository;
         protected readonly ILogger _logger;
 
         #endregion
 
         #region Constructors
-        public CodeTableWriter(ILogger<Controller> logger, IEFCoreQueryableRepository<T> repository, IUnitOfWork unitOfWork)
+        public CodeTableWriter(ILogger<Controller> logger, IEFCoreQueryableRepository<T, TKey> repository, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _repository = repository;
@@ -74,7 +74,7 @@ namespace SimpleFramework.Core.Web.Base.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(TKey id)
         {
             await _unitOfWork.ExecuteAndCommitAsync(() =>
             {

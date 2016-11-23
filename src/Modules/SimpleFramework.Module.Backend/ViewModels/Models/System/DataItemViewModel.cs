@@ -1,9 +1,13 @@
 ﻿using SimpleFramework.Core.Web.Base.Datatypes;
+using SimpleFramework.Module.Backend.ViewModels.Validations;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace SimpleFramework.Module.Backend.ViewModels
 {
-    public class DataItemViewModel: EntityModelBase
+    public class DataItemViewModel: EntityModelBase, IValidatableObject
     {
         /// <summary>
         /// 父级主键
@@ -49,6 +53,13 @@ namespace SimpleFramework.Module.Backend.ViewModels
         public string CreatedBy { get; set; }
      
         public string ModifiedBy { get; set; }
- 
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var validator = new DataItemViewModelValidator();
+            var result = validator.Validate(this);
+            return result.Errors.Select(item => new ValidationResult(item.ErrorMessage, new[] { item.PropertyName }));
+        }
+
     }
 }

@@ -40,6 +40,8 @@ using SimpleFramework.Core.Common.Message.Email;
 using SimpleFramework.Core.Common.Message.Sms;
 using SimpleFramework.Core.Data.Repository;
 using SimpleFramework.Core.EFCore.Repository;
+using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace SimpleFramework.Core
 {
@@ -88,13 +90,12 @@ namespace SimpleFramework.Core
         /// <param name="services"></param>
         private void AddMvc(IServiceCollection services)
         {
-
-
             IMvcBuilder mvcBuilder = services.AddMvc();
             mvcBuilder.AddMvcOptions(options =>
             {
                 options.Filters.AddService(typeof(HandlerExceptionFilter));
             });
+         
 
             foreach (var module in ExtensionManager.Modules)
                 // Register controller from modules
@@ -125,8 +126,16 @@ namespace SimpleFramework.Core
                 options.InputFormatters.Add(new CsvInputFormatter(csvFormatterOptions));
                 options.OutputFormatters.Add(new CsvOutputFormatter(csvFormatterOptions));
                 options.FormatterMappings.SetMediaTypeMappingForFormat("csv", MediaTypeHeaderValue.Parse("text/csv"));
-            });
 
+                options.RespectBrowserAcceptHeader = true;
+                options.InputFormatters.Add(new XmlSerializerInputFormatter());
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+            });
+            // Force Camel Case to JSON
+            mvcBuilder.AddJsonOptions(opts =>
+            {
+                opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
         }
         /// <summary>
@@ -284,8 +293,8 @@ namespace SimpleFramework.Core
             services.TryAddScoped<ISmsSender, SiteSmsSender>();
 
             services.TryAddScoped<IExceptionMapper, BaseExceptionMapper>();
-            services.AddTransient(typeof(ICodetableWriter<>), typeof(CodeTableWriter<>));
-            services.AddTransient(typeof(ICodetableReader<>), typeof(CodetableReader<>));
+            services.AddTransient(typeof(ICodetableWriter<,>), typeof(CodeTableWriter<,>));
+            services.AddTransient(typeof(ICodetableReader<,>), typeof(CodetableReader<,>));
 
         }
 
@@ -377,6 +386,11 @@ namespace SimpleFramework.Core
 
               }
             );
+
+            applicationBuilder.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+            });
 
             //  applicationBuilder.UseMultitenancy<SiteContext>();
             //多租户

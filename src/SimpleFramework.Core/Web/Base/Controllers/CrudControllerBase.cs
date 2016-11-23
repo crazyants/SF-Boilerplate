@@ -28,10 +28,10 @@ namespace SimpleFramework.Core.Web.Base.Controllers
         where TCodeTabelEntity : BaseEntity
         where TCodeTabelModel : EntityModelBase
     {
-        private readonly ICodetableReader<TCodeTabelEntity> _reader;
-        private readonly ICodetableWriter<TCodeTabelEntity> _writer;
+        private readonly ICodetableReader<TCodeTabelEntity,long> _reader;
+        private readonly ICodetableWriter<TCodeTabelEntity, long> _writer;
         protected readonly IUnitOfWork _unitOfWork;
-        protected readonly IEFCoreQueryableRepository<TCodeTabelEntity> _repository;
+        protected readonly IEFCoreQueryableRepository<TCodeTabelEntity, long> _repository;
 
         /// <summary>
         /// 数据转换器
@@ -46,9 +46,9 @@ namespace SimpleFramework.Core.Web.Base.Controllers
         /// <param name="logger">日志</param>
         public CrudControllerBase(IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
         {
-            _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity>>();
-            _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity>>();
-            _repository = service.BuildServiceProvider().GetService<IEFCoreQueryableRepository<TCodeTabelEntity>>();
+            _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity, long>>();
+            _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity, long>>();
+            _repository = service.BuildServiceProvider().GetService<IEFCoreQueryableRepository<TCodeTabelEntity, long>>();
         }
         /// <summary>
         /// 初始化构造
@@ -59,8 +59,8 @@ namespace SimpleFramework.Core.Web.Base.Controllers
         /// <param name="logger">日志</param>
         public CrudControllerBase(DbContext dbContext, IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
         {
-            _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity>>();
-            _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity>>();
+            _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity, long>>();
+            _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity, long>>();
             _repository = new EFCoreBaseRepository<TCodeTabelEntity>(dbContext);
         }
         /// <summary>
@@ -73,9 +73,9 @@ namespace SimpleFramework.Core.Web.Base.Controllers
         /// <param name="logger">日志</param>
         public CrudControllerBase(DbContext dbContext, IUnitOfWork unitOfWork, IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
         {
-            _repository = new EFCoreBaseRepository<TCodeTabelEntity>(dbContext);
-            _reader = new CodetableReader<TCodeTabelEntity>(logger, _repository);
-            _writer = new CodeTableWriter<TCodeTabelEntity>(logger, _repository, unitOfWork);
+            _repository = new EFCoreBaseRepository<TCodeTabelEntity,long>(dbContext);
+            _reader = new CodetableReader<TCodeTabelEntity, long>(logger, _repository);
+            _writer = new CodeTableWriter<TCodeTabelEntity,long>(logger, _repository, unitOfWork);
         }
         /// <summary>
         /// 异步获取模型数据
@@ -127,8 +127,8 @@ namespace SimpleFramework.Core.Web.Base.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost()]
-        public async Task<IActionResult> InsertAsync([FromBody]TCodeTabelModel model)
+        [HttpPost]
+        public async Task<IActionResult> PostAsync(TCodeTabelModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequestResult(ModelState);

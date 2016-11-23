@@ -122,7 +122,7 @@
 
                                         })
                                         .sfTree({
-                                            restUrl: '/DataItem/GetChildren/',
+                                            restUrl: '/Api/DataItem/GetChildren/',
                                             restParams: '?rootDataItemId=' + ($('#hfRootGroupId').val() || 0),
                                             multiSelect: false,
                                             selectedIds: $selectedId.val() ? $selectedId.val().split(',') : null,
@@ -151,7 +151,7 @@
                                     SF.utility.dialogOpen({
                                         id: "Form",
                                         title: '字典分类',
-                                        url: '/DataItemM/List',
+                                        url: '/DataItem/DList',
                                         width: "800px",
                                         height: "500px",
                                         callBack: function (iframeId) {
