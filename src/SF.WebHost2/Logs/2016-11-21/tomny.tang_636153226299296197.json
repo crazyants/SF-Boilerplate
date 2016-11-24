@@ -1,0 +1,24 @@
+{
+  "EventType": "GET Home/Index",
+  "Environment": {
+    "UserName": "tomny.tang",
+    "MachineName": "GZIT008",
+    "Culture": "zh"
+  },
+  "StartDate": "2016-11-21T10:57:09.9276183+08:00",
+  "EndDate": "2016-11-21T10:57:10.2748723+08:00",
+  "Duration": 347,
+  "Action": {
+    "HttpMethod": "GET",
+    "ControllerName": "Home",
+    "ActionName": "Index",
+    "ViewName": "Index",
+    "FormVariables": null,
+    "ActionParameters": {},
+    "UserName": "admin@admin.com",
+    "RequestUrl": "http://localhost:49229/",
+    "IpAddress": "::1",
+    "ResponseStatus": "200",
+    "ResponseStatusCode": 200
+  }
+}

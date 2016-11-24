@@ -20,55 +20,55 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{0A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{6A7EE3A2-1748-4CCA-B939-9D7F782B1CDE}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.WebHost", "src\SimpleFramework.WebHost\SimpleFramework.WebHost.xproj", "{13367B7A-E91C-47EE-BA5E-C50664D65767}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.WebHost", "src\SF.WebHost\SF.WebHost.xproj", "{13367B7A-E91C-47EE-BA5E-C50664D65767}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugin", "Plugin", "{25346F7B-580C-4891-8C47-EDE77370B26F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Plugin.Blogs", "src\Plugin\SimpleFramework.Plugin.Blogs\SimpleFramework.Plugin.Blogs.xproj", "{689A4140-5957-461F-ABCE-05F5E9FFA87C}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Plugin.Blogs", "src\Plugin\SF.Plugin.Blogs\SF.Plugin.Blogs.xproj", "{689A4140-5957-461F-ABCE-05F5E9FFA87C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.Pagination", "src\SimpleFramework.Web.Pagination\SimpleFramework.Web.Pagination.xproj", "{97882F42-7E4E-4B0C-8A6A-747D79C9F1DB}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Web.Pagination", "src\SF.Web.Pagination\SF.Web.Pagination.xproj", "{97882F42-7E4E-4B0C-8A6A-747D79C9F1DB}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.SiteMap", "src\SimpleFramework.Web.SiteMap\SimpleFramework.Web.SiteMap.xproj", "{6A37DA80-4E1F-4DA4-8123-30C7D6CDEDB4}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Web.SiteMap", "src\SF.Web.SiteMap\SF.Web.SiteMap.xproj", "{6A37DA80-4E1F-4DA4-8123-30C7D6CDEDB4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.Navigation", "src\SimpleFramework.Web.Navigation\SimpleFramework.Web.Navigation.xproj", "{519AC4F9-95F6-4089-A0FE-7658B2D40415}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Web.Navigation", "src\SF.Web.Navigation\SF.Web.Navigation.xproj", "{519AC4F9-95F6-4089-A0FE-7658B2D40415}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3C593EDB-AB76-4467-9884-707C3754A796}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Security", "src\SimpleFramework.Core.Security\SimpleFramework.Core.Security.xproj", "{BE070E61-8D8C-4092-AD79-2D4BADBAC5F9}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.Security", "src\SF.Core.Security\SF.Core.Security.xproj", "{BE070E61-8D8C-4092-AD79-2D4BADBAC5F9}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Plugins", "src\SimpleFramework.Core.Plugins\SimpleFramework.Core.Plugins.xproj", "{D78BE502-3E6B-4BF7-9D4B-402D0EBC5D18}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.Plugins", "src\SF.Core.Plugins\SF.Core.Plugins.xproj", "{D78BE502-3E6B-4BF7-9D4B-402D0EBC5D18}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core", "src\SimpleFramework.Core\SimpleFramework.Core.xproj", "{13310395-DA86-493D-A4F7-0DE8AC8CD36B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core", "src\SF.Core\SF.Core.xproj", "{13310395-DA86-493D-A4F7-0DE8AC8CD36B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Module.Backend", "src\Modules\SimpleFramework.Module.Backend\SimpleFramework.Module.Backend.xproj", "{1393B1C0-90BF-4E7A-B0AE-A1FD448DCDBC}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Module.Backend", "src\Modules\SF.Module.Backend\SF.Module.Backend.xproj", "{1393B1C0-90BF-4E7A-B0AE-A1FD448DCDBC}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Module.ActivityLog", "src\Modules\SimpleFramework.Module.ActivityLog\SimpleFramework.Module.ActivityLog.xproj", "{1A22C68D-BE49-4E94-A0AD-6FD31F54B805}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Module.ActivityLog", "src\Modules\SF.Module.ActivityLog\SF.Module.ActivityLog.xproj", "{1A22C68D-BE49-4E94-A0AD-6FD31F54B805}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Module.Localization", "src\Modules\SimpleFramework.Module.Localization\SimpleFramework.Module.Localization.xproj", "{168ECB44-DB3C-4DAB-9F8D-7BA5EB39D1CE}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Module.Localization", "src\Modules\SF.Module.Localization\SF.Module.Localization.xproj", "{168ECB44-DB3C-4DAB-9F8D-7BA5EB39D1CE}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Tests", "src\Test\SimpleFramework.Tests\SimpleFramework.Tests.xproj", "{96C529AA-B4A5-4F39-A4CF-31F66A8DF6CA}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Tests", "src\Test\SF.Tests\SF.Tests.xproj", "{96C529AA-B4A5-4F39-A4CF-31F66A8DF6CA}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Abstraction", "src\SimpleFramework.Core.Abstraction\SimpleFramework.Core.Abstraction.xproj", "{9C156841-9389-4840-82CB-D5A4ED9A6A00}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.Abstraction", "src\SF.Core.Abstraction\SF.Core.Abstraction.xproj", "{9C156841-9389-4840-82CB-D5A4ED9A6A00}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Scheduler", "src\SimpleFramework.Core.Scheduler\SimpleFramework.Core.Scheduler.xproj", "{136BE87A-2D4E-4855-A541-F25744BF239A}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.Scheduler", "src\SF.Core.Scheduler\SF.Core.Scheduler.xproj", "{136BE87A-2D4E-4855-A541-F25744BF239A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.SimpleAuth", "src\SimpleFramework.Web.SimpleAuth\SimpleFramework.Web.SimpleAuth.xproj", "{2F22A31D-1596-496D-8DF2-5B64E7877FEF}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Web.SimpleAuth", "src\SF.Web.SimpleAuth\SF.Web.SimpleAuth.xproj", "{2F22A31D-1596-496D-8DF2-5B64E7877FEF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.Control", "src\SimpleFramework.Web.Control\SimpleFramework.Web.Control.xproj", "{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Web.Control", "src\SF.Web.Control\SF.Web.Control.xproj", "{A596EEFD-4103-4E05-A05C-CEC1E1C7BC7A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.BreadCrumb", "src\SimpleFramework.Web.BreadCrumb\SimpleFramework.Web.BreadCrumb.xproj", "{F818F787-A9CF-4A5F-A78D-9510D8EC152B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Web.BreadCrumb", "src\SF.Web.BreadCrumb\SF.Web.BreadCrumb.xproj", "{F818F787-A9CF-4A5F-A78D-9510D8EC152B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Web.Captcha", "src\SimpleFramework.Web.Captcha\SimpleFramework.Web.Captcha.xproj", "{5093DFFF-C92A-4226-AD2F-193A6D5D1BF2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Web.Captcha", "src\SF.Web.Captcha\SF.Web.Captcha.xproj", "{5093DFFF-C92A-4226-AD2F-193A6D5D1BF2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.RateLimit", "src\SimpleFramework.Core.RateLimit\SimpleFramework.Core.RateLimit.xproj", "{21C78113-0993-4781-AAEB-3FD19922AEED}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.RateLimit", "src\SF.Core.RateLimit\SF.Core.RateLimit.xproj", "{21C78113-0993-4781-AAEB-3FD19922AEED}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Tests", "src\Test\SimpleFramework.Core.Tests\SimpleFramework.Core.Tests.xproj", "{46C59885-FD59-48D3-B400-CFDB460F738C}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.Tests", "src\Test\SF.Core.Tests\SF.Core.Tests.xproj", "{46C59885-FD59-48D3-B400-CFDB460F738C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Module.SimpleData", "src\Modules\SimpleFramework.Module.SimpleData\SimpleFramework.Module.SimpleData.xproj", "{88C02D31-3C08-4174-9D38-47FF51CE8951}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Module.SimpleData", "src\Modules\SF.Module.SimpleData\SF.Module.SimpleData.xproj", "{88C02D31-3C08-4174-9D38-47FF51CE8951}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.EFCore", "src\SimpleFramework.Core.EFCore\SimpleFramework.Core.EFCore.xproj", "{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.EFCore", "src\SF.Core.EFCore\SF.Core.EFCore.xproj", "{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFramework.Core.Dapper", "src\SimpleFramework.Core.NH\SimpleFramework.Core.Dapper.xproj", "{421B695F-1458-433B-8DFA-1F899408BF9C}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.Dapper", "src\SF.Core.NH\SF.Core.Dapper.xproj", "{421B695F-1458-433B-8DFA-1F899408BF9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

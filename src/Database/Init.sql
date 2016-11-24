@@ -1,4 +1,4 @@
-﻿USE [SimpleFramework2]
+﻿USE [SF2]
 GO
 /****** Object:  Schema [HangFire]    Script Date: 2016/10/19 15:47:03 ******/
 CREATE SCHEMA [HangFire]
