@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using SF.Core.Abstraction.Data;
 using SF.Core.Entitys;
-using SF.Core.Web.SmartTable;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,61 +28,6 @@ namespace SF.Module.Backend.Controllers
         {
             this._baseUnitOfWork = baseUnitOfWork;
             this._securityService = securityService;
-        }
-
-        [HttpPost("grid")]
-        public ActionResult List([FromBody] SmartTableParam param)
-        {
-            var query = _baseUnitOfWork.BaseWorkArea.User.Query()
-                // .Include(x => x.Roles).ThenInclude(r => r.Role)
-                .Where(x => !x.IsDeleted);
-
-            if (param.Search.PredicateObject != null)
-            {
-                dynamic search = param.Search.PredicateObject;
-
-                if (search.Email != null)
-                {
-                    string email = search.Email;
-                    query = query.Where(x => x.Email.Contains(email));
-                }
-
-                if (search.FullName != null)
-                {
-                    string fullName = search.FullName;
-                    query = query.Where(x => x.FullName.Contains(fullName));
-                }
-
-                if (search.CreatedOn != null)
-                {
-                    if (search.CreatedOn.before != null)
-                    {
-                        DateTimeOffset before = search.CreatedOn.before;
-                        before = before.Date.AddDays(1);
-                        // query = query.Where(x => x.CreatedDate <= before);
-                    }
-
-                    if (search.CreatedOn.after != null)
-                    {
-                        DateTimeOffset after = search.CreatedOn.after;
-                        after = after.Date;
-                        // query = query.Where(x => x.CreatedDate >= after);
-                    }
-                }
-            }
-
-            var users = query.ToSmartTableResult(
-                param,
-                user => new
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    FullName = user.FullName,
-                    // CreatedOn = user.CreatedDate,
-                    //   Roles = string.Join(", ", user.Roles.Select(x => x.Role.Name))
-                });
-
-            return Json(users);
         }
 
 

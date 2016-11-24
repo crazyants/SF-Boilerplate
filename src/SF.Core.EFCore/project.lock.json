@@ -3311,7 +3311,7 @@
           "Microsoft.EntityFrameworkCore": "1.0.1",
           "Microsoft.Extensions.Configuration.Binder": "1.0.0",
           "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NodaTime": "2.0.0-alpha20160523",
           "System.ComponentModel.Annotations": "4.1.0",
           "System.Globalization.Extensions": "4.0.1",

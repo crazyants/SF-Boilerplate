@@ -152,7 +152,7 @@ namespace SF.Core.Web.Base.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateAsync(int id, [FromBody]TCodeTabelModel model)
+        public async Task<IActionResult> UpdateAsync(int id, TCodeTabelModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequestResult(ModelState);

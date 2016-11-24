@@ -7,7 +7,7 @@
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.*",
     "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.*",
-    "NETStandard.Library": "1.6.0",
+    "NETStandard.Library": "1.6.1",
     "LinqKit": "1.1.7.3"
   },
 

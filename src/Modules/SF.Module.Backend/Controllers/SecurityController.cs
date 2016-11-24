@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using SF.Core.Abstraction.Data;
 using SF.Core.Entitys;
-using SF.Core.Web.SmartTable;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;

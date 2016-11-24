@@ -7,7 +7,7 @@
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Collections.Specialized": "4.0.1",
           "System.ComponentModel.TypeConverter": "4.1.0",
           "System.Dynamic.Runtime": "4.0.11",
@@ -1888,7 +1888,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging": "1.0.0",
           "Microsoft.Extensions.Options": "1.0.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -2052,7 +2052,7 @@
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Reflection.Emit": "4.0.1",
           "System.Reflection.Emit.ILGeneration": "4.0.1",
           "System.Reflection.Emit.Lightweight": "4.0.1",
@@ -2322,7 +2322,7 @@
           "Microsoft.Extensions.Caching.Memory": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Collections": "4.0.11",
           "System.Linq": "4.1.0",
           "System.Runtime": "4.1.0",
@@ -4353,7 +4353,7 @@
           "Microsoft.EntityFrameworkCore": "1.0.1",
           "Microsoft.Extensions.Configuration.Binder": "1.0.0",
           "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NodaTime": "2.0.0-alpha20160523",
           "System.ComponentModel.Annotations": "4.1.0",
           "System.Globalization.Extensions": "4.0.1",
@@ -4383,7 +4383,7 @@
           "Microsoft.EntityFrameworkCore": "1.0.1",
           "Microsoft.Extensions.Configuration.Binder": "1.0.0",
           "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NodaTime": "2.0.0-alpha20160523",
           "SF.Core.Abstraction": "1.0.0",
           "System.ComponentModel.Annotations": "4.1.0",

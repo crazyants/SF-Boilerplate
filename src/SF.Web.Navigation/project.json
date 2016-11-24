@@ -11,7 +11,7 @@
     "Microsoft.AspNetCore.Mvc.Razor": "1.0.*",
     "Microsoft.Extensions.FileProviders.Embedded": "1.0.*",
     "Microsoft.AspNetCore.Mvc.Abstractions": "1.0.*",
-    "NETStandard.Library": "1.6.0",
+    "NETStandard.Library": "1.6.1",
     "LinqKit": "1.1.7.3"
   },
 

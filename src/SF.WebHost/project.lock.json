@@ -20,7 +20,7 @@
       "Audit.NET/4.5.6": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -34,7 +34,7 @@
         "type": "package",
         "dependencies": {
           "Audit.NET": "4.5.6",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "mongocsharpdriver": "2.3.0-rc1"
         },
         "compile": {
@@ -63,7 +63,7 @@
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Collections.Specialized": "4.0.1",
           "System.ComponentModel.TypeConverter": "4.1.0",
           "System.Dynamic.Runtime": "4.0.11",
@@ -277,7 +277,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.ComponentModel": "4.0.1"
         },
         "compile": {
@@ -291,7 +291,7 @@
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "9.0.1",
           "System.Threading.Thread": "4.0.0"
         },
@@ -316,7 +316,7 @@
           "Dapper": "1.50.1",
           "Hangfire.Core": "[1.6.5]",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Data.Common": "4.1.0",
           "System.Data.SqlClient": "4.1.0"
         },
@@ -2381,7 +2381,7 @@
           "Microsoft.NETCore.DotNetHostPolicy": "1.0.1",
           "Microsoft.NETCore.Runtime.CoreCLR": "1.0.2",
           "Microsoft.VisualBasic": "10.0.1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Buffers": "4.0.0",
           "System.Collections.Immutable": "1.2.0",
           "System.ComponentModel": "4.0.1",
@@ -2743,7 +2743,7 @@
       "MongoDB.Bson/2.3.0-rc1": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Collections.NonGeneric": "4.0.1",
           "System.Diagnostics.Process": "4.1.0",
           "System.Dynamic.Runtime": "4.0.11",
@@ -2761,7 +2761,7 @@
         "dependencies": {
           "MongoDB.Bson": "2.3.0-rc1",
           "MongoDB.Driver.Core": "2.3.0-rc1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Linq.Queryable": "4.0.1"
         },
         "compile": {
@@ -2775,7 +2775,7 @@
         "type": "package",
         "dependencies": {
           "MongoDB.Bson": "2.3.0-rc1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Collections.Specialized": "4.0.1",
           "System.Diagnostics.TraceSource": "4.0.0",
           "System.Net.NameResolution": "4.0.0",
@@ -2897,7 +2897,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging": "1.0.0",
           "Microsoft.Extensions.Options": "1.0.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -2981,7 +2981,7 @@
       "NuGet.Common/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Diagnostics.Process": "4.1.0",
           "System.Security.Cryptography.Algorithms": "4.2.0",
           "System.Threading.Thread": "4.0.0"
@@ -2996,7 +2996,7 @@
       "NuGet.Configuration/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NuGet.Common": "3.5.0-beta2-1484",
           "System.Xml.XDocument": "4.0.11"
         },
@@ -3010,7 +3010,7 @@
       "NuGet.DependencyResolver.Core/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NuGet.Frameworks": "3.5.0-beta2-1484",
           "NuGet.LibraryModel": "3.5.0-beta2-1484",
           "NuGet.Protocol.Core.v3": "3.5.0-beta2-1484",
@@ -3039,7 +3039,7 @@
       "NuGet.LibraryModel/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NuGet.Frameworks": "3.5.0-beta2-1484",
           "NuGet.Versioning": "3.5.0-beta2-1484"
         },
@@ -3053,7 +3053,7 @@
       "NuGet.Packaging/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NuGet.Common": "3.5.0-beta2-1484",
           "NuGet.Packaging.Core": "3.5.0-beta2-1484",
           "System.IO.Compression": "4.1.0"
@@ -3068,7 +3068,7 @@
       "NuGet.Packaging.Core/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NuGet.Common": "3.5.0-beta2-1484",
           "NuGet.Packaging.Core.Types": "3.5.0-beta2-1484",
           "System.Xml.XDocument": "4.0.11"
@@ -3083,7 +3083,7 @@
       "NuGet.Packaging.Core.Types/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NuGet.Frameworks": "3.5.0-beta2-1484",
           "NuGet.Versioning": "3.5.0-beta2-1484"
         },
@@ -3097,7 +3097,7 @@
       "NuGet.ProjectModel/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "6.0.4",
           "NuGet.DependencyResolver.Core": "3.5.0-beta2-1484",
           "System.Dynamic.Runtime": "4.0.11",
@@ -3113,7 +3113,7 @@
       "NuGet.Protocol.Core.Types/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NuGet.Common": "3.5.0-beta2-1484",
           "NuGet.Configuration": "3.5.0-beta2-1484",
           "NuGet.Packaging": "3.5.0-beta2-1484",
@@ -3129,7 +3129,7 @@
       "NuGet.Protocol.Core.v3/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "6.0.4",
           "NuGet.Common": "3.5.0-beta2-1484",
           "NuGet.Packaging": "3.5.0-beta2-1484",
@@ -3146,7 +3146,7 @@
       "NuGet.Repositories/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NuGet.Packaging": "3.5.0-beta2-1484"
         },
         "compile": {
@@ -3159,7 +3159,7 @@
       "NuGet.RuntimeModel/3.5.0-beta2-1484": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "6.0.4",
           "NuGet.Frameworks": "3.5.0-beta2-1484",
           "NuGet.Versioning": "3.5.0-beta2-1484",
@@ -3268,7 +3268,7 @@
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Reflection.Emit": "4.0.1",
           "System.Reflection.Emit.ILGeneration": "4.0.1",
           "System.Reflection.Emit.Lightweight": "4.0.1",
@@ -3538,7 +3538,7 @@
           "Microsoft.Extensions.Caching.Memory": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "System.Collections": "4.0.11",
           "System.Linq": "4.1.0",
           "System.Runtime": "4.1.0",
@@ -5887,7 +5887,7 @@
           "Microsoft.Extensions.Configuration.Json": "1.0.0",
           "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
           "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NoDb": "1.0.0",
           "NodaTime": "2.0.0-alpha20160523",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.2",
@@ -5927,7 +5927,7 @@
           "Microsoft.EntityFrameworkCore": "1.0.1",
           "Microsoft.Extensions.Configuration.Binder": "1.0.0",
           "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NodaTime": "2.0.0-alpha20160523",
           "System.ComponentModel.Annotations": "4.1.0",
           "System.Globalization.Extensions": "4.0.1",
@@ -5957,7 +5957,7 @@
           "Microsoft.EntityFrameworkCore": "1.0.1",
           "Microsoft.Extensions.Configuration.Binder": "1.0.0",
           "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NodaTime": "2.0.0-alpha20160523",
           "SF.Core.Abstraction": "1.0.0",
           "System.ComponentModel.Annotations": "4.1.0",
@@ -5985,7 +5985,7 @@
           "Microsoft.EntityFrameworkCore": "1.0.1",
           "Microsoft.Extensions.Configuration.Binder": "1.0.0",
           "MimeKit": "1.4.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "NodaTime": "2.0.0-alpha20160523",
           "SF.Core": "1.0.0",
           "SF.Core.Abstraction": "1.0.0",
@@ -6012,7 +6012,7 @@
           "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-          "NETStandard.Library": "1.6.0",
+          "NETStandard.Library": "1.6.1",
           "SF.Web.Navigation": "1.0.0",
           "SF.Web.SiteMap": "1.0.0",
           "System.Linq.Dynamic.Core": "1.0.6.6"
