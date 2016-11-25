@@ -111,7 +111,7 @@ namespace SF.Core.Plugins
             {
                 var simpleDbContext = sp.GetService<CoreDbContext>();
                 var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new PluginsUnitOfWork(simpleDbContext, new CreateAuditableInterceptor(userNameResolver), new UpdateAuditableInterceptor(userNameResolver));
+                return new PluginsUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver));
             });
         }
         /// <summary>

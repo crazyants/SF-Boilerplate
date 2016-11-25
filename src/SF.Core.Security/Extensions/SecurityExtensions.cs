@@ -42,7 +42,7 @@ namespace SF.Core.Security
             {
                 return new Dictionary<int, Action<IApplicationBuilder>>()
                 {
-                    [10000]=this.UseSecurity,
+                    [0]=this.UseSecurity,
                 };
             }
         }
@@ -73,7 +73,7 @@ namespace SF.Core.Security
         {
             // Ensure the shell tenants are loaded when a request comes in
             // and replaces the current service provider for the tenant's one.
-            applicationBuilder.UseMiddleware<CurrentUserMiddleware>();
+           
 
         }
 

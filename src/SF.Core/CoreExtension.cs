@@ -47,6 +47,7 @@ using SF.Core.WorkContexts;
 using SF.Core.WorkContexts.Implementation;
 using SF.Core.Web.Api.JsonConverters;
 using Newtonsoft.Json;
+using SF.Core.Web.Middleware;
 
 namespace SF.Core
 {
@@ -169,16 +170,16 @@ namespace SF.Core
                     b => b.MigrationsAssembly("SF.WebHost"))
                       .UseInternalServiceProvider(serviceProvider));
 
-            services.AddEntityFrameworkMySql()
-             .AddDbContext<CoreDbContext>((serviceProvider, options) =>
-             options.UseMySql(this.configurationRoot.GetConnectionString("DefaultConnection"))
-                    .UseInternalServiceProvider(serviceProvider)
-                    );
-            services.AddEntityFrameworkNpgsql()
-              .AddDbContext<CoreDbContext>((serviceProvider, options) =>
-              options.UseNpgsql(this.configurationRoot.GetConnectionString("DefaultConnection"))
-                     .UseInternalServiceProvider(serviceProvider)
-                     );
+            //services.AddEntityFrameworkMySql()
+            // .AddDbContext<CoreDbContext>((serviceProvider, options) =>
+            // options.UseMySql(this.configurationRoot.GetConnectionString("DefaultConnection"))
+            //        .UseInternalServiceProvider(serviceProvider)
+            //        );
+            //services.AddEntityFrameworkNpgsql()
+            //  .AddDbContext<CoreDbContext>((serviceProvider, options) =>
+            //  options.UseNpgsql(this.configurationRoot.GetConnectionString("DefaultConnection"))
+            //         .UseInternalServiceProvider(serviceProvider)
+            //         );
             services.AddSingleton<DbContext, CoreDbContext>();
 
         }
@@ -252,7 +253,7 @@ namespace SF.Core
             {
                 var simpleDbContext = sp.GetService<CoreDbContext>();
                 var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new BaseUnitOfWork(simpleDbContext, new CreateAuditableInterceptor(userNameResolver), new UpdateAuditableInterceptor(userNameResolver));
+                return new BaseUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver));
             });
             services.AddSingleton<IUnitOfWork>(sp => sp.GetService<IBaseUnitOfWork>());
             services.AddSingleton<IUnitOfWorkFactory>(uow => new UnitOfWorkFactory(services.BuildServiceProvider()));
@@ -340,6 +341,10 @@ namespace SF.Core
             applicationBuilder.UseSession(new SessionOptions() { IdleTimeout = TimeSpan.FromMinutes(30) });
             applicationBuilder.UseIdentity();
 
+
+            applicationBuilder.UseMiddleware<CurrentUserMiddleware>();
+            // applicationBuilder.UseMiddleware<RequestLoggerMiddleware>();
+            //  applicationBuilder.UseMiddleware<ProcessingTimeMiddleware>();
             //注册MVC请求
             applicationBuilder.UseMvc(
               routeBuilder =>
@@ -410,6 +415,8 @@ namespace SF.Core
 
 
             //    });
+
+
         }
 
         private Action<IRouteBuilder>[] GetPrioritizedUseMvcActions()

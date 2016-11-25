@@ -31,7 +31,7 @@ namespace SF.Module.ActivityLog
             {
                 var simpleDbContext = sp.GetService<CoreDbContext>();
                 var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new ActivityUnitOfWork(simpleDbContext, new CreateAuditableInterceptor(userNameResolver), new UpdateAuditableInterceptor(userNameResolver));
+                return new ActivityUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver));
             });
 
 

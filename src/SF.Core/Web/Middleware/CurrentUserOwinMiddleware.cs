@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 
 
-namespace SF.Core.Security
+namespace SF.Core.Web.Middleware
 {
     /// <summary>
     /// 当前用户中间件
@@ -23,17 +23,26 @@ namespace SF.Core.Security
         {
             string userName = null;
 
-            if (httpContext != null && httpContext.User != null)
+            //if (httpContext != null && httpContext.User != null)
+            //{
+            //    var identity = httpContext.User.Identity;
+            //    if (identity != null && identity.IsAuthenticated)
+            //    {
+
+            //        if (string.IsNullOrEmpty(userName))
+            //        {
+            //            userName = identity.Name;
+            //        }
+
+            //    }
+            //}
+
+            if (httpContext?.User?.Identity?.Name != null)
             {
-                var identity = httpContext.User.Identity;
-                if (identity != null && identity.IsAuthenticated)
+                if (string.IsNullOrEmpty(userName))
                 {
-
-                    if (string.IsNullOrEmpty(userName))
-                    {
-                        userName = identity.Name;
-                    }
-
+                    var identity = httpContext.User.Identity;
+                    userName = identity.Name;
                 }
             }
 

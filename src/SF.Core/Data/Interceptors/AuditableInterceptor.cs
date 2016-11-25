@@ -4,31 +4,34 @@ using SF.Core.Services;
 using System;
 
 
+
 namespace SF.Core.Interceptors
 {
-    public class UpdateAuditableInterceptor : ChangeInterceptor<IHaveUpdatedMeta>
+    public class AuditableInterceptor : ChangeInterceptor<BaseEntity>
     {
         private readonly IUserNameResolver _userNameResolver;
 
-        public UpdateAuditableInterceptor(IUserNameResolver userNameResolver)
+        public AuditableInterceptor(IUserNameResolver userNameResolver)
         {
             _userNameResolver = userNameResolver;
         }
 
-        public override void OnBeforeInsert(EntityEntry entry, IHaveUpdatedMeta item)
+        public override void OnBeforeInsert(EntityEntry entry, BaseEntity item)
         {
             base.OnBeforeInsert(entry, item);
 
-            var currentTime = DateTime.UtcNow;
-            var currentUser = GetCurrentUserName();    
-            item.UpdatedOn = item.UpdatedOn;
+            var currentTime = DateTimeOffset.Now;
+            var currentUser = GetCurrentUserName();
+            item.CreatedOn = item.CreatedOn == default(DateTimeOffset) ? currentTime : item.CreatedOn;
+            item.CreatedBy = item.CreatedBy ?? currentUser;
+            item.UpdatedOn = item.UpdatedOn == default(DateTimeOffset) ? currentTime : item.CreatedOn;
             item.UpdatedBy = item.UpdatedBy ?? currentUser;
         }
 
-        public override void OnBeforeUpdate(EntityEntry entry, IHaveUpdatedMeta item)
+        public override void OnBeforeUpdate(EntityEntry entry, BaseEntity item)
         {
             base.OnBeforeUpdate(entry, item);
-            var currentTime = DateTime.UtcNow;
+            var currentTime = DateTimeOffset.Now;
             item.UpdatedOn = currentTime;
             item.UpdatedBy = GetCurrentUserName();
         }

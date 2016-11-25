@@ -208,7 +208,7 @@ namespace SF.Core.Web.Base.Controllers
                 var insertedEntity = await _writer.InsertAsync(entity);
 
                 #endregion
-                #region 新增处理AfterA
+                #region 新增处理After
                 addArgs.Entity = entity;
                 this.OnAfterAdd(addArgs);
                 #endregion
