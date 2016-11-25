@@ -109,13 +109,13 @@
                     <span id="rfv" class="validation-error help-inline" style="display:none;">Page is Required.</span>
                 </div>
                 <div class="form-group data-text-box  required">
-                    <label class="col-md-3 control-label" for="tbCampusName">名称</label>
+                    <label class="col-md-3 control-label" for="ItemName">名称</label>
                     <div class="col-md-9 control-wrapper">
                         <input id="ItemName" name="ItemName" type="text" onblur="SF.utility.existField(this.id, '/Api/DataItem/ExistItemName')" class="form-control" placeholder="请输入名称" isvalid="yes" checkexpession="NotNull" />
                     </div>
                 </div>
                 <div class="form-group data-text-box  required">
-                    <label class="col-md-3 control-label" for="tbCampusName">编号</label>
+                    <label class="col-md-3 control-label" for="ItemCode">编号</label>
                     <div class="col-md-9 control-wrapper">
                         <input id="ItemCode" name="ItemCode" type="text" onblur="SF.utility.existField(this.id, '/Api/DataItem/ExistItemCode')" class="form-control" placeholder="请输入编号" isvalid="yes" checkexpession="NotNull" />
                     </div>
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 <div class="form-group data-text-box  required">
-                    <label class="col-md-3 control-label" for="tbCampusName"></label>
+                    <label class="col-md-3 control-label"  ></label>
                     <div class="col-md-9 control-wrapper">
                         <div class="checkbox">
                             <label>
@@ -142,30 +142,11 @@
                     </div>
                 </div>
                 <div class="form-group data-text-box ">
-                    <label class="col-md-3 control-label" for="tbCampusName"></label>
+                    <label class="col-md-3 control-label" for="Description"></label>
                     <div class="col-md-9 control-wrapper">
                         <textarea id="Description" class="form-control" style="height: 70px;"></textarea>
                     </div>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group data-text-box  required">
-                            <label class="col-md-3 control-label" for="tbCampusName"></label>
-                            <div class="col-md-9 control-wrapper">
-                                <div class="controls">
-                                    <div class="js-requirement-check-type">
-                                        <input class="js-hidden-selected" type="hidden" name="hfRequirementCheckType" id="hfRequirementCheckType" value="1" />
-                                        <div class="btn-group">
-                                            <a id="btnRequirementCheckTypeSQL" class="btn btn-default active" data-val="0">SQL</a>
-                                            <a id="btnRequirementCheckTypeDataview" class="btn btn-default" data-val="1">Dataview</a>
-                                            <a id="btnRequirementCheckTypeManual" class="btn btn-default" data-val="2">Manual</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </fieldset>
         </div>

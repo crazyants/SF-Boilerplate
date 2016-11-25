@@ -212,7 +212,7 @@ namespace SF.Core.Web.Base.Controllers
                 addArgs.Entity = entity;
                 this.OnAfterAdd(addArgs);
                 #endregion
-                return Created($"{Request.Path.Value}/{insertedEntity.Id}", CrudDtoMapper.MapEntityToDto(insertedEntity));
+                return Success("", CrudDtoMapper.MapEntityToDto(insertedEntity));
             }
             catch (ValidationException validationEx)
             {
@@ -255,7 +255,7 @@ namespace SF.Core.Web.Base.Controllers
                 addArgs.Entity = entity;
                 this.OnAfterEdit(addArgs);
                 #endregion
-                return OkResult();
+                return Success("updated success");
             }
             catch (EntityNotFoundException)
             {
@@ -295,7 +295,7 @@ namespace SF.Core.Web.Base.Controllers
                 #region 删除处理After
                 this.OnAfterEdit(addArgs);
                 #endregion
-                return OkResult();
+                return Success("delete success");
             }
             catch (EntityNotFoundException)
             {
