@@ -12,8 +12,10 @@
 * Description: SF快速开发平台
 * Website：http://www.mayisite.com
 *********************************************************************************/
+using Microsoft.EntityFrameworkCore;
 using SF.Core.Abstraction.UoW;
 using SF.Core.Data.WorkArea;
+using SF.Core.EFCore.UoW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace SF.Core.Data
 {
-    public interface IBaseUnitOfWork : IUnitOfWork
+    public interface IBaseUnitOfWork : IEFCoreUnitOfWork
     {
         #region Work Areas
 

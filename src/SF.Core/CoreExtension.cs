@@ -100,7 +100,7 @@ namespace SF.Core
             {
                 options.Filters.AddService(typeof(HandlerExceptionFilter));
             });
-         
+
 
             foreach (var module in ExtensionManager.Modules)
                 // Register controller from modules
@@ -138,7 +138,7 @@ namespace SF.Core
             });
             // Force Camel Case to JSON
             mvcBuilder.AddJsonOptions(opts =>
-            {          
+            {
                 opts.SerializerSettings.ContractResolver = new BaseContractResolver();
                 opts.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                 opts.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -234,45 +234,7 @@ namespace SF.Core
               .AddRoleStore<SimplRoleStore>()
               .AddUserStore<SimplUserStore>()
              .AddDefaultTokenProviders();
-            //配置身份选项
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //    options.Cookies = new IdentityCookieOptions
-            //    {
-            //        ApplicationCookie = new CookieAuthenticationOptions
-            //        {
-            //            LoginPath = "/login",
-            //            AuthenticationScheme = "ApplicationCookie",
-            //            AccessDeniedPath = new PathString("/account/forbidden"),
-            //            AutomaticAuthenticate = true,
-            //            AutomaticChallenge = true,
-            //            ExpireTimeSpan = TimeSpan.FromMinutes(5),
-            //            ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter,
-            //        }
-            //    };
-            //    options.Lockout = new LockoutOptions
-            //    {
-            //        DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10),
-            //        MaxFailedAccessAttempts = 10,
-            //        AllowedForNewUsers = false,
-            //    };
-            //    options.Password = new PasswordOptions
-            //    {
-            //        RequireDigit = false,//是否需要数字(0-9).
-            //        RequireLowercase = false,//是否需要小写字母(a-z).
-            //        RequireUppercase = false,//是否需要大写字母(A-Z).
-            //        RequireNonAlphanumeric = false,//是否包含非字母或数字字符。
-            //        RequiredLength = 6,//设置密码长度最小为6
-            //    };
-            //    options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
-            //    {
-            //        OnRedirectToLogin = ctx =>
-            //        {
-            //            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            //            return Task.FromResult<object>(null);
-            //        }
-            //    };
-            //});
+           
 
             services.AddSingleton<ViewRenderer>();
 
@@ -290,8 +252,9 @@ namespace SF.Core
             {
                 var simpleDbContext = sp.GetService<CoreDbContext>();
                 var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new BaseUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
+                return new BaseUnitOfWork(simpleDbContext, new CreateAuditableInterceptor(userNameResolver), new UpdateAuditableInterceptor(userNameResolver));
             });
+            services.AddSingleton<IUnitOfWork>(sp => sp.GetService<IBaseUnitOfWork>());
             services.AddSingleton<IUnitOfWorkFactory>(uow => new UnitOfWorkFactory(services.BuildServiceProvider()));
 
             services.TryAddScoped<IWorkContext, WorkContext>();

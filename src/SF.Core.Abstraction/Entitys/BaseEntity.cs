@@ -23,7 +23,7 @@ namespace SF.Core.Abstraction.Entitys
         /// A Serial number for the value in the code table.  This can be used to sort (required).
         /// </summary>
         [Required]
-        public int Sortindex { get; set; }
+        public int SortIndex { get; set; }
     }
 
     /// <summary>

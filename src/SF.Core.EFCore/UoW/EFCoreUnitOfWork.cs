@@ -106,27 +106,7 @@ namespace SF.Core.EFCore.UoW
         /// </summary>
         protected override void OnBegin()
         {
-            var entries = Context.ChangeTracker.Entries().ToList();
-            var entriesByState = entries.ToLookup(row => row.State);
-            var processInterceptors = _interceptors != null;
-
-            intercept = null;
-
-            if (_interceptors != null)
-            {
-                intercept = new InterceptionContext(_interceptors)
-                {
-                    DatabaseContext = Context,
-                    ChangeTracker = Context.ChangeTracker,
-                    Entries = entries,
-                    EntriesByState = entriesByState,
-                };
-            }
-
-            if (intercept != null)
-            {
-                intercept.Before();
-            }
+          
         }
 
         /// <summary>
@@ -143,6 +123,27 @@ namespace SF.Core.EFCore.UoW
         {
             try
             {
+                var entries = Context.ChangeTracker.Entries().ToList();
+                var entriesByState = entries.ToLookup(row => row.State);
+                var processInterceptors = _interceptors != null;
+
+                intercept = null;
+
+                if (_interceptors != null)
+                {
+                    intercept = new InterceptionContext(_interceptors)
+                    {
+                        DatabaseContext = Context,
+                        ChangeTracker = Context.ChangeTracker,
+                        Entries = entries,
+                        EntriesByState = entriesByState,
+                    };
+                }
+
+                if (intercept != null)
+                {
+                    intercept.Before();
+                }
                 SyncObjectsStatePreCommit();
                 var changes = Context.SaveChanges();
                 SyncObjectsStatePostCommit();
@@ -165,27 +166,7 @@ namespace SF.Core.EFCore.UoW
         /// <returns>The task for this operation</returns>
         protected override Task OnBeginAsync(CancellationToken ct)
         {
-            var entries = Context.ChangeTracker.Entries().ToList();
-            var entriesByState = entries.ToLookup(row => row.State);
-            var processInterceptors = _interceptors != null;
-
-            intercept = null;
-
-            if (_interceptors != null)
-            {
-                intercept = new InterceptionContext(_interceptors)
-                {
-                    DatabaseContext = Context,
-                    ChangeTracker = Context.ChangeTracker,
-                    Entries = entries,
-                    EntriesByState = entriesByState,
-                };
-            }
-
-            if (intercept != null)
-            {
-                intercept.Before();
-            }
+           
             return Task.FromResult(true);
         }
 
@@ -205,6 +186,27 @@ namespace SF.Core.EFCore.UoW
         {
             try
             {
+                var entries = Context.ChangeTracker.Entries().ToList();
+                var entriesByState = entries.ToLookup(row => row.State);
+                var processInterceptors = _interceptors != null;
+
+                intercept = null;
+
+                if (_interceptors != null)
+                {
+                    intercept = new InterceptionContext(_interceptors)
+                    {
+                        DatabaseContext = Context,
+                        ChangeTracker = Context.ChangeTracker,
+                        Entries = entries,
+                        EntriesByState = entriesByState,
+                    };
+                }
+
+                if (intercept != null)
+                {
+                    intercept.Before();
+                }
                 SyncObjectsStatePreCommit();
                 await Context.SaveChangesAsync(ct);
                 SyncObjectsStatePostCommit();
@@ -305,6 +307,16 @@ namespace SF.Core.EFCore.UoW
         /// <param name="context">The database context</param>
         /// <exception cref="ArgumentNullException"></exception>
         protected EFCoreUnitOfWork(DbContext context) : base(context)
+        {
+
+        }
+
+        /// <summary>
+        /// Creates a new instance
+        /// </summary>
+        /// <param name="context">The database context</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        protected EFCoreUnitOfWork(DbContext context, params IInterceptor[] interceptors) : base(context, interceptors)
         {
 
         }

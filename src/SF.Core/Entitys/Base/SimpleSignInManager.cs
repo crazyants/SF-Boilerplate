@@ -9,7 +9,7 @@ using MediatR;
 using SF.Core.Events;
 using SF.Core.Web.Validation;
 
-namespace SF.Core.Extensions
+namespace SF.Core.Entitys
 {
     public class SimpleSignInManager<TUser> : SignInManager<TUser> where TUser : class
     {

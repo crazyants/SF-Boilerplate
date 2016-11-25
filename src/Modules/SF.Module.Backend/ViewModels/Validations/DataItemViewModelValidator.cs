@@ -29,7 +29,7 @@ namespace SF.Module.Backend.ViewModels.Validations
         {
             RuleFor(user => user.ItemName).NotEmpty().WithMessage("ItemName cannot be empty");
             RuleFor(user => user.ItemCode).NotEmpty().WithMessage("ItemCode cannot be empty");
-            RuleFor(user => user.Sortindex).NotEmpty().WithMessage("Sortindex cannot be empty");
+            RuleFor(user => user.SortIndex).NotEmpty().WithMessage("Sortindex cannot be empty");
         }
     }
 }

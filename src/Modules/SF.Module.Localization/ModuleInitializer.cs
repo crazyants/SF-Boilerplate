@@ -33,7 +33,7 @@ namespace SF.Module.Localization
             {
                 var simpleDbContext = sp.GetService<CoreDbContext>();
                 var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new ResourceUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver), new EntityPrimaryKeyGeneratorInterceptor());
+                return new ResourceUnitOfWork(simpleDbContext, new CreateAuditableInterceptor(userNameResolver), new UpdateAuditableInterceptor(userNameResolver));
             });
 
             var globalFirst = this.configurationRoot.GetSection("GlobalResourceOptions").GetValue<bool>("TryGlobalFirst");

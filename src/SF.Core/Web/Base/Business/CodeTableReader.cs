@@ -36,7 +36,7 @@ namespace SF.Core.Web.Base.Business
         #endregion
 
         #region Utilities
-        protected OrderBy<T> Ordering => new OrderBy<T>(query => query.OrderBy(a => a.Sortindex));
+        protected OrderBy<T> Ordering => new OrderBy<T>(query => query.OrderBy(a => a.SortIndex));
         #endregion
 
         #region Method

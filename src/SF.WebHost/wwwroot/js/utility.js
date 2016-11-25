@@ -14,7 +14,8 @@
                         success: function (getData, status, xhr) {
                         },
                         error: function (xhr, status, error) {
-                            SF.dialogs.alert(status + ' [' + error + ']: ' + xhr.responseText);
+                            SF.utility.dialogAlert(status + ' [' + error + ']: ' + xhr.responseText);
+                            
                         }
                     });
                 },
@@ -39,7 +40,7 @@
                 },
                 //安全退出
                 outLogin: function () {
-                    SF.dialogs.confirm("注：您确定要安全退出本次登录吗？", function (r) {
+                    SF.utility.dialogConfirm("注：您确定要安全退出本次登录吗？", function (r) {
                         if (r) {
                             SF.utility.loading(true, "正在安全退出...");
                             window.setTimeout(function () {
@@ -80,10 +81,8 @@
                           //  contentType: options.contentType,
                             success: function (data) {
                                 if (data.state != "success") {
-                                    SF.dialogs.alert(data.message);
+                                    SF.utility.dialogAlert(data.message);
                                 } else {
-                                    SF.utility.loading(false);
-                                    SF.dialogs.alert(data.message);
                                     options.success(data);
                                     if (options.close == true) {
                                         // dialogClose();
@@ -91,8 +90,7 @@
                                 }
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                SF.utility.loading(false);
-                                SF.dialogs.alert(errorThrown);
+                                SF.utility.dialogAlert(XMLHttpRequest.responseText, -1);
                             },
                             beforeSend: function () {
                                 SF.utility.loading(true, options.loading);
@@ -121,13 +119,13 @@
                         async: options.async,
                         success: function (data) {
                             if (data != null && data.state != "success") {
-                                SF.dialogs.alert(data.message, -1);
+                                SF.utility.dialogAlert(data.message);
                             } else {
                                 options.success(data);
                             }
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            SF.dialogs.alert(errorThrown, -1);
+                            SF.utility.dialogAlert(XMLHttpRequest.responseText, -1);
                         }, beforeSend: function () {
                             SF.utility.loading(true);
                         },
@@ -147,13 +145,8 @@
                         success: null
                     };
                     var options = $.extend(defaults, options);
-                    bootbox.dialog({
-                        message: options.msg,
-                        buttons: {
-                            ok: {
-                                label: 'OK',
-                                className: 'btn-primary',
-                                callback: function () {
+                    dialogConfirm(options.msg, function (r) {
+                        if (r) {
                                     SF.utility.loading(true, options.loading);
                                     window.setTimeout(function () {
                                         var postdata = options.param;
@@ -167,15 +160,13 @@
                                             dataType: options.dataType,
                                             success: function (data) {
                                                 if (data.state != "success") {
-                                                    SF.dialogs.alert(data.message);
-                                                } else {
-                                                    SF.dialogs.alert(data.message);
+                                                    SF.utility.dialogAlert(data.message);
+                                                } else {                                                  
                                                     options.success(data);
                                                 }
                                             },
                                             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                SF.utility.loading(false);
-                                                SF.dialogs.alert(errorThrown);
+                                                SF.utility.dialogAlert(XMLHttpRequest.responseText, -1);
                                             },
                                             beforeSend: function () {
                                                 SF.utility.loading(true, options.loading);
@@ -185,12 +176,6 @@
                                             }
                                         });
                                     }, 500);
-                                }
-                            },
-                            cancel: {
-                                label: 'Cancel',
-                                className: 'btn-secondary',
-                            }
                         }
                     });
                 },
@@ -219,7 +204,7 @@
                             }
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            SF.dialogs.alert(errorThrown, -1);
+                            SF.utility.dialogAlert(XMLHttpRequest.responseText, -1);
                         }
                     });
                 },
@@ -388,13 +373,15 @@
                     }
                     top.layer.alert(content, {
                         icon: type,
-                        title: "提示"
+                        title: "提示",
+                        zIndex: top.layer.zIndex, //重点1
                     });
                 },
                 dialogConfirm: function (content, callBack) {
                     top.layer.confirm(content, {
                         icon: 7,
                         title: "提示",
+                        zIndex: top.layer.zIndex, //重点1
                         btn: ['确认', '取消'],
                     }, function () {
                         callBack(true);
@@ -406,7 +393,14 @@
                     if (type == -1) {
                         type = 2;
                     }
-                    top.layer.msg(content, { icon: type, time: 4000, shift: 5 });
+                    top.layer.msg(content,
+                        {
+                            icon: type,
+                            time: 4000,
+                            shift: 5,
+                            zIndex: top.layer.zIndex, //重点1
+                        }
+                        );
                 },
                 dialogClose: function () {
                     try {

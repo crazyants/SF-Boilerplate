@@ -6,6 +6,7 @@ using System.Data;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using SF.Core.Abstraction.Interceptors;
+using System.Reflection;
 
 namespace SF.Core.Interceptors
 {
@@ -22,7 +23,7 @@ namespace SF.Core.Interceptors
         public virtual bool IsTargetEntity(EntityEntry item)
         {
             return item.State != EntityState.Detached &&
-                   this.TargetType.Equals(item.Entity);
+                   this.TargetType.IsInstanceOfType(item.Entity);
         }
 
         public void Before(InterceptionContext context)

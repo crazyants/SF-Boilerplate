@@ -30,7 +30,7 @@ namespace SF.Core.Web.Base.Datatypes
         public virtual long Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.RequiredField)]
-        public int Sortindex { get; set; }
+        public int SortIndex { get; set; }
     }
     public abstract partial class TabbableModel : EntityModelBase
     {

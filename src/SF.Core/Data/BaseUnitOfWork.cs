@@ -20,11 +20,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SF.Core.Abstraction.Interceptors;
+using Microsoft.EntityFrameworkCore;
 
 namespace SF.Core.Data
 {
 
-    public class BaseUnitOfWork : EFCoreUnitOfWork<CoreDbContext>, IBaseUnitOfWork
+    public class BaseUnitOfWork : EFCoreUnitOfWork, IBaseUnitOfWork
     {
         public BaseUnitOfWork(CoreDbContext context, params IInterceptor[] interceptors) : base(context, interceptors)
         {
@@ -32,5 +33,7 @@ namespace SF.Core.Data
         }
 
         public IBaseWorkArea BaseWorkArea { get; }
+
+    
     }
 }

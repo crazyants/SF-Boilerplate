@@ -45,10 +45,10 @@ namespace SF.Core.Data
                 b.ToTable("Core_UserLogin");
             });
 
-            modelBuilder.Entity<IdentityUserToken<long>>(b =>
-            {
-                b.ToTable("Core_UserToken");
-            });
+            //modelBuilder.Entity<IdentityUserToken<long>>(b =>
+            //{
+            //    b.ToTable("Core_UserToken");
+            //});
 
             modelBuilder.Entity<UserEntity>(u =>
             {

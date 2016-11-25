@@ -16,8 +16,8 @@ namespace Microsoft.EntityFrameworkCore
             modelBuilder.Entity<AutoHistory>(b => {
                 b.Property(c => c.SourceId).IsRequired().HasMaxLength(50);
                 b.Property(c => c.TypeName).IsRequired().HasMaxLength(128);
-                b.Property(c => c.BeforeJson).HasMaxLength(2048);
-                b.Property(c => c.AfterJson).HasMaxLength(2048);
+                //b.Property(c => c.BeforeJson).HasMaxLength(2048);
+                //b.Property(c => c.AfterJson).HasMaxLength(2048);
                 // Shadow properties
                 //b.Property<DateTime>("LastUpdated");
                 // This MSSQL only

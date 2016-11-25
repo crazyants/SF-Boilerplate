@@ -81,7 +81,7 @@ namespace SF.WebHost.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("Core_UserToken");
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("SF.Core.AutoHistorys.Internal.AutoHistory", b =>
@@ -89,11 +89,9 @@ namespace SF.WebHost.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AfterJson")
-                        .HasAnnotation("MaxLength", 2048);
+                    b.Property<string>("AfterJson");
 
-                    b.Property<string>("BeforeJson")
-                        .HasAnnotation("MaxLength", 2048);
+                    b.Property<string>("BeforeJson");
 
                     b.Property<DateTime>("CreateTime");
 
@@ -135,7 +133,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("Phone");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<long>("StateOrProvinceId");
 
@@ -182,7 +180,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("SecretKey");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
@@ -208,7 +206,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 
@@ -255,7 +253,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<int?>("SortCode");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
@@ -298,7 +296,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<long?>("ParentId");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
@@ -324,7 +322,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<long>("StateOrProvinceId");
 
@@ -356,7 +354,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("RoutingController");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 
@@ -384,7 +382,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<int>("MediaType");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 
@@ -438,7 +436,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<DateTime?>("SentDate");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<DateTime?>("StartSendingDate");
 
@@ -486,7 +484,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("Sender");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("Subject");
 
@@ -519,7 +517,7 @@ namespace SF.WebHost.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 256);
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
@@ -550,7 +548,7 @@ namespace SF.WebHost.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 1024);
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("Type")
                         .HasAnnotation("MaxLength", 255);
@@ -605,7 +603,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<long>("RoleId");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
@@ -654,7 +652,7 @@ namespace SF.WebHost.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 64);
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
@@ -694,7 +692,7 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("ShortTextValue")
                         .HasAnnotation("MaxLength", 512);
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 
@@ -724,7 +722,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("Type");
 
@@ -754,7 +752,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("Slug");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 
@@ -782,7 +780,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<DateTimeOffset?>("LastUsedOn");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 
@@ -914,7 +912,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<long>("EntityTypeId");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 
@@ -938,7 +936,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 
@@ -960,7 +958,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 
@@ -984,7 +982,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("Key");
 
-                    b.Property<int>("Sortindex");
+                    b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy");
 

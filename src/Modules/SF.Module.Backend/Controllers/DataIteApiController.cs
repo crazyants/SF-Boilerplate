@@ -33,8 +33,8 @@ namespace SF.Module.Backend.Controllers
     {
         private readonly IBaseUnitOfWork _baseUnitOfWork;
         public DataIteApiController(IServiceCollection collection, ILogger<UserCrudController> logger,
-            CoreDbContext dbContext, IBaseUnitOfWork baseUnitOfWork)
-            : base(dbContext, baseUnitOfWork, collection, logger)
+             IBaseUnitOfWork baseUnitOfWork)
+            : base( baseUnitOfWork, collection, logger)
         {
             this._baseUnitOfWork = baseUnitOfWork;
             CrudDtoMapper = new DataItemDtoMapper();

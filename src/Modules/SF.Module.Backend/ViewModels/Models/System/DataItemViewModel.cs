@@ -32,7 +32,7 @@ namespace SF.Module.Backend.ViewModels
         /// <summary>
         /// 排序码
         /// </summary>		
-        public int? SortCode { get; set; }
+        public int? SortIndex { get; set; }
         /// <summary>
         /// 删除标记
         /// </summary>		

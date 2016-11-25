@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SF.Core.Data;
 using SF.Core.Entitys;
 
-namespace SF.Core.Extensions
+namespace SF.Core.Entitys
 {
     public class SimplRoleStore : RoleStore<RoleEntity, CoreDbContext, long, UserRoleEntity, IdentityRoleClaim<long>>
     {
