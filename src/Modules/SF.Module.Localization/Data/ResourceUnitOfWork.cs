@@ -17,13 +17,14 @@ using SF.Core.Data;
 using SF.Core.EFCore.UoW;
 using SF.Core.Interceptors;
 using SF.Module.Localization.Data.Repository;
+using System.Collections.Generic;
 
 namespace SF.Module.Localization.Data
 {
 
     public class ResourceUnitOfWork : EFCoreUnitOfWork<CoreDbContext>, IResourceUnitOfWork
     {
-        public ResourceUnitOfWork(CoreDbContext context, params IInterceptor[] interceptors) : base(context, interceptors)
+        public ResourceUnitOfWork(CoreDbContext context, IEnumerable<IInterceptor> interceptors) : base(context, interceptors)
         {
             Resource = new ResourceRepository(context);
         }

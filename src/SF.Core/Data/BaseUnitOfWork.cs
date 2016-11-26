@@ -27,7 +27,8 @@ namespace SF.Core.Data
 
     public class BaseUnitOfWork : EFCoreUnitOfWork, IBaseUnitOfWork
     {
-        public BaseUnitOfWork(CoreDbContext context, params IInterceptor[] interceptors) : base(context, interceptors)
+        private readonly IEnumerable<IInterceptor> _interceptors;
+        public BaseUnitOfWork(CoreDbContext context, IEnumerable<IInterceptor> interceptors) : base(context, interceptors)
         {
             BaseWorkArea = new BaseWorkArea(context);
         }

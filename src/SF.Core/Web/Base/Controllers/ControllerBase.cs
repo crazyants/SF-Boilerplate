@@ -54,7 +54,7 @@ namespace SF.Core.Web.Base.Controllers
             if (ex == null)
             {
                 Logger.LogError(message, args);
-                var error = new Exception(string.Format(message, args));
+                var error = new ServerErrorException(string.Format(message, args));
                 return new ObjectResult(_exceptionMapper.Resolve(error)) { StatusCode = 500 };
             }
             else
@@ -62,7 +62,7 @@ namespace SF.Core.Web.Base.Controllers
 
                 var errorMessage = String.Format(message, args);
                 Logger.LogError("{0} : {1}", errorMessage, ExceptionHelper.GetAllToStrings(ex));
-                var error = new Exception(string.Format("{0} : {1}", errorMessage, ex.Message));
+                var error = new ServerErrorException(string.Format("{0} : {1}", errorMessage, ex.Message));
                 return new ObjectResult(_exceptionMapper.Resolve(error)) { StatusCode = 500 };
             }
         }
@@ -88,7 +88,7 @@ namespace SF.Core.Web.Base.Controllers
         protected virtual IActionResult NotFoundResult(string message, params object[] args)
         {
             Logger.LogWarning(message, args);
-            var error = new Exception(string.Format(message, args));
+            var error = new NotFoundException(string.Format(message, args));
             return new ObjectResult(_exceptionMapper.Resolve(error)) { StatusCode = 404 };
         }
 

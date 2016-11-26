@@ -27,12 +27,7 @@ namespace SF.Module.ActivityLog
         }
         public void AddActivityService(IServiceCollection services)
         {
-            services.AddSingleton<IActivityUnitOfWork>(sp =>
-            {
-                var simpleDbContext = sp.GetService<CoreDbContext>();
-                var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new ActivityUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver));
-            });
+            services.AddSingleton<IActivityUnitOfWork, ActivityUnitOfWork>();
 
 
         }

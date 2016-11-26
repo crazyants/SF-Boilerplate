@@ -44,7 +44,6 @@ namespace SF.Core.Interceptors
         {
             base.OnBeforeInsert(entry, entity);
 
-
             entity.Id = GenerateComb().ToString("N");
 
         }

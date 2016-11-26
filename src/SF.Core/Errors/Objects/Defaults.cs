@@ -37,5 +37,10 @@ namespace SF.Core.Errors.Internal
             internal const string Title = "Entity Not found.";
             internal const string Code = "UNVALI001";
         }
+        internal class ServerErrorException
+        {
+            internal const string Title = "Server Error.";
+            internal const string Code = "500";
+        }
     }
 }

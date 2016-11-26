@@ -212,7 +212,7 @@ namespace SF.Core.Web.Base.Controllers
                 addArgs.Entity = entity;
                 this.OnAfterAdd(addArgs);
                 #endregion
-                return Success("", CrudDtoMapper.MapEntityToDto(insertedEntity));
+                return Success("", CrudDtoMapper.MapEntityToDto(insertedEntity, model));
             }
             catch (ValidationException validationEx)
             {

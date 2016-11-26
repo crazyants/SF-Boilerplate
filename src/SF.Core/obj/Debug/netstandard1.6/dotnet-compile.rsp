@@ -369,6 +369,7 @@ D:\Users\tomny\Source\Repos\SimpleFramework\src\SF.Core\Errors\IExceptionMapper.
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SF.Core\Errors\Exceptions\BaseException.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SF.Core\Errors\Exceptions\EntityNotFoundException.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SF.Core\Errors\Exceptions\NotFoundException.cs
+D:\Users\tomny\Source\Repos\SimpleFramework\src\SF.Core\Errors\Exceptions\ServerErrorException.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SF.Core\Errors\Exceptions\UnauthorizedException.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SF.Core\Errors\Exceptions\ValidationException.cs
 D:\Users\tomny\Source\Repos\SimpleFramework\src\SF.Core\Errors\Objects\Defaults.cs

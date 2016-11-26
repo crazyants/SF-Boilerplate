@@ -250,8 +250,7 @@ namespace SF.Module.Backend.Controllers
         /// <returns>The entity</returns>
         protected override DataItemEntity OnMapDtoToEntity(DataItemViewModel dto, DataItemEntity entity)
         {
-            var retVal = new DataItemEntity();
-            retVal.InjectFrom(dto);
+            var retVal = Mapper.Map<DataItemViewModel, DataItemEntity>(dto);
             return retVal;
         }
         /// <summary>
@@ -261,9 +260,8 @@ namespace SF.Module.Backend.Controllers
         /// <param name="dto">DTO映射实体</param>
         /// <returns>The dto</returns>
         protected override DataItemViewModel OnMapEntityToDto(DataItemEntity entity, DataItemViewModel dto)
-        {
-            var retVal = new DataItemViewModel();
-            retVal.InjectFrom(entity);
+        {        
+            var retVal = Mapper.Map<DataItemEntity, DataItemViewModel>(entity);
             return retVal;
         }
     }

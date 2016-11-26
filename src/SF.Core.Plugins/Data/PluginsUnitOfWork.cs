@@ -28,7 +28,7 @@ namespace SF.Core.Plugins.Data
 
     public class PluginsUnitOfWork : EFCoreUnitOfWork<CoreDbContext>, IPluginsUnitOfWork
     {
-        public PluginsUnitOfWork(CoreDbContext context, params IInterceptor[] interceptors) : base(context, interceptors)
+        public PluginsUnitOfWork(CoreDbContext context, IEnumerable<IInterceptor> interceptors) : base(context, interceptors)
         {
             Plugin = new PluginRepository(context);
         }

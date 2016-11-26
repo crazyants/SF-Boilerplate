@@ -30,10 +30,6 @@ namespace SF.Module.Backend.ViewModels
         /// </summary>		
         public int? IsNav { get; set; }
         /// <summary>
-        /// 排序码
-        /// </summary>		
-        public int? SortIndex { get; set; }
-        /// <summary>
         /// 删除标记
         /// </summary>		
         public int? DeleteMark { get; set; }
@@ -46,13 +42,13 @@ namespace SF.Module.Backend.ViewModels
         /// </summary>		
         public string Description { get; set; }
 
-        public DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
 
-        public DateTimeOffset? ModifiedDate { get; set; }
+        public DateTimeOffset UpdatedOn { get; set; }
      
         public string CreatedBy { get; set; }
      
-        public string ModifiedBy { get; set; }
+        public string UpdatedBy { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

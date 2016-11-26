@@ -48,6 +48,7 @@ using SF.Core.WorkContexts.Implementation;
 using SF.Core.Web.Api.JsonConverters;
 using Newtonsoft.Json;
 using SF.Core.Web.Middleware;
+using SF.Core.Abstraction.Interceptors;
 
 namespace SF.Core
 {
@@ -180,6 +181,7 @@ namespace SF.Core
             //  options.UseNpgsql(this.configurationRoot.GetConnectionString("DefaultConnection"))
             //         .UseInternalServiceProvider(serviceProvider)
             //         );
+            services.AddSingleton<CoreDbContext>();
             services.AddSingleton<DbContext, CoreDbContext>();
 
         }
@@ -235,9 +237,12 @@ namespace SF.Core
               .AddRoleStore<SimplRoleStore>()
               .AddUserStore<SimplUserStore>()
              .AddDefaultTokenProviders();
-           
+
 
             services.AddSingleton<ViewRenderer>();
+
+            services.AddSingleton<IInterceptor, AuditableInterceptor>();
+
 
             services.AddScoped<HandlerExceptionFilter>();
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -249,12 +254,13 @@ namespace SF.Core
             services.AddTransient(typeof(IEFCoreQueryableRepository<>), typeof(EFCoreBaseRepository<>));
             services.AddTransient(typeof(IEFCoreQueryableRepository<,>), typeof(EFCoreBaseRepository<,>));
 
-            services.AddSingleton<IBaseUnitOfWork>(sp =>
-            {
-                var simpleDbContext = sp.GetService<CoreDbContext>();
-                var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new BaseUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver));
-            });
+            services.AddSingleton<IBaseUnitOfWork, BaseUnitOfWork>();
+            //(sp =>
+            //{
+            //    var simpleDbContext = sp.GetService<CoreDbContext>();
+            //    var userNameResolver = sp.GetService<IUserNameResolver>();
+            //    return new BaseUnitOfWork(simpleDbContext);
+            //});
             services.AddSingleton<IUnitOfWork>(sp => sp.GetService<IBaseUnitOfWork>());
             services.AddSingleton<IUnitOfWorkFactory>(uow => new UnitOfWorkFactory(services.BuildServiceProvider()));
 

@@ -107,12 +107,8 @@ namespace SF.Core.Plugins
             services.AddSingleton<IActionDescriptorCollectionProvider, PluginActionDescriptorCollectionProvider>();
 
             services.Configure<RazorViewEngineOptions>(options => { options.ViewLocationExpanders.Add(new PluginViewLocationExpander()); });
-            services.AddSingleton<IPluginsUnitOfWork>(sp =>
-            {
-                var simpleDbContext = sp.GetService<CoreDbContext>();
-                var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new PluginsUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver));
-            });
+            services.AddSingleton<IPluginsUnitOfWork, PluginsUnitOfWork>();
+         
         }
         /// <summary>
         /// 插件管理服务注册

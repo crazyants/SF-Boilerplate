@@ -29,12 +29,7 @@ namespace SF.Module.Localization
         }
         public void AddLocalizationService(IServiceCollection services)
         {
-            services.AddSingleton<IResourceUnitOfWork>(sp =>
-            {
-                var simpleDbContext = sp.GetService<CoreDbContext>();
-                var userNameResolver = sp.GetService<IUserNameResolver>();
-                return new ResourceUnitOfWork(simpleDbContext, new AuditableInterceptor(userNameResolver));
-            });
+            services.AddSingleton<IResourceUnitOfWork, ResourceUnitOfWork>();
 
             var globalFirst = this.configurationRoot.GetSection("GlobalResourceOptions").GetValue<bool>("TryGlobalFirst");
 

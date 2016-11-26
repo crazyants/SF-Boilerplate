@@ -50,7 +50,7 @@ namespace SF.Core.EFCore.UoW
         /// </summary>
         /// <param name="context">The database context</param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected EFCoreUnitOfWork(TDbContext context, params IInterceptor[] interceptors)
+        protected EFCoreUnitOfWork(TDbContext context, IEnumerable<IInterceptor> interceptors)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
             Context = context;
@@ -72,7 +72,7 @@ namespace SF.Core.EFCore.UoW
         /// </summary>
         public TDbContext Context { get; set; }
 
-        private readonly IInterceptor[] _interceptors;
+        private readonly IEnumerable<IInterceptor> _interceptors;
 
         private bool _disposed;
 
@@ -131,7 +131,7 @@ namespace SF.Core.EFCore.UoW
 
                 if (_interceptors != null)
                 {
-                    intercept = new InterceptionContext(_interceptors)
+                    intercept = new InterceptionContext(_interceptors.ToArray())
                     {
                         DatabaseContext = Context,
                         ChangeTracker = Context.ChangeTracker,
@@ -194,7 +194,7 @@ namespace SF.Core.EFCore.UoW
 
                 if (_interceptors != null)
                 {
-                    intercept = new InterceptionContext(_interceptors)
+                    intercept = new InterceptionContext(_interceptors.ToArray())
                     {
                         DatabaseContext = Context,
                         ChangeTracker = Context.ChangeTracker,
@@ -316,7 +316,7 @@ namespace SF.Core.EFCore.UoW
         /// </summary>
         /// <param name="context">The database context</param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected EFCoreUnitOfWork(DbContext context, params IInterceptor[] interceptors) : base(context, interceptors)
+        protected EFCoreUnitOfWork(DbContext context, IEnumerable<IInterceptor> interceptors) : base(context, interceptors)
         {
 
         }

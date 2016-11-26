@@ -17,13 +17,14 @@ using SF.Core.Data;
 using SF.Core.EFCore.UoW;
 using SF.Core.Interceptors;
 using SF.Module.ActivityLog.Data.Repository;
+using System.Collections.Generic;
 
 namespace SF.Module.ActivityLog.Data
 {
 
     public class ActivityUnitOfWork : EFCoreUnitOfWork<CoreDbContext>, IActivityUnitOfWork
     {
-        public ActivityUnitOfWork(CoreDbContext context, params IInterceptor[] interceptors) : base(context, interceptors)
+        public ActivityUnitOfWork(CoreDbContext context, IEnumerable<IInterceptor> interceptors) : base(context, interceptors)
         {
             Activity = new ActivityRepository(context);
         }
