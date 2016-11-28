@@ -13,7 +13,7 @@ namespace SF.Web.Navigation
 
         public string RootTreeBuilderName { get; set; } = "SF.Web.Navigation.XmlNavigationTreeBuilder";
 
-        public string NavigationMapJsonFileName { get; set; } = "navigation.json";
-        public string NavigationMapXmlFileName { get; set; } = "navigation.xml";
+        public string NavigationMapJsonFileName { get; set; } = "config/navigation.json";
+        public string NavigationMapXmlFileName { get; set; } = "config/navigation.xml";
     }
 }

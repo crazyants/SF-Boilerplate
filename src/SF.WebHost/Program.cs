@@ -10,7 +10,7 @@ namespace SF.WebHost
         {
             var config = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("hosting.json", optional: true)
+               .AddJsonFile("config/hosting.json", optional: true)
                .Build();
             var host = new WebHostBuilder()
                 .UseKestrel()

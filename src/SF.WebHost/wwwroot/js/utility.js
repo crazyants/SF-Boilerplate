@@ -15,7 +15,7 @@
                         },
                         error: function (xhr, status, error) {
                             SF.utility.dialogAlert(status + ' [' + error + ']: ' + xhr.responseText);
-                            
+
                         }
                     });
                 },
@@ -62,7 +62,7 @@
                         param: [],
                         type: "post",
                         dataType: "json",
-                      //  contentType: "application/json",
+                        //  contentType: "application/json",
                         loading: "正在处理数据...",
                         success: null,
                         close: true
@@ -78,14 +78,14 @@
                             data: options.param,
                             type: options.type,
                             dataType: options.dataType,
-                          //  contentType: options.contentType,
+                            //  contentType: options.contentType,
                             success: function (data) {
                                 if (data.state != "success") {
                                     SF.utility.dialogAlert(data.message);
                                 } else {
                                     options.success(data);
                                     if (options.close == true) {
-                                        // dialogClose();
+                                        SF.utility.dialogClose();
                                     }
                                 }
                             },
@@ -118,7 +118,7 @@
                         dataType: options.dataType,
                         async: options.async,
                         success: function (data) {
-                            if (data != null && data.state != "success") {
+                            if (data != null && data.state != undefined && data.state != "success") {
                                 SF.utility.dialogAlert(data.message);
                             } else {
                                 options.success(data);
@@ -147,35 +147,35 @@
                     var options = $.extend(defaults, options);
                     dialogConfirm(options.msg, function (r) {
                         if (r) {
-                                    SF.utility.loading(true, options.loading);
-                                    window.setTimeout(function () {
-                                        var postdata = options.param;
-                                        if ($('[name=__RequestVerificationToken]').length > 0) {
-                                            postdata["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
+                            SF.utility.loading(true, options.loading);
+                            window.setTimeout(function () {
+                                var postdata = options.param;
+                                if ($('[name=__RequestVerificationToken]').length > 0) {
+                                    postdata["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
+                                }
+                                $.ajax({
+                                    url: options.url,
+                                    data: postdata,
+                                    type: options.type,
+                                    dataType: options.dataType,
+                                    success: function (data) {
+                                        if (data.state != "success") {
+                                            SF.utility.dialogAlert(data.message);
+                                        } else {
+                                            options.success(data);
                                         }
-                                        $.ajax({
-                                            url: options.url,
-                                            data: postdata,
-                                            type: options.type,
-                                            dataType: options.dataType,
-                                            success: function (data) {
-                                                if (data.state != "success") {
-                                                    SF.utility.dialogAlert(data.message);
-                                                } else {                                                  
-                                                    options.success(data);
-                                                }
-                                            },
-                                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                SF.utility.dialogAlert(XMLHttpRequest.responseText, -1);
-                                            },
-                                            beforeSend: function () {
-                                                SF.utility.loading(true, options.loading);
-                                            },
-                                            complete: function () {
-                                                SF.utility.loading(false);
-                                            }
-                                        });
-                                    }, 500);
+                                    },
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                        SF.utility.dialogAlert(XMLHttpRequest.responseText, -1);
+                                    },
+                                    beforeSend: function () {
+                                        SF.utility.loading(true, options.loading);
+                                    },
+                                    complete: function () {
+                                        SF.utility.loading(false);
+                                    }
+                                });
+                            }, 500);
                         }
                     });
                 },
@@ -428,7 +428,7 @@
                 getWebControls: function (formId, keyValue) {
                     var reVal = "";
                     var $id = $('#' + formId)
-                   $id.find('input,select,textarea,.ui-select').each(function (r) {
+                    $id.find('input,select,textarea,.ui-select').each(function (r) {
                         var id = $(this).attr('id');
                         var type = $(this).attr('type');
                         switch (type) {
@@ -475,8 +475,8 @@
                     //}
                     return postdata;
                 },
-                setWebControls: function (formId,data) {
-                    var $id = $('#'+formId)
+                setWebControls: function (formId, data) {
+                    var $id = $('#' + formId)
                     for (var key in data) {
                         var id = $id.find('#' + key);
                         if (id.attr('id')) {
@@ -494,10 +494,10 @@
                                     }
                                     break;
                                 case "select":
-                                 //   id.ComboBoxSetValue(value);
+                                    //   id.ComboBoxSetValue(value);
                                     break;
                                 case "selectTree":
-                                  //  id.ComboBoxTreeSetValue(value);
+                                    //  id.ComboBoxTreeSetValue(value);
                                     break;
                                 case "datepicker":
                                     id.val(SF.utility.formatDate(value, 'yyyy-MM-dd'));
@@ -508,6 +508,17 @@
                             }
                         }
                     }
+                },
+                checkedRow: function (id) {
+                    var isOK = true;
+                    if (id == undefined || id == "" || id == 'null' || id == 'undefined') {
+                        isOK = false;
+                        SF.utility.dialogMsg('您没有选中任何数据项,请选中后再操作！', 0);
+                    } else if (id.split(",").length > 1) {
+                        isOK = false;
+                        SF.utility.dialogMsg('很抱歉,一次只能选择一条记录！', 0);
+                    }
+                    return isOK;
                 }
             };
 

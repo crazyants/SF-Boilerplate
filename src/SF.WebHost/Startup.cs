@@ -46,9 +46,9 @@ namespace SF.WebHost
             // just an a small extra protection in case hackers try some kind of attack based on knowing the name of the file
             // it should not be possible for anyone to get files outside of wwwroot using http requests
             // but every little thing you can do for stronger security is a good idea
-            builder.AddJsonFile("simpleauthsettings.json", optional: true);
+            builder.AddJsonFile("Config/simpleauthsettings.json", optional: true);
 
-            builder.AddJsonFile("ratelimitsettings.json", optional: true);
+            builder.AddJsonFile("Config/ratelimitsettings.json", optional: true);
 
             if (env.IsDevelopment())
             {

@@ -12,7 +12,7 @@
     function initControl() {
         //上级
         SF.controls.itemPicker.initialize({
-            controlId: 'ParentId',
+            controlId: 'SelectParentId',
             restUrl: '/Api/DataItem/GetChildren/',
             allowMultiSelect: false,
             defaultText: '',
@@ -20,15 +20,15 @@
         });
         //获取表单
         if (!!keyValue) {
-            SF.utility.SetForm({
-                url: "/Api/DataItem/GetFormJson",
-                param: { keyValue: keyValue },
+            SF.utility.setForm({
+                url: "/Api/DataItem/" + keyValue,
+              //  param: { keyValue: keyValue },
                 success: function (data) {
                     SF.utility.setWebControls('form1', data);
                 }
             });
         } else {
-            // $("#ParentId").ComboBoxTreeSetValue(parentId);
+            // $("#parentId").ComboBoxTreeSetValue(parentId);
             $("#hfItemId").val(parentId);
         }
 
@@ -40,8 +40,8 @@
             return false;
         }
         var postData = SF.utility.getWebControls('form1',keyValue);
-        if (postData["ParentId"] == "") {
-            postData["ParentId"] = 0;
+        if (postData["parentId"] == "") {
+            postData["parentId"] = 0;
         }
         var url = "/Api/DataItem/";
         if (type == "PUT")
@@ -71,9 +71,9 @@
                 <div class="form-group page-picker  required">
                     <label class="col-md-3 control-label" for="ppPage">上级</label>
                     <div class="col-md-9 control-wrapper">
-                        <div id="ParentId" class="picker picker-select rollover-container ">
-                            <input class="js-item-id-value" type="hidden" name="ParentId" id="ParentId" />
-                            <input class="js-initial-item-parent-ids-value" type="hidden" name="hfInitialItemParentIds" id="hfInitialItemParentIds" />
+                        <div id="SelectParentId" class="picker picker-select rollover-container ">
+                            <input class="js-item-id-value" type="hidden" name="parentId" id="parentId" />
+                            <input class="js-initial-item-parent-ids-value" type="hidden" name="hfInitialItemparentIds" id="hfInitialItemparentIds" />
                             <input class="js-item-name-value" type="hidden" name="hfItemName" id="hfItemName" />
                             <input class="js-item-rest-url-extra-params-value" type="hidden" name="hfItemRestUrlExtraParams" />
                             <a class='picker-label' href='#'>
@@ -109,21 +109,21 @@
                     <span id="rfv" class="validation-error help-inline" style="display:none;">Page is Required.</span>
                 </div>
                 <div class="form-group data-text-box  required">
-                    <label class="col-md-3 control-label" for="ItemName">名称</label>
+                    <label class="col-md-3 control-label" for="itemName">名称</label>
                     <div class="col-md-9 control-wrapper">
-                        <input id="ItemName" name="ItemName" type="text" onblur="SF.utility.existField(this.id, '/Api/DataItem/ExistItemName')" class="form-control" placeholder="请输入名称" isvalid="yes" checkexpession="NotNull" />
+                        <input id="itemName" name="itemName" type="text" onblur="SF.utility.existField(this.id, '/Api/DataItem/ExistItemName')" class="form-control" placeholder="请输入名称" isvalid="yes" checkexpession="NotNull" />
                     </div>
                 </div>
                 <div class="form-group data-text-box  required">
-                    <label class="col-md-3 control-label" for="ItemCode">编号</label>
+                    <label class="col-md-3 control-label" for="itemCode">编号</label>
                     <div class="col-md-9 control-wrapper">
-                        <input id="ItemCode" name="ItemCode" type="text" onblur="SF.utility.existField(this.id, '/Api/DataItem/ExistItemCode')" class="form-control" placeholder="请输入编号" isvalid="yes" checkexpession="NotNull" />
+                        <input id="itemCode" name="itemCode" type="text" onblur="SF.utility.existField(this.id, '/Api/DataItem/ExistItemCode')" class="form-control" placeholder="请输入编号" isvalid="yes" checkexpession="NotNull" />
                     </div>
                 </div>
                 <div class="form-group data-text-box  required">
-                    <label class="col-md-3 control-label" for="SortIndex">排序</label>
+                    <label class="col-md-3 control-label" for="sortIndex">排序</label>
                     <div class="col-md-9 control-wrapper">
-                        <input id="SortIndex" name="SortIndex" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
+                        <input id="sortIndex" name="sortIndex" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
                     </div>
                 </div>
                 <div class="form-group data-text-box  required">
@@ -131,20 +131,20 @@
                     <div class="col-md-9 control-wrapper">
                         <div class="checkbox">
                             <label>
-                                <input id="IsTree" type="checkbox" />
+                                <input id="isTree" type="checkbox" />
                                 树型
                             </label>
                             <label>
-                                <input id="EnabledMark" type="checkbox" checked="checked" />
+                                <input id="enabledMark" type="checkbox" checked="checked" />
                                 有效
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group data-text-box ">
-                    <label class="col-md-3 control-label" for="Description"></label>
+                    <label class="col-md-3 control-label" for="description"></label>
                     <div class="col-md-9 control-wrapper">
-                        <textarea id="Description" class="form-control" style="height: 70px;"></textarea>
+                        <textarea id="description" class="form-control" style="height: 70px;"></textarea>
                     </div>
 
                 </div>

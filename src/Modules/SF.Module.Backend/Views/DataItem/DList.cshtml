@@ -116,13 +116,14 @@
 
     //新增
     function btn_add() {
-        var parentId = $("#gridTable").jqGridRowValue("ItemId");
+        var parentId = $("#gridTable").jqGridRowValue("Id");
         SF.utility.dialogOpen({
             id: "DataItem_Form",
             title: '添加分类',
             url: '/DataItem/DForm?parentId=' + parentId,
             width: "1000px",
             height: "500px",
+
             callBack: function (iframeId) {
                 top.frames[iframeId].AcceptClick("POST");
             }
@@ -130,14 +131,15 @@
     };
     //编辑
     function btn_edit() {
-        var keyValue = $("#gridTable").jqGridRowValue("ItemId");
-        if (checkedRow(keyValue)) {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        if (SF.utility.checkedRow(keyValue)) {
             SF.utility.dialogOpen({
                 id: "DataItem_Form",
                 title: '编辑分类',
                 url: '/DataItem/DForm?keyValue=' + keyValue,
                 width: "1000px",
                 height: "500px",
+                close:true,
                 callBack: function (iframeId) {
                     top.frames[iframeId].AcceptClick("PUT");
                 }
@@ -146,7 +148,7 @@
     }
     //删除
     function btn_delete() {
-        var keyValue = $("#gridTable").jqGridRowValue("ItemId");
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
         if (keyValue) {
             SF.utility.removeForm({
                 type:"Delete",
