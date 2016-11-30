@@ -7,6 +7,7 @@ using SF.Core.Common;
 using SF.Core.Data;
 using SF.Core.Entitys;
 using SF.Core.Extensions;
+using SF.Core.QueryExtensions.Extensions;
 using SF.Core.Web.Attributes;
 using SF.Core.Web.Base.Controllers;
 using SF.Core.Web.Base.DataContractMapper;

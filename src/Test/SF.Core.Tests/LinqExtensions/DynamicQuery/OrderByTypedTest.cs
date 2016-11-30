@@ -12,13 +12,10 @@
 * Description: SF快速开发平台
 * Website：http://www.mayisite.com
 *********************************************************************************/
-using SF.Core.Data.Extensions;
+using SF.Core.QueryExtensions.Extensions;
 using SF.Core.Tests.LinqExtensions.Data;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace SF.Core.Tests.LinqExtensions.DynamicQuery

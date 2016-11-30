@@ -35,6 +35,7 @@
     "SaasKit.Multitenancy": "1.1.*",
     "SF.Core.Abstraction": "1.0.0-*",
     "SF.Core.EFCore": "1.0.0-*",
+    "SF.Core.QueryExtensions": "1.0.0-*",
     "System.ComponentModel.Annotations": "4.1.0",
     "System.Globalization.Extensions": "4.0.1",
     "System.Linq.Dynamic.Core": "1.0.6.8",

@@ -240,6 +240,7 @@
 -r:"E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core\bin\Debug\netstandard1.6\SF.Core.dll"
 -r:"E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core.Abstraction\bin\Debug\netstandard1.6\SF.Core.Abstraction.dll"
 -r:"E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core.EFCore\bin\Debug\netstandard1.6\SF.Core.EFCore.dll"
+-r:"E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core.QueryExtensions\bin\Debug\netstandard1.6\SF.Core.QueryExtensions.dll"
 -r:"E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core.Security\bin\Debug\netstandard1.6\SF.Core.Security.dll"
 -r:"E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Web.Captcha\bin\Debug\netstandard1.6\SF.Web.Captcha.dll"
 -r:"E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Web.Control\bin\Debug\netstandard1.6\SF.Web.Control.dll"

@@ -26,5 +26,10 @@ namespace SF.Core.Tests.LinqExtensions.Data
         public string Name { get; set; }
 
         public IEnumerable<ChildDummy> Children { get; set; }
+        public string Property1 { get; set; }
+
+        public string Property2 { get; set; }
+
+        public string Property3 { get; set; }
     }
 }

@@ -20,7 +20,7 @@
       "Audit.NET/4.5.6": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.1",
+          "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -34,7 +34,7 @@
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
-          "NETStandard.Library": "1.6.1",
+          "NETStandard.Library": "1.6.0",
           "System.Collections.Specialized": "4.0.1",
           "System.ComponentModel.TypeConverter": "4.1.0",
           "System.Dynamic.Runtime": "4.0.11",
@@ -248,7 +248,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
-          "NETStandard.Library": "1.6.1",
+          "NETStandard.Library": "1.6.0",
           "System.ComponentModel": "4.0.1"
         },
         "compile": {
@@ -262,7 +262,7 @@
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
-          "NETStandard.Library": "1.6.1",
+          "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
           "System.Threading.Thread": "4.0.0"
         },
@@ -287,7 +287,7 @@
           "Dapper": "1.50.1",
           "Hangfire.Core": "[1.6.5]",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
-          "NETStandard.Library": "1.6.1",
+          "NETStandard.Library": "1.6.0",
           "System.Data.Common": "4.1.0",
           "System.Data.SqlClient": "4.1.0"
         },
@@ -2103,7 +2103,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging": "1.0.0",
           "Microsoft.Extensions.Options": "1.0.0",
-          "NETStandard.Library": "1.6.1",
+          "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -2267,7 +2267,7 @@
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
-          "NETStandard.Library": "1.6.1",
+          "NETStandard.Library": "1.6.0",
           "System.Reflection.Emit": "4.0.1",
           "System.Reflection.Emit.ILGeneration": "4.0.1",
           "System.Reflection.Emit.Lightweight": "4.0.1",
@@ -2537,7 +2537,7 @@
           "Microsoft.Extensions.Caching.Memory": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
-          "NETStandard.Library": "1.6.1",
+          "NETStandard.Library": "1.6.0",
           "System.Collections": "4.0.11",
           "System.Linq": "4.1.0",
           "System.Runtime": "4.1.0",
@@ -4592,6 +4592,7 @@
           "Pomelo.EntityFrameworkCore.MySql": "1.0.0",
           "SF.Core.Abstraction": "1.0.0",
           "SF.Core.EFCore": "1.0.0",
+          "SF.Core.QueryExtensions": "1.0.0",
           "SaasKit.Multitenancy": "1.1.0",
           "System.ComponentModel.Annotations": "4.1.0",
           "System.Globalization.Extensions": "4.0.1",
@@ -4667,6 +4668,35 @@
         },
         "runtime": {
           "netstandard1.6/SF.Core.EFCore.dll": {}
+        }
+      },
+      "SF.Core.QueryExtensions/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "CacheManager.Core": "0.9.1",
+          "MailKit": "1.4.0",
+          "MediatR": "2.1.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+          "Microsoft.AspNetCore.Mvc": "1.0.1",
+          "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
+          "Microsoft.AspNetCore.Routing": "1.0.1",
+          "Microsoft.EntityFrameworkCore": "1.0.1",
+          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+          "MimeKit": "1.4.0",
+          "NETStandard.Library": "1.6.1",
+          "NodaTime": "2.0.0-alpha20160523",
+          "System.ComponentModel.Annotations": "4.1.0",
+          "System.Globalization.Extensions": "4.0.1",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0"
+        },
+        "compile": {
+          "netstandard1.6/SF.Core.QueryExtensions.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/SF.Core.QueryExtensions.dll": {}
         }
       },
       "SF.Core.Security/1.0.0": {
@@ -4758,7 +4788,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-          "NETStandard.Library": "1.6.0"
+          "NETStandard.Library": "1.6.1"
         },
         "compile": {
           "netstandard1.6/SF.Web.Navigation.dll": {}
@@ -4777,7 +4807,7 @@
           "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-          "NETStandard.Library": "1.6.0"
+          "NETStandard.Library": "1.6.1"
         },
         "compile": {
           "netstandard1.6/SF.Web.SiteMap.dll": {}
@@ -11694,6 +11724,11 @@
       "type": "project",
       "path": "../../SF.Core.EFCore/project.json",
       "msbuildProject": "../../SF.Core.EFCore/SF.Core.EFCore.xproj"
+    },
+    "SF.Core.QueryExtensions/1.0.0": {
+      "type": "project",
+      "path": "../../SF.Core.QueryExtensions/project.json",
+      "msbuildProject": "../../SF.Core.QueryExtensions/SF.Core.QueryExtensions.xproj"
     },
     "SF.Core.Security/1.0.0": {
       "type": "project",

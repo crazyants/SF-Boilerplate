@@ -155,7 +155,7 @@ namespace SF.Core.Web.Base.Controllers
                 if (codetable == null)
                     return NotFoundResult($"Code with id {id} not found in {typeof(TCodeTabelModel).Name}.");
                 var model = CrudDtoMapper.MapEntityToDto(codetable);
-                return OkResult(model);
+                return OkResult(model.ToJson());
             }
             catch (Exception ex)
             {
@@ -177,7 +177,8 @@ namespace SF.Core.Web.Base.Controllers
                   {
                       return CrudDtoMapper.MapEntityToDto(x);
                   });
-                return OkResult(mappedValues);
+                return OkResult(mappedValues.ToJson());
+
             }
             catch (Exception ex)
             {

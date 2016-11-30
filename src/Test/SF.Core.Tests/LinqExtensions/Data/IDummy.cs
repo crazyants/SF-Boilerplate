@@ -24,5 +24,11 @@ namespace SF.Core.Tests.LinqExtensions.Data
         int Id { get; set; }
 
         string Name { get; set; }
+
+        string Property1 { get; set; }
+
+        string Property2 { get; set; }
+
+        string Property3{ get; set; }
     }
 }

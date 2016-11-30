@@ -47,7 +47,7 @@ namespace SF.Core.Web.Base.Business
         public async Task<T> InsertAsync(T entity)
         {
             if (entity == null) throw new ArgumentException("No codetable provided", nameof(entity));
-
+          
             await _unitOfWork.ExecuteAndCommitAsync(() =>
             {
                 return _repository.AddAsync(entity);

@@ -1,11 +1,10 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SF.Core.Abstraction.Data;
 using SF.Core.Abstraction.Entitys;
 using SF.Core.Abstraction.UoW;
-using SF.Core.Data.Extensions;
 using SF.Core.EFCore.UoW;
+using SF.Core.QueryExtensions.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +20,7 @@ namespace SF.Core.Web.Base.Business
     {
         #region Fields
 
- 
+        private readonly IUnitOfWorkFactory _factory;
         private readonly IEFCoreQueryableRepository<T, TKey> _repository;
         protected readonly ILogger _logger;
 

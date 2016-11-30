@@ -27,30 +27,30 @@ namespace SF.Core.Tests.LinqExtensions.Data
         {
             var d = new[]
             {
-                new Dummy { Id = 1, Name = "Asdf" },
-                new Dummy { Id = 2, Name = "Narf" },
-                new Dummy { Id = 3, Name = "Qwer" }
+                new Dummy { Id = 1, Name = "Asdf", Property1="Asdf",Property2="Asdf",Property3="Asdf" },
+                new Dummy { Id = 2, Name = "Narf", Property1="Narf",Property2="Narf",Property3="Narf" },
+                new Dummy { Id = 3, Name = "Qwer", Property1="Qwer",Property2="Qwer",Property3="Qwer" }
             };
 
             var s = new[]
             {
-                new SuperDummy { Id = 4, Name = "Asdf" },
-                new SuperDummy { Id = 5, Name = "Narf" },
-                new SuperDummy { Id = 6, Name = "Qwer" }
+                new SuperDummy { Id = 4, Name = "Asdf",Property1="Asdf",Property2="Asdf",Property3="Asdf" },
+                new SuperDummy { Id = 5, Name = "Narf",Property1="Narf",Property2="Narf",Property3="Narf" },
+                new SuperDummy { Id = 6, Name = "Qwer",Property1="Qwer",Property2="Qwer",Property3="Qwer" }
             };
 
             var p = new[]
             {
-                new ParentDummy { Id = 7, Name = "Asdf" },
-                new ParentDummy { Id = 8, Name = "Narf" },
-                new ParentDummy { Id = 9, Name = "Qwer" }
+                new ParentDummy { Id = 7, Name = "Asdf",Property1="Asdf",Property2="Asdf",Property3="Asdf" },
+                new ParentDummy { Id = 8, Name = "Narf",Property1="Narf",Property2="Narf",Property3="Narf" },
+                new ParentDummy { Id = 9, Name = "Qwer",Property1="Qwer",Property2="Qwer",Property3="Qwer" }
             };
 
             var c = new[]
             {
-                new ChildDummy { Id = 10, Name = "Asdf", Parent = p[1] },
-                new ChildDummy { Id = 11, Name = "Narf", Parent = p[2] },
-                new ChildDummy { Id = 12, Name = "Qwer", Parent = p[0] }
+                new ChildDummy { Id = 10, Name = "Asdf", Parent = p[1],Property1="Asdf",Property2="Asdf",Property3="Asdf" },
+                new ChildDummy { Id = 11, Name = "Narf", Parent = p[2],Property1="Narf",Property2="Narf",Property3="Narf" },
+                new ChildDummy { Id = 12, Name = "Qwer", Parent = p[0],Property1="Qwer",Property2="Qwer",Property3="Qwer" }
             };
 
             p[0].Children = new[] { c[0], c[1] };

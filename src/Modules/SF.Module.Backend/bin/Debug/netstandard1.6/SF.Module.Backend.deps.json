@@ -3305,6 +3305,7 @@
           "SaasKit.Multitenancy": "1.1.4",
           "SF.Core.Abstraction": "1.0.0",
           "SF.Core.EFCore": "1.0.0",
+          "SF.Core.QueryExtensions": "1.0.0",
           "System.ComponentModel.Annotations": "4.1.0",
           "System.Globalization.Extensions": "4.3.0",
           "System.Linq.Dynamic.Core": "1.0.6.8",
@@ -3365,6 +3366,30 @@
         },
         "runtime": {
           "SF.Core.EFCore.dll": {}
+        }
+      },
+      "SF.Core.QueryExtensions/1.0.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.ComponentModel.Annotations": "4.1.0",
+          "System.Globalization.Extensions": "4.3.0",
+          "Microsoft.EntityFrameworkCore": "1.0.1",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
+          "Microsoft.AspNetCore.Mvc": "1.0.1",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+          "MediatR": "2.1.0",
+          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+          "CacheManager.Core": "0.9.1",
+          "Microsoft.AspNetCore.Routing": "1.0.1",
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
+          "MailKit": "1.4.0",
+          "MimeKit": "1.4.0",
+          "NodaTime": "2.0.0-alpha20160523"
+        },
+        "runtime": {
+          "SF.Core.QueryExtensions.dll": {}
         }
       },
       "SF.Core.Security/1.0.0": {
@@ -4733,6 +4758,11 @@
       "sha512": ""
     },
     "SF.Core.EFCore/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SF.Core.QueryExtensions/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -69,6 +69,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Module.SimpleData", "src
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.EFCore", "src\SF.Core.EFCore\SF.Core.EFCore.xproj", "{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SF.Core.QueryExtensions", "src\SF.Core.QueryExtensions\SF.Core.QueryExtensions.xproj", "{22855B73-21D1-49BB-BCD3-4CD3EE0E9627}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,10 @@ Global
 		{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFD5CDDC-C302-4306-8067-78C36C4BB3CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22855B73-21D1-49BB-BCD3-4CD3EE0E9627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22855B73-21D1-49BB-BCD3-4CD3EE0E9627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22855B73-21D1-49BB-BCD3-4CD3EE0E9627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22855B73-21D1-49BB-BCD3-4CD3EE0E9627}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,5 +201,6 @@ Global
 		{46C59885-FD59-48D3-B400-CFDB460F738C} = {6A7EE3A2-1748-4CCA-B939-9D7F782B1CDE}
 		{88C02D31-3C08-4174-9D38-47FF51CE8951} = {7EFA2FA7-32DD-4047-B021-50E77A83D714}
 		{DFD5CDDC-C302-4306-8067-78C36C4BB3CC} = {3C593EDB-AB76-4467-9884-707C3754A796}
+		{22855B73-21D1-49BB-BCD3-4CD3EE0E9627} = {3C593EDB-AB76-4467-9884-707C3754A796}
 	EndGlobalSection
 EndGlobal

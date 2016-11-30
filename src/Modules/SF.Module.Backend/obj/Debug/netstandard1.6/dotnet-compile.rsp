@@ -242,6 +242,7 @@
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core\bin\Debug\netstandard1.6\SF.Core.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core.Abstraction\bin\Debug\netstandard1.6\SF.Core.Abstraction.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core.EFCore\bin\Debug\netstandard1.6\SF.Core.EFCore.dll
+--reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core.QueryExtensions\bin\Debug\netstandard1.6\SF.Core.QueryExtensions.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Core.Security\bin\Debug\netstandard1.6\SF.Core.Security.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Web.Captcha\bin\Debug\netstandard1.6\SF.Web.Captcha.dll
 --reference:E:\Tomny\权限中心\Git\SimpleFrameworkV1.0\SFrameworkV1.1.4\src\SF.Web.Control\bin\Debug\netstandard1.6\SF.Web.Control.dll
