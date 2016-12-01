@@ -497,7 +497,7 @@
                                     //   id.ComboBoxSetValue(value);
                                     break;
                                 case "selectTree":
-                                    //  id.ComboBoxTreeSetValue(value);
+                                    SF.utility.comboBoxTreeSetValue(id, value);
                                     break;
                                 case "datepicker":
                                     id.val(SF.utility.formatDate(value, 'yyyy-MM-dd'));
@@ -519,6 +519,47 @@
                         SF.utility.dialogMsg('很抱歉,一次只能选择一条记录！', 0);
                     }
                     return isOK;
+                },
+                comboBoxTreeSetValue: function (element, value) {
+                    if (value == "") {
+                        return;
+                    }
+                    var $control = $(element),
+                 $hfItemIds = $control.find('.js-item-id-value'),
+                 $hfItemNames = $control.find('.js-item-name-value'),
+                 $treeView = $control.find('.treeview'),
+                 $spanNames = $control.find('.selected-names');
+
+
+                    var data_text = $treeView.find('ul').find('[data-id=' + value + ']').find('[class="sftree-name"]').attr("title");
+                    if (data_text) {
+                        $hfItemNames.val(data_text);
+                        $spanNames.text(data_text);
+                    }
+                   
+                },
+                comboBoxTreeSetValues: function (element, values) {
+                    if (values == "") {
+                        return;
+                    }
+                    var $control = $(element),
+                    $hfItemIds = $control.find('.js-item-id-value'),
+                    $hfItemNames = $control.find('.js-item-name-value'),
+                    $treeView = $control.find('.treeview'),
+                    $spanNames = $control.find('.selected-names');
+
+                    $hfItemIds.val(values.join(','));
+                    var $ul = $treeView.find('ul');
+                    var selectedNames = [];
+                    $.each(values, function (index, value) {
+                        var data_text = $ul.find('[data-id=' + value + ']').find('[class="sftree-name"]').attr("title")
+                        selectedNames.push(data_text);
+                    });
+
+                    if (selectedNames.length > 0) {
+                        $spanNames.text(selectedNames.join(', '));
+                    }
+                   
                 }
             };
 

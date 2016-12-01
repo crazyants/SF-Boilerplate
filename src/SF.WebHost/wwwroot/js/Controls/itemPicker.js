@@ -22,6 +22,7 @@
                         restUrl: this.options.restUrl,
                         restParams: this.options.restParams,
                         expandedIds: this.options.expandedIds,
+                        success: this.options.success,
                         id: this.options.startingId
                     },
                     $hfItemIds = $control.find('.js-item-id-value'),

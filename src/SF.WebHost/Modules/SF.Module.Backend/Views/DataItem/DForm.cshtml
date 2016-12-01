@@ -16,20 +16,22 @@
             restUrl: '/Api/DataItem/GetChildren/',
             allowMultiSelect: false,
             defaultText: '',
-            expandedIds: [0]
+            expandedIds: [0],
+            success: function (data) {
+                SF.utility.comboBoxTreeSetValue($("#SelectParentId"), data.ParentId);
+            }
         });
         //获取表单
         if (!!keyValue) {
             SF.utility.setForm({
                 url: "/Api/DataItem/" + keyValue,
-              //  param: { keyValue: keyValue },
                 success: function (data) {
                     SF.utility.setWebControls('form1', data);
                 }
             });
         } else {
-            // $("#ParentId").ComboBoxTreeSetValue(ParentId);
-            $("#hfItemId").val(parentId);
+            SF.utility.comboBoxTreeSetValue($("#SelectParentId"), ParentId);
+
         }
 
 
@@ -39,7 +41,7 @@
         if (!$('#form1').Validform()) {
             return false;
         }
-        var postData = SF.utility.getWebControls('form1',keyValue);
+        var postData = SF.utility.getWebControls('form1', keyValue);
         if (postData["ParentId"] == "") {
             postData["ParentId"] = 0;
         }
@@ -47,9 +49,9 @@
         if (type == "PUT")
             url = url + keyValue;
         else if (type == "POST")
-            url = url ;
+            url = url;
         SF.utility.saveForm({
-            type:type,
+            type: type,
             url: url,
             param: postData,
             loading: "正在保存数据...",
@@ -71,19 +73,19 @@
                 <div class="form-group page-picker  required">
                     <label class="col-md-3 control-label" for="ppPage">上级</label>
                     <div class="col-md-9 control-wrapper">
-                        <div id="SelectParentId" class="picker picker-select rollover-container ">
+                        <div id="SelectParentId" class="picker picker-select rollover-container " type="selectTree">
                             <input class="js-item-id-value" type="hidden" name="ParentId" id="ParentId" />
-                            <input class="js-initial-item-parent-ids-value" type="hidden" name="hfInitialItemParentIds" id="hfInitialItemParentIds" />
+                            <input class="js-initial-item-parent-ids-value" type="hidden" id="hfInitialItemParentIds" />
                             <input class="js-item-name-value" type="hidden" name="hfItemName" id="hfItemName" />
-                            <input class="js-item-rest-url-extra-params-value" type="hidden" name="hfItemRestUrlExtraParams" />
+                            <input class="js-item-rest-url-extra-params-value" type="hidden" id="hfItemRestUrlExtraParams" />
                             <a class='picker-label' href='#'>
                                 <i class='fa fa-file icon-fw'></i>
-                                <span id='selectedItemLabel_ppPage' class='selected-names'></span>
+                                <span class='selected-names'></span>
                                 <b class='fa fa-caret-down pull-right'></b>
                             </a>
-                            <a id="btnSelectNone" class="picker-select-none" style="display:none;"><i class='fa fa-times'></i></a>
+                            <a class="picker-select-none" style="display:none;"><i class='fa fa-times'></i></a>
                             <div class="picker-menu dropdown-menu">
-                                <div id='treeview-scroll-container_ppPage' class='scroll-container scroll-container-vertical scroll-container-picker'>
+                                <div class='scroll-container scroll-container-vertical scroll-container-picker'>
                                     <div class='scrollbar'>
                                         <div class='track'>
                                             <div class='thumb'>
@@ -93,7 +95,7 @@
                                     </div>
                                     <div class='viewport'>
                                         <div class='overview'>
-                                            <div id='treeviewItems_ppPage' class='treeview treeview-items'></div>
+                                            <div class='treeview treeview-items'></div>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +129,7 @@
                     </div>
                 </div>
                 <div class="form-group data-text-box  required">
-                    <label class="col-md-3 control-label"  ></label>
+                    <label class="col-md-3 control-label"></label>
                     <div class="col-md-9 control-wrapper">
                         <div class="checkbox">
                             <label>

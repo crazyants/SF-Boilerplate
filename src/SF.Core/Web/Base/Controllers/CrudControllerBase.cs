@@ -20,6 +20,7 @@ using SF.Core.Common;
 using SF.Core.Web.Base.Args;
 using SF.Core.Web.Models;
 using SF.Core.Extensions;
+using System.Collections.Generic;
 
 namespace SF.Core.Web.Base.Controllers
 {
@@ -45,14 +46,14 @@ namespace SF.Core.Web.Base.Controllers
         /// 数据转换器
         /// </summary>
         /// <returns></returns>
-        public ICrudDtoMapper<TCodeTabelEntity, TCodeTabelModel> CrudDtoMapper { get; set; }
+        protected ICrudDtoMapper<TCodeTabelEntity, TCodeTabelModel> CrudDtoMapper { get; set; }
         /// <summary>
         /// 初始化构造
         /// 使用注入的同一个上下文
         /// </summary>
         /// <param name="service">服务集合</param>
         /// <param name="logger">日志</param>
-        public CrudControllerBase(IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
+        protected CrudControllerBase(IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
         {
             _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity, long>>();
             _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity, long>>();
@@ -65,7 +66,7 @@ namespace SF.Core.Web.Base.Controllers
         /// <param name="dbContext">上下文实例</param>
         /// <param name="service">服务集合</param>
         /// <param name="logger">日志</param>
-        public CrudControllerBase(IEFCoreUnitOfWork unitOfWork, IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
+        protected CrudControllerBase(IEFCoreUnitOfWork unitOfWork, IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
         {
             _repository = new EFCoreBaseRepository<TCodeTabelEntity>(unitOfWork.Context);
             _reader = new CodetableReader<TCodeTabelEntity, long>(logger, _repository);
@@ -135,6 +136,14 @@ namespace SF.Core.Web.Base.Controllers
         {
 
         }
+        /// <summary>
+        /// 查询带返回结果的外部委托方法
+        /// </summary>
+        protected Func<ICodetableReader<TCodeTabelEntity, long>, Task<TCodeTabelModel>> GetAsyncFun;
+        /// <summary>
+        /// 查询所有带返回结果的外部委托方法
+        /// </summary>
+        protected Func<ICodetableReader<TCodeTabelEntity, long>, Task<IEnumerable<TCodeTabelModel>>> GetAllAsyncFun;
         #endregion
 
         #region Method  
@@ -151,10 +160,19 @@ namespace SF.Core.Web.Base.Controllers
             Guard.CheckArgumentNull(CrudDtoMapper, "数据转换器不能为空");
             try
             {
-                var codetable = await _reader.GetAsync(id);
-                if (codetable == null)
-                    return NotFoundResult($"Code with id {id} not found in {typeof(TCodeTabelModel).Name}.");
-                var model = CrudDtoMapper.MapEntityToDto(codetable);
+                TCodeTabelModel model;
+                if (GetAsyncFun != null)
+                {
+                    model = await GetAsyncFun(_reader);
+                }
+                else
+                {
+                    var codetableEntity = await _reader.GetAsync(id);
+                    if (codetableEntity == null)
+                        return NotFoundResult($"Code with id {id} not found in {typeof(TCodeTabelModel).Name}.");
+                    model = CrudDtoMapper.MapEntityToDto(codetableEntity);
+                }
+
                 return OkResult(model.ToJson());
             }
             catch (Exception ex)
@@ -172,12 +190,20 @@ namespace SF.Core.Web.Base.Controllers
             Guard.CheckArgumentNull(CrudDtoMapper, "数据转换器不能为空");
             try
             {
-                var values = await _reader.GetAllAsync();
-                var mappedValues = values.Select(x =>
-                  {
-                      return CrudDtoMapper.MapEntityToDto(x);
-                  });
-                return OkResult(mappedValues.ToJson());
+                IEnumerable<TCodeTabelModel> models;
+                if (GetAllAsyncFun != null)
+                {
+                    models = await GetAllAsyncFun(_reader);
+                }
+                else
+                {
+                    var values = await _reader.GetAllAsync();
+                    models = values.Select(x =>
+                    {
+                        return CrudDtoMapper.MapEntityToDto(x);
+                    });
+                }
+                return OkResult(models.ToJson());
 
             }
             catch (Exception ex)

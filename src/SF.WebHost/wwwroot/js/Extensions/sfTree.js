@@ -1,18 +1,18 @@
 ﻿(function ($) {
     'use strict';
-    
+
     // Private SFTree "class" that will represent instances of the node tree in memory
     // and provide all functionality needed by instances of a treeview control.
     var SFTree = function (element, options) {
-            this.$el = $(element);
-            this.options = options;
-            this.selectedNodes = [];
-        
-            // Create an object-based event aggregator (not DOM-based)
-            // for internal eventing
-            this.events = $({});
-        },
-        
+        this.$el = $(element);
+        this.options = options;
+        this.selectedNodes = [];
+
+        // Create an object-based event aggregator (not DOM-based)
+        // for internal eventing
+        this.events = $({});
+    },
+
         // Generic recursive utility function to find a node in the tree by its id
 		_findNodeById = function (id, array) {
 		    var currentNode,
@@ -24,10 +24,10 @@
 
 		    for (var i = 0; i < array.length; i++) {
 		        currentNode = array[i];
-		        
+
 		        // remove surrounding single quotes from id if they exist
 		        var idCompare = id.toString().replace(/(^')|('$)/g, '');
-                
+
 		        if (currentNode.id.toString() === idCompare) {
 		            return currentNode;
 		        } else if (currentNode.hasChildren) {
@@ -41,7 +41,7 @@
 
 		    return null;
 		},
-        
+
         // Default utility function to attempt to map a SF.Web.UI.Controls.Pickers.TreeViewItem
         // to a more standard JS object.
 		_mapArrayDefault = function (arr) {
@@ -53,7 +53,7 @@
 		            parentId: item.parentId,
 		            hasChildren: item.hasChildren,
 		            isActive: item.isActive,
-                    countInfo: item.countInfo
+		            countInfo: item.countInfo
 		        };
 
 		        if (item.children && typeof item.children.length === 'number') {
@@ -63,7 +63,7 @@
 		        return node;
 		    });
 		},
-        
+
         // Utility function that attempts to derive a node tree structure given an HTML element
         _mapFromHtml = function ($el, attrs) {
             var nodes = [],
@@ -77,17 +77,17 @@
                         hasChildren: $li.children('ul').length > 0,
                         isOpen: $li.attr('data-expanded') === 'true'
                     };
-                
+
                 if (attrs && typeof attrs.length === 'number') {
                     for (var i = 0; i < attrs.length; i++) {
                         node[attrs[i]] = $li.attr('data-' + attrs[i]);
-                    }   
+                    }
                 }
 
                 if (node.hasChildren) {
                     node.children = _mapFromHtml($li, attrs);
                 }
-                
+
                 nodes.push(node);
             });
 
@@ -103,7 +103,7 @@
 				self = this;
 
             this.showLoading(this.$el);
-            
+
             // If Selected Ids is set, pre-select those nodes
             promise.done(function () {
                 if (self.options.selectedIds && typeof self.options.selectedIds.length === 'number') {
@@ -125,18 +125,18 @@
         fetch: function (id) {
             var self = this,
                 startingNode = _findNodeById(id, this.nodes),
-                
+
                 // Using a jQuery Deferred to control when this operation will get returned to the caller.
                 // Since the fetch operation may span multiple AJAX requests, we need a good way to control
                 // how the caller will be notified of completion.
                 dfd = $.Deferred(),
-                
+
                 // Create a queue of Ids to expand the corresponding nodes
                 toExpand = [],
-                
+
                 // Create a "queue" or hash of AJAX calls that are currently in progress
                 inProgress = {},
-                
+
                 // Handler function to determine whether or not the fetch operation is complete.
                 onProgressNotification = function () {
                     var numberInQueue = Object.keys(inProgress).length;
@@ -149,7 +149,7 @@
                         dfd.resolve();
                     }
                 },
-                
+
                 // Wrapper function around jQuery.ajax. Appends a handler to databind the
                 // resulting JSON from the server and returns the promise
                 getNodes = function (parentId, parentNode) {
@@ -168,15 +168,17 @@
                     }
 
                     self.clearError();
-                    
+
                     return $.ajax({
-                            url: restUrl,
-                            dataType: 'json',
-                            contentType: 'application/json'
-                        })
+                        url: restUrl,
+                        dataType: 'json',
+                        contentType: 'application/json'
+                    })
                         .done(function (data) {
                             try {
                                 self.dataBind(data, parentNode);
+                                if (self.options.success)
+                                    self.options.success(data);
                             } catch (e) {
                                 dfd.reject(e);
                             }
@@ -217,7 +219,7 @@
 
                         // If we find the node, make sure it's expanded, and fetch its children
                         currentNode.isOpen = true;
-                        
+
                         // Queue up current node
                         inProgress[currentId] = currentId;
                         getNodes(currentId, currentNode).done(function () {
@@ -231,13 +233,15 @@
 
                 // When databound, check to see if fetching is complete
                 this.events.on('nodes:dataBound', onProgressNotification);
-                
+
                 // Get initial node's data
                 getNodes(id, startingNode);
             } else if (this.options.local) {
                 // Assuming there is local data defined, attempt to databind it
                 try {
                     this.dataBind(this.options.local);
+                    if (this.options.success)
+                        this.options.success(this.options.local);
                     dfd.resolve();
                 } catch (e) {
                     dfd.reject(e);
@@ -250,7 +254,7 @@
 
             return dfd.promise();
         },
-        
+
         // Attempt to load data returned by `fetch` into the current sfTree's
         // node data structure
         dataBind: function (data, parentNode) {
@@ -264,7 +268,7 @@
             // Call configured `mapData` function. If it wasn't overridden by the user,
             // `_mapArrayDefault` will be called.
             nodeArray = this.options.mapping.mapData(data);
-            
+
             for (i = 0; i < nodeArray.length; i++) {
                 nodeArray[i].isOpen = false;
             }
@@ -272,7 +276,7 @@
             // If a parent node is supplied, append the result set to the parent node.
             if (parentNode) {
                 parentNode.children = nodeArray;
-            // Otherwise the result set would be the root array.
+                // Otherwise the result set would be the root array.
             } else {
                 this.nodes = nodeArray;
             }
@@ -283,7 +287,7 @@
             this.$el.trigger('sfTree:dataBound');
             return nodeArray;
         },
-        
+
         // Recursively render out each node in the DOM via the `$el` property
         render: function () {
             var self = this,
@@ -297,7 +301,7 @@
 
 				    $li.addClass('sftree-item')
 						.addClass(node.hasChildren ? 'sftree-folder' : 'sftree-leaf')
-                        .addClass( ( !node.hasOwnProperty('isActive') || node.isActive )? '' : 'is-inactive')
+                        .addClass((!node.hasOwnProperty('isActive') || node.isActive) ? '' : 'is-inactive')
 						.attr('data-id', node.id)
 						.attr('data-parent-id', node.parentId);
 
@@ -306,7 +310,7 @@
 				        $li.attr('data-' + includeAttrs[i], node[includeAttrs[i]]);
 				    }
 
-                    // ensure we only get Text for the tooltip
+				    // ensure we only get Text for the tooltip
 				    var tmp = document.createElement("DIV");
 				    tmp.innerHTML = node.name;
 				    var nodeText = tmp.textContent || tmp.innerText || "";
@@ -317,7 +321,7 @@
 				    }
 
 				    $li.append('<span class="sftree-name" title="' + nodeText.trim() + '"> ' + node.name + countInfoHtml + '</span>');
-				    
+
 				    for (var i = 0; i < self.selectedNodes.length; i++) {
 				        if (self.selectedNodes[i].id == node.id) {
 				            $li.find('.sftree-name').addClass('selected');
@@ -343,10 +347,10 @@
 				        $childUl = $('<ul/>');
 				        $childUl.addClass('sftree-children');
 
-                        if (!node.isOpen) {
-                            $childUl.hide();
-                        }
-				        
+				        if (!node.isOpen) {
+				            $childUl.hide();
+				        }
+
 				        $li.append($childUl);
 
 				        var l = node.children.length;
@@ -372,7 +376,7 @@
         clearError: function () {
             this.$el.siblings('.js-sftree-alert').remove();
         },
-        
+
         // Render Bootstrap alert displaying the error message.
         renderError: function (msg) {
             this.clearError();
@@ -383,23 +387,23 @@
                 .append(msg);
             $warning.insertBefore(this.$el);
         },
-        
+
         // Show loading spinner
         showLoading: function ($element) {
             $element.append(this.options.loadingHtml);
         },
-        
+
         // Remove loading spinner
         discardLoading: function ($element) {
             $element.find('.sftree-loading').remove();
         },
-        
+
         // Clears all selected nodes
         clear: function () {
             this.selectedNodes = [];
             this.render();
         },
-        
+
         // Sets selected nodes given an array of ids
         setSelected: function (array) {
             this.selectedNodes = [];
@@ -418,7 +422,7 @@
                 }
             }
         },
-        
+
         // Wire up DOM events for sfTree instance
         initTreeEvents: function () {
             var self = this;
@@ -446,7 +450,7 @@
                 } else {
                     node.isOpen = true;
                     $icon.removeClass(closedClass).addClass(openClass);
-                    
+
                     // If the node has children, but they haven't been loaded yet,
                     // attempt to load them first, then re-render
                     if (node.hasChildren && !node.children) {
@@ -493,7 +497,7 @@
                 self.selectedNodes = selectedNodes;
                 self.$el.trigger('sfTree:selected', id);
                 self.$el.trigger('sfTree:itemClicked', id);
-                
+
                 // If there is an array of other events to trigger on select,
                 // loop through them and trigger each, passing along the
                 // currently selected node's id
@@ -520,13 +524,12 @@
         return this.each(function () {
             var $el = $(this);
             var sfTree = $el.data('sfTree');
-            
+
             if (!sfTree) {
                 // create a new sftree
                 sfTree = new SFTree(this, settings);
             }
-            else
-            {
+            else {
                 // use the existing sftree but update the settings and clean up selectedNodes
                 sfTree.options = settings;
                 sfTree.selectedNodes = [];
@@ -546,6 +549,7 @@
         restParams: null,
         local: null,
         multiselect: false,
+        success: null,
         loadingHtml: '<span class="sftree-loading"><i class="fa fa-refresh fa-spin"></i></span>',
         iconClasses: {
             branchOpen: 'fa fa-fw fa-caret-down',
