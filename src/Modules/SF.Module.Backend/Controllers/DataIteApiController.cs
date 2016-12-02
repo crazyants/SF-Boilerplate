@@ -251,7 +251,9 @@ namespace SF.Module.Backend.Controllers
         /// <returns>The entity</returns>
         protected override DataItemEntity OnMapDtoToEntity(DataItemViewModel dto, DataItemEntity entity)
         {
-            var retVal = Mapper.Map<DataItemViewModel, DataItemEntity>(dto);
+         //   var retVal = Mapper.Map<DataItemViewModel, DataItemEntity>(dto);
+
+            var retVal = Mapper.Map<DataItemEntity>(dto, entity);
             return retVal;
         }
         /// <summary>
@@ -262,7 +264,9 @@ namespace SF.Module.Backend.Controllers
         /// <returns>The dto</returns>
         protected override DataItemViewModel OnMapEntityToDto(DataItemEntity entity, DataItemViewModel dto)
         {        
-            var retVal = Mapper.Map<DataItemEntity, DataItemViewModel>(entity);
+           // var retVal = Mapper.Map<DataItemEntity, DataItemViewModel>(entity);
+
+            var retVal = Mapper.Map<DataItemViewModel>(entity, dto);
             return retVal;
         }
     }
