@@ -274,7 +274,10 @@ namespace SF.Core.Web.Base.Controllers
 
                 if (model == null) throw new ValidationException("model not provided");
                 if (id != model.Id) throw new ValidationException("id does not match model id");
-                var entity = CrudDtoMapper.MapDtoToEntity(model);
+                var codetableEntity = await _reader.GetAsync(id);
+                if (codetableEntity == null)
+                    return NotFoundResult($"Code with id {id} not found in {typeof(TCodeTabelModel).Name}.");
+                var entity = CrudDtoMapper.MapDtoToEntity(model, codetableEntity);
                 await _writer.UpdateAsync(entity);
 
                 #endregion

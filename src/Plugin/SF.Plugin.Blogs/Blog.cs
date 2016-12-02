@@ -53,8 +53,6 @@ namespace SF.Plugin.Blogs
             }
         }
 
-
-
         public ICollection<ServiceDescriptor> Services
         {
             get

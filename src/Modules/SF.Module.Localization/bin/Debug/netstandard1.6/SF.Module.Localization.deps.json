@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "e662f68b89679d6f832e50c9ac3e3320be1582d7"
+    "signature": "8f6415c2c12e737faceef60b89570806cf59a1f2"
   },
   "compilationOptions": {},
   "targets": {
@@ -198,7 +198,7 @@
           "lib/netstandard1.3/IdentityModel.AspNetCore.ScopeValidation.dll": {}
         }
       },
-      "IdentityServer4.AccessTokenValidation/1.0.1-rc3": {
+      "IdentityServer4.AccessTokenValidation/1.0.1-rc4": {
         "dependencies": {
           "IdentityModel.AspNetCore.OAuth2Introspection": "1.0.1",
           "IdentityModel.AspNetCore.ScopeValidation": "1.0.0",
@@ -3107,7 +3107,7 @@
           "EPPlus.Core": "1.0.2",
           "FluentValidation": "6.4.0-beta3",
           "IdentityModel": "2.0.0",
-          "IdentityServer4.AccessTokenValidation": "1.0.1-rc3",
+          "IdentityServer4.AccessTokenValidation": "1.0.1-rc4",
           "LinqKit": "1.1.7.3",
           "MailKit": "1.4.0",
           "MediatR": "2.1.0",
@@ -3298,10 +3298,10 @@
       "serviceable": true,
       "sha512": "sha512-xffIiCCBi9CqBWVmjUhFizxyZa7Tr2sVW84oR93HixBnjim8jpVhiPak3T+xQ9OGIE9m53SFnUx7zExOXGUVAg=="
     },
-    "IdentityServer4.AccessTokenValidation/1.0.1-rc3": {
+    "IdentityServer4.AccessTokenValidation/1.0.1-rc4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hLuQ6S3RFanKfaA8/xy5Qi6AyePA7ilXfR3w/iNI4PjgZMfcYx3XNrz6/jdBHyO6QC6vbzukQaLgV83zgbqOKw=="
+      "sha512": "sha512-psM1VOcPgGPsxHk6vES1I/11vZayL4svBTnlX3F+ZZ9eiPzWjUixTxwqP2pcDb4PQ08g/EY0OJGGI7etUU7N6A=="
     },
     "LinqKit/1.1.7.3": {
       "type": "package",

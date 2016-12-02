@@ -17,7 +17,7 @@ namespace SF.Core.Data
     public class CoreDbContext : IdentityDbContext<UserEntity, RoleEntity, long, IdentityUserClaim<long>, UserRoleEntity, IdentityUserLogin<long>, IdentityRoleClaim<long>, IdentityUserToken<long>>
     {
 
-        public CoreDbContext(DbContextOptions options) : base(options)
+        public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
         {
 
             Database.EnsureCreated();

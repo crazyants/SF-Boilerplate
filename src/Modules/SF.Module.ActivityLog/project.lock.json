@@ -219,7 +219,7 @@
           "lib/netstandard1.3/IdentityModel.AspNetCore.ScopeValidation.dll": {}
         }
       },
-      "IdentityServer4.AccessTokenValidation/1.0.1-rc3": {
+      "IdentityServer4.AccessTokenValidation/1.0.1-rc4": {
         "type": "package",
         "dependencies": {
           "IdentityModel.AspNetCore.OAuth2Introspection": "1.0.1",
@@ -4380,10 +4380,10 @@
           "SF.Core.QueryExtensions": "1.0.0",
           "SaasKit.Multitenancy": "1.1.0",
           "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
+          "System.Globalization.Extensions": "4.3.0",
           "System.Linq.Dynamic.Core": "1.0.6.8",
           "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
           "Z.EntityFramework.Plus.EFCore": "1.4.10",
           "protobuf-net": "2.1.0",
           "valueinjecter": "3.1.1.3"
@@ -4413,9 +4413,9 @@
           "NETStandard.Library": "1.6.1",
           "NodaTime": "2.0.0-alpha20160523",
           "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
+          "System.Globalization.Extensions": "4.3.0",
           "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0"
+          "System.Reflection.TypeExtensions": "4.3.0"
         },
         "compile": {
           "netstandard1.6/SF.Core.Abstraction.dll": {}
@@ -4444,9 +4444,9 @@
           "NodaTime": "2.0.0-alpha20160523",
           "SF.Core.Abstraction": "1.0.0",
           "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
+          "System.Globalization.Extensions": "4.3.0",
           "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0"
+          "System.Reflection.TypeExtensions": "4.3.0"
         },
         "compile": {
           "netstandard1.6/SF.Core.EFCore.dll": {}
@@ -4473,9 +4473,9 @@
           "NETStandard.Library": "1.6.1",
           "NodaTime": "2.0.0-alpha20160523",
           "System.ComponentModel.Annotations": "4.1.0",
-          "System.Globalization.Extensions": "4.0.1",
+          "System.Globalization.Extensions": "4.3.0",
           "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0"
+          "System.Reflection.TypeExtensions": "4.3.0"
         },
         "compile": {
           "netstandard1.6/SF.Core.QueryExtensions.dll": {}
@@ -4677,12 +4677,12 @@
         "lib/netstandard1.3/IdentityModel.AspNetCore.ScopeValidation.dll"
       ]
     },
-    "IdentityServer4.AccessTokenValidation/1.0.1-rc3": {
-      "sha512": "hLuQ6S3RFanKfaA8/xy5Qi6AyePA7ilXfR3w/iNI4PjgZMfcYx3XNrz6/jdBHyO6QC6vbzukQaLgV83zgbqOKw==",
+    "IdentityServer4.AccessTokenValidation/1.0.1-rc4": {
+      "sha512": "psM1VOcPgGPsxHk6vES1I/11vZayL4svBTnlX3F+ZZ9eiPzWjUixTxwqP2pcDb4PQ08g/EY0OJGGI7etUU7N6A==",
       "type": "package",
-      "path": "IdentityServer4.AccessTokenValidation/1.0.1-rc3",
+      "path": "IdentityServer4.AccessTokenValidation/1.0.1-rc4",
       "files": [
-        "IdentityServer4.AccessTokenValidation.1.0.1-rc3.nupkg.sha512",
+        "IdentityServer4.AccessTokenValidation.1.0.1-rc4.nupkg.sha512",
         "IdentityServer4.AccessTokenValidation.nuspec",
         "lib/net452/IdentityServer4.AccessTokenValidation.dll",
         "lib/netstandard1.4/IdentityServer4.AccessTokenValidation.dll"

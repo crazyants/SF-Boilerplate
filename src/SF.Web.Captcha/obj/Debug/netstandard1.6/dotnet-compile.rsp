@@ -21,7 +21,7 @@
 --reference:C:\Users\tomny.tang\.nuget\packages\IdentityModel\2.0.0\lib\netstandard1.3\IdentityModel.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\IdentityModel.AspNetCore.OAuth2Introspection\1.0.1\lib\netstandard1.3\IdentityModel.AspNetCore.OAuth2Introspection.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\IdentityModel.AspNetCore.ScopeValidation\1.0.0\lib\netstandard1.3\IdentityModel.AspNetCore.ScopeValidation.dll
---reference:C:\Users\tomny.tang\.nuget\packages\IdentityServer4.AccessTokenValidation\1.0.1-rc3\lib\netstandard1.4\IdentityServer4.AccessTokenValidation.dll
+--reference:C:\Users\tomny.tang\.nuget\packages\IdentityServer4.AccessTokenValidation\1.0.1-rc4\lib\netstandard1.4\IdentityServer4.AccessTokenValidation.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\LinqKit\1.1.7.3\lib\netstandard1.3\LinqKit.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\MailKit\1.4.0\lib\netstandard1.3\MailKit.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\MediatR\2.1.0\lib\netstandard1.1\MediatR.dll
@@ -148,7 +148,7 @@
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Dynamic.Runtime\4.0.11\ref\netstandard1.3\System.Dynamic.Runtime.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Globalization\4.3.0\ref\netstandard1.3\System.Globalization.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Globalization.Calendars\4.3.0\ref\netstandard1.3\System.Globalization.Calendars.dll
---reference:C:\Users\tomny.tang\.nuget\packages\System.Globalization.Extensions\4.0.1\ref\netstandard1.3\System.Globalization.Extensions.dll
+--reference:C:\Users\tomny.tang\.nuget\packages\System.Globalization.Extensions\4.3.0\ref\netstandard1.3\System.Globalization.Extensions.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.IdentityModel.Tokens.Jwt\5.0.0\lib\netstandard1.4\System.IdentityModel.Tokens.Jwt.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Interactive.Async\3.0.0\lib\netstandard1.0\System.Interactive.Async.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.IO\4.3.0\ref\netstandard1.5\System.IO.dll
@@ -176,7 +176,7 @@
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Reflection.Extensions\4.3.0\ref\netstandard1.0\System.Reflection.Extensions.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Reflection.Metadata\1.3.0\lib\netstandard1.1\System.Reflection.Metadata.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Reflection.Primitives\4.3.0\ref\netstandard1.0\System.Reflection.Primitives.dll
---reference:C:\Users\tomny.tang\.nuget\packages\System.Reflection.TypeExtensions\4.1.0\ref\netstandard1.5\System.Reflection.TypeExtensions.dll
+--reference:C:\Users\tomny.tang\.nuget\packages\System.Reflection.TypeExtensions\4.3.0\ref\netstandard1.5\System.Reflection.TypeExtensions.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Resources.Reader\4.0.0\lib\netstandard1.0\System.Resources.Reader.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Resources.ResourceManager\4.3.0\ref\netstandard1.0\System.Resources.ResourceManager.dll
 --reference:C:\Users\tomny.tang\.nuget\packages\System.Runtime\4.3.0\ref\netstandard1.5\System.Runtime.dll

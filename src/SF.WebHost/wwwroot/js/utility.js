@@ -531,7 +531,7 @@
                  $spanNames = $control.find('.selected-names');
 
 
-                    var data_text = $treeView.find('ul').find('[data-id=' + value + ']').find('[class="sftree-name"]').attr("title");
+                    var data_text = $treeView.find('ul').find('[data-id=' + value + ']').find('span').attr("title");
                     if (data_text) {
                         $hfItemNames.val(data_text);
                         $spanNames.text(data_text);
@@ -552,7 +552,7 @@
                     var $ul = $treeView.find('ul');
                     var selectedNames = [];
                     $.each(values, function (index, value) {
-                        var data_text = $ul.find('[data-id=' + value + ']').find('[class="sftree-name"]').attr("title")
+                        var data_text = $ul.find('[data-id=' + value + ']').find('span').attr("title")
                         selectedNames.push(data_text);
                     });
 

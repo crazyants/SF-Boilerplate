@@ -13,5 +13,7 @@ PM> Update-Database -ConfigurationTypeName Configuration
 
 //添加更改脚本
 PM> Add-Migration [脚本名] -ConfigurationTypeName MigrationsConfiguration
+//多数据
+ PM> Add-Migration Modify_Multi -Context UnicornsContext
 //更新脚本
 PM> Update-Database -ConfigurationTypeName MigrationsConfiguration

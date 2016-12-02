@@ -12,7 +12,8 @@ var paths = {
 var modules = [
     'SF.Module.ActivityLog',
     'SF.Module.Backend',
-    'SF.Module.Localization'
+    'SF.Module.Localization',
+    'SF.Module.SimpleData'
 ];
 
 gulp.task('clean-module', function () {
@@ -27,6 +28,9 @@ gulp.task('copy-modules', ['clean-module'], function () {
             .pipe(gulp.dest(paths.hostModules + module));
         gulp.src(paths.devModules + module + '/bin/Debug/netstandard1.6/**/' + module + '.*')
             .pipe(gulp.dest(paths.hostModules + module + '/bin'));
+        gulp.src(paths.devModules + module + '/bin/Debug/netcoreapp1.0/**/' + module + '.*')
+           .pipe(gulp.dest(paths.hostModules + module + '/bin'));
+
     });
 
     //gulp.src(paths.devModules + 'SF.Module.SampleData/SampleContent/**/*.*')

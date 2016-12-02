@@ -4,7 +4,7 @@
   "dependencies": {
     "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
     "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-preview1-final",
     "Microsoft.AspNetCore.Mvc": "1.0.*",
     "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.*",
     "NETStandard.Library": "1.6.1",

@@ -16,6 +16,7 @@ namespace SF.Module.SimpleData
         public bool IsResort { get; set; }  //是否度假胜地
 
         public Destination Destination { get; set; }
+        public struct aa { }
     }
 
     /// <summary>

@@ -160,6 +160,8 @@ namespace SF.Core.Data
             modelBuilder.Entity<DataItemEntity>(b =>
             {
                 b.HasKey(x => x.Id);
+                b.Property(u => u.ItemName).HasMaxLength(1000);
+                b.Property(u => u.ItemCode).HasMaxLength(1000);
                 b.Property(u => u.Description).HasMaxLength(1000);
                 b.MapCreatedMeta().MapUpdatedMeta();
                 b.ToTable("Core_DataItem");

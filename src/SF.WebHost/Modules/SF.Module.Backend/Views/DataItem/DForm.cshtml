@@ -10,6 +10,22 @@
     })
     //初始化控件
     function initControl() {
+
+        //获取表单
+        if (!!keyValue) {
+            SF.utility.setForm({
+                url: "/Api/DataItem/" + keyValue,
+                success: function (data) {
+                    SF.utility.setWebControls('form1', data);
+                    onBeforLoadForm(data.ParentId);
+                }
+            });
+        } else {
+            onBeforLoadForm(ParentId);
+        }
+    }
+    function onBeforLoadForm(parentId)
+    {
         //上级
         SF.controls.itemPicker.initialize({
             controlId: 'SelectParentId',
@@ -18,22 +34,9 @@
             defaultText: '',
             expandedIds: [0],
             success: function (data) {
-                SF.utility.comboBoxTreeSetValue($("#SelectParentId"), data.ParentId);
+                SF.utility.comboBoxTreeSetValue($("#SelectParentId"), parentId);
             }
         });
-        //获取表单
-        if (!!keyValue) {
-            SF.utility.setForm({
-                url: "/Api/DataItem/" + keyValue,
-                success: function (data) {
-                    SF.utility.setWebControls('form1', data);
-                }
-            });
-        } else {
-            SF.utility.comboBoxTreeSetValue($("#SelectParentId"), ParentId);
-
-        }
-
 
     }
     //保存表单

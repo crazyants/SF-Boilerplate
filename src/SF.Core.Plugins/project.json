@@ -16,9 +16,9 @@
     "SF.Core": "1.0.0-*",
     "SF.Core.Abstraction": "1.0.0-*",
     "System.ComponentModel.Annotations": "4.1.0",
-    "System.Globalization.Extensions": "4.0.1",
+    "System.Globalization.Extensions": "4.3.0",
     "System.Linq.Queryable": "4.0.1",
-    "System.Reflection.TypeExtensions": "4.1.0",
+    "System.Reflection.TypeExtensions": "4.3.0",
     "valueinjecter": "3.1.1.3"
   },
 
