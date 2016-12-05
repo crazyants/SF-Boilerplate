@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
-using Omu.ValueInjecter;
-using SF.Core.Security;
 using SF.Core.Entitys;
 using SF.Core.Common;
 using SF.Core.Extensions;
 using System.Collections.Generic;
+using AutoMapper;
 
 namespace SF.Core.Security.Converters
 {
@@ -15,9 +13,8 @@ namespace SF.Core.Security.Converters
         public static Role ToCoreModel(this RoleEntity source, IPermissionScopeService scopeService)
         {
             var result = new Role();
-            result.InjectFrom(source);
-  
-           result.Permissions = source.RolePermissions.Select(rp => rp.ToCoreModel(scopeService)).ToArray();
+            result = Mapper.Map<RoleEntity, Role>(source);
+            result.Permissions = source.RolePermissions.Select(rp => rp.ToCoreModel(scopeService)).ToArray();
             return result;
         }
 
@@ -29,13 +26,13 @@ namespace SF.Core.Security.Converters
                 Description = source.Description,
             };
 
-                result.Id = source.Id;
+            result.Id = source.Id;
 
             result.RolePermissions = new NullCollection<RolePermissionEntity>();
 
             if (source.Permissions != null)
             {
-                result.RolePermissions = new List<RolePermissionEntity>(source.Permissions.Select(x=> x.ToRolePemissionDataModel()));
+                result.RolePermissions = new List<RolePermissionEntity>(source.Permissions.Select(x => x.ToRolePemissionDataModel()));
             }
             return result;
         }
@@ -52,9 +49,7 @@ namespace SF.Core.Security.Converters
             if (target == null)
                 throw new ArgumentNullException("target");
 
-            var patchInjection = new PatchInjection<RoleEntity>(x => x.Name, x => x.Description);
-            target.InjectFrom(patchInjection, source);
-
+            target = Mapper.Map<RoleEntity, RoleEntity>(source);
             if (!source.RolePermissions.IsNullCollection())
             {
                 var comparer = AnonymousComparer.Create((RolePermissionEntity rp) => rp.PermissionId);

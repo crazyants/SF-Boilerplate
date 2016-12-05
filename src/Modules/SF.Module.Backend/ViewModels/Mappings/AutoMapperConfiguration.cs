@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace SF.Module.Backend.ViewModels.Mappings
 {
-    public class AutoMapperConfiguration
+    public class AutoMapperConfiguration2
     {
         public static void Configure()
         {

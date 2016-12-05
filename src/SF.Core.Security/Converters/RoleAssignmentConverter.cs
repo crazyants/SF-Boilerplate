@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Omu.ValueInjecter;
 using SF.Core.Entitys;
+using AutoMapper;
 
 namespace SF.Core.Security.Converters
 {
@@ -13,9 +13,7 @@ namespace SF.Core.Security.Converters
             if (target == null)
                 throw new ArgumentNullException("target");
 
-            var patchInjection = new PatchInjection<UserRoleEntity>(x => x.RoleId, x => x.UserId);
-            target.InjectFrom(patchInjection, source);
-
+            target = Mapper.Map<UserRoleEntity, UserRoleEntity>(source);
         }
     }
 }

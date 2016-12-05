@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using Omu.ValueInjecter;
 using Microsoft.AspNetCore.Identity;
-using SF.Core.Security;
+using AutoMapper;
 
 namespace SF.Core.Security.Converters
 {
@@ -10,8 +9,7 @@ namespace SF.Core.Security.Converters
         public static SecurityResult ToCoreModel(this IdentityResult dataModel)
         {
             var result = new SecurityResult();
-            result.InjectFrom(dataModel);
-
+            result = Mapper.Map<IdentityResult, SecurityResult>(dataModel);
             if (dataModel.Errors != null)
                 result.Errors = dataModel.Errors.Select(x=>x.Description).ToArray();
 

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SF.Core.Data;
+using SF.Core.Entitys;
 
 namespace SF.WebHost.Migrations
 {
@@ -13,7 +14,7 @@ namespace SF.WebHost.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1")
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<long>", b =>
@@ -99,11 +100,11 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("SourceId")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 50);
+                        .HasMaxLength(50);
 
                     b.Property<string>("TypeName")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 
@@ -125,9 +126,14 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<long>("DistrictId");
 
@@ -139,7 +145,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("UpdatedOn");
 
@@ -165,18 +171,22 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("AppId")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<bool>("IsActive");
 
                     b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("SecretKey");
 
@@ -184,7 +194,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("UpdatedOn");
 
@@ -203,6 +213,10 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<string>("Name");
 
@@ -224,14 +238,19 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<int?>("DeleteMark");
 
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<string>("Description")
-                        .HasAnnotation("MaxLength", 1000);
+                        .HasMaxLength(1000);
 
                     b.Property<int?>("EnabledMark");
 
@@ -257,7 +276,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("UpdatedOn");
 
@@ -275,14 +294,19 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<int?>("DeleteMark");
 
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<string>("Description")
-                        .HasAnnotation("MaxLength", 1000);
+                        .HasMaxLength(1000);
 
                     b.Property<int?>("EnabledMark");
 
@@ -290,9 +314,11 @@ namespace SF.WebHost.Migrations
 
                     b.Property<int?>("IsTree");
 
-                    b.Property<string>("ItemCode");
+                    b.Property<string>("ItemCode")
+                        .HasMaxLength(1000);
 
-                    b.Property<string>("ItemName");
+                    b.Property<string>("ItemName")
+                        .HasMaxLength(1000);
 
                     b.Property<long?>("ParentId");
 
@@ -300,7 +326,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("UpdatedOn");
 
@@ -317,6 +343,10 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<string>("Location");
 
@@ -348,6 +378,10 @@ namespace SF.WebHost.Migrations
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("RoutingAction");
@@ -375,6 +409,10 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<string>("FileName");
 
@@ -406,12 +444,16 @@ namespace SF.WebHost.Migrations
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<bool>("IsActive");
 
                     b.Property<bool>("IsSuccessSend");
 
                     b.Property<string>("Language")
-                        .HasAnnotation("MaxLength", 10);
+                        .HasMaxLength(10);
 
                     b.Property<DateTime?>("LastFailAttemptDate");
 
@@ -420,19 +462,19 @@ namespace SF.WebHost.Migrations
                     b.Property<int>("MaxAttemptCount");
 
                     b.Property<string>("ObjectId")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("ObjectTypeId")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("Recipient")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("Sender")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("SendingGateway")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTime?>("SentDate");
 
@@ -441,10 +483,10 @@ namespace SF.WebHost.Migrations
                     b.Property<DateTime?>("StartSendingDate");
 
                     b.Property<string>("Subject")
-                        .HasAnnotation("MaxLength", 512);
+                        .HasMaxLength(512);
 
                     b.Property<string>("Type")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("UpdatedBy");
 
@@ -466,19 +508,23 @@ namespace SF.WebHost.Migrations
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<bool>("IsDefault");
 
                     b.Property<string>("Language")
-                        .HasAnnotation("MaxLength", 10);
+                        .HasMaxLength(10);
 
                     b.Property<string>("NotificationTypeId")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("ObjectId")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("ObjectTypeId")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("Recipient");
 
@@ -489,7 +535,7 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("Subject");
 
                     b.Property<string>("TemplateEngine")
-                        .HasAnnotation("MaxLength", 64);
+                        .HasMaxLength(64);
 
                     b.Property<string>("UpdatedBy");
 
@@ -507,21 +553,25 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("UpdatedOn");
 
@@ -539,19 +589,23 @@ namespace SF.WebHost.Migrations
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<string>("Label")
-                        .HasAnnotation("MaxLength", 1024);
+                        .HasMaxLength(1024);
 
                     b.Property<long>("RolePermissionId");
 
                     b.Property<string>("Scope")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 1024);
+                        .HasMaxLength(1024);
 
                     b.Property<int>("SortIndex");
 
                     b.Property<string>("Type")
-                        .HasAnnotation("MaxLength", 255);
+                        .HasMaxLength(255);
 
                     b.Property<string>("UpdatedBy");
 
@@ -575,10 +629,10 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -595,9 +649,13 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<long>("PermissionId");
 
@@ -607,7 +665,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("UpdatedOn");
 
@@ -627,12 +685,17 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<string>("Description")
-                        .HasAnnotation("MaxLength", 1024);
+                        .HasMaxLength(1024);
 
                     b.Property<bool>("IsEnum");
 
@@ -643,20 +706,20 @@ namespace SF.WebHost.Migrations
                     b.Property<bool>("IsSystem");
 
                     b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("ObjectType")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("SettingValueType")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 64);
+                        .HasMaxLength(64);
 
                     b.Property<int>("SortIndex");
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("UpdatedOn");
 
@@ -680,17 +743,21 @@ namespace SF.WebHost.Migrations
 
                     b.Property<decimal>("DecimalValue");
 
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<int>("IntegerValue");
 
                     b.Property<string>("Locale")
-                        .HasAnnotation("MaxLength", 64);
+                        .HasMaxLength(64);
 
                     b.Property<string>("LongTextValue");
 
                     b.Property<long>("SettingId");
 
                     b.Property<string>("ShortTextValue")
-                        .HasAnnotation("MaxLength", 512);
+                        .HasMaxLength(512);
 
                     b.Property<int>("SortIndex");
 
@@ -700,7 +767,7 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("ValueType")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 64);
+                        .HasMaxLength(64);
 
                     b.HasKey("Id");
 
@@ -719,6 +786,10 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<string>("Name");
 
@@ -745,6 +816,10 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<long>("EntityId");
 
@@ -778,6 +853,10 @@ namespace SF.WebHost.Migrations
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<DateTimeOffset?>("LastUsedOn");
 
                     b.Property<int>("SortIndex");
@@ -805,26 +884,26 @@ namespace SF.WebHost.Migrations
                     b.Property<int>("AccessFailedCount");
 
                     b.Property<string>("AccountState")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<long?>("CurrentShippingAddressId");
 
                     b.Property<string>("DeletedBy")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -839,10 +918,10 @@ namespace SF.WebHost.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
 
@@ -856,17 +935,17 @@ namespace SF.WebHost.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.Property<DateTimeOffset>("UpdatedOn");
 
                     b.Property<Guid>("UserGuid");
 
                     b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("UserType")
-                        .HasAnnotation("MaxLength", 128);
+                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 
@@ -892,8 +971,6 @@ namespace SF.WebHost.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Core_UserRole");
                 });
 
@@ -907,6 +984,10 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<long>("EntityId");
 
@@ -934,6 +1015,10 @@ namespace SF.WebHost.Migrations
 
                     b.Property<DateTimeOffset>("CreatedOn");
 
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
+
                     b.Property<string>("Name");
 
                     b.Property<int>("SortIndex");
@@ -955,6 +1040,10 @@ namespace SF.WebHost.Migrations
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTimeOffset>("CreatedOn");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<string>("Name");
 
@@ -979,6 +1068,10 @@ namespace SF.WebHost.Migrations
                     b.Property<DateTimeOffset>("CreatedOn");
 
                     b.Property<long?>("CultureId");
+
+                    b.Property<string>("DeletedBy");
+
+                    b.Property<DateTimeOffset?>("DeletedOn");
 
                     b.Property<string>("Key");
 

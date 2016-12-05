@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using Omu.ValueInjecter;
 using SF.Core.Entitys;
 using SF.Core.Common;
 using SF.Core.Extensions;
+using AutoMapper;
 
 namespace SF.Core.Settings.Converters
 {
@@ -16,7 +16,7 @@ namespace SF.Core.Settings.Converters
 		public static SettingEntry ToModel(this SettingEntity entity)
 		{
 			var result = new SettingEntry();
-			result.InjectFrom(entity);
+            result = Mapper.Map<SettingEntity, SettingEntry>(entity);
             result.ValueType = (SettingValueType)Enum.Parse(typeof(SettingValueType), entity.SettingValueType);
 			var existingValues = entity.SettingValues.Select(x => x.ToString(CultureInfo.InvariantCulture)).ToArray();
 
@@ -65,7 +65,7 @@ namespace SF.Core.Settings.Converters
                 throw new ArgumentNullException("setting");
 
             var retVal = new SettingEntity();
-            retVal.InjectFrom(setting);
+            retVal = Mapper.Map<SettingEntry, SettingEntity>(setting);
             retVal.SettingValueType = setting.ValueType.ToString();
             retVal.IsEnum = setting.IsArray;
 

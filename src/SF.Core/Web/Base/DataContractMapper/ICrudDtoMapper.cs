@@ -1,6 +1,7 @@
 ﻿
 using SF.Core.Abstraction.Entitys;
 using SF.Core.Web.Base.Datatypes;
+using System.Collections.Generic;
 
 namespace SF.Core.Web.Base.DataContractMapper
 {
@@ -41,7 +42,12 @@ namespace SF.Core.Web.Base.DataContractMapper
         /// <param name="entity">The already existing entity</param>
         /// <returns>The mapped dto</returns>
         TEntity MapDtoToEntity(TDto dto, TEntity entity);
-     
 
+        /// <summary>
+        /// Maps the given entitys to the already existing dtos
+        /// </summary>
+        /// <param name="entitys">The entitys to map</param>
+        /// <returns>The mapped dtos</returns>
+        IEnumerable<TDto> MapEntityToDtos(IEnumerable<TEntity> entitys);
     }
 }

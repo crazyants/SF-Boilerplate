@@ -13,7 +13,7 @@ namespace SF.Core.Data
         {
             modelBuilder.Entity<UserEntity>(cfg =>
             {
-                cfg.MapCreatedMeta().MapUpdatedMeta().MapDeletedMeta();
+                cfg.MapCreatedMeta().MapUpdatedMeta().MapDeletedMeta().MapDeletedMeta();
                 cfg.ToTable("Core_User");
             });
 
@@ -78,7 +78,7 @@ namespace SF.Core.Data
                     .WithMany()
                     .OnDelete(DeleteBehavior.Restrict);
 
-                x.MapCreatedMeta().MapUpdatedMeta();
+                x.MapCreatedMeta().MapUpdatedMeta().MapDeletedMeta();
             });
             #region Security
 
@@ -138,13 +138,13 @@ namespace SF.Core.Data
             modelBuilder.Entity<SettingEntity>(b =>
             {
                 b.HasKey(uc => uc.Id);
-                b.MapCreatedMeta().MapUpdatedMeta();
+                b.MapCreatedMeta().MapUpdatedMeta().MapDeletedMeta();
                 b.ToTable("Core_Setting");
             });
             modelBuilder.Entity<SettingEntity>(b =>
             {
                 b.HasKey(uc => uc.Id);
-                b.MapCreatedMeta().MapUpdatedMeta();
+                b.MapCreatedMeta().MapUpdatedMeta().MapDeletedMeta();
                 b.ToTable("Core_SettingValue");
             });
 
@@ -163,7 +163,7 @@ namespace SF.Core.Data
                 b.Property(u => u.ItemName).HasMaxLength(1000);
                 b.Property(u => u.ItemCode).HasMaxLength(1000);
                 b.Property(u => u.Description).HasMaxLength(1000);
-                b.MapCreatedMeta().MapUpdatedMeta();
+                b.MapCreatedMeta().MapUpdatedMeta().MapDeletedMeta();
                 b.ToTable("Core_DataItem");
             });
 
@@ -171,7 +171,7 @@ namespace SF.Core.Data
             {
                 b.HasKey(x => x.Id);
                 b.Property(u => u.Description).HasMaxLength(1000);
-                b.MapCreatedMeta().MapUpdatedMeta();
+                b.MapCreatedMeta().MapUpdatedMeta().MapDeletedMeta();
                 b.ToTable("Core_DataItemDetail");
             });
 

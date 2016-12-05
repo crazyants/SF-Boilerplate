@@ -16,7 +16,7 @@ namespace SF.Core.Abstraction.Entitys
  
     }
 
-    public abstract class BaseEntity<TKey> : EntityWithCreatedAndUpdatedMeta<TKey>
+    public abstract class BaseEntity<TKey> : EntityWithAllMeta<TKey>
     {
 
         /// <summary>

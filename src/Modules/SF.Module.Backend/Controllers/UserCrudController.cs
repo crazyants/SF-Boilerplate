@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Omu.ValueInjecter;
 using SF.Core.Data;
 using SF.Core.Entitys;
 using SF.Core.Web.Base.Controllers;

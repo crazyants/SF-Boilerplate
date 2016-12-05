@@ -1,6 +1,7 @@
-﻿using Omu.ValueInjecter;
+﻿
 using webModel = SF.Module.Backend.ViewModels.Setting;
 using moduleModel = SF.Core.Settings;
+using AutoMapper;
 
 namespace SF.Module.Backend.Converters.Settings
 {
@@ -9,15 +10,17 @@ namespace SF.Module.Backend.Converters.Settings
         public static webModel.SettingViewModel ToWebModel(this moduleModel.SettingEntry setting)
         {
 			var retVal = new webModel.SettingViewModel();
-			retVal.InjectFrom(setting);
+	 
+            retVal = Mapper.Map<moduleModel.SettingEntry, webModel.SettingViewModel>(setting);
             return retVal;
         }
 
 		public static moduleModel.SettingEntry ToModuleModel(this webModel.SettingViewModel setting)
         {
 			var retVal = new moduleModel.SettingEntry();
-			retVal.InjectFrom(setting);
-			return retVal;
+		 
+            retVal = Mapper.Map <webModel.SettingViewModel,moduleModel.SettingEntry>(setting);
+            return retVal;
         }
     }
 }

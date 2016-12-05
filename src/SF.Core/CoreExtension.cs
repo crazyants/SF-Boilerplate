@@ -49,6 +49,8 @@ using SF.Core.Web.Api.JsonConverters;
 using Newtonsoft.Json;
 using SF.Core.Web.Middleware;
 using SF.Core.Abstraction.Interceptors;
+using AutoMapper;
+using SF.Core.Abstraction.Mapping;
 
 namespace SF.Core
 {
@@ -242,7 +244,7 @@ namespace SF.Core
             services.AddSingleton<ViewRenderer>();
 
             services.AddSingleton<IInterceptor, AuditableInterceptor>();
-
+        
 
             services.AddScoped<HandlerExceptionFilter>();
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -376,6 +378,7 @@ namespace SF.Core
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials();
             });
 
+         
             //  applicationBuilder.UseMultitenancy<SiteContext>();
             //多租户
             // var storage = configurationRoot["DevOptions:DbPlatform"];

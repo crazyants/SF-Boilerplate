@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Omu.ValueInjecter;
 using SF.Core.Common;
 using SF.Core.Data;
 using SF.Core.Entitys;
 using SF.Core.Extensions;
 using SF.Core.QueryExtensions.Extensions;
-using SF.Core.Web.Attributes;
 using SF.Core.Web.Base.Controllers;
 using SF.Core.Web.Base.DataContractMapper;
 using SF.Core.Web.Models.GridTree;
@@ -30,12 +29,12 @@ namespace SF.Module.Backend.Controllers
     /// </summary>
     [Authorize]
     [Route("Api/DataItem/")]
-    public class DataIteApiController : CrudControllerBase<DataItemEntity, DataItemViewModel>
+    public class DataItemApiController : CrudControllerBase<DataItemEntity, DataItemViewModel>
     {
         private readonly IBaseUnitOfWork _baseUnitOfWork;
-        public DataIteApiController(IServiceCollection collection, ILogger<UserCrudController> logger,
+        public DataItemApiController(IServiceCollection collection, ILogger<DataItemApiController> logger,
              IBaseUnitOfWork baseUnitOfWork)
-            : base( baseUnitOfWork, collection, logger)
+            : base(baseUnitOfWork, collection, logger)
         {
             this._baseUnitOfWork = baseUnitOfWork;
             CrudDtoMapper = new DataItemDtoMapper();
@@ -123,7 +122,7 @@ namespace SF.Module.Backend.Controllers
             foreach (DataItemEntity item in data)
             {
                 TreeGridEntity tree = new TreeGridEntity();
-                bool hasChildren = data.Count(t => t.ParentId == item.Id) == 0 ? false : true;
+                bool hasChildren = data.Count(t => t.ParentId == item.Id && t.ParentId != t.Id) == 0 ? false : true;
                 tree.id = item.Id.ToString();
                 tree.parentId = item.ParentId.HasValue ? item.ParentId.Value.ToString() : "";
                 tree.expanded = true;
@@ -135,7 +134,7 @@ namespace SF.Module.Backend.Controllers
         }
 
         /// <summary>
-        /// 用户列表
+        /// 分类列表
         /// </summary>
         /// <param name="pagination">分页参数</param>
         /// <param name="queryJson">查询参数</param>
@@ -146,15 +145,16 @@ namespace SF.Module.Backend.Controllers
         {
 
             var query = _repository.QueryPage(page: request.PageIndex, pageSize: request.RecordsCount);
+         var dtos=   CrudDtoMapper.MapEntityToDtos(query);
             JqGridResponse response = new JqGridResponse()
             {
                 TotalPagesCount = query.TotalPages,
                 PageIndex = request.PageIndex,
                 TotalRecordsCount = query.TotalCount,
             };
-            foreach (DataItemEntity userEntity in query)
+            foreach (DataItemViewModel userInput in dtos)
             {
-                response.Records.Add(new JqGridRecord(Convert.ToString(userEntity.Id), userEntity));
+                response.Records.Add(new JqGridRecord(Convert.ToString(userInput.Id), userInput));
             }
 
             response.Reader.RepeatItems = false;
@@ -206,36 +206,6 @@ namespace SF.Module.Backend.Controllers
         }
         #endregion
 
-        #region 提交数据
-        /// <summary>
-        /// 删除分类
-        /// </summary>
-        /// <param name="keyValue">主键值</param>
-        /// <returns></returns>
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[HandlerAjaxOnly]
-        //public ActionResult RemoveForm(string keyValue)
-        //{
-        //    dataItemBLL.RemoveForm(keyValue);
-        //    base.UpdateAsync
-        //    return Success("删除成功。");
-        //}
-        /// <summary>
-        /// 保存分类表单（新增、修改）
-        /// </summary>
-        /// <param name="keyValue">主键值</param>
-        /// <param name="dataItemEntity">分类实体</param>
-        /// <returns></returns>
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[HandlerAjaxOnly]
-        //public ActionResult SaveForm(string keyValue, DataItemEntity dataItemEntity)
-        //{
-        //    dataItemBLL.SaveForm(keyValue, dataItemEntity);
-        //    return Success("操作成功。");
-        //}
-        #endregion
     }
 
     /// <summary>
@@ -243,6 +213,8 @@ namespace SF.Module.Backend.Controllers
     /// </summary>
     public class DataItemDtoMapper : CrudDtoMapper<DataItemEntity, DataItemViewModel>
     {
+
+
         /// <summary>
         /// DTO转换领域的实体映射
         /// </summary>
@@ -251,10 +223,8 @@ namespace SF.Module.Backend.Controllers
         /// <returns>The entity</returns>
         protected override DataItemEntity OnMapDtoToEntity(DataItemViewModel dto, DataItemEntity entity)
         {
-         //   var retVal = Mapper.Map<DataItemViewModel, DataItemEntity>(dto);
-
-            var retVal = Mapper.Map<DataItemEntity>(dto, entity);
-            return retVal;
+            Mapper.Map<DataItemViewModel, DataItemEntity>(dto, entity);
+            return entity;
         }
         /// <summary>
         /// 领域的实体转换DTO映射
@@ -263,11 +233,20 @@ namespace SF.Module.Backend.Controllers
         /// <param name="dto">DTO映射实体</param>
         /// <returns>The dto</returns>
         protected override DataItemViewModel OnMapEntityToDto(DataItemEntity entity, DataItemViewModel dto)
-        {        
-           // var retVal = Mapper.Map<DataItemEntity, DataItemViewModel>(entity);
-
-            var retVal = Mapper.Map<DataItemViewModel>(entity, dto);
-            return retVal;
+        {
+            Mapper.Map<DataItemEntity, DataItemViewModel>(entity, dto);
+            return dto;
+        }
+        /// <summary>
+        /// 领域的实体转换List<dto>映射
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        protected override IEnumerable<DataItemViewModel> OnMapEntityToDtos(IEnumerable<DataItemEntity> entitys)
+        {
+            var dtos = Mapper.Map<IEnumerable<DataItemEntity>, IEnumerable<DataItemViewModel>>(entitys);
+            return dtos;
         }
     }
 }

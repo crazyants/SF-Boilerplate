@@ -3,6 +3,23 @@
   "version": 2,
   "targets": {
     ".NETStandard,Version=v1.6": {
+      "AutoMapper/5.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1",
+          "NETStandard.Library": "1.6.0",
+          "System.Collections.Specialized": "4.0.1",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Linq.Queryable": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
+        }
+      },
       "CacheManager.Core/0.9.1": {
         "type": "package",
         "dependencies": {
@@ -1772,7 +1789,7 @@
           "System.Threading": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Collections.Specialized.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Collections.Specialized.dll": {}
@@ -3441,6 +3458,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
+          "AutoMapper": "5.2.0",
           "CacheManager.Core": "0.9.1",
           "MailKit": "1.4.0",
           "MediatR": "2.1.0",
@@ -3469,6 +3487,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/5.2.0": {
+      "sha512": "ulUMmzFg1vAFMpTyJsplgnC7pOIFlb25dbldHd7J4eroQWjSV4iAoOQ33h1oMjf6mLo3uZ8aRNUN2rgpOeSE1w==",
+      "type": "package",
+      "path": "AutoMapper/5.2.0",
+      "files": [
+        "AutoMapper.5.2.0.nupkg.sha512",
+        "AutoMapper.nuspec",
+        "lib/net45/AutoMapper.dll",
+        "lib/net45/AutoMapper.xml",
+        "lib/netstandard1.1/AutoMapper.dll",
+        "lib/netstandard1.1/AutoMapper.xml",
+        "lib/netstandard1.3/AutoMapper.dll",
+        "lib/netstandard1.3/AutoMapper.xml"
+      ]
+    },
     "CacheManager.Core/0.9.1": {
       "sha512": "9cciBBtU8T2D558M6qyQYKXi294XF0Vs8f6mSPLxWkPL1p1vOpyVGEmDcXDBBkfs6JBJtgPPGbjd5qWZfjeerw==",
       "type": "package",

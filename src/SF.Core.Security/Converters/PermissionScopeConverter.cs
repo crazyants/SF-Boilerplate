@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Omu.ValueInjecter;
-using SF.Core.Security;
+﻿
+using AutoMapper;
 using SF.Core.Entitys;
 
 namespace SF.Core.Security.Converters
@@ -11,14 +8,15 @@ namespace SF.Core.Security.Converters
     {
         public static PermissionScope ToCoreModel(this  PermissionScopeEntity source, PermissionScope permissionScope)
         {
-            permissionScope.InjectFrom(source);
+         
+            permissionScope = Mapper.Map<PermissionScopeEntity, PermissionScope>(source);
             return permissionScope;
         }
 
         public static PermissionScopeEntity ToDataModel(this PermissionScope source)
         {
             var result = new PermissionScopeEntity();
-            result.InjectFrom(source);
+            result = Mapper.Map<PermissionScope, PermissionScopeEntity>(source);
             return result;
         }
 

@@ -5110,15 +5110,6 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "valueinjecter/3.1.1.3": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard1.6/Omu.ValueInjecter.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.6/Omu.ValueInjecter.dll": {}
-        }
-      },
       "Z.EntityFramework.Plus.EFCore/1.4.10": {
         "type": "package",
         "compile": {
@@ -5171,8 +5162,7 @@
           "System.Linq.Queryable": "4.0.1",
           "System.Reflection.TypeExtensions": "4.3.0",
           "Z.EntityFramework.Plus.EFCore": "1.4.10",
-          "protobuf-net": "2.1.0",
-          "valueinjecter": "3.1.1.3"
+          "protobuf-net": "2.1.0"
         },
         "compile": {
           "netstandard1.6/SF.Core.dll": {}
@@ -5185,6 +5175,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
+          "AutoMapper": "5.2.0",
           "CacheManager.Core": "0.9.1",
           "MailKit": "1.4.0",
           "MediatR": "2.1.0",
@@ -5274,6 +5265,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
+          "AutoMapper": "5.2.0",
           "CacheManager.Core": "0.9.1",
           "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
           "LinqKit": "1.1.7.3",
@@ -5290,8 +5282,7 @@
           "System.ComponentModel.Annotations": "4.1.0",
           "System.Globalization.Extensions": "4.3.0",
           "System.Linq.Queryable": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.3.0",
-          "valueinjecter": "3.1.1.3"
+          "System.Reflection.TypeExtensions": "4.3.0"
         },
         "compile": {
           "netstandard1.6/SF.Core.Security.dll": {}
@@ -12799,27 +12790,6 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
-      ]
-    },
-    "valueinjecter/3.1.1.3": {
-      "sha512": "4xcg4w9/Ri/gDLxyJRwDu+flBmaN2keQTgcoPGpCgby+ooL8xFbAmr/jWBZD4IglmuaZZ3fWmxAR7laM3ptVkw==",
-      "type": "package",
-      "path": "valueinjecter/3.1.1.3",
-      "files": [
-        "lib/net40/Omu.ValueInjecter.XML",
-        "lib/net40/Omu.ValueInjecter.dll",
-        "lib/net40/Omu.ValueInjecter.pdb",
-        "lib/netstandard1.6/Omu.ValueInjecter.deps.json",
-        "lib/netstandard1.6/Omu.ValueInjecter.dll",
-        "lib/netstandard1.6/Omu.ValueInjecter.pdb",
-        "lib/netstandard1.6/Omu.ValueInjecter.xml",
-        "lib/uap/Omu.ValueInjecter.XML",
-        "lib/uap/Omu.ValueInjecter.dll",
-        "lib/uap/Omu.ValueInjecter.pdb",
-        "lib/uap/Omu.ValueInjecter.pri",
-        "lib/uap/Properties/ValueInjecter_Universal.rd.xml",
-        "valueinjecter.3.1.1.3.nupkg.sha512",
-        "valueinjecter.nuspec"
       ]
     },
     "Z.EntityFramework.Plus.EFCore/1.4.10": {

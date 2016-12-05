@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "8f5ccef63df2469f3c23ebe0fb7f3cd3968c53b9"
+    "signature": "e324264eea518e027cbd2241201789ee6910d561"
   },
   "compilationOptions": {
     "defines": [
@@ -3905,11 +3905,6 @@
           "lib/portable-net4+sl4+wp8+win8/TypeLite.dll": {}
         }
       },
-      "valueinjecter/3.1.1.3": {
-        "compile": {
-          "lib/netstandard1.6/Omu.ValueInjecter.dll": {}
-        }
-      },
       "Z.EntityFramework.Plus.EFCore/1.4.10": {
         "compile": {
           "lib/netstandard1.3/Z.EntityFramework.Plus.EFCore.dll": {}
@@ -3956,7 +3951,6 @@
           "System.Linq.Dynamic.Core": "1.0.6.8",
           "System.Linq.Queryable": "4.3.0",
           "System.Reflection.TypeExtensions": "4.3.0",
-          "valueinjecter": "3.1.1.3",
           "Z.EntityFramework.Plus.EFCore": "1.4.10"
         },
         "compile": {
@@ -3981,7 +3975,8 @@
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
           "MailKit": "1.4.0",
           "MimeKit": "1.4.0",
-          "NodaTime": "2.0.0-alpha20160523"
+          "NodaTime": "2.0.0-alpha20160523",
+          "AutoMapper": "5.2.0"
         },
         "compile": {
           "SF.Core.Abstraction.dll": {}
@@ -4054,9 +4049,9 @@
           "MimeKit": "1.4.0",
           "NodaTime": "2.0.0-alpha20160523",
           "SF.Core.Abstraction": "1.0.0",
-          "valueinjecter": "3.1.1.3",
           "LinqKit": "1.1.7.3",
-          "SF.Core": "1.0.0"
+          "SF.Core": "1.0.0",
+          "AutoMapper": "5.2.0"
         },
         "compile": {
           "SF.Core.Security.dll": {}
@@ -7937,11 +7932,6 @@
           "lib/portable-net4+sl4+wp8+win8/TypeLite.dll": {}
         }
       },
-      "valueinjecter/3.1.1.3": {
-        "runtime": {
-          "lib/netstandard1.6/Omu.ValueInjecter.dll": {}
-        }
-      },
       "Z.EntityFramework.Plus.EFCore/1.4.10": {
         "runtime": {
           "lib/netstandard1.3/Z.EntityFramework.Plus.EFCore.dll": {}
@@ -7988,7 +7978,6 @@
           "System.Linq.Dynamic.Core": "1.0.6.8",
           "System.Linq.Queryable": "4.3.0",
           "System.Reflection.TypeExtensions": "4.3.0",
-          "valueinjecter": "3.1.1.3",
           "Z.EntityFramework.Plus.EFCore": "1.4.10"
         },
         "runtime": {
@@ -8013,7 +8002,8 @@
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
           "MailKit": "1.4.0",
           "MimeKit": "1.4.0",
-          "NodaTime": "2.0.0-alpha20160523"
+          "NodaTime": "2.0.0-alpha20160523",
+          "AutoMapper": "5.2.0"
         },
         "runtime": {
           "SF.Core.Abstraction.dll": {}
@@ -8086,9 +8076,9 @@
           "MimeKit": "1.4.0",
           "NodaTime": "2.0.0-alpha20160523",
           "SF.Core.Abstraction": "1.0.0",
-          "valueinjecter": "3.1.1.3",
           "LinqKit": "1.1.7.3",
-          "SF.Core": "1.0.0"
+          "SF.Core": "1.0.0",
+          "AutoMapper": "5.2.0"
         },
         "runtime": {
           "SF.Core.Security.dll": {}
@@ -9610,11 +9600,6 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-TiXo25bKiM+LeUYcZNSEkCm42ioEGhMRM/5iOoJzgS2LRMyRdaD595tRISeHPrJKZYrlQ9JAIPMVvMB+bWP9yQ=="
-    },
-    "valueinjecter/3.1.1.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-4xcg4w9/Ri/gDLxyJRwDu+flBmaN2keQTgcoPGpCgby+ooL8xFbAmr/jWBZD4IglmuaZZ3fWmxAR7laM3ptVkw=="
     },
     "Z.EntityFramework.Plus.EFCore/1.4.10": {
       "type": "package",

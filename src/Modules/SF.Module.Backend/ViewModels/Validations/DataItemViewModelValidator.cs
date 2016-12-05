@@ -30,6 +30,8 @@ namespace SF.Module.Backend.ViewModels.Validations
             RuleFor(user => user.ItemName).NotEmpty().WithMessage("ItemName cannot be empty");
             RuleFor(user => user.ItemCode).NotEmpty().WithMessage("ItemCode cannot be empty");
             RuleFor(user => user.SortIndex).NotEmpty().WithMessage("Sortindex cannot be empty");
+            RuleFor(user => user.Id).NotEqual(user => user.ParentId??-1).WithMessage("不能选择自身为上级!");
+
         }
     }
 }

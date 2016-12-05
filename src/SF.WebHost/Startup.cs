@@ -15,6 +15,8 @@ using System.Reflection;
 using System.Linq;
 using SF.Core;
 using SF.Core.Common;
+using SF.Core.Abstraction.Mapping;
+using AutoMapper;
 
 namespace SF.WebHost
 {
@@ -26,7 +28,7 @@ namespace SF.WebHost
         protected ILogger<Startup> logger;
 
         public Startup(IHostingEnvironment env, IServiceProvider serviceProvider)
-  : this(env, serviceProvider, new AssemblyProvider(serviceProvider))
+         : this(env, serviceProvider, new AssemblyProvider(serviceProvider))
         {
             this.logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger<Startup>();
         }
@@ -88,6 +90,26 @@ namespace SF.WebHost
                 prioritizedConfigureServicesAction(services);
             }
 
+
+            //实例并通过构造函数初始化Mapper配置
+            MapperConfiguration mapperConfiguration = new MapperConfiguration(cfg =>
+            {
+                foreach (IAutoMapperConfiguration mappingRegistration in ExtensionManager.GetInstances<IAutoMapperConfiguration>())
+                {
+                    mappingRegistration.MapperConfigurationToExpression(cfg);
+                }
+            });
+            services.AddSingleton<IMapper>(sp => mapperConfiguration.CreateMapper());
+
+            //使用静态映射实例初始化AutoMapper
+            Mapper.Initialize(cfg =>
+            {
+                foreach (IAutoMapperConfiguration mappingRegistration in ExtensionManager.GetInstances<IAutoMapperConfiguration>())
+                {
+                    mappingRegistration.MapperConfigurationToExpression(cfg);
+                }
+            });          
+
             services.Build(Configuration, _hostingEnvironment).BuildServiceProvider();
         }
 
@@ -111,6 +133,7 @@ namespace SF.WebHost
                 this.logger.LogInformation("Executing prioritized Configure action '{0}' of {1}", this.GetActionMethodInfo(prioritizedConfigureAction));
                 prioritizedConfigureAction(app);
             }
+
 
         }
 

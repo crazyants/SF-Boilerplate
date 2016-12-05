@@ -19,8 +19,7 @@
     "SF.Core.Abstraction": "1.0.0-*",
     "SF.Core.Security": "1.0.0-*",
     "SF.Web.Captcha": "1.0.0-*",
-    "SF.Web.Control": "1.0.0-*",
-    "valueinjecter": "3.1.1.3"
+    "SF.Web.Control": "1.0.0-*"
   },
 
   "frameworks": {

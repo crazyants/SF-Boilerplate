@@ -1,7 +1,6 @@
 ﻿using System;
-using Omu.ValueInjecter;
-using SF.Core.Security;
 using SF.Core.Entitys;
+using AutoMapper;
 
 namespace SF.Core.Security.Converters
 {
@@ -10,8 +9,8 @@ namespace SF.Core.Security.Converters
         public static ApiAccount ToCoreModel(this ApiAccountEntity entity)
         {
             var result = new ApiAccount();
-            result.InjectFrom(entity);
 
+            result = Mapper.Map<ApiAccountEntity, ApiAccount>(entity);
             result.ApiAccountType = entity.ApiAccountType;
             result.IsActive = entity.IsActive;
 
@@ -21,10 +20,9 @@ namespace SF.Core.Security.Converters
         public static ApiAccountEntity ToDataModel(this ApiAccount model)
         {
             var result = new ApiAccountEntity();
-            result.InjectFrom(model);
- 
+            result= Mapper.Map<ApiAccount, ApiAccountEntity>(model);
             result.Id = model.Id;
- 
+
             if (model.IsActive != null)
             {
                 result.IsActive = model.IsActive.Value;

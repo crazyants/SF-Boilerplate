@@ -239,3 +239,80 @@
         </div>
     </div>
 </section>
+<script>
+    var encode = request('ItemCode');
+    $(function () {
+        InitialPage();
+        GetGrid();
+    });
+    //初始化页面
+    function InitialPage() {
+        //resize重设(表格、树形)宽高
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $("#gridTable").setGridHeight($(window).height() - 108.5);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+  //加载表格
+    function GetGrid() {
+        var selectedRowIndex = 0;
+        var $gridTable = $("#gridTable");
+        $gridTable.jqGrid({
+            url: "/Api/DataItemList/GetListJson?encode=" + encode,
+            datatype: "json",
+            height: $(window).height() - 108.5,
+            autowidth: true,
+            colModel: [
+                { label: '主键', name: 'ItemDetailId', hidden: true },
+               { label: '&nbsp;&nbsp;&nbsp;&nbsp;项目名', name: 'ItemName', index: 'ItemName', width: 200, align: 'left', sortable: false },
+                { label: '项目值', name: 'ItemValue', index: 'ItemValue', width: 200, align: 'left', sortable: false },
+                { label: '简拼', name: 'SimpleSpelling', index: 'SimpleSpelling', width: 150, align: 'left', sortable: false },
+                { label: '排序', name: 'SortCode', index: 'SortCode', width: 80, align: 'left' },
+                {
+                    label: "有效", name: "EnabledMark", index: "EnabledMark", width: 50, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { label: "备注", name: "Description", index: "Description", width: 200, align: "left" }
+            ],
+            treeGrid: true,
+            treeGridModel: "nested",
+            ExpandColumn: "ItemValue",
+            rowNum: "10000",
+            rownumbers: true,
+            onSelectRow: function () {
+                selectedRowIndex = $("#" + this.id).getGridParam('selrow');
+            },
+            gridComplete: function () {
+                $("#" + this.id).setSelection(selectedRowIndex, false);
+            }
+        });
+        //查询条件
+        $("#queryCondition .dropdown-menu li").click(function () {
+            var text = $(this).find('a').html();
+            var value = $(this).find('a').attr('data-value');
+            $("#queryCondition .dropdown-text").html(text).attr('data-value', value)
+        });
+        //查询事件
+        $("#btn_Search").click(function () {
+            var queryJson = {
+                condition: $("#queryCondition").find('.dropdown-text').attr('data-value'),
+                keyword: $("#txt_Keyword").val()
+            }
+            $gridTable.jqGrid('setGridParam', {
+                postData: { queryJson: JSON.stringify(queryJson) },
+            }).trigger('reloadGrid');
+        });
+        //查询回车
+        $('#txt_Keyword').bind('keypress', function (event) {
+            if (event.keyCode == "13") {
+                $('#btn_Search').trigger("click");
+            }
+        });
+    }
+      
+</script>

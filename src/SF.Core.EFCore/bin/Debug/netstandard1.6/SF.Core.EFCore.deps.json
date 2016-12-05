@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "832ed75dfdce3eb0b41ac7c4f39fb91b290ec617"
+    "signature": "cd085be2a30b4f75877d4fe4fcb2ef99da3ad155"
   },
   "compilationOptions": {},
   "targets": {
@@ -31,6 +31,19 @@
         },
         "runtime": {
           "SF.Core.EFCore.dll": {}
+        }
+      },
+      "AutoMapper/5.2.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1",
+          "NETStandard.Library": "1.6.1",
+          "System.Collections.Specialized": "4.0.1",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Linq.Queryable": "4.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
       "CacheManager.Core/0.9.1": {
@@ -2455,7 +2468,8 @@
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
           "MailKit": "1.4.0",
           "MimeKit": "1.4.0",
-          "NodaTime": "2.0.0-alpha20160523"
+          "NodaTime": "2.0.0-alpha20160523",
+          "AutoMapper": "5.2.0"
         },
         "runtime": {
           "SF.Core.Abstraction.dll": {}
@@ -2468,6 +2482,11 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/5.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ulUMmzFg1vAFMpTyJsplgnC7pOIFlb25dbldHd7J4eroQWjSV4iAoOQ33h1oMjf6mLo3uZ8aRNUN2rgpOeSE1w=="
     },
     "CacheManager.Core/0.9.1": {
       "type": "package",

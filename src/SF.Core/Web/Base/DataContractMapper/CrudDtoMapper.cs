@@ -1,6 +1,7 @@
 
 using SF.Core.Abstraction.Entitys;
 using SF.Core.Web.Base.Datatypes;
+using System.Collections.Generic;
 
 namespace SF.Core.Web.Base.DataContractMapper
 {
@@ -20,9 +21,6 @@ namespace SF.Core.Web.Base.DataContractMapper
         {
             var entity = OnMapDtoToEntity(dto, new TEntity());
 
-            // Making sure the derived class doesn't change these values
-            entity.Id = dto.Id;
-
             return entity;
         }
 
@@ -35,10 +33,7 @@ namespace SF.Core.Web.Base.DataContractMapper
         {
             var dto = OnMapEntityToDto(entity, new TDto());
 
-            // Making sure the derived class doesn't change these values
-            dto.Id = entity.Id;
-
-            return OnMapEntityToDto(entity, dto);
+            return dto;
         }
 
         /// <summary>
@@ -51,11 +46,7 @@ namespace SF.Core.Web.Base.DataContractMapper
         {
             var dto = OnMapEntityToDto(entity, existingDto);
 
-            // Making sure the derived class doesn't change these values
-            dto.Id = entity.Id;
-
-
-            return OnMapEntityToDto(entity, dto);
+            return dto;
         }
 
         /// <summary>
@@ -68,11 +59,20 @@ namespace SF.Core.Web.Base.DataContractMapper
         {
             var entity = OnMapDtoToEntity(dto, existingEntity);
 
-            // Making sure the derived class doesn't change these values
-            entity.Id = dto.Id;
-
-
             return entity;
+        }
+
+        /// <summary>
+        /// 领域的实体转成DTO
+        /// </summary>
+        /// <param name="entity">领域的实体</param>
+        /// <param name="existingDto">已实例化的DTO</param>
+        /// <returns></returns>
+        public IEnumerable<TDto> MapEntityToDtos(IEnumerable<TEntity> entitys)
+        {
+            var dtos = OnMapEntityToDtos(entitys);
+
+            return dtos;
         }
 
         /// <summary>
@@ -82,7 +82,13 @@ namespace SF.Core.Web.Base.DataContractMapper
         /// <param name="dto">DTO映射实体</param>
         /// <returns>The dto</returns>
         protected abstract TDto OnMapEntityToDto(TEntity entity, TDto dto);
-
+        /// <summary>
+        /// 领域的实体转换DTO映射
+        /// </summary>
+        /// <param name="entity">实体映射</param>
+        /// <param name="dto">DTO映射实体</param>
+        /// <returns>The dto</returns>
+        protected abstract IEnumerable<TDto> OnMapEntityToDtos(IEnumerable<TEntity> entitys);
         /// <summary>
         /// DTO转换领域的实体映射
         /// </summary>
@@ -90,6 +96,7 @@ namespace SF.Core.Web.Base.DataContractMapper
         /// <param name="entity">实体映射DTO</param>
         /// <returns>The entity</returns>
         protected abstract TEntity OnMapDtoToEntity(TDto dto, TEntity entity);
+
 
     }
 }
