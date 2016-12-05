@@ -1,0 +1,5 @@
+
+@model SF.Module.Backend.ViewModels.Shared.BackendMenuItemViewModel
+<a class="menu-item @(this.ViewBag.ActiveMenuItem == this.Model.Url.Replace("/backend/", string.Empty) ? "active" : null)" href="@Model.Url">
+  @Model.Name
+</a>

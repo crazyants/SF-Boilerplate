@@ -1,0 +1,124 @@
+﻿{
+  "IpRateLimiting": {
+    "EnableEndpointRateLimiting": true,
+    "StackBlockedRequests": false,
+    "RealIpHeader": "X-Real-IP",
+    "ClientIdHeader": "X-ClientId",
+    "HttpStatusCode": 429,
+    "IpWhitelist": [ "127.0.0.1", "192.168.0.0/24" ],
+    "EndpointWhitelist": [ "delete:/api/values", "*:/api/items", "*:/api/ClientRateLimit", "*:/api/IpRateLimit" ],
+    "ClientWhitelist": [ "bypass-key-1", "bypass-key-2" ],
+    "GeneralRules": [
+      {
+        "Endpoint": "*",
+        "Period": "1s",
+        "Limit": 2
+      },
+      {
+        "Endpoint": "*",
+        "Period": "1m",
+        "Limit": 3
+      }
+    ]
+  },
+
+  "IpRateLimitPolicies": {
+    "IpRules": [
+      {
+        "Ip": "::1/10",
+        "Rules": [
+          {
+            "Endpoint": "*",
+            "Period": "1s",
+            "Limit": 10
+          }
+          //{
+          //  "Endpoint": "get:/login",
+          //  "Period": "1m",
+          //  "Limit": 2
+          //},
+          //{
+          //  "Endpoint": "put:/api/values",
+          //  "Period": "5m",
+          //  "Limit": 2
+          //},
+          //{
+          //  "Endpoint": "delete:/api/values",
+          //  "Period": "1h",
+          //  "Limit": 2
+          //}
+        ]
+      }
+    ]
+  },
+
+  "ClientRateLimiting": {
+    "EnableEndpointRateLimiting": true,
+    "ClientIdHeader": "X-ClientId",
+    "HttpStatusCode": 429,
+    "EndpointWhitelist": [ "delete:/api/items", "*:/api/values", "*:/api/ClientRateLimit", "*:/api/IpRateLimit" ],
+    "ClientWhitelist": [ "cl-key-a", "cl-key-b" ],
+    "GeneralRules": [
+      {
+        "Endpoint": "*",
+        "Period": "1s",
+        "Limit": 2
+      },
+      {
+        "Endpoint": "*",
+        "Period": "1m",
+        "Limit": 3
+      },
+      {
+        "Endpoint": "post:/api/clients",
+        "Period": "5m",
+        "Limit": 3
+      }
+    ]
+  },
+
+  "ClientRateLimitPolicies": {
+    "ClientRules": [
+      {
+        "ClientId": "anon",
+        "Rules": [
+          {
+            "Endpoint": "*",
+            "Period": "1s",
+            "Limit": 10
+          },
+          {
+            "Endpoint": "get:/api/clients",
+            "Period": "1m",
+            "Limit": 2
+          },
+          {
+            "Endpoint": "put:/api/clients",
+            "Period": "5m",
+            "Limit": 2
+          },
+          {
+            "Endpoint": "delete:/api/clients",
+            "Period": "1h",
+            "Limit": 2
+          }
+        ]
+      },
+      {
+        "ClientId": "cl-key-2",
+        "Rules": [
+          {
+            "Endpoint": "get:/api/clients",
+            "Period": "1s",
+            "Limit": 10
+          },
+          {
+            "Endpoint": "*",
+            "Period": "1m",
+            "Limit": 2
+          }
+        ]
+      }
+    ]
+  }
+}
