@@ -6,7 +6,7 @@ using SF.Core.Common;
 using SF.Core.Data;
 using SF.Core.Entitys;
 using SF.Core.Extensions;
-using SF.Core.Web.Models.Tree;
+using SF.Web.Common.Models.Tree;
 using SF.Module.Backend.Services;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,7 @@ namespace SF.Module.Backend.Controllers
     /// </summary>
     [Authorize]
     [Route("DataItem/")]
-    public class DataItemController : Core.Web.Base.Controllers.ControllerBase
+    public class DataItemController : SF.Web.Common.Base.Controllers.ControllerBase
     {
         /// <summary>
         /// 
@@ -44,37 +44,37 @@ namespace SF.Module.Backend.Controllers
         /// 字典分类列表
         /// </summary>
         /// <returns></returns>
-        [Route("DList")]
+        [Route("List")]
         public ActionResult DList()
         {
-            return View();
+            return View("List");
         }
         /// <summary>
         /// 分类表单
         /// </summary>
         /// <returns></returns>
-        [Route("DForm")]
+        [Route("Form")]
         public ActionResult DForm()
         {
-            return View();
-        }
-        /// <summary>
-        /// 字典项列表
-        /// </summary>
-        /// <returns></returns>
-        [Route("DTList")]
-        public ActionResult DTList()
-        {
-            return View();
+            return View("Form");
         }
         /// <summary>
         /// 字典项表单
         /// </summary>
         /// <returns></returns>
-        [Route("DTForm")]
-        public ActionResult DTForm()
+        [Route("ValueForm")]
+        public ActionResult ValueForm()
         {
-            return View();
+            return View("ValueForm");
+        }
+        /// <summary>
+        /// 字典项明细
+        /// </summary>
+        /// <returns></returns>
+        [Route("ValueDetailForm")]
+        public ActionResult ValueDetailForm()
+        {
+            return View("ValueDetailForm");
         }
         #endregion
 

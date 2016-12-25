@@ -1,5 +1,5 @@
 ﻿/*******************************************************************************
-* 命名空间: SF.Core.Security.Converters
+* 命名空间: SF.Web.Security.Converters
 *
 * 功 能： N/A
 * 类 名： MappingRegistration
@@ -15,7 +15,7 @@
 using AutoMapper;
 using SF.Core.Abstraction.Mapping;
 using SF.Core.Entitys;
-using SF.Core.Web.Base.Mapper.Extensions;
+using SF.Web.Common.Base.Mapper.Extensions;
 
 namespace SF.Module.Backend.ViewModels.Mappings
 {
@@ -23,18 +23,6 @@ namespace SF.Module.Backend.ViewModels.Mappings
     {
         public void MapperConfigurationToExpression(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<DataItemViewModel, DataItemEntity>()
-                .MapperExpressCreatedMeta()
-                .MapperExpressUpdatedMeta()
-                .MapperExpressDeleteMeta()
-                .ReverseMap();
-
-            cfg.CreateMap<DataItemDetailViewModel, DataItemDetailEntity>()
-              .MapperExpressCreatedMeta()
-              .MapperExpressUpdatedMeta()
-              .MapperExpressDeleteMeta()
-              .ReverseMap();
-
             cfg.CreateMap<SF.Module.Backend.ViewModels.Setting.SettingViewModel, SF.Core.Settings.SettingEntry>()
             .ReverseMap();
         }

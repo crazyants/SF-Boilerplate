@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SF.Core.Abstraction;
 using SF.Core.Abstraction.Data;
-using SF.Core.Abstraction.Entitys;
+using SF.Core.Entitys.Abstraction;
 using SF.Core.Entitys;
 using System.Threading.Tasks;
 using System.Threading;
@@ -20,8 +20,8 @@ namespace SF.Core.Data
         public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
         {
 
-            Database.EnsureCreated();
-        //    Database.Migrate();
+          //  Database.EnsureCreated();
+            //    Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,7 +33,8 @@ namespace SF.Core.Data
                 //获取所有继承BaseEntity的实体
                 var entityClassTypes = assemblie.ExportedTypes.Where(x =>
                 //( x.GetTypeInfo().IsSubclassOf(typeof(BaseEntity)) && !x.GetTypeInfo().IsAbstract)||
-                typeof(IEntityWithTypedId<long>).IsAssignableFrom(x) && !x.GetTypeInfo().IsAbstract
+                typeof(IEntityWithTypedId<long>).IsAssignableFrom(x) && !x.GetTypeInfo().IsAbstract &&
+               ! x.GetTypeInfo().IsDefined(typeof(MapIgnoreAttribute),false)
                 );
                 typeToRegisterEntitys.AddRange(entityClassTypes);
 

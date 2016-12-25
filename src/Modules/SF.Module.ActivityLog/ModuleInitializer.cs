@@ -9,7 +9,7 @@ using SF.Core;
 using SF.Core.Data;
 using SF.Core.Interceptors;
 using SF.Module.ActivityLog.Data;
-using SF.Core.Services;
+
 
 namespace SF.Module.ActivityLog
 {

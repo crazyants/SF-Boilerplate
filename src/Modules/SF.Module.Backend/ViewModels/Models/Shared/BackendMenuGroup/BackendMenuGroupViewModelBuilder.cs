@@ -1,5 +1,5 @@
 ﻿
-using SF.Core.Web.UI.Backends;
+using SF.Core.Abstraction.UI.Backends;
 
 namespace SF.Module.Backend.ViewModels.Shared
 {

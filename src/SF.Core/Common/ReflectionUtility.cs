@@ -5,7 +5,7 @@ using System.Text;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Collections;
-using SF.Core.Abstraction.Entitys;
+using SF.Core.Entitys.Abstraction;
 
 namespace SF.Core.Common
 {

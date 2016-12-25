@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SF.Core.Abstraction;
 using SF.WebHost.Extensions;
 using simpleGlobal = SF.Core;
-using SF.Core.Web;
 using System.Reflection;
 using System.Linq;
 using SF.Core;
@@ -108,7 +104,7 @@ namespace SF.WebHost
                 {
                     mappingRegistration.MapperConfigurationToExpression(cfg);
                 }
-            });          
+            });
 
             services.Build(Configuration, _hostingEnvironment).BuildServiceProvider();
         }
@@ -122,7 +118,7 @@ namespace SF.WebHost
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //  app.UseDatabaseErrorPage();
             }
 
             app.UseCustomizedRequestLocalization();

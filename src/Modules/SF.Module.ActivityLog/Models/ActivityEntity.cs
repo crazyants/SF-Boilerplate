@@ -1,5 +1,5 @@
 ﻿using System;
-using SF.Core.Abstraction.Entitys;
+using SF.Core.Entitys.Abstraction;
 
 namespace SF.Module.ActivityLog.Models
 {
@@ -7,7 +7,7 @@ namespace SF.Module.ActivityLog.Models
     {
         public long ActivityTypeId { get; set; }
 
-        public ActivityType ActivityType { get; set; }
+        public ActivityTypeEntity ActivityType { get; set; }
 
         public long EntityId { get; set; }
 

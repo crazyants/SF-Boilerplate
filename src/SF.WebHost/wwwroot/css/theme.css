@@ -7424,7 +7424,7 @@ a.link-block,
 }
 #content-wrapper #page-title .breadcrumb {
   padding: 0;
-  margin: 4px 0 0;
+  margin: 4px 0px 0px 10px;
 }
 #content-wrapper #page-title .breadcrumb a {
   color: #797063;
@@ -7753,3 +7753,28 @@ body.navbar-side-close #content-wrapper {
     padding: 4px;
   }
 }
+
+.form{width:100%;margin:0px;padding:0px;border-collapse:collapse;border-width:3px 1px 1px;table-layout:fixed}
+.form .formTitle{position:relative;left:0px;text-align:right;white-space:nowrap;font-weight:normal;width:90px;padding-right:10px;}
+.form .formTitle font{color:red;position:absolute;right:0px;}
+.form .formTitle-top {vertical-align:top; padding-top:4px;}
+.form .formValue{position:relative;padding:5px;width:auto;}
+.form .formValue select{padding: 4px;padding-left:4px;}
+.form-control{color:#000;border-radius:0px;font-size:9pt;height:28px;padding-top:0px;padding-bottom:1px;padding-right:0px;padding-left:5px;resize: none;}
+.form-control:focus{border-color:#337ab7;box-shadow:none;}
+.form div.active{border-color:#337ab7;box-shadow:none;}
+.form textarea.form-control{padding-top:5px;}
+textarea.form-control{padding-top:5px;}
+.form-control[disabled],fieldset[disabled] .form-control{background-color:#eee;opacity:1;cursor:default;opacity: 0.6;}
+.form-control[readonly],fieldset[readonly] .form-control{background-color:#fff;cursor:default}
+.form .control-button{padding-left:5px;padding-right:5px;border: 1px solid #ccc;float: left;height: 28px;line-height: 27px;text-align: center;border-left: none;cursor: pointer;background: #ddd}
+.form .control-button:hover{opacity: 0.8;}
+.form .input-button{border: none;right: 8px;top: 50%;width: 12px;height: 16px;margin-top: -12px;cursor: pointer;overflow: hidden;position: absolute;z-index:100;}
+.form .wdate-datepicker{background: url(../images/datepicker_icon.png) right 0 no-repeat #FFF;}
+.form .input-box{position:absolute;right:11px;top:9px;color:#ccc;font-size: 16px;cursor:pointer;}
+.form .input-success{position:absolute;right:11px;top:8px;color:#468847;font-size: 16px;cursor:default;}
+.form .input-warning{position:absolute;right:11px;top:9px;color:#C09853;font-size: 16px;cursor:default;}
+.form .input-error{position:absolute;right:11px;top:9px;color:#B94A48;font-size: 16px;cursor:default;}
+.form-button{padding: 0px;height: 40px;line-height: 36px;text-align: right;border-top: 1px solid #ccc;background-color: #f5f5f5;position: absolute;top: 100%;margin-top: -40px;width: 100%;padding-right: 6px;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;-khtml-user-select: none;user-select: none;}
+.form-error-text{padding-left:30px;height: 26px;color:red; line-height: 25px; background:url('../images/validatebox_warning.png') center left no-repeat; background-position: 10px 4px;}
+.form-succeed-text{padding-left:30px;height: 26px;color:green; line-height: 25px; background:url('../images/accept.png') center left no-repeat; background-position: 10px 4px;}

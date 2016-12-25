@@ -12,7 +12,7 @@
 * Description: SF快速开发平台
 * Website：http://www.mayisite.com
 *********************************************************************************/
-using SF.Core.Abstraction.Entitys.Pages;
+using SF.Core.Entitys.Abstraction.Pages;
 using SF.Core.Abstraction.UoW;
 using SF.Core.EFCore.UoW;
 using SF.Core.Entitys;

@@ -21,35 +21,34 @@ using SF.Core.Plugins.Data;
 using SF.Core.Data;
 using SF.Core.Interceptors;
 using SF.Core.Abstraction.UoW.Helper;
-using SF.Core.Services;
 
 namespace SF.Core.Plugins
 {
-    public class PluginExtensions : ModuleInitializerBase
+    public static class PluginExtensions/* : ModuleInitializerBase*/
     {
-        public override IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities
-        {
-            get
-            {
-                return new Dictionary<int, Action<IServiceCollection>>()
-                {
-                    [9999] = this.AddPlugins,
-                    [10000] = this.AddPluginManager
-                };
-            }
-        }
+        //public override IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities
+        //{
+        //    get
+        //    {
+        //        return new Dictionary<int, Action<IServiceCollection>>()
+        //        {
+        //            [9999] = this.AddPlugins,
+        //            [10000] = this.AddPluginManager
+        //        };
+        //    }
+        //}
 
-        public override IEnumerable<KeyValuePair<int, Action<IApplicationBuilder>>> ConfigureActionsByPriorities
-        {
-            get
-            {
-                return new Dictionary<int, Action<IApplicationBuilder>>()
-                {
-                    [9999] = this.UseMvcWithPlugin,
-                    [10000] = this.AddPluginCustomizedMvc
-                };
-            }
-        }
+        //public override IEnumerable<KeyValuePair<int, Action<IApplicationBuilder>>> ConfigureActionsByPriorities
+        //{
+        //    get
+        //    {
+        //        return new Dictionary<int, Action<IApplicationBuilder>>()
+        //        {
+        //            [9999] = this.UseMvcWithPlugin,
+        //            [10000] = this.AddPluginCustomizedMvc
+        //        };
+        //    }
+        //}
 
 
         /// <summary>
@@ -59,7 +58,7 @@ namespace SF.Core.Plugins
         /// <param name="target">目标路由</param>
         /// <param name="configureRoutes"></param>
         /// <returns></returns>
-        public void UseMvcWithPlugin(IApplicationBuilder applicationBuilder)
+        public static void UseMvcWithPlugin(this IApplicationBuilder applicationBuilder)
         {
             applicationBuilder.UseMvc(
               routeBuilder =>
@@ -80,7 +79,7 @@ namespace SF.Core.Plugins
         ///  插件控制器注册
         /// </summary>
         /// <param name="app"></param>
-        public void AddPluginCustomizedMvc(IApplicationBuilder applicationBuilder)
+        public static void AddPluginCustomizedMvc(this IApplicationBuilder applicationBuilder)
         {
             var pluginManagers = applicationBuilder.ApplicationServices.GetService<IPluginManager>();
 
@@ -98,7 +97,7 @@ namespace SF.Core.Plugins
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public void AddPlugins(IServiceCollection services)
+        public static void AddPlugins(this IServiceCollection services)
         {
 
             services.AddTransient<IPluginSettingsManager, PluginSettingsManager>();
@@ -117,7 +116,7 @@ namespace SF.Core.Plugins
         /// <param name="configRoot"></param>
         /// <param name="env"></param>
         /// <returns></returns>
-        public void AddPluginManager(IServiceCollection services)
+        public static void AddPluginManager(this IServiceCollection services, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment)
         {
 
             services.AddSingleton<IPluginManager, PluginManager>(srcProvider =>
@@ -126,7 +125,7 @@ namespace SF.Core.Plugins
                 var uow = srcProvider.GetRequiredService<IPluginsUnitOfWork>();
                 var appMgr = srcProvider.GetRequiredService<ApplicationPartManager>();
 
-                return new PluginManager(assbly, this.configurationRoot, this.hostingEnvironment, uow, appMgr);
+                return new PluginManager(assbly,  configurationRoot,  hostingEnvironment, uow, appMgr);
             });
 
         }
@@ -134,7 +133,7 @@ namespace SF.Core.Plugins
         /// 测试插件数据
         /// </summary>
         /// <param name="services"></param>
-        public static void RunTestData(IServiceProvider services)
+        public static void RunTestData(this  IServiceProvider services)
         {
             var unitOfWork = services.GetService<IPluginsUnitOfWork>();
             unitOfWork.ExecuteAndCommit(uow =>

@@ -5,7 +5,7 @@ using System.Linq;
 using CacheManager.Core;
 using SF.Core.Entitys;
 using SF.Core.Abstraction.Data;
-using SF.Core.Abstraction.Entitys;
+using SF.Core.Entitys.Abstraction;
 using Microsoft.EntityFrameworkCore;
 using SF.Core.Settings.Converters;
 using SF.Core.Common;

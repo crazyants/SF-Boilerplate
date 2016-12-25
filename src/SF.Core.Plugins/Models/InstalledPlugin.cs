@@ -1,4 +1,4 @@
-﻿using SF.Core.Abstraction.Entitys;
+﻿using SF.Core.Entitys.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Linq;

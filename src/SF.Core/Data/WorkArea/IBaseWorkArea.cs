@@ -38,6 +38,9 @@ namespace SF.Core.Data.WorkArea
 
         IDistrictRepository District { get; }
 
-  
+        ISiteSettingsRepository SiteSettings { get; }
+
+        ISiteHostRepository SiteHost { get; }
+
     }
 }

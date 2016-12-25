@@ -1,8 +1,8 @@
-#:D:\Users\tomny\Source\Repos\SFramework_Team\src\Test\SF.Tests\SF.Tests.xproj
-#:D:\Users\tomny\Source\Repos\SFramework_Team\src\Test\SF.Core.Tests\SF.Core.Tests.xproj
-D:\Users\tomny\Source\Repos\SFramework_Team\src\Test\SF.Core.Tests\SF.Core.Tests.xproj|D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core\SF.Core.xproj
-D:\Users\tomny\Source\Repos\SFramework_Team\src\Test\SF.Core.Tests\SF.Core.Tests.xproj|D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core.QueryExtensions\SF.Core.QueryExtensions.xproj
-D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core\SF.Core.xproj|D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core.Abstraction\SF.Core.Abstraction.xproj
-D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core\SF.Core.xproj|D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core.EFCore\SF.Core.EFCore.xproj
-D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core\SF.Core.xproj|D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core.QueryExtensions\SF.Core.QueryExtensions.xproj
-D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core.EFCore\SF.Core.EFCore.xproj|D:\Users\tomny\Source\Repos\SFramework_Team\src\SF.Core.Abstraction\SF.Core.Abstraction.xproj
+#:D:\Users\tomny\Source\Repos\SFramework_2017\src\Modules\SF.Module.ActivityLog\SF.Module.ActivityLog.xproj
+D:\Users\tomny\Source\Repos\SFramework_2017\src\Modules\SF.Module.ActivityLog\SF.Module.ActivityLog.xproj|D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core\SF.Core.xproj
+D:\Users\tomny\Source\Repos\SFramework_2017\src\Modules\SF.Module.ActivityLog\SF.Module.ActivityLog.xproj|D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core.Abstraction\SF.Core.Abstraction.xproj
+D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core\SF.Core.xproj|D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core.Abstraction\SF.Core.Abstraction.xproj
+D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core\SF.Core.xproj|D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core.EFCore\SF.Core.EFCore.xproj
+D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core\SF.Core.xproj|D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core.Entitys\SF.Core.Entitys.xproj
+D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core.Abstraction\SF.Core.Abstraction.xproj|D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core.Entitys\SF.Core.Entitys.xproj
+D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core.EFCore\SF.Core.EFCore.xproj|D:\Users\tomny\Source\Repos\SFramework_2017\src\SF.Core.Abstraction\SF.Core.Abstraction.xproj

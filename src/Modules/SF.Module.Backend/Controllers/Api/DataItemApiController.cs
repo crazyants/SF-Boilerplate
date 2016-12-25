@@ -1,26 +1,31 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SF.Core.Abstraction.Events;
 using SF.Core.Common;
 using SF.Core.Data;
 using SF.Core.Entitys;
 using SF.Core.Extensions;
 using SF.Core.QueryExtensions.Extensions;
-using SF.Core.Web.Base.Controllers;
-using SF.Core.Web.Base.DataContractMapper;
-using SF.Core.Web.Models.GridTree;
-using SF.Core.Web.Models.Tree;
 using SF.Module.Backend.Services;
 using SF.Module.Backend.ViewModels;
+using SF.Web.Common.Base.Args;
+using SF.Web.Common.Base.Controllers;
+using SF.Web.Common.Base.DataContractMapper;
 using SF.Web.Control.JqGrid.Core.Json;
 using SF.Web.Control.JqGrid.Core.Request;
 using SF.Web.Control.JqGrid.Core.Response;
+using SF.Web.Common.Models.GridTree;
+using SF.Web.Common.Models.Tree;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using SF.Module.Backend.Domain.DataItem.ViewModel;
+using SF.Module.Backend.Domain.DataItem.Service;
 
 namespace SF.Module.Backend.Controllers
 {
@@ -31,20 +36,42 @@ namespace SF.Module.Backend.Controllers
     [Route("Api/DataItem/")]
     public class DataItemApiController : CrudControllerBase<DataItemEntity, DataItemViewModel>
     {
+        private readonly IMediator _mediator;
+        private readonly IDataItemService _dataItemService;
         private readonly IBaseUnitOfWork _baseUnitOfWork;
         public DataItemApiController(IServiceCollection collection, ILogger<DataItemApiController> logger,
-             IBaseUnitOfWork baseUnitOfWork)
+             IBaseUnitOfWork baseUnitOfWork,
+             IMediator mediator,
+             IDataItemService dataItemService)
             : base(baseUnitOfWork, collection, logger)
         {
             this._baseUnitOfWork = baseUnitOfWork;
-            CrudDtoMapper = new DataItemDtoMapper();
+            this._mediator = mediator;
+            this._dataItemService = dataItemService;
 
         }
-
+        #region 事件
+        /// <summary>
+        /// 新增后
+        /// </summary>
+        /// <param name="arg"></param>
+        protected override void OnAfterAdd(CrudEventArgs<DataItemEntity, DataItemViewModel> arg)
+        {
+            this._mediator.Publish(new EntityInserted<DataItemEntity>(arg.Entity));
+        }
+        /// <summary>
+        /// 编辑后
+        /// </summary>
+        /// <param name="arg"></param>
+        protected override void OnAfterEdit(CrudEventArgs<DataItemEntity, DataItemViewModel> arg)
+        {
+            this._mediator.Publish(new EntityUpdated<DataItemEntity>(arg.Entity));
+        }
+        #endregion
 
         #region 获取数据
         /// <summary>
-        /// 
+        /// 字典树数据源
         /// </summary>
         /// <param name="id"></param>
         /// <param name="rootDataItemId"></param>
@@ -56,19 +83,18 @@ namespace SF.Module.Backend.Controllers
         int rootDataItemId = 0,
         TreeViewItem.GetCountsType countsType = TreeViewItem.GetCountsType.None)
         {
+            var qry = _dataItemService.GetChildren(id, rootDataItemId);
 
-            var qry = this._baseUnitOfWork.BaseWorkArea.DataItem.GetChildren(id, rootDataItemId);
-
-            List<DataItemEntity> dataItemEntityList = new List<DataItemEntity>();
+            List<DataItemViewModel> dataItemEntityList = new List<DataItemViewModel>();
             List<TreeViewItem> groupNameList = new List<TreeViewItem>();
-
-            foreach (var group in qry.OrderBy(g => g.ItemName))
+            var groups = qry.OrderBy(g => g.ItemName);
+            foreach (var group in groups)
             {
 
                 dataItemEntityList.Add(group);
                 var treeViewItem = new TreeViewItem();
                 treeViewItem.Id = group.Id.ToString();
-                treeViewItem.Name = group.ItemName;
+                treeViewItem.Name = $"{group.ItemName}({group.ItemCode})";
                 treeViewItem.IsActive = (group.EnabledMark ?? 0) > 0;
 
                 treeViewItem.IconCssClass = "fa fa-sitemap";
@@ -100,7 +126,7 @@ namespace SF.Module.Backend.Controllers
             return groupNameList.AsQueryable();
         }
         /// <summary>
-        /// 分类列表
+        /// 分类树列表
         /// </summary>
         /// <param name="keyword">关键字查询</param>
         /// <returns>返回树形列表Json</returns>
@@ -115,11 +141,9 @@ namespace SF.Module.Backend.Controllers
                 data = data.TreeWhere(t => t.ItemName.Contains(keyword));
             }
             JqGridResponse response = new JqGridResponse();
-
-
-
+            var dtos = CrudDtoMapper.MapEntityToDtos(data);
             var TreeList = new List<TreeGridEntity>();
-            foreach (DataItemEntity item in data)
+            foreach (DataItemViewModel item in dtos)
             {
                 TreeGridEntity tree = new TreeGridEntity();
                 bool hasChildren = data.Count(t => t.ParentId == item.Id && t.ParentId != t.Id) == 0 ? false : true;
@@ -134,18 +158,22 @@ namespace SF.Module.Backend.Controllers
         }
 
         /// <summary>
-        /// 分类列表
+        /// 分类普通列表
         /// </summary>
         /// <param name="pagination">分页参数</param>
         /// <param name="queryJson">查询参数</param>
         /// <returns>返回分页列表Json</returns>
         [HttpGet]
         [Route("GetPageList")]
-        public ActionResult GetPageListJson(JqGridRequest request, string queryJson)
+        public ActionResult GetPageListJson(JqGridRequest request, string keyword)
         {
-
-            var query = _repository.QueryPage(page: request.PageIndex, pageSize: request.RecordsCount);
-         var dtos=   CrudDtoMapper.MapEntityToDtos(query);
+            Expression<Func<DataItemEntity, bool>> pc = d => d.Id > 0;
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                pc = d => d.ItemName.Contains(keyword);
+            }
+            var query = _repository.QueryPage(pc, page: request.PageIndex, pageSize: request.RecordsCount);
+            var dtos = CrudDtoMapper.MapEntityToDtos(query);
             JqGridResponse response = new JqGridResponse()
             {
                 TotalPagesCount = query.TotalPages,
@@ -208,45 +236,5 @@ namespace SF.Module.Backend.Controllers
 
     }
 
-    /// <summary>
-    /// 字典映射
-    /// </summary>
-    public class DataItemDtoMapper : CrudDtoMapper<DataItemEntity, DataItemViewModel>
-    {
 
-
-        /// <summary>
-        /// DTO转换领域的实体映射
-        /// </summary>
-        /// <param name="dto">DTO实体映射</param>
-        /// <param name="entity">实体映射DTO</param>
-        /// <returns>The entity</returns>
-        protected override DataItemEntity OnMapDtoToEntity(DataItemViewModel dto, DataItemEntity entity)
-        {
-            Mapper.Map<DataItemViewModel, DataItemEntity>(dto, entity);
-            return entity;
-        }
-        /// <summary>
-        /// 领域的实体转换DTO映射
-        /// </summary>
-        /// <param name="entity">实体映射</param>
-        /// <param name="dto">DTO映射实体</param>
-        /// <returns>The dto</returns>
-        protected override DataItemViewModel OnMapEntityToDto(DataItemEntity entity, DataItemViewModel dto)
-        {
-            Mapper.Map<DataItemEntity, DataItemViewModel>(entity, dto);
-            return dto;
-        }
-        /// <summary>
-        /// 领域的实体转换List<dto>映射
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="dto"></param>
-        /// <returns></returns>
-        protected override IEnumerable<DataItemViewModel> OnMapEntityToDtos(IEnumerable<DataItemEntity> entitys)
-        {
-            var dtos = Mapper.Map<IEnumerable<DataItemEntity>, IEnumerable<DataItemViewModel>>(entitys);
-            return dtos;
-        }
-    }
 }

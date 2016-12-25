@@ -4,7 +4,6 @@
   "dependencies": {
     "NETStandard.Library": "1.6.1",
     "SF.Core": "1.0.0-*",
-    "SF.Core.Security": "1.0.0-*",
     "SF.Core.Abstraction": "1.0.0-*"
   },
 

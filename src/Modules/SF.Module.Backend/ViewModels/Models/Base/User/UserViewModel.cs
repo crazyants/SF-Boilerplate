@@ -1,4 +1,5 @@
-﻿using SF.Core.Web.Base.Datatypes;
+﻿
+using SF.Web.Common.Models;
 using System;
 
 namespace SF.Module.Backend.ViewModels

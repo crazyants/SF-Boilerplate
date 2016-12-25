@@ -4,8 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SF.Core.Data;
 using SF.Core.Entitys;
-using SF.Core.Web.Base.Controllers;
-using SF.Core.Web.Base.DataContractMapper;
+using SF.Web.Common.Base.Controllers;
+using SF.Web.Common.Base.DataContractMapper;
 using SF.Module.Backend.ViewModels;
 using SF.Web.Control.JqGrid.Core.Json;
 using SF.Web.Control.JqGrid.Core.Request;
@@ -22,7 +22,7 @@ namespace SF.Module.Backend.Controllers
     /// 用户管理
     /// </summary>
     [Authorize]
-    public class UserCrudController : Core.Web.Base.Controllers.ControllerBase
+    public class UserCrudController : SF.Web.Common.Base.Controllers.ControllerBase
     {
         private IBaseUnitOfWork _baseUnitOfWork;
         public UserCrudController(IServiceCollection collection, ILogger<UserCrudController> logger,

@@ -1,9 +1,10 @@
 ﻿
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SF.Core.Common.Razor;
+using SF.Core.Entitys;
 using SF.Core.Extensions;
-using SF.Core.WorkContexts;
 using System;
 using System.Threading.Tasks;
 
@@ -17,20 +18,22 @@ namespace SF.Core.Common.Message.Email
 
         public SiteEmailMessageSender(
             ViewRenderer viewRenderer,
+             IOptions<SmtpOptions> smtpOptionsAccessor,
             ILogger<SiteEmailMessageSender> logger
             )
         {
             log = logger;
             this.viewRenderer = viewRenderer;
+            globalSmtpSettings = smtpOptionsAccessor.Value;
 
         }
-
+        private SmtpOptions globalSmtpSettings;
         private ViewRenderer viewRenderer;
         private ILogger log;
 
         private SmtpOptions GetSmptOptions(ISiteContext siteSettings)
         {
-            if (string.IsNullOrWhiteSpace(siteSettings.SmtpServer)) { return null; }
+            if (string.IsNullOrWhiteSpace(siteSettings.SmtpServer)) { return globalSmtpSettings; }
 
             SmtpOptions smtpOptions = new SmtpOptions();
             smtpOptions.Password = siteSettings.SmtpPassword;
@@ -166,7 +169,7 @@ namespace SF.Core.Common.Message.Email
 
         public async Task AccountPendingApprovalAdminNotification(
             ISiteContext siteSettings,
-            IWorkContext user)
+            ISiteUser user)
         {
             if (siteSettings.AccountApprovalEmailCsv.Length == 0) { return; }
 
@@ -185,10 +188,10 @@ namespace SF.Core.Common.Message.Email
             try
             {
                 var plainTextMessage
-                   = await viewRenderer.RenderViewAsString<IWorkContext>("EmailTemplates/AccountPendingApprovalAdminNotificationTextEmail", user).ConfigureAwait(false);
+                   = await viewRenderer.RenderViewAsString<ISiteUser>("EmailTemplates/AccountPendingApprovalAdminNotificationTextEmail", user).ConfigureAwait(false);
 
                 var htmlMessage
-                    = await viewRenderer.RenderViewAsString<IWorkContext>("EmailTemplates/AccountPendingApprovalAdminNotificationHtmlEmail", user).ConfigureAwait(false);
+                    = await viewRenderer.RenderViewAsString<ISiteUser>("EmailTemplates/AccountPendingApprovalAdminNotificationHtmlEmail", user).ConfigureAwait(false);
 
                 await sender.SendMultipleEmailAsync(
                     smtpOptions,

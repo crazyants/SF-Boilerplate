@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using SF.Core.Abstraction.Entitys;
-using SF.Core.Services;
+using SF.Core.Abstraction.Resolvers;
+using SF.Core.Entitys.Abstraction;
 using System;
 
 

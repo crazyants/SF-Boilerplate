@@ -1,17 +1,16 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using SF.Core.Services;
 using SF.Module.Backend.ViewModels;
 using Microsoft.Extensions.Localization;
 using Audit.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using SF.Core.Security;
+using SF.Web.Security;
 using System.Threading.Tasks;
 
 
 namespace SF.Module.Backend.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Administrators")]
     //  [BreadCrumb(Title = "Home", UseDefaultRouteUrl = true, Order = 0)]
     public class HomeController : Controller
     {
@@ -40,6 +39,10 @@ namespace SF.Module.Backend.Controllers
         }
 
         public IActionResult Default()
+        {
+            return View();
+        }
+        public IActionResult UEditor()
         {
             return View();
         }

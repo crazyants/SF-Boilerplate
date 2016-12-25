@@ -145,7 +145,7 @@
                         success: null
                     };
                     var options = $.extend(defaults, options);
-                    dialogConfirm(options.msg, function (r) {
+                    SF.utility.dialogConfirm(options.msg, function (r) {
                         if (r) {
                             SF.utility.loading(true, options.loading);
                             window.setTimeout(function () {
@@ -162,6 +162,7 @@
                                         if (data.state != "success") {
                                             SF.utility.dialogAlert(data.message);
                                         } else {
+                                            SF.utility.dialogMsg(data.message, 1);
                                             options.success(data);
                                         }
                                     },
@@ -196,7 +197,7 @@
                         dataType: "text",
                         async: false,
                         success: function (data) {
-                            if (data.toLocaleLowerCase() == 'true') {
+                            if (data.toLocaleLowerCase() == 'false') {
                                 ValidationMessage($control, '已存在,请重新输入');
                                 $control.attr('fieldexist', 'yes');
                             } else {
@@ -304,6 +305,41 @@
                 reload: function () {
                     location.reload();
                     return false;
+                },
+                parentIframeId : function () {
+                    return "iframepage";
+                    
+                },
+                currentIframe: function () {
+                    if (SF.utility.isbrowsername() == "Chrome" || SF.utility.isbrowsername() == "FF") {
+                        return top.frames[SF.utility.parentIframeId()];
+                    }
+                    else {
+                        return top.frames[SF.utility.parentIframeId()];
+                    }
+                },
+                isbrowsername : function () {
+                    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                    var isOpera = userAgent.indexOf("Opera") > -1;
+                    if (isOpera) {
+                        return "Opera"
+                    }; //判断是否Opera浏览器
+                    if (userAgent.indexOf("Firefox") > -1) {
+                        return "FF";
+                    } //判断是否Firefox浏览器
+                    if (userAgent.indexOf("Chrome") > -1) {
+                        if (window.navigator.webkitPersistentStorage.toString().indexOf('DeprecatedStorageQuota') > -1) {
+                            return "Chrome";
+                        } else {
+                            return "360";
+                        }
+                    }//判断是否Chrome浏览器//360浏览器
+                    if (userAgent.indexOf("Safari") > -1) {
+                        return "Safari";
+                    } //判断是否Safari浏览器
+                    if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
+                        return "IE";
+                    }; //判断是否IE浏览器
                 },
                 dialogOpen: function (options) {
                     SF.utility.loading(true);
@@ -536,7 +572,7 @@
                         $hfItemNames.val(data_text);
                         $spanNames.text(data_text);
                     }
-                   
+
                 },
                 comboBoxTreeSetValues: function (element, values) {
                     if (values == "") {
@@ -559,7 +595,7 @@
                     if (selectedNames.length > 0) {
                         $spanNames.text(selectedNames.join(', '));
                     }
-                   
+
                 }
             };
 

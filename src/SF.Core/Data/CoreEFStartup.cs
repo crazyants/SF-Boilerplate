@@ -24,12 +24,14 @@ namespace SF.Core.Data
                 // EnsureCreated is designed for testing or rapid prototyping where you are ok with dropping and re-creating 
                 // the database each time. If you are using migrations and want to have them automatically applied on app start, 
                 // then you can use context.Database.Migrate() instead.
-
-                //try
-                //{
-                await db.Database.MigrateAsync();
-                //}
-                //catch { }
+                try
+                {
+                    await db.Database.EnsureCreatedAsync();
+                }
+                catch (System.NotImplementedException)
+                {
+                    db.Database.EnsureCreated();
+                }
 
                 await EnsureData(db);
 
@@ -40,16 +42,93 @@ namespace SF.Core.Data
         {
             int rowsAffected = 0;
 
-            // ensure roles
-            int count = await db.Roles.CountAsync();
+            int count = await db.Set<SiteSettings>().CountAsync<SiteSettings>();
+            SiteSettings newSite = null;
             if (count == 0)
             {
+                // create first site
+                newSite = InitialData.BuildInitialSite();
 
-                var adminRole = InitialData.BuildAdminRole();
-                db.Roles.Add(adminRole);
+                db.Set<SiteSettings>().Add(newSite);
 
                 rowsAffected = await db.SaveChangesAsync();
 
+            }
+            // ensure roles
+            count = await db.Roles.CountAsync();
+            if (count == 0)
+            {
+                var site = newSite;
+                if (site == null)
+                {
+                    site = await db.Set<SiteSettings>().SingleOrDefaultAsync<SiteSettings>(
+                        s => s.Id != 0 && s.IsServerAdminSite == true);
+                }
+
+                if (site != null)
+                {
+
+                    var roleAdminRole = InitialData.BuildAdminRole();
+                    roleAdminRole.SiteId = site.Id;
+                    db.Roles.Add(roleAdminRole);
+
+                    var contentAdminRole = InitialData.BuildContentAdminsRole();
+                    contentAdminRole.SiteId = site.Id;
+                    db.Roles.Add(contentAdminRole);
+
+                    var authenticatedUserRole = InitialData.BuildAuthenticatedRole();
+                    authenticatedUserRole.SiteId = site.Id;
+                    db.Roles.Add(authenticatedUserRole);
+
+                    rowsAffected = await db.SaveChangesAsync();
+
+                }
+            }
+            // ensure admin user
+            count = await db.Users.CountAsync();
+            if (count == 0)
+            {
+                SiteSettings site = await db.Set<SiteSettings>().FirstOrDefaultAsync<SiteSettings>(
+                    s => s.Id != 0 && s.IsServerAdminSite == true);
+
+                if (site != null)
+                {
+                    var role = await db.Roles.FirstOrDefaultAsync(
+                            x => x.SiteId == site.Id && x.Description == "ADMINISTRATORS");
+
+                    if (role != null)
+                    {
+                        var adminUser = InitialData.BuildInitialAdmin();
+                        adminUser.SiteId = site.Id;
+                        db.Users.Add(adminUser);
+
+                        rowsAffected = await db.SaveChangesAsync();
+
+                        if (rowsAffected > 0 && adminUser.Id != 0)
+                        {
+                            var ur = new UserRoleEntity();
+                            ur.RoleId = role.Id;
+                            ur.UserId = adminUser.Id;
+                            db.UserRoles.Add(ur);
+                            await db.SaveChangesAsync();
+
+                            role = await db.Roles.SingleOrDefaultAsync(
+                                 x => x.SiteId == site.Id && x.Description == "Authenticated Users".ToUpperInvariant());
+
+                            if (role != null)
+                            {
+                                ur = new UserRoleEntity();
+                                ur.RoleId = role.Id;
+                                ur.UserId = adminUser.Id;
+                                db.UserRoles.Add(ur);
+                                await db.SaveChangesAsync();
+                            }
+
+
+                        }
+                    }
+
+                }
 
             }
         }

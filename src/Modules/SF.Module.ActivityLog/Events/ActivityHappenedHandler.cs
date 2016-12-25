@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using SF.Core.Events;
 using SF.Core.Abstraction.Data;
 using SF.Module.ActivityLog.Models;
 using SF.Module.ActivityLog.Data;
 using SF.Core.Abstraction.UoW.Helper;
+using SF.Core.Abstraction.Events;
 
 namespace SF.Module.ActivityLog.Events
 {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using SF.Core.Abstraction.Entitys;
+using SF.Core.Entitys.Abstraction;
 
 namespace SF.Module.Localization.Models
 {

@@ -32,6 +32,8 @@ namespace SF.Core.Data.WorkArea
             Setting = new SettingRepository(context);
             UrlSlug= new UrlSlugRepository(context);
             District = new DistrictRepository(context);
+            SiteSettings = new SiteSettingsRepository(context);
+            SiteHost = new SiteHostRepository(context);
         }
         public IUserRepository User { get; }
 
@@ -46,6 +48,10 @@ namespace SF.Core.Data.WorkArea
         public IUrlSlugRepository UrlSlug { get; }
 
         public IDistrictRepository District { get; }
+
+        public ISiteSettingsRepository SiteSettings { get; }
+
+        public ISiteHostRepository SiteHost { get; }
 
     }
 }
