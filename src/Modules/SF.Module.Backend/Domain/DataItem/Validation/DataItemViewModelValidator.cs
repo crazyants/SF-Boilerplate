@@ -37,14 +37,17 @@ namespace SF.Module.Backend.Domain.DataItem.Validation
              .NotEmpty().WithMessage("字典分类名称不能为空")
              .Length(1, 100).WithMessage("字典分类名称长度必须介于1和100个字符之间..")
              .Must(HaveUniqueName).WithMessage("已存在相同名称的字典分类.");
+
             RuleFor(item => item.ItemCode)
-              .NotEmpty().WithMessage("字典分类编码不能为空")
+             .NotEmpty().WithMessage("字典分类编码不能为空")
              .Length(1, 100).WithMessage("字典分类编码长度必须介于1和100个字符之间.")
              .Must(HaveUniqueCode).WithMessage("已存在相同编码的字典分类.");
+
             RuleFor(item => item.SortIndex).NotEmpty()
-                .WithMessage("排序不能为空");
+              .WithMessage("排序不能为空");
+
             RuleFor(item => item.Id)
-                .Must(IsParenByOwnId).WithMessage("不能选择自身为上级!");
+              .Must(IsParenByOwnId).WithMessage("不能选择自身为上级!");
         }
         /// <summary>
         /// 判断唯一名字

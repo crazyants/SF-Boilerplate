@@ -10,11 +10,21 @@ using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CacheManager.Core;
 
 namespace SF.WebHost.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+        //全局构建服务
+        public static IServiceCollection AddCacheManager(this IServiceCollection services,
+            IConfigurationRoot configuration)
+        {
+             services.AddCacheManagerConfiguration(configuration);
+            services.AddSingleton(typeof(ICacheManager<>), typeof(BaseCacheManager<>));
+            return services;
+        }
+
         /// <summary>
         /// 配置审计日志
         /// </summary>
@@ -83,6 +93,8 @@ namespace SF.WebHost.Extensions
 
             return services;
         }
+
+
 
 
         /// <summary>

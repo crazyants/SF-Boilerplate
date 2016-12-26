@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "8c27cbf59efcfab0a24106f0fd1c2f3ace616899"
+    "signature": "12270f1f36bf322ddab65885edb487fc06a82c57"
   },
   "compilationOptions": {},
   "targets": {
@@ -53,6 +53,25 @@
         },
         "runtime": {
           "lib/netstandard1.1/CacheManager.Core.dll": {}
+        }
+      },
+      "CacheManager.Serialization.Json/0.9.2": {
+        "dependencies": {
+          "CacheManager.Core": "0.9.1",
+          "Newtonsoft.Json": "9.0.1",
+          "System.IO.Compression": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.1/CacheManager.Serialization.Json.dll": {}
+        }
+      },
+      "CacheManager.StackExchange.Redis/0.9.2": {
+        "dependencies": {
+          "CacheManager.Core": "0.9.1",
+          "StackExchange.Redis.StrongName": "1.1.608"
+        },
+        "runtime": {
+          "lib/netstandard1.5/CacheManager.StackExchange.Redis.dll": {}
         }
       },
       "CoreCompat.Microsoft.Practices.ServiceLocation/1.3.0-r2": {
@@ -1938,6 +1957,35 @@
           "lib/netstandard1.0/Scrutor.dll": {}
         }
       },
+      "StackExchange.Redis.StrongName/1.1.608": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.Collections.NonGeneric": "4.3.0",
+          "System.Diagnostics.Tools": "4.3.0",
+          "System.IO.Compression": "4.3.0",
+          "System.IO.FileSystem": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Net.NameResolution": "4.3.0",
+          "System.Net.Security": "4.3.0",
+          "System.Net.Sockets": "4.3.0",
+          "System.Reflection.Emit": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0",
+          "System.Security.Cryptography.Algorithms": "4.3.0",
+          "System.Security.Cryptography.X509Certificates": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Thread": "4.3.0",
+          "System.Threading.ThreadPool": "4.3.0",
+          "System.Threading.Timer": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.5/StackExchange.Redis.StrongName.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -3598,6 +3646,8 @@
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
           "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
           "CacheManager.Core": "0.9.1",
+          "CacheManager.StackExchange.Redis": "0.9.2",
+          "CacheManager.Serialization.Json": "0.9.2",
           "Scrutor": "1.10.0",
           "SaasKit.Multitenancy": "1.1.4",
           "System.Linq.Dynamic.Core": "1.0.6.9",
@@ -3648,6 +3698,16 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-9cciBBtU8T2D558M6qyQYKXi294XF0Vs8f6mSPLxWkPL1p1vOpyVGEmDcXDBBkfs6JBJtgPPGbjd5qWZfjeerw=="
+    },
+    "CacheManager.Serialization.Json/0.9.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kRfknwmFB4UqS9HzJiEtCkNktSPJtmYuw7Uuk2v11N8JA7kwN9VD3DFrzSfCJ9hKx0PmD9km6yxP7LgDWTFh8Q=="
+    },
+    "CacheManager.StackExchange.Redis/0.9.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ckBVmOVL1A8hK1guGAqsvcWQhw9E1raKH3fsQo2IZdj/cC+a/UePhON/tENaqxEfUJQYRZ4QMe07up0JGDR1hg=="
     },
     "CoreCompat.Microsoft.Practices.ServiceLocation/1.3.0-r2": {
       "type": "package",
@@ -4388,6 +4448,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-+Tl6BG+ZKLgAMMc1xD7mXRPbLodxKLHEwMN99CyuIwtDSe3g7rK4Te0twO1AzdtMq1/KSMJOdW4+xsiFA6DtQQ=="
+    },
+    "StackExchange.Redis.StrongName/1.1.608": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-n1Nt4JiBTPmObCTRWoFgfYFl2UfiPSZAbvEYSypgO64da8XD4G4cT4aLoAUIPrDMSXbrIZTTyYlrPO29SvxtKQ=="
     },
     "System.AppContext/4.3.0": {
       "type": "package",

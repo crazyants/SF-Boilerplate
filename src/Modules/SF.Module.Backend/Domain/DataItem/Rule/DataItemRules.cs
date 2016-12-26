@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LinqKit;
+using Microsoft.EntityFrameworkCore;
 using SF.Core.Abstraction.Domain;
 using SF.Core.Data;
 using SF.Core.Entitys;
-using SF.Core.QueryExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace SF.Module.Backend.Domain.DataItem.Rule
 {
+    /// <summary>
+    /// 字典业务规则处理
+    /// </summary>
     public class DataItemRules : IDataItemRules
     {
         private readonly IBaseUnitOfWork _baseUnitOfWork;

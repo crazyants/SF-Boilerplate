@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CacheManager.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
@@ -11,12 +12,8 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.CodeAnalysis;
-using SF.Core.Extensions;
-using SF.Core.Settings;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using SF.Core.Data;
-using SF.Core.Interceptors;
-using SF.Core.Entitys;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,27 +21,11 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Net.Http.Headers;
-using SF.Core.Common.Razor;
-using SF.Web.Common.Base.Business;
-using SF.Core.Errors;
-using SF.Web.Common.Formatters.CsvImportExport;
-using SF.Web.Common.Attributes;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using SF.Core.Abstraction.UoW;
-using SF.Core.EFCore.UoW;
-using SF.Core.Common.Message.Email;
-using SF.Core.Common.Message.Sms;
-using SF.Core.EFCore.Repository;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using SF.Web.Common.Api.JsonConverters;
 using Newtonsoft.Json;
-using SF.Web.Common.Middleware;
-using SF.Core.Abstraction.Interceptors;
 using AutoMapper;
-using SF.Core;
-using SF.Web.Common.Components;
 using NodaTime;
-using SF.Core.Localization;
 using NodaTime.TimeZones;
 using SF.Core.Abstraction.Resolvers;
 using SF.Core.Abstraction.Steup;
@@ -52,9 +33,27 @@ using SF.Core.Data.Identity;
 using SF.Services.Site.Implementation;
 using SF.Services;
 using SF.Services.Site;
-using FluentValidation.AspNetCore;
-using Scrutor;
-using SF.Core.Abstraction.Domain;
+using SF.Core.Data;
+using SF.Core.Interceptors;
+using SF.Core.Entitys;
+using SF.Core;
+using SF.Web.Common.Components;
+using SF.Core.Localization;
+using SF.Web.Common.Middleware;
+using SF.Core.Abstraction.Interceptors;
+using SF.Core.Abstraction.UoW;
+using SF.Core.EFCore.UoW;
+using SF.Core.Common.Message.Email;
+using SF.Core.Common.Message.Sms;
+using SF.Core.EFCore.Repository;
+using SF.Web.Common.Api.JsonConverters;
+using SF.Core.Common.Razor;
+using SF.Web.Common.Base.Business;
+using SF.Core.Errors;
+using SF.Web.Common.Formatters.CsvImportExport;
+using SF.Web.Common.Attributes;
+using SF.Core.Extensions;
+using SF.Core.Settings;
 
 namespace SF.Web.Common
 {
@@ -294,7 +293,6 @@ namespace SF.Web.Common
             services.AddScoped<ISiteCommands, SiteCommands>();
             services.AddScoped<ISiteQueries, SiteQueries>();
 
-
             #endregion
 
             #region Swagger
@@ -323,7 +321,7 @@ namespace SF.Web.Common
         /// <param name="services"></param>
         public void AddExtensionsServices(IServiceCollection services)
         {
-            #region Plugin
+             #region Plugin
             //services.AddPlugins();
             //services.AddPluginManager(configurationRoot, hostingEnvironment);
             #endregion

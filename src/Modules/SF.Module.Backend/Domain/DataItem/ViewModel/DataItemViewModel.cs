@@ -54,7 +54,7 @@ namespace SF.Module.Backend.Domain.DataItem.ViewModel
 
         public string UpdatedBy { get; set; }
 
-
+        [Obsolete("默认使用FluentValidation集成，判断使用ModelState.IsValid")]
         public IEnumerable<ValidationResult> Validate(IValidator<DataItemViewModel> validator)
         {
             var result = validator.Validate(this);

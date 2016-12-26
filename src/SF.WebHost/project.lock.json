@@ -76,7 +76,7 @@
           "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
-      "CacheManager.Core/0.9.1": {
+      "CacheManager.Core/0.9.2": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -96,6 +96,33 @@
         },
         "runtime": {
           "lib/netstandard1.1/CacheManager.Core.dll": {}
+        }
+      },
+      "CacheManager.Serialization.Json/0.9.2": {
+        "type": "package",
+        "dependencies": {
+          "CacheManager.Core": "0.9.2-beta-1339",
+          "Newtonsoft.Json": "9.0.1",
+          "System.IO.Compression": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/CacheManager.Serialization.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/CacheManager.Serialization.Json.dll": {}
+        }
+      },
+      "CacheManager.StackExchange.Redis/0.9.2": {
+        "type": "package",
+        "dependencies": {
+          "CacheManager.Core": "0.9.2-beta-1339",
+          "StackExchange.Redis.StrongName": "1.1.608"
+        },
+        "compile": {
+          "lib/netstandard1.5/CacheManager.StackExchange.Redis.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/CacheManager.StackExchange.Redis.dll": {}
         }
       },
       "CoreCompat.Microsoft.Practices.ServiceLocation/1.3.0-r2": {
@@ -3372,6 +3399,39 @@
           "lib/netstandard1.0/Scrutor.dll": {}
         }
       },
+      "StackExchange.Redis.StrongName/1.1.608": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.11",
+          "System.Collections.Concurrent": "4.0.12",
+          "System.Collections.NonGeneric": "4.0.1",
+          "System.Diagnostics.Tools": "4.0.1",
+          "System.IO.Compression": "4.1.0",
+          "System.IO.FileSystem": "4.0.1",
+          "System.Linq": "4.1.0",
+          "System.Net.NameResolution": "4.0.0",
+          "System.Net.Security": "4.0.0",
+          "System.Net.Sockets": "4.1.0",
+          "System.Reflection.Emit": "4.0.1",
+          "System.Reflection.Emit.Lightweight": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.0.0",
+          "System.Security.Cryptography.Algorithms": "4.2.0",
+          "System.Security.Cryptography.X509Certificates": "4.1.0",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading": "4.0.11",
+          "System.Threading.Thread": "4.0.0",
+          "System.Threading.ThreadPool": "4.0.10",
+          "System.Threading.Timer": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.5/StackExchange.Redis.StrongName.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/StackExchange.Redis.StrongName.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -5667,6 +5727,39 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
+      "CacheManager.Microsoft.Extensions.Configuration/0.9.3": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.1",
+        "dependencies": {
+          "CacheManager.Core": "0.9.2",
+          "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "System.IO": "4.1.0",
+          "System.Runtime": "4.1.0"
+        },
+        "compile": {
+          "netstandard1.1/CacheManager.Microsoft.Extensions.Configuration.dll": {}
+        },
+        "runtime": {
+          "netstandard1.1/CacheManager.Microsoft.Extensions.Configuration.dll": {}
+        }
+      },
+      "CacheManager.Microsoft.Extensions.Logging/0.9.3": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.1",
+        "dependencies": {
+          "CacheManager.Core": "0.9.2",
+          "Microsoft.Extensions.Logging": "1.0.0",
+          "System.Runtime": "4.1.0"
+        },
+        "compile": {
+          "netstandard1.1/CacheManager.Microsoft.Extensions.Logging.dll": {}
+        },
+        "runtime": {
+          "netstandard1.1/CacheManager.Microsoft.Extensions.Logging.dll": {}
+        }
+      },
       "SF.Core/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
@@ -5824,7 +5917,9 @@
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "AutoMapper": "5.2.0",
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
+          "CacheManager.Serialization.Json": "0.9.2",
+          "CacheManager.StackExchange.Redis": "0.9.2",
           "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
           "MediatR": "2.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
@@ -5948,19 +6043,49 @@
         "lib/netstandard1.3/AutoMapper.xml"
       ]
     },
-    "CacheManager.Core/0.9.1": {
-      "sha512": "9cciBBtU8T2D558M6qyQYKXi294XF0Vs8f6mSPLxWkPL1p1vOpyVGEmDcXDBBkfs6JBJtgPPGbjd5qWZfjeerw==",
+    "CacheManager.Core/0.9.2": {
+      "sha512": "NXhUPBK6skAxrLM7gFopuThLj4Opc9C8av7tb0kKaJ2pwMuEX3Lf12/zgmMLHAGY0LYcbDne3qn4VbBzfMN9wg==",
       "type": "package",
-      "path": "CacheManager.Core/0.9.1",
+      "path": "CacheManager.Core/0.9.2",
       "files": [
-        "CacheManager.Core.0.9.1.nupkg.sha512",
-        "CacheManager.Core.nuspec",
+        "cachemanager.core.0.9.2.nupkg.sha512",
+        "cachemanager.core.nuspec",
         "lib/net40/CacheManager.Core.dll",
         "lib/net40/CacheManager.Core.xml",
         "lib/net45/CacheManager.Core.dll",
         "lib/net45/CacheManager.Core.xml",
         "lib/netstandard1.1/CacheManager.Core.dll",
         "lib/netstandard1.1/CacheManager.Core.xml"
+      ]
+    },
+    "CacheManager.Serialization.Json/0.9.2": {
+      "sha512": "kRfknwmFB4UqS9HzJiEtCkNktSPJtmYuw7Uuk2v11N8JA7kwN9VD3DFrzSfCJ9hKx0PmD9km6yxP7LgDWTFh8Q==",
+      "type": "package",
+      "path": "CacheManager.Serialization.Json/0.9.2",
+      "files": [
+        "cachemanager.serialization.json.0.9.2.nupkg.sha512",
+        "cachemanager.serialization.json.nuspec",
+        "lib/net40/CacheManager.Serialization.Json.dll",
+        "lib/net40/CacheManager.Serialization.Json.xml",
+        "lib/net45/CacheManager.Serialization.Json.dll",
+        "lib/net45/CacheManager.Serialization.Json.xml",
+        "lib/netstandard1.1/CacheManager.Serialization.Json.dll",
+        "lib/netstandard1.1/CacheManager.Serialization.Json.xml"
+      ]
+    },
+    "CacheManager.StackExchange.Redis/0.9.2": {
+      "sha512": "ckBVmOVL1A8hK1guGAqsvcWQhw9E1raKH3fsQo2IZdj/cC+a/UePhON/tENaqxEfUJQYRZ4QMe07up0JGDR1hg==",
+      "type": "package",
+      "path": "CacheManager.StackExchange.Redis/0.9.2",
+      "files": [
+        "cachemanager.stackexchange.redis.0.9.2.nupkg.sha512",
+        "cachemanager.stackexchange.redis.nuspec",
+        "lib/net40/CacheManager.StackExchange.Redis.dll",
+        "lib/net40/CacheManager.StackExchange.Redis.xml",
+        "lib/net45/CacheManager.StackExchange.Redis.dll",
+        "lib/net45/CacheManager.StackExchange.Redis.xml",
+        "lib/netstandard1.5/CacheManager.StackExchange.Redis.dll",
+        "lib/netstandard1.5/CacheManager.StackExchange.Redis.xml"
       ]
     },
     "CoreCompat.Microsoft.Practices.ServiceLocation/1.3.0-r2": {
@@ -8832,6 +8957,23 @@
         "Scrutor.nuspec",
         "lib/netstandard1.0/Scrutor.dll",
         "lib/netstandard1.0/Scrutor.xml"
+      ]
+    },
+    "StackExchange.Redis.StrongName/1.1.608": {
+      "sha512": "n1Nt4JiBTPmObCTRWoFgfYFl2UfiPSZAbvEYSypgO64da8XD4G4cT4aLoAUIPrDMSXbrIZTTyYlrPO29SvxtKQ==",
+      "type": "package",
+      "path": "StackExchange.Redis.StrongName/1.1.608",
+      "files": [
+        "StackExchange.Redis.StrongName.1.1.608.nupkg.sha512",
+        "StackExchange.Redis.StrongName.nuspec",
+        "lib/net40/StackExchange.Redis.StrongName.dll",
+        "lib/net40/StackExchange.Redis.StrongName.xml",
+        "lib/net45/StackExchange.Redis.StrongName.dll",
+        "lib/net45/StackExchange.Redis.StrongName.xml",
+        "lib/net46/StackExchange.Redis.StrongName.dll",
+        "lib/net46/StackExchange.Redis.StrongName.xml",
+        "lib/netstandard1.5/StackExchange.Redis.StrongName.dll",
+        "lib/netstandard1.5/StackExchange.Redis.StrongName.xml"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -13939,6 +14081,16 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
+    "CacheManager.Microsoft.Extensions.Configuration/0.9.3": {
+      "type": "project",
+      "path": "../CacheManager.Microsoft.Extensions.Configuration/project.json",
+      "msbuildProject": "../CacheManager.Microsoft.Extensions.Configuration/CacheManager.Microsoft.Extensions.Configuration.xproj"
+    },
+    "CacheManager.Microsoft.Extensions.Logging/0.9.3": {
+      "type": "project",
+      "path": "../CacheManager.Microsoft.Extensions.Logging/project.json",
+      "msbuildProject": "../CacheManager.Microsoft.Extensions.Logging/CacheManager.Microsoft.Extensions.Logging.xproj"
+    },
     "SF.Core/1.0.0": {
       "type": "project",
       "path": "../SF.Core/project.json",
@@ -13987,7 +14139,9 @@
       "Audit.NET.MongoDB >= 4.5.6",
       "Audit.NET.SqlServer >= 4.5.6",
       "AutoMapper >= 5.2.0",
-      "CacheManager.Core >= 0.9.1",
+      "CacheManager.Core >= 0.9.2",
+      "CacheManager.Microsoft.Extensions.Configuration >= 0.9.3-*",
+      "CacheManager.Microsoft.Extensions.Logging >= 0.9.3-*",
       "CoreCompat.Microsoft.Practices.ServiceLocation >= 1.3.0-r2",
       "Hangfire >= 1.6.5",
       "LinqKit >= 1.1.7.3",

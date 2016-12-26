@@ -14,6 +14,7 @@ using SF.Core.Common;
 using SF.Core.Abstraction.Mapping;
 using AutoMapper;
 
+
 namespace SF.WebHost
 {
     public class Startup
@@ -45,9 +46,8 @@ namespace SF.WebHost
             // it should not be possible for anyone to get files outside of wwwroot using http requests
             // but every little thing you can do for stronger security is a good idea
             builder.AddJsonFile("Config/simpleauthsettings.json", optional: true);
-
             builder.AddJsonFile("Config/ratelimitsettings.json", optional: true);
-
+            builder.AddJsonFile("Config/cache.json", optional: false);
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets();
@@ -67,12 +67,15 @@ namespace SF.WebHost
             simpleGlobal.GlobalConfiguration.WebRootPath = _hostingEnvironment.WebRootPath;
             simpleGlobal.GlobalConfiguration.ContentRootPath = _hostingEnvironment.ContentRootPath;
 
+
             services.AddAuditStorageProviders(Configuration, _hostingEnvironment);
             // Add Application Insights data collection services to the services container.
             services.AddApplicationInsightsTelemetry(Configuration);
             //services.AddSingleton(_ => Configuration);
             //services.AddSingleton(_ => services);
             services.AddSingleton(typeof(IServiceCollection), (o) => { return services; });
+
+           
 
             foreach (IModuleInitializer extension in ExtensionManager.Extensions)
             {
@@ -105,7 +108,7 @@ namespace SF.WebHost
                     mappingRegistration.MapperConfigurationToExpression(cfg);
                 }
             });
-
+            services.AddCacheManager(Configuration);
             services.Build(Configuration, _hostingEnvironment).BuildServiceProvider();
         }
 
