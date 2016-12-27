@@ -24,8 +24,11 @@
             onBeforLoadForm(ParentId);
         }
     }
+
     function onBeforLoadForm(parentId)
     {
+        $("#hfInitialItemParentIds").val("1,5");
+        $("#ParentId").val(6);
         //上级
         SF.controls.itemPicker.initialize({
             controlId: 'SelectParentId',
@@ -34,8 +37,12 @@
             defaultText: '',
             expandedIds: [parentId],
             success: function (data) {
-                SF.utility.comboBoxTreeSetValue($("#SelectParentId"), parentId);
-            }
+                //SF.utility.comboBoxTreeSetValue($("#SelectParentId"), parentId);
+            },
+            selected: function (id) {
+               // SF.utility.comboBoxTreeSetValue($("#SelectParentId"), id);
+            },
+
         });
 
     }
