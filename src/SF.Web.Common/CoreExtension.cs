@@ -431,6 +431,7 @@ namespace SF.Web.Common
             applicationBuilder.UseMultitenancy<SiteContext>();
 
             applicationBuilder.UseMiddleware<CurrentUserMiddleware>();
+            applicationBuilder.UseMiddleware<CustomErrorPagesMiddleware>(); 
             // applicationBuilder.UseMiddleware<RequestLoggerMiddleware>();
             //  applicationBuilder.UseMiddleware<ProcessingTimeMiddleware>();
             //注册MVC请求

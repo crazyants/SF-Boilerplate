@@ -4424,6 +4424,7 @@
           "Microsoft.EntityFrameworkCore": "1.1.0",
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
           "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
           "NETStandard.Library": "1.6.1",
           "SF.Core": "1.0.0",

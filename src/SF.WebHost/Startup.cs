@@ -55,6 +55,16 @@ namespace SF.WebHost
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+
+            foreach (var c in Configuration.GetSection("ErrorPages").GetChildren())
+            {
+                var key = Convert.ToInt32(c.Key);
+                if (!GlobalConfiguration.ErrorPages.Keys.Contains(key))
+                {
+                    GlobalConfiguration.ErrorPages.Add(key, c.Value);
+                }
+            }
         }
 
         private IConfigurationRoot Configuration { get; }
