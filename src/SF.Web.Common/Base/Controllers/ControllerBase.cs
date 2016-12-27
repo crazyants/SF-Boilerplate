@@ -8,6 +8,8 @@ using SF.Core.Errors.Exceptions;
 using SF.Web.Common.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using SF.Web.Common.Extensions;
 
 namespace SF.Web.Common.Base.Controllers
 {
@@ -28,7 +30,10 @@ namespace SF.Web.Common.Base.Controllers
         protected virtual IActionResult BadRequestResult(ModelStateDictionary modelState)
         {
             // ToDo : does this have to be logged ?
-            return new BadRequestObjectResult(modelState);
+            //return new BadRequestObjectResult(modelState);
+            var errorMessages = modelState.AllModelStateErrors();
+            var message = string.Join(",", errorMessages.Select(x => x.ErrorMessage));
+            return Content(new AjaxResult { state = ResultType.error.ToString(), message = message }.ToJson());
         }
 
         protected virtual IActionResult BadRequestResult(ValidationException validationEx)
@@ -42,7 +47,7 @@ namespace SF.Web.Common.Base.Controllers
                     modelState.AddModelError(String.Empty, message);
                 }
             }
-            return new BadRequestObjectResult(modelState);
+            return BadRequestResult(modelState);
 
         }
 
@@ -55,7 +60,7 @@ namespace SF.Web.Common.Base.Controllers
             {
                 modelState.AddModelError(String.Empty, validationResult.ErrorMessage);
             }
-            return new BadRequestObjectResult(modelState);
+            return BadRequestResult(modelState);
 
         }
 
@@ -70,25 +75,16 @@ namespace SF.Web.Common.Base.Controllers
             {
                 Logger.LogError(message, args);
                 var error = new ServerErrorException(string.Format(message, args));
-                return new ObjectResult(_exceptionMapper.Resolve(error)) { StatusCode = 500 };
+                return Content(new AjaxResult { state = ResultType.error.ToString(), message = _exceptionMapper.Resolve(error).ToString() }.ToJson());
             }
             else
             {
-
                 var errorMessage = String.Format(message, args);
                 Logger.LogError("{0} : {1}", errorMessage, ExceptionHelper.GetAllToStrings(ex));
                 var error = new ServerErrorException(string.Format("{0} : {1}", errorMessage, ex.Message));
-                return new ObjectResult(_exceptionMapper.Resolve(error)) { StatusCode = 500 };
+                return Content(new AjaxResult { state = ResultType.error.ToString(), message = _exceptionMapper.Resolve(error).ToString() }.ToJson());
             }
         }
-
-        //protected virtual IActionResult InternalServerError(Exception error)
-        //{
-        //    if (error == null) throw new ArgumentNullException("error", "error is null");
-        //    foreach (var message in error.Message)
-        //        Logger.LogError(error.Message);
-        //    return new ObjectResult(error) { StatusCode = 500 };
-        //}
 
         protected virtual IActionResult OkResult()
         {

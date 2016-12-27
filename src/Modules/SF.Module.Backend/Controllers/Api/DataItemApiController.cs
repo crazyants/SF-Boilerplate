@@ -26,6 +26,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using SF.Module.Backend.Domain.DataItem.ViewModel;
 using SF.Module.Backend.Domain.DataItem.Service;
+using LinqKit;
 
 namespace SF.Module.Backend.Controllers
 {

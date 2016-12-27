@@ -275,6 +275,9 @@ namespace SF.Web.Common
 
             services.AddScoped<ITimeZoneIdResolver, RequestTimeZoneIdResolver>();
 
+            services.AddCacheManagerConfiguration(configurationRoot, cfg => cfg.WithMicrosoftLogging(services));
+            services.AddSingleton(typeof(ICacheManager<>), typeof(BaseCacheManager<>));
+
             #region 基础业务Service
             services.AddMultitenancy<SiteContext, CachingSiteResolver>();
             services.AddScoped<CacheHelper, CacheHelper>();
@@ -321,7 +324,7 @@ namespace SF.Web.Common
         /// <param name="services"></param>
         public void AddExtensionsServices(IServiceCollection services)
         {
-             #region Plugin
+            #region Plugin
             //services.AddPlugins();
             //services.AddPluginManager(configurationRoot, hostingEnvironment);
             #endregion

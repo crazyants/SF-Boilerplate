@@ -22,6 +22,8 @@
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
           "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
           "CacheManager.Core": "0.9.2",
+          "CacheManager.Microsoft.Extensions.Configuration": "0.9.3",
+          "CacheManager.Microsoft.Extensions.Logging": "0.9.3",
           "CacheManager.StackExchange.Redis": "0.9.2",
           "CacheManager.Serialization.Json": "0.9.2",
           "Scrutor": "1.10.0",
@@ -3043,6 +3045,29 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
+      "CacheManager.Microsoft.Extensions.Configuration/0.9.3": {
+        "dependencies": {
+          "System.Runtime": "4.3.0",
+          "System.IO": "4.3.0",
+          "CacheManager.Core": "0.9.2",
+          "Microsoft.Extensions.Configuration.Abstractions": "1.0.1",
+          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"
+        },
+        "runtime": {
+          "CacheManager.Microsoft.Extensions.Configuration.dll": {}
+        }
+      },
+      "CacheManager.Microsoft.Extensions.Logging/0.9.3": {
+        "dependencies": {
+          "System.Runtime": "4.3.0",
+          "CacheManager.Core": "0.9.2",
+          "Microsoft.Extensions.Logging": "1.1.0"
+        },
+        "runtime": {
+          "CacheManager.Microsoft.Extensions.Logging.dll": {}
+        }
+      },
       "SF.Core/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -4313,6 +4338,16 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-A/uxsWi/Ifzkmd4ArTLISMbfFs6XpRPsXZonrIqyTY70xi8t+mDtvSM5Os0RqyRDobjMBwIDHDL4NOIbkDwf7A=="
+    },
+    "CacheManager.Microsoft.Extensions.Configuration/0.9.3": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CacheManager.Microsoft.Extensions.Logging/0.9.3": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "SF.Core/1.0.0": {
       "type": "project",

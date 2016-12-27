@@ -5040,6 +5040,39 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
+      "CacheManager.Microsoft.Extensions.Configuration/0.9.3": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.1",
+        "dependencies": {
+          "CacheManager.Core": "0.9.2",
+          "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "System.IO": "4.1.0",
+          "System.Runtime": "4.1.0"
+        },
+        "compile": {
+          "netstandard1.1/CacheManager.Microsoft.Extensions.Configuration.dll": {}
+        },
+        "runtime": {
+          "netstandard1.1/CacheManager.Microsoft.Extensions.Configuration.dll": {}
+        }
+      },
+      "CacheManager.Microsoft.Extensions.Logging/0.9.3": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.1",
+        "dependencies": {
+          "CacheManager.Core": "0.9.2",
+          "Microsoft.Extensions.Logging": "1.0.0",
+          "System.Runtime": "4.1.0"
+        },
+        "compile": {
+          "netstandard1.1/CacheManager.Microsoft.Extensions.Logging.dll": {}
+        },
+        "runtime": {
+          "netstandard1.1/CacheManager.Microsoft.Extensions.Logging.dll": {}
+        }
+      },
       "SF.Core/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
@@ -5179,6 +5212,8 @@
         "dependencies": {
           "AutoMapper": "5.2.0",
           "CacheManager.Core": "0.9.2",
+          "CacheManager.Microsoft.Extensions.Configuration": "0.9.3",
+          "CacheManager.Microsoft.Extensions.Logging": "0.9.3",
           "CacheManager.Serialization.Json": "0.9.2",
           "CacheManager.StackExchange.Redis": "0.9.2",
           "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
@@ -12683,6 +12718,16 @@
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
       ]
+    },
+    "CacheManager.Microsoft.Extensions.Configuration/0.9.3": {
+      "type": "project",
+      "path": "../../CacheManager.Microsoft.Extensions.Configuration/project.json",
+      "msbuildProject": "../../CacheManager.Microsoft.Extensions.Configuration/CacheManager.Microsoft.Extensions.Configuration.xproj"
+    },
+    "CacheManager.Microsoft.Extensions.Logging/0.9.3": {
+      "type": "project",
+      "path": "../../CacheManager.Microsoft.Extensions.Logging/project.json",
+      "msbuildProject": "../../CacheManager.Microsoft.Extensions.Logging/CacheManager.Microsoft.Extensions.Logging.xproj"
     },
     "SF.Core/1.0.0": {
       "type": "project",

@@ -33,11 +33,7 @@ namespace SF.Web.Common.Attributes
                 var errorList = new List<ErrorViewModel>();
                 foreach (var validationsfailures in (context.Exception as ValidationException).Errors)
                 {
-                    errorList.Add(new ErrorViewModel
-                    {
-                        ErrorCode = validationsfailures.ErrorCode,
-                        ErrorMessage = validationsfailures.ErrorMessage
-                    });
+                    errorList.Add(new ErrorViewModel(validationsfailures.ErrorCode, validationsfailures.ErrorMessage));
                 }
                 var result = new JsonResult(errorList);
                 result.ContentType = "application/json";

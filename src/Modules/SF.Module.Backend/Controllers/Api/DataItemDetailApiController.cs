@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using SF.Module.Backend.Domain.DataItemDetail.ViewModel;
+using LinqKit;
 
 namespace SF.Module.Backend.Controllers
 {
@@ -52,11 +53,10 @@ namespace SF.Module.Backend.Controllers
         public ActionResult GetPageListJson(long itemId, string condition, string keyword, JqGridRequest request)
         {
             Expression<Func<DataItemDetailEntity, bool>> pk = d => d.ItemId == itemId;
-            Expression<Func<DataItemDetailEntity, bool>> pc = d => d.Id > 0;
 
             if (!string.IsNullOrEmpty(keyword))
             {
-
+                Expression<Func<DataItemDetailEntity, bool>> pc = null;
                 #region 多条件查询
                 switch (condition)
                 {
@@ -71,10 +71,12 @@ namespace SF.Module.Backend.Controllers
                         break;
                     default:
                         break;
+
                 }
-                #endregion      
+                #endregion
+                pk.And(pc);
             }
-            var query = _repository.QueryPage(pc.And(pk), page: request.PageIndex, pageSize: request.RecordsCount);
+            var query = _repository.QueryPage(pk, page: request.PageIndex, pageSize: request.RecordsCount);
             var dtos = CrudDtoMapper.MapEntityToDtos(query);
             JqGridResponse response = new JqGridResponse()
             {

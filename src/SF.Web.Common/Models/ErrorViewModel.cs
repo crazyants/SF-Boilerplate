@@ -7,6 +7,11 @@ namespace SF.Web.Common.Models
 {
     public class ErrorViewModel
     {
+        public ErrorViewModel(string errorCode, string errorMessage)
+        {
+            ErrorCode = errorCode;
+            ErrorMessage = errorMessage;
+        }
         public string ErrorMessage { get; set; }
         public string ErrorCode { get; set; }
     }

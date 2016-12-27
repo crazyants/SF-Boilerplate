@@ -242,6 +242,8 @@
 -r:"C:\Users\tomny.tang\.nuget\packages\System.Xml.XmlSerializer\4.0.11\ref\netstandard1.3\System.Xml.XmlSerializer.dll"
 -r:"C:\Users\tomny.tang\.nuget\packages\System.Xml.XPath\4.3.0\ref\netstandard1.3\System.Xml.XPath.dll"
 -r:"C:\Users\tomny.tang\.nuget\packages\System.Xml.XPath.XmlDocument\4.3.0\ref\netstandard1.3\System.Xml.XPath.XmlDocument.dll"
+-r:"E:\Tomny\权限中心\Git\SFramework_Team_2017\src\CacheManager.Microsoft.Extensions.Configuration\bin\Debug\netstandard1.1\CacheManager.Microsoft.Extensions.Configuration.dll"
+-r:"E:\Tomny\权限中心\Git\SFramework_Team_2017\src\CacheManager.Microsoft.Extensions.Logging\bin\Debug\netstandard1.1\CacheManager.Microsoft.Extensions.Logging.dll"
 -r:"E:\Tomny\权限中心\Git\SFramework_Team_2017\src\SF.Core\bin\Debug\netstandard1.6\SF.Core.dll"
 -r:"E:\Tomny\权限中心\Git\SFramework_Team_2017\src\SF.Core.Abstraction\bin\Debug\netstandard1.6\SF.Core.Abstraction.dll"
 -r:"E:\Tomny\权限中心\Git\SFramework_Team_2017\src\SF.Core.EFCore\bin\Debug\netstandard1.6\SF.Core.EFCore.dll"

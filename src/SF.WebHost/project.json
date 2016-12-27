@@ -60,9 +60,7 @@
     "SF.Web.Security": "1.0.0-*",
     "SF.Core.Web.Control": "1.0.0-*",
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
-    "AutoMapper": "5.2.0",
-    "CacheManager.Microsoft.Extensions.Configuration": "0.9.3-*",
-    "CacheManager.Microsoft.Extensions.Logging": "0.9.3-*"
+    "AutoMapper": "5.2.0"
   },
 
   "tools": {

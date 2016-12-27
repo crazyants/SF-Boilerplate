@@ -108,7 +108,7 @@ namespace SF.WebHost
                     mappingRegistration.MapperConfigurationToExpression(cfg);
                 }
             });
-            services.AddCacheManager(Configuration);
+   
             services.Build(Configuration, _hostingEnvironment).BuildServiceProvider();
         }
 

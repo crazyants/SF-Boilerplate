@@ -306,9 +306,9 @@
                     location.reload();
                     return false;
                 },
-                parentIframeId : function () {
+                parentIframeId: function () {
                     return "iframepage";
-                    
+
                 },
                 currentIframe: function () {
                     if (SF.utility.isbrowsername() == "Chrome" || SF.utility.isbrowsername() == "FF") {
@@ -318,7 +318,7 @@
                         return top.frames[SF.utility.parentIframeId()];
                     }
                 },
-                isbrowsername : function () {
+                isbrowsername: function () {
                     var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
                     var isOpera = userAgent.indexOf("Opera") > -1;
                     if (isOpera) {
@@ -561,10 +561,10 @@
                         return;
                     }
                     var $control = $(element),
-                 $hfItemIds = $control.find('.js-item-id-value'),
-                 $hfItemNames = $control.find('.js-item-name-value'),
-                 $treeView = $control.find('.treeview'),
-                 $spanNames = $control.find('.selected-names');
+                         $hfItemIds = $control.find('.js-item-id-value'),
+                         $hfItemNames = $control.find('.js-item-name-value'),
+                         $treeView = $control.find('.treeview'),
+                         $spanNames = $control.find('.selected-names');
 
 
                     var data_text = $treeView.find('ul').find('[data-id=' + value + ']').find('span').attr("title");
