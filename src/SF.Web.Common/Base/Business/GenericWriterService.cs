@@ -15,7 +15,7 @@ namespace SF.Web.Common.Base.Business
     /// 写入处理
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CodeTableWriter<T,TKey> : ICodetableWriter<T, TKey> where T : BaseEntity<TKey>
+    public class GenericWriterService<T,TKey> : IGenericWriterService<T, TKey> where T : BaseEntity<TKey>
     {
         #region Fields
         protected readonly IUnitOfWork _unitOfWork;
@@ -25,7 +25,7 @@ namespace SF.Web.Common.Base.Business
         #endregion
 
         #region Constructors
-        public CodeTableWriter(ILogger<Controller> logger, IEFCoreQueryableRepository<T, TKey> repository, IUnitOfWork unitOfWork)
+        public GenericWriterService(ILogger<Controller> logger, IEFCoreQueryableRepository<T, TKey> repository, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _repository = repository;

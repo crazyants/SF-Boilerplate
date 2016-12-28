@@ -34,9 +34,9 @@ namespace SF.Web.Common.Base.Controllers
         where TCodeTabelModel : EntityModelBase
     {
         #region Fields
-        private readonly FluentValidation.IValidator<TCodeTabelModel> _validator;
-        private readonly ICodetableReader<TCodeTabelEntity, long> _reader;
-        private readonly ICodetableWriter<TCodeTabelEntity, long> _writer;
+        protected readonly FluentValidation.IValidator<TCodeTabelModel> _validator;
+        protected readonly IGenericReaderService<TCodeTabelEntity, long> _readerService;
+        protected readonly IGenericWriterService<TCodeTabelEntity, long> _writerService;
         protected readonly IEFCoreQueryableRepository<TCodeTabelEntity, long> _repository;
 
         #endregion
@@ -56,8 +56,8 @@ namespace SF.Web.Common.Base.Controllers
         protected CrudControllerBase(IServiceCollection service, ILogger<Controller> logger) : base(service, logger)
         {
             _validator = service.BuildServiceProvider().GetService<FluentValidation.IValidator<TCodeTabelModel>>();
-            _reader = service.BuildServiceProvider().GetService<ICodetableReader<TCodeTabelEntity, long>>();
-            _writer = service.BuildServiceProvider().GetService<ICodetableWriter<TCodeTabelEntity, long>>();
+            _readerService = service.BuildServiceProvider().GetService<IGenericReaderService<TCodeTabelEntity, long>>();
+            _writerService = service.BuildServiceProvider().GetService<IGenericWriterService<TCodeTabelEntity, long>>();
             _repository = service.BuildServiceProvider().GetService<IEFCoreQueryableRepository<TCodeTabelEntity, long>>();
             CrudDtoMapper = service.BuildServiceProvider().GetService<ICrudDtoMapper<TCodeTabelEntity, TCodeTabelModel>>();
      
@@ -73,14 +73,30 @@ namespace SF.Web.Common.Base.Controllers
         {
             _validator = service.BuildServiceProvider().GetService<FluentValidation.IValidator<TCodeTabelModel>>();
             _repository = new EFCoreBaseRepository<TCodeTabelEntity>(unitOfWork.Context);
-            _reader = new CodetableReader<TCodeTabelEntity, long>(logger, _repository);
-            _writer = new CodeTableWriter<TCodeTabelEntity, long>(logger, _repository, unitOfWork);
+            _readerService = new GenericReaderService<TCodeTabelEntity, long>(logger, _repository);
+            _writerService = new GenericWriterService<TCodeTabelEntity, long>(logger, _repository, unitOfWork);
             CrudDtoMapper = service.BuildServiceProvider().GetService<ICrudDtoMapper<TCodeTabelEntity, TCodeTabelModel>>();
            
         }
         #endregion
 
         #region Utilities
+        /// <summary>
+        /// 查询带返回结果的外部委托方法
+        /// </summary>
+        protected Func<IGenericReaderService<TCodeTabelEntity, long>, Task<TCodeTabelModel>> GetAsyncFun;
+        /// <summary>
+        /// 查询所有带返回结果的外部委托方法
+        /// </summary>
+        protected Func<IGenericReaderService<TCodeTabelEntity, long>, Task<IEnumerable<TCodeTabelModel>>> GetAllAsyncFun;
+        /// <summary>
+        /// 获取一条记录后
+        /// </summary>
+        /// <param name="arg"></param>
+        protected virtual void OnAfterGet(TCodeTabelModel arg)
+        {
+
+        }
         /// <summary>
         /// 新增前
         /// </summary>
@@ -141,14 +157,7 @@ namespace SF.Web.Common.Base.Controllers
         {
 
         }
-        /// <summary>
-        /// 查询带返回结果的外部委托方法
-        /// </summary>
-        protected Func<ICodetableReader<TCodeTabelEntity, long>, Task<TCodeTabelModel>> GetAsyncFun;
-        /// <summary>
-        /// 查询所有带返回结果的外部委托方法
-        /// </summary>
-        protected Func<ICodetableReader<TCodeTabelEntity, long>, Task<IEnumerable<TCodeTabelModel>>> GetAllAsyncFun;
+
         #endregion
 
         #region Method  
@@ -166,16 +175,18 @@ namespace SF.Web.Common.Base.Controllers
                 TCodeTabelModel model;
                 if (GetAsyncFun != null)
                 {
-                    model = await GetAsyncFun(_reader);
+                    model = await GetAsyncFun(_readerService);
                 }
                 else
                 {
-                    var codetableEntity = await _reader.GetAsync(id);
+                    var codetableEntity = await _readerService.GetAsync(id);
                     if (codetableEntity == null)
                         return NotFoundResult($"Code with id {id} not found in {typeof(TCodeTabelModel).Name}.");
                     model = CrudDtoMapper.MapEntityToDto(codetableEntity);
                 }
-
+                #region 获取After
+                this.OnAfterGet(model);
+                #endregion
                 return OkResult(model.ToJson());
             }
             catch (Exception ex)
@@ -196,11 +207,11 @@ namespace SF.Web.Common.Base.Controllers
                 IEnumerable<TCodeTabelModel> models;
                 if (GetAllAsyncFun != null)
                 {
-                    models = await GetAllAsyncFun(_reader);
+                    models = await GetAllAsyncFun(_readerService);
                 }
                 else
                 {
-                    var values = await _reader.GetAllAsync();
+                    var values = await _readerService.GetAllAsync();
                     models = values.Select(x =>
                     {
                         return CrudDtoMapper.MapEntityToDto(x);
@@ -239,7 +250,7 @@ namespace SF.Web.Common.Base.Controllers
                 #region 新增处理
 
                 var entity = CrudDtoMapper.MapDtoToEntity(model);
-                var insertedEntity = await _writer.InsertAsync(entity);
+                var insertedEntity = await _writerService.InsertAsync(entity);
 
                 #endregion
                 #region 新增处理After
@@ -284,11 +295,11 @@ namespace SF.Web.Common.Base.Controllers
 
                 if (model == null) throw new ValidationException("model not provided");
                 if (id != model.Id) throw new ValidationException("id does not match model id");
-                var codetableEntity = await _reader.GetAsync(id);
+                var codetableEntity = await _readerService.GetAsync(id);
                 if (codetableEntity == null)
                     return NotFoundResult($"Code with id {id} not found in {typeof(TCodeTabelModel).Name}.");
                 var entity = CrudDtoMapper.MapDtoToEntity(model, codetableEntity);
-                await _writer.UpdateAsync(entity);
+                await _writerService.UpdateAsync(entity);
 
                 #endregion
                 #region 编辑处理After
@@ -329,7 +340,7 @@ namespace SF.Web.Common.Base.Controllers
                 #endregion
                 #region 删除处理
 
-                await _writer.DeleteAsync(id);
+                await _writerService.DeleteAsync(id);
 
                 #endregion
                 #region 删除处理After

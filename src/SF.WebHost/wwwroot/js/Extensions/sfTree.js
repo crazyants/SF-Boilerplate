@@ -422,7 +422,6 @@
                 }
             }
         },
-
         // Wire up DOM events for sfTree instance
         initTreeEvents: function () {
             var self = this;

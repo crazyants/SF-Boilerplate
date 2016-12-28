@@ -27,6 +27,7 @@ using System.Linq.Expressions;
 using SF.Module.Backend.Domain.DataItem.ViewModel;
 using SF.Module.Backend.Domain.DataItem.Service;
 using LinqKit;
+using SF.Module.Backend.Domain.DataItem.Rule;
 
 namespace SF.Module.Backend.Controllers
 {
@@ -39,19 +40,31 @@ namespace SF.Module.Backend.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IDataItemService _dataItemService;
+        private readonly IDataItemRules _dataItemRules;
         private readonly IBaseUnitOfWork _baseUnitOfWork;
         public DataItemApiController(IServiceCollection collection, ILogger<DataItemApiController> logger,
              IBaseUnitOfWork baseUnitOfWork,
              IMediator mediator,
-             IDataItemService dataItemService)
+             IDataItemService dataItemService,
+             IDataItemRules dataItemRules)
             : base(baseUnitOfWork, collection, logger)
         {
             this._baseUnitOfWork = baseUnitOfWork;
             this._mediator = mediator;
             this._dataItemService = dataItemService;
+            this._dataItemRules = dataItemRules;
+        }
+
+        #region 事件
+        /// <summary>
+        /// 获取一条记录后
+        /// </summary>
+        /// <param name="arg"></param>
+        protected override void OnAfterGet(DataItemViewModel arg)
+        {
 
         }
-        #region 事件
+
         /// <summary>
         /// 新增后
         /// </summary>
@@ -102,7 +115,7 @@ namespace SF.Module.Backend.Controllers
 
                 if (countsType == TreeViewItem.GetCountsType.ChildGroups)
                 {
-                    treeViewItem.CountInfo = this._baseUnitOfWork.BaseWorkArea.DataItem.Query().Where(a => a.ParentId.HasValue && a.ParentId == group.Id).Count();
+                    treeViewItem.CountInfo = this._dataItemService.GetAlls().Where(a => a.ParentId.HasValue && a.ParentId == group.Id).Count();
                 }
 
                 groupNameList.Add(treeViewItem);
@@ -111,7 +124,7 @@ namespace SF.Module.Backend.Controllers
 
             //快速找出哪些项目有子级
             List<long> resultIds = dataItemEntityList.Select(a => a.Id).ToList();
-            var qryHasChildrenList = this._baseUnitOfWork.BaseWorkArea.DataItem.Query()
+            var qryHasChildrenList = _dataItemService.GetAlls()
                 .Where(g =>
                    g.ParentId.HasValue &&
                    resultIds.Contains(g.ParentId.Value)).Select(g => g.ParentId.Value)
@@ -135,7 +148,7 @@ namespace SF.Module.Backend.Controllers
         [Route("GetTreeList")]
         public ActionResult GetTreeListJson(string keyword)
         {
-            var data = _repository.Query().ToList();
+            var data = _dataItemService.GetAlls();
 
             if (!string.IsNullOrEmpty(keyword))
             {
@@ -168,12 +181,8 @@ namespace SF.Module.Backend.Controllers
         [Route("GetPageList")]
         public ActionResult GetPageListJson(JqGridRequest request, string keyword)
         {
-            Expression<Func<DataItemEntity, bool>> pc = d => d.Id > 0;
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                pc = d => d.ItemName.Contains(keyword);
-            }
-            var query = _repository.QueryPage(pc, page: request.PageIndex, pageSize: request.RecordsCount);
+
+            var query = _dataItemService.GetPageListBykeyword(keyword, request.PageIndex, request.RecordsCount);
             var dtos = CrudDtoMapper.MapEntityToDtos(query);
             JqGridResponse response = new JqGridResponse()
             {
@@ -200,16 +209,9 @@ namespace SF.Module.Backend.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("ExistItemCode")]
-        public ActionResult ExistItemCode(string itemCode, string keyValue)
+        public ActionResult ExistItemCode(string itemCode, long keyValue)
         {
-            var query = _repository.Query();
-            Expression<Func<DataItemEntity, bool>> pi = d => d.ItemCode == itemCode;
-            if (!string.IsNullOrEmpty(keyValue))
-            {
-                Expression<Func<DataItemEntity, bool>> pk = d => d.Id != keyValue.AsInteger(0);
-                pi.And(pk);
-            }
-            bool IsOk = query.Where(pi).Count() == 0 ? true : false;
+            bool IsOk = _dataItemRules.IsDataItemCodeUnique(itemCode, keyValue);
             return Content(IsOk.ToString());
         }
         /// <summary>
@@ -220,17 +222,9 @@ namespace SF.Module.Backend.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("ExistItemName")]
-        public ActionResult ExistItemName(string itemName, string keyValue)
+        public ActionResult ExistItemName(string itemName, long keyValue)
         {
-
-            var query = _repository.Query();
-            Expression<Func<DataItemEntity, bool>> pi = d => d.ItemName == itemName;
-            if (!string.IsNullOrEmpty(keyValue))
-            {
-                Expression<Func<DataItemEntity, bool>> pk = d => d.Id != keyValue.AsInteger(0);
-                pi.And(pk);
-            }
-            bool IsOk = query.Where(pi).Count() == 0 ? true : false;
+            bool IsOk = _dataItemRules.IsDataItemNameUnique(itemName, keyValue);
             return Content(IsOk.ToString());
         }
         #endregion

@@ -25,5 +25,6 @@ namespace SF.Module.Backend.Common
         /// 字典分类
         /// </summary>
         public const string DATAITEM_PATTERN_KEY = "sf.pres.dataitem-{0}";
+        public const string DATAITEM_ALL = "sf.pres.dataitem-all";
     }
 }

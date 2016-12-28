@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 namespace SF.Web.Common.Base.Business
 {
     /// <summary>
-    /// 写入处理
+    /// 一般写入服务处理类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ICodetableWriter<T, TKey> where T : IEntityWithTypedId<TKey>
+    public interface IGenericWriterService<T, TKey> where T : IEntityWithTypedId<TKey>
     {
         Task<T> InsertAsync(T entity);
         Task UpdateAsync(T entity);

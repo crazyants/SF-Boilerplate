@@ -3679,7 +3679,8 @@
           "SF.Core.Abstraction": "1.0.0",
           "SF.Core": "1.0.0",
           "SF.Core.Entitys": "1.0.0",
-          "SF.Services": "1.0.0"
+          "SF.Services": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0"
         },
         "runtime": {
           "SF.Web.Common.dll": {}

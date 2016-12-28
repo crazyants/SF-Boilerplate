@@ -290,8 +290,8 @@ namespace SF.Web.Common
             services.TryAddScoped<ISmsSender, SiteSmsSender>();
 
             services.TryAddScoped<IExceptionMapper, BaseExceptionMapper>();
-            services.AddTransient(typeof(ICodetableWriter<,>), typeof(CodeTableWriter<,>));
-            services.AddTransient(typeof(ICodetableReader<,>), typeof(CodetableReader<,>));
+            services.AddTransient(typeof(IGenericWriterService<,>), typeof(GenericWriterService<,>));
+            services.AddTransient(typeof(IGenericReaderService<,>), typeof(GenericReaderService<,>));
 
             services.AddScoped<ISiteCommands, SiteCommands>();
             services.AddScoped<ISiteQueries, SiteQueries>();

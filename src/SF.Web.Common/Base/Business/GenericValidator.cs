@@ -4,7 +4,7 @@ using System;
 
 namespace SF.Web.Common.Base.Business
 {
-    public class CodeTabelValidator<T> : ICodeTabelValidator<T> where T : BaseEntity
+    public class GenericValidator<T> : IGenericValidator<T> where T : BaseEntity
     {
         public void CanUserDelete(T entity)
         {

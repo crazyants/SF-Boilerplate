@@ -15,19 +15,18 @@ namespace SF.Web.Common.Base.Business
     /// 读取处理
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CodetableReader<T, TKey> : ICodetableReader<T, TKey> where T : BaseEntity<TKey>
+    public class GenericReaderService<T, TKey> : IGenericReaderService<T, TKey> where T : BaseEntity<TKey>
         
     {
         #region Fields
 
-        private readonly IUnitOfWorkFactory _factory;
         private readonly IEFCoreQueryableRepository<T, TKey> _repository;
         protected readonly ILogger _logger;
 
         #endregion
 
         #region Constructors
-        public CodetableReader(ILogger<Controller> logger, IEFCoreQueryableRepository<T, TKey> repository)
+        public GenericReaderService(ILogger<Controller> logger, IEFCoreQueryableRepository<T, TKey> repository)
         {
             _logger = logger;
             _repository = repository;
