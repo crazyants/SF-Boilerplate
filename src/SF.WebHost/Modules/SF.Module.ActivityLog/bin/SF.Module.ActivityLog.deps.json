@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "05ebcd35c5a1df1aa1a7aafe7b163e732f71dd21"
+    "signature": "125d1344bf5d3bed3d1b5e9b0099747a4e6c643a"
   },
   "compilationOptions": {},
   "targets": {
@@ -84,6 +84,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/CoreCompat.System.Drawing.dll": {}
+        }
+      },
+      "EFSecondLevelCache.Core/1.0.2": {
+        "dependencies": {
+          "CacheManager.Core": "0.9.1",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/EFSecondLevelCache.Core.dll": {}
         }
       },
       "EPPlus.Core/1.0.2": {
@@ -3005,7 +3018,8 @@
           "CacheManager.Core": "0.9.1",
           "Microsoft.AspNetCore.Routing": "1.0.1",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
-          "SF.Core.Abstraction": "1.0.0"
+          "SF.Core.Abstraction": "1.0.0",
+          "EFSecondLevelCache.Core": "1.0.2"
         },
         "runtime": {
           "SF.Core.EFCore.dll": {}
@@ -3051,6 +3065,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-KOBeVy8FHx9zkXrIZAM8OdXPrimROmvfB02fOegrYIelNN/zWhsOwzONgD7gw7wOTJgAFfdwpme5CiMraJj47Q=="
+    },
+    "EFSecondLevelCache.Core/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ngtWn9d26fbv8bLrN5G/JmQKZRu//n5VyV3vVqmwevSdPqg7z7zq3k5MEgfE1MOEgAxWK2oV7SsjZFiAHK9Yjg=="
     },
     "EPPlus.Core/1.0.2": {
       "type": "package",

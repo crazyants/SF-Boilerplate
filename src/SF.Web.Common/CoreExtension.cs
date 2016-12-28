@@ -54,6 +54,7 @@ using SF.Web.Common.Formatters.CsvImportExport;
 using SF.Web.Common.Attributes;
 using SF.Core.Extensions;
 using SF.Core.Settings;
+using EFSecondLevelCache.Core;
 
 namespace SF.Web.Common
 {
@@ -167,7 +168,8 @@ namespace SF.Web.Common
         /// <returns></returns>
         public void AddCustomizedDataStore(IServiceCollection services)
         {
-
+            //EF Core二级缓存
+            services.AddEFSecondLevelCache();
             //services.AddDbContext<CoreDbContext>(options =>
             //    options.UseSqlServer(this.configurationRoot.GetConnectionString("DefaultConnection"),
             //        b => b.MigrationsAssembly("SF.WebHost")));
@@ -223,8 +225,7 @@ namespace SF.Web.Common
             #endregion
 
             #region 数据库
-            // 确保数据库创建和初始数据
-            // CoreEFStartup.InitializeDatabaseAsync(app.ApplicationServices).Wait();
+     
             //Identity配置
             services.AddScoped<SignInManager<UserEntity>, SimpleSignInManager<UserEntity>>();
             //注意 必须在AddMvc之前注册
@@ -429,6 +430,8 @@ namespace SF.Web.Common
             applicationBuilder.UseSession(new SessionOptions() { IdleTimeout = TimeSpan.FromMinutes(30) });
             applicationBuilder.UseIdentity();
             applicationBuilder.UseMultitenancy<SiteContext>();
+            //EF Core二级缓存
+            applicationBuilder.UseEFSecondLevelCache();
 
             applicationBuilder.UseMiddleware<CurrentUserMiddleware>();
             applicationBuilder.UseMiddleware<CustomErrorPagesMiddleware>(); 

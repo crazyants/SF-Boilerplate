@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "f0b7e40fae6faf03608e752a22626e2c4e44d812"
+    "signature": "b5271c826e74cdea70f66133d7502efed21670bb"
   },
   "compilationOptions": {
     "defines": [
@@ -56,7 +56,8 @@
           "SF.Web.Security": "1.0.0",
           "SF.Core.Web.Control": "1.0.0",
           "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
-          "AutoMapper": "5.2.0"
+          "AutoMapper": "5.2.0",
+          "EFSecondLevelCache.Core": "1.0.2"
         },
         "compile": {
           "SF.WebHost.dll": {}
@@ -208,6 +209,19 @@
         },
         "compile": {
           "lib/netstandard1.3/Dapper.dll": {}
+        }
+      },
+      "EFSecondLevelCache.Core/1.0.2": {
+        "dependencies": {
+          "CacheManager.Core": "0.9.2",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/EFSecondLevelCache.Core.dll": {}
         }
       },
       "EPPlus.Core/1.0.2": {
@@ -3923,7 +3937,8 @@
           "CacheManager.Core": "0.9.2",
           "Microsoft.AspNetCore.Routing": "1.0.2",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.2",
-          "SF.Core.Abstraction": "1.0.0"
+          "SF.Core.Abstraction": "1.0.0",
+          "EFSecondLevelCache.Core": "1.0.2"
         },
         "compile": {
           "SF.Core.EFCore.dll": {}
@@ -4069,7 +4084,8 @@
           "SF.Web.Security": "1.0.0",
           "SF.Core.Web.Control": "1.0.0",
           "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
-          "AutoMapper": "5.2.0"
+          "AutoMapper": "5.2.0",
+          "EFSecondLevelCache.Core": "1.0.2"
         },
         "runtime": {
           "SF.WebHost.dll": {}
@@ -4229,6 +4245,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/Dapper.dll": {}
+        }
+      },
+      "EFSecondLevelCache.Core/1.0.2": {
+        "dependencies": {
+          "CacheManager.Core": "0.9.2",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/EFSecondLevelCache.Core.dll": {}
         }
       },
       "EPPlus.Core/1.0.2": {
@@ -7875,7 +7904,8 @@
           "CacheManager.Core": "0.9.2",
           "Microsoft.AspNetCore.Routing": "1.0.2",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.2",
-          "SF.Core.Abstraction": "1.0.0"
+          "SF.Core.Abstraction": "1.0.0",
+          "EFSecondLevelCache.Core": "1.0.2"
         },
         "runtime": {
           "SF.Core.EFCore.dll": {}
@@ -8039,6 +8069,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-UnvcSLoFOriBz9uMTwWmhhpvkPke91OfouxkWK+88zrFXbm38DP0MmQNjFYIsnPUnvPd/pC+nhgm+nM+mkdtTg=="
+    },
+    "EFSecondLevelCache.Core/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ngtWn9d26fbv8bLrN5G/JmQKZRu//n5VyV3vVqmwevSdPqg7z7zq3k5MEgfE1MOEgAxWK2oV7SsjZFiAHK9Yjg=="
     },
     "EPPlus.Core/1.0.2": {
       "type": "package",

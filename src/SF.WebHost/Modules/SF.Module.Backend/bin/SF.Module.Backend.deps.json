@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "fcd7a920b811c54bc12f0140bd1d0eaaf2cc2a45"
+    "signature": "5a2252e13c8e90028dd2dd1906288a548b1eca4a"
   },
   "compilationOptions": {},
   "targets": {
@@ -170,6 +170,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/DevZH.Qiniu.dll": {}
+        }
+      },
+      "EFSecondLevelCache.Core/1.0.2": {
+        "dependencies": {
+          "CacheManager.Core": "0.9.1",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/EFSecondLevelCache.Core.dll": {}
         }
       },
       "EPPlus.Core/1.0.2": {
@@ -3315,7 +3328,8 @@
           "CacheManager.Core": "0.9.1",
           "Microsoft.AspNetCore.Routing": "1.0.2",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.2",
-          "SF.Core.Abstraction": "1.0.0"
+          "SF.Core.Abstraction": "1.0.0",
+          "EFSecondLevelCache.Core": "1.0.2"
         },
         "runtime": {
           "SF.Core.EFCore.dll": {}
@@ -3494,6 +3508,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-pdM/DglDIo/f90e8o2yYvv0FWo0jCZIhOXPVFgPSaHy03dAKmVMg61vgkD/B/txti02GxK8p0JgfdySwDjd/xQ=="
+    },
+    "EFSecondLevelCache.Core/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ngtWn9d26fbv8bLrN5G/JmQKZRu//n5VyV3vVqmwevSdPqg7z7zq3k5MEgfE1MOEgAxWK2oV7SsjZFiAHK9Yjg=="
     },
     "EPPlus.Core/1.0.2": {
       "type": "package",

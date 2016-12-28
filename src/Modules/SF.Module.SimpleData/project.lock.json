@@ -110,6 +110,23 @@
           "lib/netstandard1.3/CoreCompat.System.Drawing.dll": {}
         }
       },
+      "EFSecondLevelCache.Core/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "CacheManager.Core": "0.9.1",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/EFSecondLevelCache.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/EFSecondLevelCache.Core.dll": {}
+        }
+      },
       "EPPlus.Core/1.0.2": {
         "type": "package",
         "dependencies": {
@@ -5148,6 +5165,7 @@
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "CacheManager.Core": "0.9.1",
+          "EFSecondLevelCache.Core": "1.0.2",
           "LinqKit": "1.1.7.3",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
@@ -5352,6 +5370,17 @@
         "CoreCompat.System.Drawing.nuspec",
         "lib/net45/CoreCompat.System.Drawing.dll",
         "lib/netstandard1.3/CoreCompat.System.Drawing.dll"
+      ]
+    },
+    "EFSecondLevelCache.Core/1.0.2": {
+      "sha512": "ngtWn9d26fbv8bLrN5G/JmQKZRu//n5VyV3vVqmwevSdPqg7z7zq3k5MEgfE1MOEgAxWK2oV7SsjZFiAHK9Yjg==",
+      "type": "package",
+      "path": "EFSecondLevelCache.Core/1.0.2",
+      "files": [
+        "EFSecondLevelCache.Core.1.0.2.nupkg.sha512",
+        "EFSecondLevelCache.Core.nuspec",
+        "lib/netstandard1.6/EFSecondLevelCache.Core.dll",
+        "lib/netstandard1.6/EFSecondLevelCache.Core.xml"
       ]
     },
     "EPPlus.Core/1.0.2": {
