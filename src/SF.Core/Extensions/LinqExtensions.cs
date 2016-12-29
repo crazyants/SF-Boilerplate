@@ -26,6 +26,7 @@ namespace SF.Core.Extensions
         /// <returns></returns>
         public static List<T> TreeWhere<T>(this List<T> entityList, Predicate<T> condition, string primaryKey = "Id", string parentId = "ParentId") where T : class
         {
+
             List<T> locateList = entityList.FindAll(condition);
             var parameter = Expression.Parameter(typeof(T), "t");
             //模糊查询表达式
@@ -71,7 +72,8 @@ namespace SF.Core.Extensions
         /// <returns></returns>
         public static List<T> FindParentWhere<T>(this T entity, List<T> entityList, Predicate<T> condition, string primaryKey = "Id", string parentId = "ParentId") where T : class
         {
-            List<T> locateList = entityList.FindAll(condition);
+            if (condition != null)
+                entityList = entityList.FindAll(condition);
             var parameter = Expression.Parameter(typeof(T), "t");
             //模糊查询表达式
             List<T> treeList = new List<T>();
@@ -99,8 +101,8 @@ namespace SF.Core.Extensions
                     break;
                 }
             }
-
-            return treeList.Distinct().ToList();
+            //去重并发转
+            return treeList.Distinct().Reverse().ToList();
         }
         #endregion
 

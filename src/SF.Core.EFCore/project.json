@@ -10,7 +10,7 @@
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "LinqKit": "1.1.7.3",
     "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-    "CacheManager.Core": "0.9.1",
+    "CacheManager.Core": "0.9.2",
     "Microsoft.AspNetCore.Routing": "1.0.1",
     "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
     "SF.Core.Abstraction": "1.0.0-*",

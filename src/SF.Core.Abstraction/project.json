@@ -12,7 +12,7 @@
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "MediatR": "2.1.0",
     "Microsoft.Extensions.Configuration.Binder": "1.0.0",
-    "CacheManager.Core": "0.9.1",
+    "CacheManager.Core": "0.9.2",
     "AutoMapper": "5.2.0",
     "SF.Core.Entitys": "1.0.0-*"
   },

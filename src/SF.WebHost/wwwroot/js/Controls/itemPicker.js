@@ -65,9 +65,12 @@
 
                 // Bind tree events
                 $control.find('.treeview')
-                    .on('sfTree:selected', function (id) {
-                        // intentionally blank
-                        self.options.selected(id)
+                    .on('sfTree:selected', function () {
+                        if ($hfItemNames.val() == '') {
+                            if (!self.options.allowMultiSelect) {
+                                $control.find('.picker-btn').trigger('click');
+                            }
+                        }
                     })
                     .on('sfTree:itemClicked', function (e) {
                         // make sure it doesn't autoscroll after something has been manually clicked

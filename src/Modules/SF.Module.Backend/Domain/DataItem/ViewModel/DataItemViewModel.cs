@@ -54,6 +54,14 @@ namespace SF.Module.Backend.Domain.DataItem.ViewModel
 
         public string UpdatedBy { get; set; }
 
+        #region 扩展
+        /// <summary>
+        /// 父级字段路径1,2,3
+        /// </summary>
+        public string ParentPath { get; set; }
+
+        #endregion
+
         [Obsolete("默认使用FluentValidation集成，判断使用ModelState.IsValid")]
         public IEnumerable<ValidationResult> Validate(IValidator<DataItemViewModel> validator)
         {

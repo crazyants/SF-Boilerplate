@@ -32,28 +32,30 @@ namespace SF.Module.Backend.Domain.DataItem.Rule
         public bool IsDataItemIdUnique(long id)
         {
             return _baseUnitOfWork.BaseWorkArea.DataItem.Exists(id);
-          
+
         }
 
         public bool IsDataItemCodeUnique(string code, long dataItemId = 0)
         {
-            Expression<Func<DataItemEntity, bool>> expression = d => d.ItemCode == code;
-            if (dataItemId!=0)
+            var predicate = PredicateBuilder.New<DataItemEntity>();
+            predicate.And(d => d.ItemCode == code);
+            if (dataItemId != 0)
             {
-                expression.And(d => d.Id != dataItemId);  
+                predicate.And(d => d.Id != dataItemId);
             }
-            return _baseUnitOfWork.BaseWorkArea.DataItem.Query().AsNoTracking().Any(expression);
-           
+            return _baseUnitOfWork.BaseWorkArea.DataItem.Query().AsNoTracking().Any(predicate);
+
         }
 
         public bool IsDataItemNameUnique(string name, long dataItemId = 0)
         {
-            Expression<Func<DataItemEntity, bool>> expression = d => d.ItemName == name;
+            var predicate = PredicateBuilder.New<DataItemEntity>();
+            predicate.And(d => d.ItemName == name);
             if (dataItemId != 0)
             {
-                expression.And(d => d.Id != dataItemId);
+                predicate.And(d => d.Id != dataItemId);
             }
-            return _baseUnitOfWork.BaseWorkArea.DataItem.Query().AsNoTracking().Any(expression);
+            return _baseUnitOfWork.BaseWorkArea.DataItem.Query().AsNoTracking().Any(predicate);
 
         }
 

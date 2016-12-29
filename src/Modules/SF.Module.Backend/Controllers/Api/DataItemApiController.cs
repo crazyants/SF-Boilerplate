@@ -62,7 +62,9 @@ namespace SF.Module.Backend.Controllers
         /// <param name="arg"></param>
         protected override void OnAfterGet(DataItemViewModel arg)
         {
-
+            var allDataItemDto = CrudDtoMapper.MapEntityToDtos(_readerService.GetAll());
+            var ids = arg.FindParentWhere(allDataItemDto.ToList(), null).Select(x => x.Id).ToArray();
+            arg.ParentPath = string.Join(",", ids);
         }
 
         /// <summary>
@@ -81,6 +83,15 @@ namespace SF.Module.Backend.Controllers
         {
             this._mediator.Publish(new EntityUpdated<DataItemEntity>(arg.Entity));
         }
+        /// <summary>
+        /// 删除后
+        /// </summary>
+        /// <param name="arg"></param>
+        protected override void OnAfterDeletet(CrudEventArgs<DataItemEntity, DataItemViewModel> arg)
+        {
+            this._mediator.Publish(new EntityDeleted<DataItemEntity>(arg.Entity));
+        }
+        
         #endregion
 
         #region 获取数据

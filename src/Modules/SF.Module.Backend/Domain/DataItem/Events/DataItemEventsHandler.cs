@@ -45,19 +45,21 @@ namespace SF.Module.Backend.Domain.DataItem.Events
         {
             Debug.WriteLine("Pong EntityDeleted");
             _cacheManager.Remove(ConstHelper.DATAITEM_PATTERN_KEY.FormatCurrent(notification.Entity.Id));
-
+            _cacheManager.Remove(ConstHelper.DATAITEM_ALL);
         }
 
         public void Handle(EntityUpdated<DataItemEntity> notification)
         {
             Debug.WriteLine("Pong EntityUpdated");
             _cacheManager.Remove(ConstHelper.DATAITEM_PATTERN_KEY.FormatCurrent(notification.Entity.Id));
+            _cacheManager.Remove(ConstHelper.DATAITEM_ALL);
         }
 
         public void Handle(EntityInserted<DataItemEntity> notification)
         {
             Debug.WriteLine("Pong EntityInserted");
             _cacheManager.Remove(ConstHelper.DATAITEM_PATTERN_KEY.FormatCurrent(notification.Entity.Id));
+            _cacheManager.Remove(ConstHelper.DATAITEM_ALL);
         }
     }
 }

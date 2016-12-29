@@ -113,12 +113,8 @@ namespace SF.Core.Data
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-            // ensure auto history
-            this.EnsureAutoHistory();
-            var changedEntityNames = this.GetChangedEntityNames();
 
             var result = base.SaveChanges(acceptAllChangesOnSuccess);
-            _cacheServiceProvider.InvalidateCacheDependencies(changedEntityNames);
             return result;
         }
 
@@ -135,12 +131,8 @@ namespace SF.Core.Data
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // ensure auto history
-            this.EnsureAutoHistory();
-            var changedEntityNames = this.GetChangedEntityNames();
 
             var result = base.SaveChangesAsync(cancellationToken);
-            _cacheServiceProvider.InvalidateCacheDependencies(changedEntityNames);
             return result;
 
         }

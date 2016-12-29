@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "5a2252e13c8e90028dd2dd1906288a548b1eca4a"
+    "signature": "dba59cff80a4d3412e4c958e19f904c06244125e"
   },
   "compilationOptions": {},
   "targets": {
@@ -12,7 +12,7 @@
           "Audit.Mvc": "4.5.6",
           "Audit.NET": "4.5.6",
           "AutoMapper": "5.2.0",
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
           "Hangfire": "1.6.5",
           "LinqKit": "1.1.7.3",
@@ -65,7 +65,7 @@
           "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
-      "CacheManager.Core/0.9.1": {
+      "CacheManager.Core/0.9.2": {
         "dependencies": {
           "System.Collections": "4.3.0",
           "System.Collections.Concurrent": "4.3.0",
@@ -85,7 +85,7 @@
       },
       "CacheManager.Serialization.Json/0.9.2": {
         "dependencies": {
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "Newtonsoft.Json": "9.0.1",
           "System.IO.Compression": "4.3.0"
         },
@@ -95,7 +95,7 @@
       },
       "CacheManager.StackExchange.Redis/0.9.2": {
         "dependencies": {
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "StackExchange.Redis.StrongName": "1.1.608"
         },
         "runtime": {
@@ -170,19 +170,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/DevZH.Qiniu.dll": {}
-        }
-      },
-      "EFSecondLevelCache.Core/1.0.2": {
-        "dependencies": {
-          "CacheManager.Core": "0.9.1",
-          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
-          "Microsoft.EntityFrameworkCore": "1.1.0",
-          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
-          "NETStandard.Library": "1.6.1",
-          "System.Reflection.TypeExtensions": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.6/EFSecondLevelCache.Core.dll": {}
         }
       },
       "EPPlus.Core/1.0.2": {
@@ -3236,7 +3223,7 @@
         "dependencies": {
           "System.Runtime": "4.3.0",
           "System.IO": "4.3.0",
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
           "Microsoft.Extensions.Configuration.Binder": "1.0.1",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"
@@ -3248,18 +3235,31 @@
       "CacheManager.Microsoft.Extensions.Logging/0.9.3": {
         "dependencies": {
           "System.Runtime": "4.3.0",
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "Microsoft.Extensions.Logging": "1.1.0"
         },
         "runtime": {
           "CacheManager.Microsoft.Extensions.Logging.dll": {}
         }
       },
+      "EFSecondLevelCache.Core/1.0.2": {
+        "dependencies": {
+          "CacheManager.Core": "0.9.2",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "runtime": {
+          "EFSecondLevelCache.Core.dll": {}
+        }
+      },
       "SF.Core/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "AutoMapper": "5.2.0",
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
           "CoreCompat.System.Drawing": "1.0.0-beta006",
           "EPPlus.Core": "1.0.2",
@@ -3307,7 +3307,7 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
           "MediatR": "2.1.0",
           "Microsoft.Extensions.Configuration.Binder": "1.0.1",
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "AutoMapper": "5.2.0",
           "SF.Core.Entitys": "1.0.0"
         },
@@ -3325,7 +3325,7 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
           "LinqKit": "1.1.7.3",
           "Microsoft.Extensions.Configuration.Binder": "1.0.1",
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "Microsoft.AspNetCore.Routing": "1.0.2",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.2",
           "SF.Core.Abstraction": "1.0.0",
@@ -3412,7 +3412,7 @@
           "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.1",
           "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "CacheManager.Microsoft.Extensions.Configuration": "0.9.3",
           "CacheManager.Microsoft.Extensions.Logging": "0.9.3",
           "CacheManager.StackExchange.Redis": "0.9.2",
@@ -3440,7 +3440,7 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
           "Microsoft.Extensions.Configuration.Binder": "1.0.1",
           "CoreCompat.Microsoft.Practices.ServiceLocation": "1.3.0-r2",
-          "CacheManager.Core": "0.9.1",
+          "CacheManager.Core": "0.9.2",
           "SF.Core.Abstraction": "1.0.0",
           "SF.Core": "1.0.0",
           "AutoMapper": "5.2.0",
@@ -3474,10 +3474,10 @@
       "serviceable": true,
       "sha512": "sha512-ulUMmzFg1vAFMpTyJsplgnC7pOIFlb25dbldHd7J4eroQWjSV4iAoOQ33h1oMjf6mLo3uZ8aRNUN2rgpOeSE1w=="
     },
-    "CacheManager.Core/0.9.1": {
+    "CacheManager.Core/0.9.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9cciBBtU8T2D558M6qyQYKXi294XF0Vs8f6mSPLxWkPL1p1vOpyVGEmDcXDBBkfs6JBJtgPPGbjd5qWZfjeerw=="
+      "sha512": "sha512-NXhUPBK6skAxrLM7gFopuThLj4Opc9C8av7tb0kKaJ2pwMuEX3Lf12/zgmMLHAGY0LYcbDne3qn4VbBzfMN9wg=="
     },
     "CacheManager.Serialization.Json/0.9.2": {
       "type": "package",
@@ -3508,11 +3508,6 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-pdM/DglDIo/f90e8o2yYvv0FWo0jCZIhOXPVFgPSaHy03dAKmVMg61vgkD/B/txti02GxK8p0JgfdySwDjd/xQ=="
-    },
-    "EFSecondLevelCache.Core/1.0.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ngtWn9d26fbv8bLrN5G/JmQKZRu//n5VyV3vVqmwevSdPqg7z7zq3k5MEgfE1MOEgAxWK2oV7SsjZFiAHK9Yjg=="
     },
     "EPPlus.Core/1.0.2": {
       "type": "package",
@@ -4705,6 +4700,11 @@
       "sha512": ""
     },
     "CacheManager.Microsoft.Extensions.Logging/0.9.3": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EFSecondLevelCache.Core/1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

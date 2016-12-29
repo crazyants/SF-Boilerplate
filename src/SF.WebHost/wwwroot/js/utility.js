@@ -197,7 +197,7 @@
                         dataType: "text",
                         async: false,
                         success: function (data) {
-                            if (data.toLocaleLowerCase() == 'false') {
+                            if (data.toLocaleLowerCase() == 'true') {
                                 ValidationMessage($control, '已存在,请重新输入');
                                 $control.attr('fieldexist', 'yes');
                             } else {

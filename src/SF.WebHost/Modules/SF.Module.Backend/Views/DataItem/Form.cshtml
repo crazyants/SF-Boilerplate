@@ -17,18 +17,17 @@
                 url: "/Api/DataItem/" + keyValue,
                 success: function (data) {
                     SF.utility.setWebControls('form1', data);
-                    onBeforLoadForm(data.ParentId);
+                    onBeforLoadForm(data.ParentId, data.ParentPath);
                 }
             });
         } else {
-            onBeforLoadForm(ParentId);
+            onBeforLoadForm(ParentId, '');
         }
     }
 
-    function onBeforLoadForm(parentId)
-    {
-        $("#hfInitialItemParentIds").val("1,5");
-        $("#ParentId").val(6);
+    function onBeforLoadForm(parentId, parentPath) {
+        $("#hfInitialItemParentIds").val(parentPath);
+        $("#ParentId").val(parentId);
         //上级
         SF.controls.itemPicker.initialize({
             controlId: 'SelectParentId',

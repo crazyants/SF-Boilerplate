@@ -30,8 +30,8 @@ namespace SF.Web.Common.Base.Controllers
     /// <typeparam name="TCodeTabelEntity"></typeparam>
     /// <typeparam name="TCodeTabelModel"></typeparam>
     public abstract class CrudControllerBase<TCodeTabelEntity, TCodeTabelModel> : ControllerBase
-        where TCodeTabelEntity : BaseEntity
-        where TCodeTabelModel : EntityModelBase
+        where TCodeTabelEntity : BaseEntity, new()
+        where TCodeTabelModel : EntityModelBase, new()
     {
         #region Fields
         protected readonly FluentValidation.IValidator<TCodeTabelModel> _validator;
@@ -344,7 +344,10 @@ namespace SF.Web.Common.Base.Controllers
 
                 #endregion
                 #region 删除处理After
-                this.OnAfterEdit(addArgs);
+                var entity = new TCodeTabelEntity();
+                entity.Id = id;
+                addArgs.Entity = entity;
+                this.OnAfterDeletet(addArgs);
                 #endregion
                 return Success("delete success");
             }

@@ -168,8 +168,7 @@ namespace SF.Web.Common
         /// <returns></returns>
         public void AddCustomizedDataStore(IServiceCollection services)
         {
-            //EF Core二级缓存
-            services.AddEFSecondLevelCache();
+
             //services.AddDbContext<CoreDbContext>(options =>
             //    options.UseSqlServer(this.configurationRoot.GetConnectionString("DefaultConnection"),
             //        b => b.MigrationsAssembly("SF.WebHost")));
@@ -195,8 +194,7 @@ namespace SF.Web.Common
             services.AddSingleton<CoreDbContext>();
             services.AddSingleton<DbContext, CoreDbContext>();
 
-            // this creates ensures the database is created and initial data
-            CoreEFStartup.InitializeDatabaseAsync(services.BuildServiceProvider()).Wait();
+           
         }
 
         /// <summary>
@@ -225,7 +223,7 @@ namespace SF.Web.Common
             #endregion
 
             #region 数据库
-     
+
             //Identity配置
             services.AddScoped<SignInManager<UserEntity>, SimpleSignInManager<UserEntity>>();
             //注意 必须在AddMvc之前注册
@@ -275,9 +273,15 @@ namespace SF.Web.Common
             services.AddScoped<IVersionProvider, SFCoreVersionProvider>();
 
             services.AddScoped<ITimeZoneIdResolver, RequestTimeZoneIdResolver>();
+            #region 缓存
 
-            services.AddCacheManagerConfiguration(configurationRoot, cfg => cfg.WithMicrosoftLogging(services));
+            //EF Core二级缓存
+            services.AddEFSecondLevelCache();
             services.AddSingleton(typeof(ICacheManager<>), typeof(BaseCacheManager<>));
+            services.AddCacheManagerConfiguration(configurationRoot, cfg => cfg.WithMicrosoftLogging(services));
+
+            #endregion
+
 
             #region 基础业务Service
             services.AddMultitenancy<SiteContext, CachingSiteResolver>();
@@ -325,10 +329,12 @@ namespace SF.Web.Common
         /// <param name="services"></param>
         public void AddExtensionsServices(IServiceCollection services)
         {
+
             #region Plugin
             //services.AddPlugins();
             //services.AddPluginManager(configurationRoot, hostingEnvironment);
             #endregion
+
         }
 
         /// <summary>
@@ -434,7 +440,7 @@ namespace SF.Web.Common
             applicationBuilder.UseEFSecondLevelCache();
 
             applicationBuilder.UseMiddleware<CurrentUserMiddleware>();
-            applicationBuilder.UseMiddleware<CustomErrorPagesMiddleware>(); 
+            applicationBuilder.UseMiddleware<CustomErrorPagesMiddleware>();
             // applicationBuilder.UseMiddleware<RequestLoggerMiddleware>();
             //  applicationBuilder.UseMiddleware<ProcessingTimeMiddleware>();
             //注册MVC请求

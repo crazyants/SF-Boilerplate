@@ -118,7 +118,10 @@ namespace SF.WebHost
                     mappingRegistration.MapperConfigurationToExpression(cfg);
                 }
             });
-   
+
+            // this creates ensures the database is created and initial data
+            simpleGlobal.Data.CoreEFStartup.InitializeDatabaseAsync(services.BuildServiceProvider()).Wait();
+
             services.Build(Configuration, _hostingEnvironment).BuildServiceProvider();
         }
 
