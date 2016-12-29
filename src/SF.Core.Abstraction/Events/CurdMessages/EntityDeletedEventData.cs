@@ -7,16 +7,14 @@ namespace SF.Core.Abstraction.Events
     /// <summary>
     /// A container for passing entities that have been deleted. This is not used for entities that are deleted logicaly via a bit column.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class EntityDeleted<T>: INotification where T : BaseEntity
+    /// <typeparam name="TEntity"></typeparam>
+    public class EntityDeletedEventData<TEntity> : EntityEventData<TEntity>
     {
-
-        public EntityDeleted(T entity)
+        public EntityDeletedEventData(TEntity entity)
+            : base(entity)
         {
-            this.Entity = entity;
+
         }
 
-
-        public T Entity { get; private set; }
     }
 }

@@ -15,6 +15,7 @@ namespace SF.Web.Security
     public class PermissionStereotype
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public IEnumerable<Permission> Permissions { get; set; }
     }
 }

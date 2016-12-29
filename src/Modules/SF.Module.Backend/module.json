@@ -1,0 +1,65 @@
+﻿{
+  "Id": "SF.Backend",
+  "Version": "1.0.1",
+  "PlatformVersion": "1.0.0",
+  "Title": "SF.Backend",
+  "Description": "后台管理模块",
+  "Authors": "疯狂蚂蚁",
+  "Owners": "疯狂蚂蚁",
+  "IconUrl": "",
+  "ReleaseNotes": "First version.",
+  "Copyright": "Copyright © 2016 疯狂蚂蚁. All rights reserved",
+  "Tags": "Home",
+  "Settings": [
+    {
+      "group": {
+        "Name": "General",
+        "Settings": [
+          {
+            "Name": "Catalog.ExportImport.Description",
+            "ValueType": "string",
+            "DefaultValue": "categories",
+            "Title": "Export/Import description",
+            "Description": "Module description in platform export/import wizard",
+            "IsArray": "true",
+            "ArrayValues": [
+              "QuickReview",
+              "FullReview"
+            ]
+          },
+          {
+            "Name": "Catalog.ExportImport.Description",
+            "ValueType": "string",
+            "DefaultValue": "categories",
+            "Title": "Export/Import description",
+            "Description": "Module description in platform export/import wizard",
+            "IsArray": "true",
+            "ArrayValues": [
+              "QuickReview",
+              "FullReview"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "group": {
+        "Name": "Images",
+        "Settings": [
+          {
+            "Name": "Catalog.ExportImport.Description",
+            "ValueType": "string",
+            "DefaultValue": "categories",
+            "Title": "Export/Import description",
+            "Description": "Module description in platform export/import wizard",
+            "IsArray": "true",
+            "ArrayValues": [
+              "QuickReview",
+              "FullReview"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -73,7 +73,7 @@ namespace SF.Module.Backend.Controllers
         /// <param name="arg"></param>
         protected override void OnAfterAdd(CrudEventArgs<DataItemEntity, DataItemViewModel> arg)
         {
-            this._mediator.Publish(new EntityInserted<DataItemEntity>(arg.Entity));
+            this._mediator.Publish(new EntityCreatedEventData<DataItemEntity>(arg.Entity));
         }
         /// <summary>
         /// 编辑后
@@ -81,7 +81,7 @@ namespace SF.Module.Backend.Controllers
         /// <param name="arg"></param>
         protected override void OnAfterEdit(CrudEventArgs<DataItemEntity, DataItemViewModel> arg)
         {
-            this._mediator.Publish(new EntityUpdated<DataItemEntity>(arg.Entity));
+            this._mediator.Publish(new EntityUpdatedEventData<DataItemEntity>(arg.Entity));
         }
         /// <summary>
         /// 删除后
@@ -89,7 +89,7 @@ namespace SF.Module.Backend.Controllers
         /// <param name="arg"></param>
         protected override void OnAfterDeletet(CrudEventArgs<DataItemEntity, DataItemViewModel> arg)
         {
-            this._mediator.Publish(new EntityDeleted<DataItemEntity>(arg.Entity));
+            this._mediator.Publish(new EntityDeletedEventData<DataItemEntity>(arg.Entity));
         }
         
         #endregion

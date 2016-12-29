@@ -7,16 +7,12 @@ namespace SF.Core.Abstraction.Events
     /// <summary>
     /// A container for entities that are updated.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class EntityUpdated<T> : INotification where T : BaseEntity
+    /// <typeparam name="TEntity"></typeparam>
+    public class EntityUpdatedEventData<TEntity> : EntityEventData<TEntity>
     {
-
-        public EntityUpdated(T entity)
+        public EntityUpdatedEventData(TEntity entity)
+            : base(entity)
         {
-            this.Entity = entity;
         }
-
-        public T Entity { get; private set; }
-
     }
 }

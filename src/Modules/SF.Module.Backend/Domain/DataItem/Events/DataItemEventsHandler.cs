@@ -30,9 +30,9 @@ namespace SF.Module.Backend.Domain.DataItem.Events
     /// 字典事件处理类
     /// </summary>
     public class DataItemEventsHandler :
-        INotificationHandler<EntityInserted<DataItemEntity>>,
-        INotificationHandler<EntityUpdated<DataItemEntity>>,
-        INotificationHandler<EntityDeleted<DataItemEntity>>
+        INotificationHandler<EntityCreatedEventData<DataItemEntity>>,
+        INotificationHandler<EntityUpdatedEventData<DataItemEntity>>,
+        INotificationHandler<EntityDeletedEventData<DataItemEntity>>
     {
         private readonly ICacheManager<object> _cacheManager;
 
@@ -41,21 +41,21 @@ namespace SF.Module.Backend.Domain.DataItem.Events
             _cacheManager = cacheManager;
         }
 
-        public void Handle(EntityDeleted<DataItemEntity> notification)
+        public void Handle(EntityDeletedEventData<DataItemEntity> notification)
         {
             Debug.WriteLine("Pong EntityDeleted");
             _cacheManager.Remove(ConstHelper.DATAITEM_PATTERN_KEY.FormatCurrent(notification.Entity.Id));
             _cacheManager.Remove(ConstHelper.DATAITEM_ALL);
         }
 
-        public void Handle(EntityUpdated<DataItemEntity> notification)
+        public void Handle(EntityUpdatedEventData<DataItemEntity> notification)
         {
             Debug.WriteLine("Pong EntityUpdated");
             _cacheManager.Remove(ConstHelper.DATAITEM_PATTERN_KEY.FormatCurrent(notification.Entity.Id));
             _cacheManager.Remove(ConstHelper.DATAITEM_ALL);
         }
 
-        public void Handle(EntityInserted<DataItemEntity> notification)
+        public void Handle(EntityCreatedEventData<DataItemEntity> notification)
         {
             Debug.WriteLine("Pong EntityInserted");
             _cacheManager.Remove(ConstHelper.DATAITEM_PATTERN_KEY.FormatCurrent(notification.Entity.Id));
