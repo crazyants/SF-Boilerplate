@@ -1,12 +1,12 @@
-﻿## SF是一套基于ASP.NET Core MVC+EFCore+Bootstrap开发出来的框架，源代码完全开源，可以帮助你解决C#.NET项目中重复编码的繁琐工作，让开发人员远离加班！
-## SF 官方 QQ 交流群：306818375
-## 在线体验地址[SF官方演示地址](http://www.mayisite.pro)
+#### SF是一套基于ASP.NET Core MVC+EFCore+Bootstrap开发出来的框架，源代码完全开源，可以帮助你解决C#.NET项目中重复编码的繁琐工作，让开发人员远离加班！
+#### SF 官方 QQ 交流群：306818375
+#### 在线体验地址[SF官方演示地址](http://www.mayisite.pro)
 
-## Prerequisite:
+#### Prerequisite:
 - .NET Core SDK (https://www.microsoft.com/net/core)
 - SQL Server or PostgreSQL or MySql
 
-## Technologies and frameworks used:
+#### Technologies and frameworks used:
 - ASP.NET MVC Core 1.0.1 on .NET Core 1.0.1
 - Entity Framework Core 1.0.1
 - ASP.NET Identity Core 1.0
@@ -24,25 +24,25 @@
 - JQGrid
 - MediatR for domain event
  
-## How to release on local
+#### How to release on local
 - dotnet publish -r win10-x64
 - dotnet publish -r ubuntu.14.04-x64
 
-## How to contribute:
+#### How to contribute:
 - Report bugs or suggest features by create new issues or add comments to issues
 - Pickup an issue, create your own branch and implement it, then submit a Merge Request when you finished the implemntation and testing
 - Remember to fix all the StyleCop violations before submit a Merge Request
 
-## License
+#### License
 SimpleFramework is licensed under the Apache 2.0 license.
 
-## 作者信息
+#### 作者信息
 - 系统名称：SimpleFramework
 - 系统作者：疯狂蚂蚁
 - 团队名称：蚂蚁兵团
 - 欢迎你加入我们，开源让我们进步，开源让我们开阔视野.
 
-## 界面截图
+#### 界面截图
 
 ![后台主页](https://git.oschina.net/tang1022.cool/SFramework/raw/master/miscellaneous/SFInfo.png)
 ![字典分类管理](https://git.oschina.net/tang1022.cool/SFramework/raw/master/miscellaneous/SF_DataItem.png)
