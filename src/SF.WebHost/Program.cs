@@ -14,7 +14,7 @@ namespace SF.WebHost
                .Build();
             var host = new WebHostBuilder()
                 .UseKestrel()
-               // .UseConfiguration(config)
+                .UseConfiguration(config)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

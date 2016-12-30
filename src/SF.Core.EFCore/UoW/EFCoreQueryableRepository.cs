@@ -14,7 +14,7 @@
 *********************************************************************************/
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
-using SF.Core.Abstraction.Entitys.Pages;
+using SF.Core.Entitys.Abstraction.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -833,7 +833,7 @@ namespace SF.Core.EFCore.UoW
             int pageSize = 15)
         {
             var query = QueryFilter(predicate, orderBy, includes, page, pageSize);
-            return new PagedList<TEntity>(query, page, pageSize);
+            return new PagedList<TEntity>(query, page, pageSize, query.Count());
         }
 
         /// <summary>
@@ -864,11 +864,11 @@ namespace SF.Core.EFCore.UoW
             }
             if (predicate != null)
             {
-                query = query.AsExpandable().Where(predicate);
+                query = query.Where(predicate);
             }
             if (page != null && pageSize != null)
             {
-                query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
+                query = query.Skip(page.Value * pageSize.Value).Take(pageSize.Value);
             }
             return query;
         }

@@ -1,5 +1,6 @@
-# A super simple, modularized bussiness system built on .NET Core
-# QQ Group：433379982
+﻿## SF是一套基于ASP.NET Core MVC+EFCore+Bootstrap开发出来的框架，源代码完全开源，可以帮助你解决C#.NET项目中重复编码的繁琐工作，让开发人员远离加班！
+## SF 官方 QQ 交流群：306818375
+## 在线体验地址[SF官方演示地址](http://www.mayisite.pro)
 
 ## Prerequisite:
 - .NET Core SDK (https://www.microsoft.com/net/core)
@@ -24,3 +25,14 @@
 
 ## License
 SimpleFramework is licensed under the Apache 2.0 license.
+
+## 作者信息
+- 系统名称：SimpleFramework
+- 系统作者：疯狂蚂蚁
+- 团队名称：蚂蚁兵团
+- 欢迎你加入我们，开源让我们进步，开源让我们开阔视野.
+
+## 界面截图
+
+![后台主页](https://git.oschina.net/tang1022.cool/SFramework/raw/master/miscellaneous/SFInfo.png)
+![字典分类管理](https://git.oschina.net/tang1022.cool/SFramework/raw/master/miscellaneous/SF_DataItem.png)

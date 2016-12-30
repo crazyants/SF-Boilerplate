@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.FileProviders;
-using Hangfire;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Reflection;

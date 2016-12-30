@@ -26,6 +26,8 @@ namespace SF.Core.Data.WorkArea
     {
         IUserRepository User { get; }
 
+        IPermissionRepository Permission { get; }
+
         IUserAddressRepository UserAddress { get; }
 
         IMediaRespository Media { get; }
@@ -38,6 +40,9 @@ namespace SF.Core.Data.WorkArea
 
         IDistrictRepository District { get; }
 
-  
+        ISiteSettingsRepository SiteSettings { get; }
+
+        ISiteHostRepository SiteHost { get; }
+
     }
 }

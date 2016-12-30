@@ -8,15 +8,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using SF.Module.Backend.ViewModels.Account;
 using SF.Core.Entitys;
-using SF.Core.Services;
+
 using Audit.Mvc;
 using SF.Core.Extensions;
-using SF.Core.Web;
+using SF.Web;
 using SF.Core.Common;
 using SF.Core.Common.Message.Email;
 using SF.Core.Common.Message.Sms;
-using SF.Core.Web.Models;
-using SF.Core.WorkContexts;
+using SF.Web.Common.Models;
 
 namespace SF.Module.Backend.Controllers
 {
@@ -35,14 +34,14 @@ namespace SF.Module.Backend.Controllers
             SignInManager<UserEntity> signInManager,
             ISiteMessageEmailSender emailSender,
             ISmsSender smsSender,
-            ISiteContext siteContext,
+            SiteContext currentSite,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
-            _siteContext = siteContext;
+            _siteContext = currentSite;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
@@ -119,7 +118,7 @@ namespace SF.Module.Backend.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            var user = new UserEntity { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+            var user = new UserEntity { UserName = model.Email, Email = model.Email, FullName = model.FullName, SiteId = _siteContext.Id };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {

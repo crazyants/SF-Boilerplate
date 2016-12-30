@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using SF.Core.Abstraction.Entitys;
+using SF.Core.Entitys.Abstraction;
 using System;
 
 namespace SF.Core.Interceptors

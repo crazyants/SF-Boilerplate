@@ -13,8 +13,8 @@
 * Website：http://www.mayisite.com
 *********************************************************************************/
 using Microsoft.EntityFrameworkCore;
-using SF.Core.Abstraction.Entitys;
-using SF.Core.Abstraction.Entitys.Pages;
+using SF.Core.Entitys.Abstraction;
+using SF.Core.Entitys.Abstraction.Pages;
 using SF.Core.Abstraction.UoW;
 using SF.Core.EFCore.UoW;
 using System;

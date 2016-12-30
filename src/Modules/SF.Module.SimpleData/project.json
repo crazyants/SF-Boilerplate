@@ -7,24 +7,21 @@
     "authors": [ "Joe Audette" ],
 
   "dependencies": {
-
     "Microsoft.AspNetCore.Mvc": "1.0.*",
     "Microsoft.Extensions.Configuration.Json": "1.0.*",
-    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.*",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
     "Microsoft.EntityFrameworkCore.Tools": {
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "System.ComponentModel": "4.0.1-*",
-    "Microsoft.EntityFrameworkCore": "1.0.*",
-    "Microsoft.Extensions.Caching.Abstractions": "1.0.*",
+    "Microsoft.EntityFrameworkCore": "1.1.0",
     "Microsoft.Extensions.Logging.Abstractions": "1.1.*",
     "Microsoft.AspNetCore.Hosting": "1.1.*",
     "SF.Core": "1.0.0-*",
-    "SF.Core.Security": "1.0.0-*",
     "SF.Core.Abstraction": "1.0.0-*",
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
-    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0"
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
+    "SF.Web.Security": "1.0.0-*"
   },
 
     "tools": {

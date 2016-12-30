@@ -1,5 +1,5 @@
 ﻿
-using SF.Core.Abstraction.Entitys;
+using SF.Core.Entitys.Abstraction;
 
 namespace SF.Core.Settings
 {

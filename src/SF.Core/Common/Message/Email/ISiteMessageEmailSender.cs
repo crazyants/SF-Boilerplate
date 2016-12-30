@@ -1,6 +1,6 @@
 ﻿
+using SF.Core.Entitys;
 using SF.Core.Extensions;
-using SF.Core.WorkContexts;
 using System.Threading.Tasks;
 
 namespace SF.Core.Common.Message.Email
@@ -27,7 +27,7 @@ namespace SF.Core.Common.Message.Email
 
         Task AccountPendingApprovalAdminNotification(
             ISiteContext siteSettings,
-            IWorkContext user);
+            ISiteUser user);
 
         Task SendAccountApprovalNotificationAsync(
             ISiteContext siteSettings,

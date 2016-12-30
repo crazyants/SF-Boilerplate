@@ -1,6 +1,6 @@
 ﻿(function ($) {
     'use strict';
-    window.SF= window.SF|| {};
+    window.SF = window.SF || {};
     SF.controls = SF.controls || {};
 
     SF.controls.itemPicker = (function () {
@@ -66,7 +66,11 @@
                 // Bind tree events
                 $control.find('.treeview')
                     .on('sfTree:selected', function () {
-                        // intentionally blank
+                        if ($hfItemNames.val() == '') {
+                            if (!self.options.allowMultiSelect) {
+                                $control.find('.picker-btn').trigger('click');
+                            }
+                        }
                     })
                     .on('sfTree:itemClicked', function (e) {
                         // make sure it doesn't autoscroll after something has been manually clicked
@@ -125,7 +129,7 @@
                     $(this).closest('.picker-menu').slideUp(function () {
                         self.updateScrollbar();
                     });
-                    
+
                     if (!(el && el.originalEvent && el.originalEvent.srcElement == this)) {
                         // if this event was called by something other than the button itself, make sure the execute the href (which is probably javascript)
                         var jsPostback = $(this).attr('href');
@@ -202,7 +206,8 @@
                 allowMultiSelect: false,
                 defaultText: '',
                 selectedIds: null,
-                expandedIds: null
+                expandedIds: null,
+                selected: null,
             },
             controls: {},
             initialize: function (options) {

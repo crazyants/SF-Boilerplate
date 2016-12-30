@@ -1,17 +1,16 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using SF.Core.Services;
 using SF.Module.Backend.ViewModels;
 using Microsoft.Extensions.Localization;
 using Audit.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using SF.Core.Security;
+using SF.Web.Security;
 using System.Threading.Tasks;
 
 
 namespace SF.Module.Backend.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Administrators")]
     //  [BreadCrumb(Title = "Home", UseDefaultRouteUrl = true, Order = 0)]
     public class HomeController : Controller
     {
@@ -43,6 +42,10 @@ namespace SF.Module.Backend.Controllers
         {
             return View();
         }
+        public IActionResult UEditor()
+        {
+            return View();
+        }
         /// <summary>
         /// 测试授权
         /// </summary>
@@ -50,7 +53,7 @@ namespace SF.Module.Backend.Controllers
       //  [BreadCrumb(Title = "Authoer", Order = 3)]
         public async Task<ActionResult> Authoer()
         {
-            if (!await _authorizationService.AuthorizeAsync(User, GobalPermissions.AccessAdminPanel))
+            if (!await _authorizationService.AuthorizeAsync(User, BackendPermissionProvider.DataItemAdd))
                 return Unauthorized();
 
 
@@ -63,7 +66,7 @@ namespace SF.Module.Backend.Controllers
         /// <returns></returns>
         public async Task<ActionResult> AuthoerFilter()
         {
-            if (!await _authorizationService.AuthorizeAsync(User, GobalPermissions.AccessAdminPanel))
+            if (!await _authorizationService.AuthorizeAsync(User, BackendPermissionProvider.DataItemEdit))
                 return Unauthorized();
 
 

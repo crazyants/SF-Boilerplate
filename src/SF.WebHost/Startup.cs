@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SF.Core.Abstraction;
 using SF.WebHost.Extensions;
 using simpleGlobal = SF.Core;
-using SF.Core.Web;
 using System.Reflection;
 using System.Linq;
 using SF.Core;
 using SF.Core.Common;
 using SF.Core.Abstraction.Mapping;
 using AutoMapper;
+using SF.Core.StartupTask;
 
 namespace SF.WebHost
 {
@@ -49,9 +46,8 @@ namespace SF.WebHost
             // it should not be possible for anyone to get files outside of wwwroot using http requests
             // but every little thing you can do for stronger security is a good idea
             builder.AddJsonFile("Config/simpleauthsettings.json", optional: true);
-
             builder.AddJsonFile("Config/ratelimitsettings.json", optional: true);
-
+            builder.AddJsonFile("Config/cache.json", optional: false);
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets();
@@ -59,6 +55,16 @@ namespace SF.WebHost
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+
+            foreach (var c in Configuration.GetSection("ErrorPages").GetChildren())
+            {
+                var key = Convert.ToInt32(c.Key);
+                if (!GlobalConfiguration.ErrorPages.Keys.Contains(key))
+                {
+                    GlobalConfiguration.ErrorPages.Add(key, c.Value);
+                }
+            }
         }
 
         private IConfigurationRoot Configuration { get; }
@@ -71,12 +77,15 @@ namespace SF.WebHost
             simpleGlobal.GlobalConfiguration.WebRootPath = _hostingEnvironment.WebRootPath;
             simpleGlobal.GlobalConfiguration.ContentRootPath = _hostingEnvironment.ContentRootPath;
 
+
             services.AddAuditStorageProviders(Configuration, _hostingEnvironment);
             // Add Application Insights data collection services to the services container.
             services.AddApplicationInsightsTelemetry(Configuration);
             //services.AddSingleton(_ => Configuration);
             //services.AddSingleton(_ => services);
             services.AddSingleton(typeof(IServiceCollection), (o) => { return services; });
+
+
 
             foreach (IModuleInitializer extension in ExtensionManager.Extensions)
             {
@@ -108,9 +117,13 @@ namespace SF.WebHost
                 {
                     mappingRegistration.MapperConfigurationToExpression(cfg);
                 }
-            });          
+            });
 
-            services.Build(Configuration, _hostingEnvironment).BuildServiceProvider();
+
+            var serviceProvider = services.Build(Configuration, _hostingEnvironment).BuildServiceProvider();
+
+            var sfStarter = serviceProvider.GetService<ISFStarter>();
+            sfStarter.Run();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -122,7 +135,7 @@ namespace SF.WebHost
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //  app.UseDatabaseErrorPage();
             }
 
             app.UseCustomizedRequestLocalization();

@@ -3,7 +3,7 @@ namespace SF.Core.EFCore.Maps.Fluent
 {
     using System;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Abstraction.Entitys;
+    using Entitys.Abstraction;
 
     public static partial class CodeFirstMappingExtensions
     {

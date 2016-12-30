@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Authorization;
-using SF.Core.Security;
 using System.Threading.Tasks;
 using SF.Module.SimpleData.Data;
 

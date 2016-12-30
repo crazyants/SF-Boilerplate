@@ -134,8 +134,6 @@ span.data-view-filter-label {
 table th[align='right'] {
   text-align: right;
 }
-
-
 .poptip{z-index:1000;position: absolute;top: 20px;left:20px;padding: 6px 10px 6px;*padding: 7px 10px 5px;line-height: 16px;color: #fff;font-size: 12px;background-color: #B94A48;border: solid 1px #B94A48;border-radius: 2px;box-shadow: 0 0 3px #ddd;}
 .poptip-arrow{position: absolute;overflow: hidden;font-style: normal;font-family: simsun;text-shadow:0 0 2px #ccc;}
 .poptip-arrow em,.poptip-arrow i{position: absolute;left:0;top:0;font-style: normal;}

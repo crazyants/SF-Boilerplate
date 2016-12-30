@@ -70,12 +70,10 @@ namespace SF.Web.SimpleAuth
 
 
         #endregion
+
         #region MyRegion IApplicationBuilder
 
-
-
-
-        private void UseMvc(IApplicationBuilder applicationBuilder)
+        public void UseMvc(IApplicationBuilder applicationBuilder)
         {
             applicationBuilder.UseMultitenancy<AppTenant>();
 

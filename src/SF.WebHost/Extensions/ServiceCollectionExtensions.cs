@@ -10,16 +10,20 @@ using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CacheManager.Core;
 
 namespace SF.WebHost.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+    
+
         /// <summary>
         /// 配置审计日志
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
+        /// <param name="hostingEnvironment"></param>
         /// <returns></returns>
         public static IServiceCollection AddAuditStorageProviders(this IServiceCollection services,
             IConfigurationRoot configuration,
@@ -41,12 +45,12 @@ namespace SF.WebHost.Extensions
             }
             else if (auditStorage == "MongoDB")
             {
-                Audit.Core.Configuration.DataProvider = new Audit.MongoDB.Providers.MongoDataProvider()
-                {
-                    ConnectionString = "mongodb://localhost:27017",
-                    Database = "Audit",
-                    Collection = "Event"
-                };
+                //Audit.Core.Configuration.DataProvider = new Audit.MongoDB.Providers.MongoDataProvider()
+                //{
+                //    ConnectionString = "mongodb://localhost:27017",
+                //    Database = "Audit",
+                //    Collection = "Event"
+                //};
             }
             else
             {
@@ -58,7 +62,7 @@ namespace SF.WebHost.Extensions
             return services;
 
         }
- 
+
         //全局构建服务
         public static IServiceCollection Build(this IServiceCollection services,
             IConfigurationRoot configuration, IHostingEnvironment hostingEnvironment)
@@ -67,8 +71,8 @@ namespace SF.WebHost.Extensions
             services.AddScoped<IMediator, Mediator>();
             services.AddScoped<SingleInstanceFactory>(p => t => p.GetRequiredService(t));
             services.AddScoped<MultiInstanceFactory>(p => t => p.GetRequiredServices(t));
-            services.AddMediatorHandlers(typeof(Startup).GetTypeInfo().Assembly);
-        
+            services.AddMediatorHandlers();
+
 
             //AutoFac第三方DI
             //builder.RegisterModule(new AutofacModule());
@@ -82,6 +86,8 @@ namespace SF.WebHost.Extensions
 
             return services;
         }
+
+
 
 
         /// <summary>
@@ -104,7 +110,7 @@ namespace SF.WebHost.Extensions
         //        //    var c = ctx.Resolve<IComponentContext>();
         //        //    return t => c.Resolve(t);
         //        //});
-//}
+        //}
         //        //builder.Register<MultiInstanceFactory>(ctx =>
         //        //{
         //        //    var c = ctx.Resolve<IComponentContext>();
@@ -126,7 +132,7 @@ namespace SF.WebHost.Extensions
         //        //});
 
         //    }
-        
+
 
 
     }

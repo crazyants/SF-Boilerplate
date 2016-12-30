@@ -6,22 +6,25 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SF.Core.Abstraction;
 using SF.Core.Abstraction.Data;
-using SF.Core.Abstraction.Entitys;
+using SF.Core.Entitys.Abstraction;
 using SF.Core.Entitys;
 using System.Threading.Tasks;
 using System.Threading;
 using SF.Core.Extensions;
+using EFSecondLevelCache.Core;
+using EFSecondLevelCache.Core.Contracts;
 
 namespace SF.Core.Data
 {
     public class CoreDbContext : IdentityDbContext<UserEntity, RoleEntity, long, IdentityUserClaim<long>, UserRoleEntity, IdentityUserLogin<long>, IdentityRoleClaim<long>, IdentityUserToken<long>>
     {
-
-        public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
+        private readonly IEFCacheServiceProvider _cacheServiceProvider;
+        public CoreDbContext(DbContextOptions<CoreDbContext> options, IEFCacheServiceProvider cacheServiceProvider) : base(options)
         {
 
-            Database.EnsureCreated();
-        //    Database.Migrate();
+            //  Database.EnsureCreated();
+            //    Database.Migrate();
+            _cacheServiceProvider = cacheServiceProvider;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,7 +36,8 @@ namespace SF.Core.Data
                 //获取所有继承BaseEntity的实体
                 var entityClassTypes = assemblie.ExportedTypes.Where(x =>
                 //( x.GetTypeInfo().IsSubclassOf(typeof(BaseEntity)) && !x.GetTypeInfo().IsAbstract)||
-                typeof(IEntityWithTypedId<long>).IsAssignableFrom(x) && !x.GetTypeInfo().IsAbstract
+                typeof(IEntityWithTypedId<long>).IsAssignableFrom(x) && !x.GetTypeInfo().IsAbstract &&
+               !x.GetTypeInfo().IsDefined(typeof(MapIgnoreAttribute), false)
                 );
                 typeToRegisterEntitys.AddRange(entityClassTypes);
 
@@ -99,32 +103,38 @@ namespace SF.Core.Data
         {
             // ensure auto history
             this.EnsureAutoHistory();
+            var changedEntityNames = this.GetChangedEntityNames();
 
-            return base.SaveChanges();
+            var result = base.SaveChanges();
+            _cacheServiceProvider.InvalidateCacheDependencies(changedEntityNames);
+
+            return result;
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-            // ensure auto history
-            this.EnsureAutoHistory();
 
-            return base.SaveChanges(acceptAllChangesOnSuccess);
+            var result = base.SaveChanges(acceptAllChangesOnSuccess);
+            return result;
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         {
             // ensure auto history
             this.EnsureAutoHistory();
+            var changedEntityNames = this.GetChangedEntityNames();
 
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            var result = base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            _cacheServiceProvider.InvalidateCacheDependencies(changedEntityNames);
+            return result;
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            // ensure auto history
-            this.EnsureAutoHistory();
 
-            return base.SaveChangesAsync(cancellationToken);
+            var result = base.SaveChangesAsync(cancellationToken);
+            return result;
+
         }
     }
 }

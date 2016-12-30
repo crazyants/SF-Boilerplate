@@ -14,6 +14,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The <see cref="ModelBuilder"/> to enable auto history functionality.</returns>
         public static ModelBuilder EnableAutoHistory(this ModelBuilder modelBuilder) {
             modelBuilder.Entity<AutoHistory>(b => {
+                b.HasKey(x => x.Id);
                 b.Property(c => c.SourceId).IsRequired().HasMaxLength(50);
                 b.Property(c => c.TypeName).IsRequired().HasMaxLength(128);
                 //b.Property(c => c.BeforeJson).HasMaxLength(2048);

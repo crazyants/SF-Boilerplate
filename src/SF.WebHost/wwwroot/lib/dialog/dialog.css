@@ -55,7 +55,7 @@ html #layui_layer_skinlayercss{display:none;position:absolute;width:1989px}
 .layui-layer-btn a{height:28px;line-height:28px;margin:0 5px;padding:0 20px;cursor:pointer;text-decoration:none;display: inline-block;border: 1px solid #ccc;/*background:#1ab394;border: 1px solid #1ab394;*/border-radius: 4px;}
 .layui-layer-btn a:hover{background:#F5F5F5;}
 .layui-layer-btn a:active{opacity:.7}
-.layui-layer-btn .layui-layer-btn0{background:#5cb85c;border: 1px solid #4cae4c;color:#fff;}
+.layui-layer-btn .layui-layer-btn0{background:#debe18;border: 1px solid #c7aa16;color:#fff;}
 .layui-layer-btn .layui-layer-btn0:hover{background:#449d44;border: 1px solid #398439;}
 .layui-layer-btn .layui-layer-btn0:active{opacity:.7}
 .layui-layer-btn .layui-layer-btn1{background:#d9534f;border: 1px solid #d43f3a;color:#fff;}

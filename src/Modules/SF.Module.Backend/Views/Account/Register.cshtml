@@ -85,7 +85,7 @@
 
 
                         </div>
-                  
+
                     </div>
                 </div>
 
@@ -147,9 +147,13 @@
             } else {
                 $("#btnSend").addClass('active').attr('disabled', 'disabled');
                 $("#btnSend").find('span').hide();
+                var postData = { Email: $email.val(), FullName: $name.val(), Password: $password.val(), ConfirmPassword: $confirmpassword.val(), verifycode: '' };
+                if ($('[name=__RequestVerificationToken]').length > 0) {
+                    postData["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
+                }
                 $.ajax({
                     url: contentPath + "/Register",
-                    data: { Email: $email.val(), FullName: $name.val(), Password: $password.val(), ConfirmPassword: $confirmpassword.val(), verifycode: '' },
+                    data: postData,
                     type: "post",
                     dataType: "json",
                     success: function (data) {

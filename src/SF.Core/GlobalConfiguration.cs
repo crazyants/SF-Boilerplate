@@ -11,5 +11,7 @@ namespace SF.Core
         public static string WebRootPath { get; set; }
 
         public static string ContentRootPath { get; set; }
+
+        public static IDictionary<int, string> ErrorPages { get; } = new Dictionary<int, string>();
     }
 }

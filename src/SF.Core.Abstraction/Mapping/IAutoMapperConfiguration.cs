@@ -16,6 +16,9 @@ using AutoMapper;
 
 namespace SF.Core.Abstraction.Mapping
 {
+    /// <summary>
+    /// AutoMapper配置注册
+    /// </summary>
     public interface IAutoMapperConfiguration
     {
         void MapperConfigurationToExpression(IMapperConfigurationExpression cfg);
