@@ -42,6 +42,11 @@ SimpleFramework is licensed under the Apache 2.0 license.
 - 团队名称：蚂蚁兵团
 - 欢迎你加入我们，开源让我们进步，开源让我们开阔视野.
 
+#### 项目计划
+- 加入基础功能管理界面：机构管理、部门管理、角色管理、岗位管理、职位管理、用户组管理、用户管理、功能菜单、字典管理、行政区域、单据编号、系统日志、插件管理
+- 集成IdentityServer4 扩展多租户，多系统授权登陆
+
+
 #### 界面截图
 
 ![后台主页](https://git.oschina.net/tang1022.cool/SFramework/raw/master/miscellaneous/SFInfo.png)
