@@ -11,7 +11,17 @@
 - Entity Framework Core 1.0.1
 - ASP.NET Identity Core 1.0
 - Autofac 4.0.0
-- Angular 1.5
+- AutoMapper 5.2.0
+- LinqKit 1.1.7.3
+- CacheManager 0.9.2
+- Hangfire 1.6.5
+- Audit.NET 4.5.6
+- SaasKit 1.1.*
+- EFSecondLevelCache.Core 1.0.2
+
+- Bootstrap v3.3.4
+- Layer
+- JQGrid
 - MediatR for domain event
  
 ## How to release on local
