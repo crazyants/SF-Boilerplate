@@ -11,6 +11,7 @@ using SF.Module.Backend.Domain.DataItem.Service;
 using SF.Module.Backend.Services;
 using SF.Module.Backend.Services.Implementation;
 using SF.Web.Common.Base.DataContractMapper;
+using SF.Web.Security;
 using System;
 using System.Collections.Generic;
 
@@ -56,16 +57,8 @@ namespace SF.Module.Backend
             services.TryAddScoped<IMediaService, LocalMediaService>();
             services.TryAddScoped<IUrlSlugService, UrlSlugService>();
             services.TryAddScoped<IDataItemService, DataItemService>();
-
-            //根据接口注册所有继承类
-            services.Scan(scan => scan
-                .FromAssembliesOf(typeof(IDataItemRules))
-                .AddClasses(classes => classes.AssignableTo(typeof(IRules<>)))
-                .AsImplementedInterfaces()
-                .WithTransientLifetime()
-                .AddClasses(classes => classes.AssignableTo(typeof(ICrudDtoMapper<,>)))
-                .AsImplementedInterfaces()
-                .WithTransientLifetime());
+            services.AddSingleton<IPermissionProvider, BackendPermissionProvider>();
+            
         }
         /// <summary>
         /// 全局构建

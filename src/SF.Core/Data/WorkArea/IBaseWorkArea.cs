@@ -26,6 +26,8 @@ namespace SF.Core.Data.WorkArea
     {
         IUserRepository User { get; }
 
+        IPermissionRepository Permission { get; }
+
         IUserAddressRepository UserAddress { get; }
 
         IMediaRespository Media { get; }

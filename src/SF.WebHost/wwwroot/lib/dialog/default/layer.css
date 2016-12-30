@@ -82,7 +82,7 @@ html #layuicss-skinlayercss{display: none; position: absolute; width: 1989px;}
 .layui-layer-btn a{height: 28px; line-height: 28px; margin: 0 6px; padding: 0 15px; border:1px #dedede solid; background-color:#f1f1f1; color: #333; border-radius: 2px; font-weight:400; cursor:pointer; text-decoration: none;}
 .layui-layer-btn a:hover{opacity: 0.9; text-decoration: none;}
 .layui-layer-btn a:active{opacity: 0.8;}
-.layui-layer-btn .layui-layer-btn0{border-color: #4898d5; background-color: #2e8ded; color:#fff;}
+.layui-layer-btn .layui-layer-btn0{border-color: #c7aa16; background-color:#debe18; color:#fff;}
 .layui-layer-btn-l{text-align: left;}
 .layui-layer-btn-c{text-align: center;}
 

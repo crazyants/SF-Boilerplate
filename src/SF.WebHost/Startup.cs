@@ -13,7 +13,7 @@ using SF.Core;
 using SF.Core.Common;
 using SF.Core.Abstraction.Mapping;
 using AutoMapper;
-
+using SF.Core.StartupTask;
 
 namespace SF.WebHost
 {
@@ -85,7 +85,7 @@ namespace SF.WebHost
             //services.AddSingleton(_ => services);
             services.AddSingleton(typeof(IServiceCollection), (o) => { return services; });
 
-           
+
 
             foreach (IModuleInitializer extension in ExtensionManager.Extensions)
             {
@@ -119,10 +119,11 @@ namespace SF.WebHost
                 }
             });
 
-            // this creates ensures the database is created and initial data
-            simpleGlobal.Data.CoreEFStartup.InitializeDatabaseAsync(services.BuildServiceProvider()).Wait();
 
-            services.Build(Configuration, _hostingEnvironment).BuildServiceProvider();
+            var serviceProvider = services.Build(Configuration, _hostingEnvironment).BuildServiceProvider();
+
+            var sfStarter = serviceProvider.GetService<ISFStarter>();
+            sfStarter.Run();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

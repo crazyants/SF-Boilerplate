@@ -24,7 +24,7 @@ namespace SF.Web.Security.Attributes
         {
             if (AdminAttribute.IsApplied(context.HttpContext) || IsNameAdmin(context))
             {
-                var authorized = await _authorizationService.AuthorizeAsync(context.HttpContext.User, GobalPermissions.AccessAdminPanel);
+                var authorized = await _authorizationService.AuthorizeAsync(context.HttpContext.User, GobalPermissionProvider.AccessAdminPanel);
 
                 if (!authorized)
                 {

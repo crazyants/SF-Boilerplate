@@ -11,6 +11,7 @@ using SF.Core;
 using Microsoft.AspNetCore.Identity;
 using SF.Core.Entitys;
 using SF.Web.Security.Providers;
+using SF.Core.StartupTask;
 
 namespace SF.Web.Security
 {
@@ -56,13 +57,14 @@ namespace SF.Web.Security
 
             services.TryAddTransient<IFilterProvider, DependencyFilterProvider>();
             services.TryAddTransient<IFilterMetadata, AdminFilter>();
-            services.AddSingleton<IPermissionProvider, GobalPermissions>();
+            services.AddSingleton<IPermissionProvider, GobalPermissionProvider>();
             services.AddSingleton<IPermissionScopeService, PermissionScopeService>();
             services.AddSingleton<ISecurityService, SecurityService>();
-            services.AddSingleton<IPermissionProvider>(sp =>
-            {
-                return sp.GetRequiredService<GobalPermissions>();
-            });
+            //services.AddSingleton<IPermissionProvider>(sp =>
+            //{
+            //    return sp.GetRequiredService<GobalPermissions>();
+            //});
+            services.AddSingleton<IStartupTask, RolePermissionStartupTask>();
         }
 
         public void UseSecurity(IApplicationBuilder applicationBuilder)

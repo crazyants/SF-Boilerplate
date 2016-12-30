@@ -7760,7 +7760,7 @@ body.navbar-side-close #content-wrapper {
 .form .formTitle-top {vertical-align:top; padding-top:4px;}
 .form .formValue{position:relative;padding:5px;width:auto;}
 .form .formValue select{padding: 4px;padding-left:4px;}
-.form-control{color:#000;border-radius:0px;font-size:9pt;height:28px;padding-top:0px;padding-bottom:1px;padding-right:0px;padding-left:5px;resize: none;}
+.form-control{color:#000;font-size:9pt;/*height:28px;*/padding-top:0px;padding-bottom:1px;padding-right:0px;padding-left:5px;resize: none;}
 .form-control:focus{border-color:#337ab7;box-shadow:none;}
 .form div.active{border-color:#337ab7;box-shadow:none;}
 .form textarea.form-control{padding-top:5px;}

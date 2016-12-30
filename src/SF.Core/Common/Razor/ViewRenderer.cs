@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace SF.Core.Common.Razor
 {
+    public interface IViewRenderService
+    {
+        Task<string> RenderViewAsString<TModel>(string viewName, TModel model);
+    }
     /// <summary>
     /// 此类是提供一种容易的方法来生成html字符串
     ///  使用 Razor templates and models,用于生成电子邮件的html字符串。
@@ -15,9 +19,9 @@ namespace SF.Core.Common.Razor
     /// <example>
     ///    await new ViewRenderer.RenderViewAsString<string>("EmailTemplates/AccountApprovedTextEmail", loginUrl);
     /// </example>
-    public class ViewRenderer
+    public class ViewRenderService : IViewRenderService
     {
-        public ViewRenderer(
+        public ViewRenderService(
             ICompositeViewEngine viewEngine,
             ITempDataProvider tempDataProvider,
             IActionContextAccessor actionAccessor

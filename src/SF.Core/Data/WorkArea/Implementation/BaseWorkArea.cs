@@ -26,6 +26,7 @@ namespace SF.Core.Data.WorkArea
         public BaseWorkArea(CoreDbContext context) : base(context)
         {
             User = new UserRepository(context);
+            Permission = new PermissionRepository(context);
             UserAddress = new UserAddressRepository(context);
             Media = new MediaRespository(context);
             DataItem = new DataItemRepository(context);
@@ -36,6 +37,8 @@ namespace SF.Core.Data.WorkArea
             SiteHost = new SiteHostRepository(context);
         }
         public IUserRepository User { get; }
+
+        public IPermissionRepository Permission { get; }
 
         public IUserAddressRepository UserAddress { get; }
 

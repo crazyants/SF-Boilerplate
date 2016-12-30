@@ -53,7 +53,7 @@ namespace SF.Module.Backend.Controllers
       //  [BreadCrumb(Title = "Authoer", Order = 3)]
         public async Task<ActionResult> Authoer()
         {
-            if (!await _authorizationService.AuthorizeAsync(User, GobalPermissions.AccessAdminPanel))
+            if (!await _authorizationService.AuthorizeAsync(User, BackendPermissionProvider.DataItemAdd))
                 return Unauthorized();
 
 
@@ -66,7 +66,7 @@ namespace SF.Module.Backend.Controllers
         /// <returns></returns>
         public async Task<ActionResult> AuthoerFilter()
         {
-            if (!await _authorizationService.AuthorizeAsync(User, GobalPermissions.AccessAdminPanel))
+            if (!await _authorizationService.AuthorizeAsync(User, BackendPermissionProvider.DataItemEdit))
                 return Unauthorized();
 
 

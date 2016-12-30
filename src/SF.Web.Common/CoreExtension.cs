@@ -55,6 +55,10 @@ using SF.Web.Common.Attributes;
 using SF.Core.Extensions;
 using SF.Core.Settings;
 using EFSecondLevelCache.Core;
+using SF.Core.StartupTask;
+using Scrutor;
+using SF.Core.Abstraction.Domain;
+using SF.Web.Common.Base.DataContractMapper;
 
 namespace SF.Web.Common
 {
@@ -211,7 +215,7 @@ namespace SF.Web.Common
 
 
             services.Configure<RazorViewEngineOptions>(options => { options.ViewLocationExpanders.Add(new ModuleViewLocationExpander()); });
-            services.TryAddScoped<ViewRenderer, ViewRenderer>();
+            services.AddScoped<IViewRenderService, ViewRenderService>();
 
             #region 系统基础配置参数
 
@@ -273,6 +277,10 @@ namespace SF.Web.Common
             services.AddScoped<IVersionProvider, SFCoreVersionProvider>();
 
             services.AddScoped<ITimeZoneIdResolver, RequestTimeZoneIdResolver>();
+
+            services.AddSingleton<ISFStarter, StartupTaskStarter>();
+            services.AddSingleton<IStartupTask, CoreEFStartupTask>(); 
+
             #region 缓存
 
             //EF Core二级缓存
@@ -301,7 +309,18 @@ namespace SF.Web.Common
             services.AddScoped<ISiteCommands, SiteCommands>();
             services.AddScoped<ISiteQueries, SiteQueries>();
 
+            //扫描所有模块注册以下接口所有继承类
+            services.Scan(scan => scan
+                .FromAssemblies(ExtensionManager.Modules.Select(x => x.Assembly))
+                .AddClasses(classes => classes.AssignableTo(typeof(IRules<>)))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime()
+                .AddClasses(classes => classes.AssignableTo(typeof(ICrudDtoMapper<,>)))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime());
             #endregion
+
+
 
             #region Swagger
 

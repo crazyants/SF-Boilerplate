@@ -17,7 +17,7 @@ namespace SF.Core.Common.Message.Email
         // because the link urls are obfuscated to some degree
 
         public SiteEmailMessageSender(
-            ViewRenderer viewRenderer,
+            IViewRenderService viewRenderer,
              IOptions<SmtpOptions> smtpOptionsAccessor,
             ILogger<SiteEmailMessageSender> logger
             )
@@ -28,7 +28,7 @@ namespace SF.Core.Common.Message.Email
 
         }
         private SmtpOptions globalSmtpSettings;
-        private ViewRenderer viewRenderer;
+        private IViewRenderService viewRenderer;
         private ILogger log;
 
         private SmtpOptions GetSmptOptions(ISiteContext siteSettings)
