@@ -1,8 +1,0 @@
-
-@model SF.Module.Backend.ViewModels.Shared.BackendMenuViewModel
-<div class="menu">
-  @foreach (var backendMenuGroup in this.Model.BackendMenuGroups)
-  {
-    @Html.Partial("_BackendMenuGroup", backendMenuGroup)
-  }
-</div>
