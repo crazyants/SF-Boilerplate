@@ -1,0 +1,28 @@
+﻿<environment names="Development">
+    <link rel="stylesheet" href="/css/developer.css" />
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/theme.css" />
+    <link rel="stylesheet" href="/css/account.css" />
+    <link rel="stylesheet" href="/css/sf-about.css" />
+    <link href="/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="/lib/jqgrid/jqgrid.css" rel="stylesheet" />
+    <link href="/lib/dialog/default/layer.css" rel="stylesheet" />
+    <link href="/lib/tree/tree.css" rel="stylesheet" />
+    <link href="/lib/wizard/wizard.css" rel="stylesheet" />
+</environment>
+<environment names="Staging,Production">
+    @* 给静态文件生成唯一的版本号如果静态文件发生改变，
+        Tag Helper就是重新计算文件的哈希值，它采用 SHA256的哈希值。
+        当然以前服务器缓存的文件版本也随之失效了。
+        这个asp-append-version Tag Helper可以支持Img、Script和Link元素。 *@
+    <link rel="stylesheet" href="/css/developer.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/bootstrap.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/theme.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/account.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/sf-about.css" asp-append-version="true" />
+    <link href="/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="/lib/jqgrid/jqgrid.css" rel="stylesheet" asp-append-version="true" />
+    <link href="/lib/dialog/default/layer.css" rel="stylesheet" asp-append-version="true" />
+    <link href="/lib/tree/tree.css" rel="stylesheet" asp-append-version="true" />
+    <link href="/lib/wizard/wizard.css" rel="stylesheet" asp-append-version="true" />
+</environment>

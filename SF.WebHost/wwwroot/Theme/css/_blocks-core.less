@@ -1,0 +1,421 @@
+﻿/*
+  Used to manage styles for specific blocks.
+
+  1. Notes - block to display, add, edit, delete notes
+  2. Schedule Builder - block for building schedules
+  3. Workflow - styles for workflow blocks
+
+*/
+
+// 1. Notes
+// -------------------------
+.panel-note {
+  border-top-color: @panel-top-border-color;
+  // panel extensions    ->      .panel-variant(@border; @heading-text-color; @heading-bg-color; @heading-border;) {}
+
+  .panel-variant(@panel-border; @panel-heading-text-color; @panel-heading-bg; @panel-heading-border;);
+
+  .panel-body {
+    background-color: #fff;
+  }
+
+  .panel-heading {
+    h3 {
+      float: left;
+      margin-top: 4px;
+    }
+
+    .btn {
+      float: right;
+      margin: 0;
+    }
+  }
+
+  article {
+    position: relative;
+    padding: @spacing-md-px;
+    margin-bottom: @spacing-md-px;
+    color: @state-info-text;
+    background-color: @state-info-bg;
+    border: 1px solid @state-info-border;
+    border-radius: @border-radius-base;
+
+    .date {
+      margin-left: 8px;
+      font-size: 13px;
+      font-weight: @font-weight-light;
+    }
+
+    & > i {
+      position: absolute;
+      width: 28px;
+      margin: 0 12px 0 4px;
+      font-size: 28px;
+      opacity: .2;
+    }
+
+    .details {
+      margin-left: 70px;
+
+      h5 {
+        max-width: 70%;
+        margin-top: 0;
+        margin-bottom: 6px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .actions {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+
+      a {
+        float: right;
+        margin-left: 8px;
+        font-size: 14px;
+      }
+    }
+
+    &.highlight {
+      color: @note-highlight-text;
+      background-color: @note-highlight-bg;
+      border: 1px solid @note-highlight-border;
+
+      a {
+        color: @note-highlight-text;
+      }
+    }
+
+    &.personal {
+      color: @note-personal-text;
+      background-color: @note-personal-bg;
+      border: 1px solid @note-personal-border;
+    }
+
+    & > img {
+      float: left;
+      margin: 0 12px 0 4px;
+    }
+  }
+
+  .load-more {
+    width: 20%;
+    min-width: 150px;
+    margin: 0 40%;
+
+    span {
+      margin: 0 12px;
+    }
+  }
+}
+
+.note-deny,
+.note-danger,
+.note-security {
+  article {
+    color: @alert-danger-text;
+    background-color: @alert-danger-bg;
+    border-color: @alert-danger-border;
+  }
+
+  .actions a {
+    color: @alert-danger-text;
+  }
+}
+
+.note-approve,
+.note-success {
+  article {
+    color: @alert-success-text;
+    background-color: @alert-success-bg;
+    border-color: @alert-success-border;
+  }
+
+  .actions a {
+    color: @alert-success-text;
+  }
+}
+
+.note-info {
+  article {
+    color: @alert-info-text;
+    background-color: @alert-info-bg;
+    border-color: @alert-info-border;
+  }
+
+  .actions a {
+    color: @alert-info-text;
+  }
+}
+
+.note-warning {
+  article {
+    color: @alert-warning-text;
+    background-color: @alert-warning-bg;
+    border-color: @alert-warning-border;
+  }
+
+  .actions a {
+    color: @alert-warning-text;
+  }
+}
+
+
+.panel-note-light {
+  background: none;
+  border: 0;
+
+  .panel-body {
+    background: none;
+  }
+
+  article {
+    padding-left: 0;
+    background: none;
+    border-width: 0 0 1px 0;
+    border-radius: 0;
+
+    .details {
+      margin-left: 0;
+    }
+
+    .note-author,
+    .note-created {
+      font-size: @font-size-base - 1px;
+      opacity: .7;
+    }
+  }
+}
+
+.panel-noteentry {
+  .panel-variant(@panel-border; @panel-heading-text-color; @panel-heading-bg; @panel-heading-border;);
+
+  .createDate {
+    width: 50%;
+    margin-top: 10px;
+  }
+
+  .settings {
+    margin-top: 4px;
+    .options {
+      input {
+        margin-right: 4px;
+      }
+    }
+  }
+
+  .panel-body {
+    .noteentry-control {
+      overflow: hidden;
+    }
+
+    .noteentry-notetype {
+      margin-bottom: 4px;
+    }
+
+    img {
+      float: left;
+      margin: 0 12px 0 4px;
+    }
+  }
+
+  .options .checkbox {
+    float: left;
+    margin: 0 @spacing-md-px 0 5px;
+  }
+
+  .panel-footer {
+    background-color: @panel-default-heading-bg;
+  }
+}
+
+// 2. Schedule Builder
+// -------------------------
+
+.recurrence-pattern-type {
+  padding-left: @spacing-lg-px;
+  margin-top: 12px;
+}
+
+.recurrence-pattern-specific-date {
+  .clearfix();
+
+  .input-group {
+    float: left;
+  }
+
+  .actions {
+    float: left;
+    margin-top: 4px;
+    margin-left: 12px;
+  }
+}
+
+.recurrence-pattern-daily {
+  .form-control-group {
+    min-height: @spacing-lg-px;
+  }
+}
+
+.recurrence-pattern-weekly {
+  .week-days {
+    margin-top: @spacing-md-px;
+
+    .clearfix();
+
+    .checkbox {
+      float: left;
+      margin: 0 @spacing-md-px;
+    }
+  }
+}
+
+.recurrence-pattern-monthly {
+  .form-control-group {
+    display: block;
+    min-height: 40px;
+  }
+}
+
+.continue-until {
+  .form-control-group {
+    min-height: 40px;
+  }
+}
+
+.exclusions {
+  .add-exclusion {
+    .form-control-group {
+      float: left;
+    }
+
+    .actions {
+      float: left;
+      margin-top: 5px;
+    }
+  }
+}
+
+// 3. Workflow
+// -------------------------
+
+.workflow-section-activities {
+  margin-top: 64px;
+}
+
+.workflow-activities-readonly-header {
+  top: auto;
+  left: auto;
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  color: #515151;
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.panel.workflow-activity {
+  &.activated-with-workflow {
+    border-color: @state-success-text;
+
+    & > .panel-heading {
+      color: @state-success-text;
+      background-color: @state-success-bg;
+
+      a.btn-link {
+        color: @state-success-text;
+      }
+    }
+  }
+
+  .panel-title:before {
+    margin-right: 4px;
+    font-family: FontAwesome;
+    font-weight: normal;
+    content: @fa-var-cubes;
+  }
+}
+
+.workflow-action {
+  .workflow-action-name:before {
+    font-family: FontAwesome;
+    font-weight: normal;
+    content: @fa-var-cube;
+  }
+
+  .criteria-exists {
+    color: @btn-warning-color;
+    background-color: @btn-warning-bg;
+    border: 1px solid @btn-warning-border;
+  }
+
+  .conditional-run-criteria {
+    padding-top: 15px;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  .form-action-rows .row {
+    margin-bottom: 12px;
+  }
+}
+
+// panel for workflow entry/navigation
+.panel-group {
+  .panel-workflowitem {
+    margin-bottom: 30px;
+
+    .panel-variant(@panel-border; @panel-heading-text-color; @panel-heading-bg; @panel-heading-border;);
+
+    &:hover {
+      background-color: #fff;
+    }
+
+    .panel-heading {
+      padding: 30px;
+
+      a {
+        display: block;
+
+        .panel-title {
+          width: 100%;
+
+          h3 {
+            margin: 0;
+
+            i {
+              margin-right: 12px;
+              font-size: 35px;
+            }
+          }
+        }
+
+
+        i.panel-navigation {
+          margin-top: 8px;
+
+          &:before {
+            margin-top: 6px;
+            font-family: FontAwesome;
+            font-size: 20px;
+            content: @fa-var-chevron-up;
+          }
+        }
+
+        &.collapsed {
+          i.panel-navigation:before {
+            content: @fa-var-chevron-down;
+          }
+        }
+      }
+    }
+  }
+}

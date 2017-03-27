@@ -1,0 +1,254 @@
+@{
+    ViewBag.Title = "角色管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<!--表格组件end-->
+<script type="text/javascript">
+    var keyValue = SF.utility.request('keyValue');
+    var organizeId = SF.utility.request('organizeId');
+    $(function () {
+        initControl();
+
+    })
+
+    //初始化控件
+    function initControl() {
+        SF.controls.datePicker.initialize({ id: 'Birthday' });
+        //公司
+        SF.utility.comboBoxTree($("#OrganizeId"), {
+            url: "/Api/Organize/GetTreeJson",
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true,
+        }).bind("change", function () {
+            var value = $(this).attr('data-value');
+            //加载部门
+            SF.utility.comboBoxTree($("#DepartmentId"), {
+                url: "/Api/Department/GetTreeJson?organizeId=" + value,
+                description: "==请选择==",
+                allowSearch: true
+            });
+
+            //加载岗位
+            SF.utility.comboBox($("#DutyId"), {
+                url: "/Api/DMOS/GetListJson?category=1&organizeId=" + value,
+                id: "Id",
+                text: "FullName",
+                description: "==请选择==",
+                allowSearch: true
+            });
+        });
+        ////加载角色
+        //SF.utility.comboBox($("#RoleId"), {
+        //    url: "/Api/Role/GetListJson",
+        //    id: "Id",
+        //    text: "Name",
+        //    description: "==请选择==",
+        //    allowSearch: true
+        //});
+        //部门
+        SF.utility.comboBoxTree($("#DepartmentId"), {
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true
+        }).bind("change", function () {
+            var value = $(this).attr('data-value');
+            //加载职位
+            SF.utility.comboBox($("#PostId"), {
+                url: "/Api/DMOS/GetListJson?category=2&organizeId=" + value,
+                id: "Id",
+                text: "FullName",
+                description: "==请选择==",
+                allowSearch: true
+            });
+            //加载主管
+            SF.utility.comboBox($("#ManagerId"), {
+                url: "/Api/User/GetListJson?departmentId=" + value,
+                id: "Id",
+                text: "UserName",
+                title: "UserName",
+                description: "==请选择==",
+                allowSearch: true
+            });
+        });
+
+        //岗位
+        SF.utility.comboBox($("#DutyId"), {
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true
+        });
+        //职位
+        SF.utility.comboBox($("#PostId"), {
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true
+        });
+        //主管
+        SF.utility.comboBox($("#ManagerId"), {
+            description: "==请选择==",
+            height: "200px",
+            allowSearch: true
+        });
+        //性别
+        SF.utility.comboBox($("#Gender"), {
+            description: "==请选择==",
+        });
+        //获取表单
+        if (!!keyValue) {
+            SF.utility.setForm({
+                url: "/Api/User/" + keyValue,
+                success: function (data) {
+                    SF.utility.setWebControls('form1', data);
+
+                    $("#OrganizeId").trigger("change");
+                    SF.utility.comboBoxTreeSetValue($("#DepartmentId"), data.DepartmentId).trigger("change");
+                    SF.utility.comboBoxSetValue($("#DutyId"), data.DutyId);
+                   // SF.utility.comboBoxSetValue($("#RoleId"), data.RoleId);
+                    SF.utility.comboBoxSetValue($("#PostId"), data.PostId);
+                    SF.utility.comboBoxSetValue($("#ManagerId"), data.ManagerId);
+
+                    $("#Birthday").val(SF.utility.formatDate(data.Birthday, "yyyy-MM-dd"));
+                    $("#Password").val("******").attr('disabled', 'disabled');
+                }
+            });
+        }
+    }
+    //保存表单
+    function AcceptClick(type) {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = SF.utility.getWebControls('form1', keyValue);
+        var url = "/Api/User/";
+        if (type == "PUT")
+            url = url + keyValue;
+        else if (type == "POST")
+            url = url;
+
+        SF.utility.saveForm({
+            type: type,
+            url: url,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                SF.utility.currentIframe().$("#gridTable").resetSelection();
+                SF.utility.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+
+</script>
+<div style="margin-left: 10px; margin-top: 20px; margin-right: 30px;">
+    <input type="hidden" name="Id" id="Id" />
+    <table class="form">
+        <tr>
+            <td class="formTitle">账户<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="UserName" type="text" onblur="SF.utility.ExistField(this.id,'/Api/User/ExistUserName')" class="form-control" placeholder="请输入账户" isvalid="yes" checkexpession="NotNull" />
+            </td>
+            <td class="formTitle">密码<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="Password" type="text" class="form-control" placeholder="请输入密码" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">公司<font face="宋体">*</font></td>
+            <td class="formValue">
+                <div id="OrganizeId" type="selectTree" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+            </td>
+            <td class="formTitle">部门<font face="宋体">*</font></td>
+            <td class="formValue">
+                <div id="DepartmentId" type="selectTree" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">岗位</td>
+            <td class="formValue">
+                <div id="DutyId" type="select" class="ui-select"></div>
+            </td>
+            <td class="formTitle">职位</td>
+            <td class="formValue">
+                <div id="PostId" type="select" class="ui-select"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">主管</td>
+            <td class="formValue">
+                <div id="ManagerId" type="select" class="ui-select"></div>
+            </td>
+            <td class="formTitle"> </td>
+            <td class="formValue">
+                @*<div id="RoleId" type="select" class="ui-select"></div>*@
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">工号</td>
+            <td class="formValue">
+                <input id="UserNo" type="text" class="form-control" />
+            </td>
+            <td class="formTitle">姓名</td>
+            <td class="formValue">
+                <input id="DisplayName" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">性别</td>
+            <td class="formValue">
+                <div id="Gender" type="select" class="ui-select">
+                    <ul>
+                        <li data-value="1">男</li>
+                        <li data-value="0">女</li>
+                    </ul>
+                </div>
+            </td>
+            <td class="formTitle">生日</td>
+            <td class="formValue">
+                <div class="input-group input-width-md date input-group-lower input-width-md js-date-picker date">
+                    <input name="Birthday" type="text" id="Birthday" class="form-control" value="" />
+                    <span class="input-group-addon"><i class='fa fa-calendar'></i></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">手机</td>
+            <td class="formValue">
+                <input id="Mobile" type="text" class="form-control" />
+            </td>
+            <td class="formTitle">电话</td>
+            <td class="formValue">
+                <input id="Telephone" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">邮箱</td>
+            <td class="formValue">
+                <input id="Email" type="text" class="form-control" />
+            </td>
+
+            <td class="formTitle">微信</td>
+            <td class="formValue">
+                <input id="WeChat" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">QQ</td>
+            <td class="formValue">
+                <input id="OICQ" type="text" class="form-control" />
+            </td>
+            <td class="formTitle">MSN</td>
+            <td class="formValue">
+                <input id="" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle" valign="top" style="padding-top: 4px;">
+                备注
+            </th>
+            <td class="formValue" colspan="3">
+                <textarea id="Description" class="form-control" style="height: 50px;"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "角色授权";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script type="text/javascript">
+    var userId = SF.utility.request('userId');
+    $(function () {
+        initialPage();
+        GetRoleTree();
+    })
+    //初始化页面
+    function initialPage() {
+        buttonOperation();
+    }
+    //获取系统功能
+    function GetRoleTree() {
+        var item = {
+            height: 540,
+            showcheck: true,
+            url: "/Api/Authorize/GetRoleTreeJson?userId=" + userId
+        };
+        $("#RoleTree").treeview(item);
+    }
+   
+    //按钮操作（上一步、下一步、完成、关闭）
+    function buttonOperation() {
+        var $finish = $("#btn_finish");
+        //完成提交保存
+        $finish.click(function () {
+            var postData = $("#form1").GetWebControls();
+            postData["userId"] = userId;
+            postData["roleIds"] = String($("#RoleTree").getCheckedAllNodes());
+            SF.utility.saveForm({
+                url: "/Api/User/SaveAuthorize",
+                param: postData,
+                loading: "正在保存角色授权...",
+                success: function () {
+                    SF.utility.currentIframe().$("#gridTable").resetSelection();
+                    SF.utility.currentIframe().$("#gridTable").trigger("reloadGrid");
+                }
+            })
+        })
+    }
+    
+</script>
+<div class="widget-body">
+    <div id="wizard" class="wizard" data-target="#wizard-steps" style="border-left: none; border-top: none; border-right: none;">
+        <ul class="steps">
+            <li data-target="#step-1" class="active"><span class="step">1</span>角色授权<span class="chevron"></span></li>
+        </ul>
+    </div>
+    <div class="step-content" id="wizard-steps" style="border-left: none; border-bottom: none; border-right: none;">
+        <div class="step-pane active" id="step-1">
+            <div id="RoleTree" style="margin: 10px;"></div>
+        </div>
+      
+    </div>
+</div>
+<div class="form-button" id="wizard-actions">
+   
+    <a id="btn_finish"  class="btn btn-success">完成</a>
+</div>
+
+

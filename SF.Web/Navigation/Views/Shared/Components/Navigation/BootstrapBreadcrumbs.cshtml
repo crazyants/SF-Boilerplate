@@ -1,0 +1,19 @@
+﻿@using SF.Web.Navigation
+@model NavigationViewModel
+@if (Model.CurrentNode != null && Model.ParentChain.Count > 1)
+{
+    <ul class="breadcrumb">
+    @foreach (var node in Model.ParentChain)
+    {
+        if (!Model.ShouldAllowView(node)) { continue; }
+        if (node.EqualsNode(Model.CurrentNode))
+        {
+            <li class="active">@Model.AdjustText(node)</li>
+        }
+        else
+        {
+            <li><a href="@Url.Content(Model.AdjustUrl(node))">@Model.AdjustText(node)</a><span class="divider"></span></li>
+        }
+    }
+    </ul>
+}

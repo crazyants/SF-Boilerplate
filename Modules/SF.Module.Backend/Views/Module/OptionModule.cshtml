@@ -1,0 +1,479 @@
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<!--表格组件end-->
+<script type="text/javascript">
+    var keyValue = SF.utility.request('keyValue');
+    var parentId = SF.utility.request('parentId');
+    $(function () {
+        initialPage();
+        buttonOperation();
+        // getGridButton();
+        //  getGridView();
+    })
+    //初始化页面
+    function initialPage() {
+        //加载导向
+        $('#wizard').wizard().on('change', function (e, data) {
+            var $finish = $("#btn_finish");
+            var $next = $("#btn_next");
+            if (data.direction == "next") {
+                if (data.step == 2) {
+                    $finish.removeAttr('disabled');
+                    $next.attr('disabled', 'disabled');
+                } else {
+                    $finish.attr('disabled', 'disabled');
+                }
+            } else {
+                $finish.attr('disabled', 'disabled');
+                $next.removeAttr('disabled');
+            }
+        });
+        initControl();
+    }
+    //初始化控件
+    function initControl() {
+        //目标
+        SF.utility.comboBox($("#Target"), {
+            description: "==请选择==",
+            height: "200px"
+        });
+        //上级
+        SF.utility.comboBoxTree($("#ParentId"), {
+            url: "/Api/Module/GetTreeJson",
+            description: "==请选择==",
+            height: "195px",
+            allowSearch: true
+        });
+        //获取表单
+        if (!!keyValue) {
+             SF.utility.setForm({
+                url: "/Api/Module/" + keyValue,
+                success: function (data) {
+                    SF.utility.setWebControls('form1', data);
+                    if (data.IsMenu == 1) {
+                        $("#btn_next").removeAttr('disabled');
+                        $("#btn_finish").attr('disabled', 'disabled');
+                    }Module1
+                }
+            });
+        } else {
+            SF.utility.comboBoxTreeSetValue( $("#ParentId"),parentId);
+        }
+    }
+    //选取图标
+    function SelectIcon() {
+        SF.utility.dialogOpen({
+            id: "SelectIcon",
+            title: '选取图标',
+            url: '/Module/Icon?ControlId=Icon',
+            width: "1000px",
+            height: "600px",
+            btn: false
+        })
+    }
+    //保存表单
+    function AcceptClick(type) {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = SF.utility.getWebControls('form1', keyValue);
+        if (postData["ParentId"] == "") {
+            postData["ParentId"] = 0;
+        }
+        //postData["moduleButtonListJson"] = JSON.stringify(buttonJson);
+        //postData["moduleColumnListJson"] = JSON.stringify(columnJson);
+
+        var url = "/Api/Module/";
+        if (type == "PUT")
+            url = url + keyValue;
+        else if (type == "POST")
+            url = url;
+        SF.utility.saveForm({
+            type: type,
+            url: url,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                SF.utility.currentIframe().$("#gridTable").resetSelection();
+                SF.utility.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+
+    //按钮操作（上一步、下一步、完成、关闭）
+    function buttonOperation() {
+        var $last = $("#btn_last");
+        var $next = $("#btn_next");
+        var $finish = $("#btn_finish");
+        //如果是菜单，开启 上一步、下一步
+        $("#IsMenu").click(function () {
+            if (!$(this).attr("checked")) {
+                $(this).attr("checked", true)
+                $next.removeAttr('disabled');
+                $finish.attr('disabled', 'disabled');
+            } else {
+                $(this).attr("checked", false)
+                $next.attr('disabled', 'disabled');
+                $finish.removeAttr('disabled');
+            }
+        });
+        //完成提交保存
+        $finish.click(function () {
+            AcceptClick();
+        })
+    }
+    /*系统按钮being==================================*/
+    var buttonJson = "";
+    function getGridButton() {
+        var moduleId = $("#ModuleId").val();
+        $.ajax({
+            url: "/Api/ModuleButton/GetListJson?moduleId=" + escape(moduleId),
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                buttonJson = data;
+            },
+        });
+        var $grid = $("#gridTable-button");
+        $grid.jqGrid({
+            unwritten: false,
+            url: "/Api/ModuleButton/GetTreeListJson?moduleId=" + escape(moduleId),
+            datatype: "json",
+            height: $(window).height() - 165,
+            width: $(window).width() - 11,
+            colModel: [
+                { label: "主键", name: "ModuleButtonId", hidden: true },
+                { label: "名称", name: "FullName", width: 140, align: "left", sortable: false },
+                { label: "编号", name: "EnCode", width: 140, align: "left", sortable: false },
+                { label: "地址", name: "ActionAddress", width: 500, align: "left", sortable: false },
+            ],
+            treeGrid: true,
+            treeGridModel: "nested",
+            ExpandColumn: "EnCode",
+            rowNum: "all",
+            rownumbers: true
+        });
+        //处理Json
+        function ButtonListToListTreeJson(buttonJson) {
+            $.ajax({
+                url: "/Api/ModuleButton/ListToListTreeJson",
+                data: { moduleButtonJson: JSON.stringify(buttonJson) },
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    $grid.clearGridData();
+                    $grid[0].addJSONData(data);
+                },
+            });
+        }
+        //新增
+        $("#lr-add-button").click(function () {
+            var parentId = $("#gridTable-button").jqGridRowValue("ModuleButtonId");
+            dialogOpen({
+                id: "buttonForm",
+                title: '添加按钮',
+                url: '/AuthorizeManage/ModuleButton/Form?parentId=' + parentId + "&moduleId=" + escape(moduleId),
+                width: "450px",
+                height: "300px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick(function (data) {
+                        buttonJson.push(data);
+                        ButtonListToListTreeJson(buttonJson);
+                    });
+                }
+            });
+        })
+        //编辑
+        $("#lr-edit-button").click(function () {
+            var moduleButtonId = $("#gridTable-button").jqGridRowValue("ModuleButtonId");
+            if (checkedRow(moduleButtonId)) {
+                dialogOpen({
+                    id: "buttonForm",
+                    title: '编辑按钮',
+                    url: '/AuthorizeManage/ModuleButton/Form?moduleButtonId=' + moduleButtonId + "&moduleId=" + escape(moduleId),
+                    width: "450px",
+                    height: "300px",
+                    callBack: function (iframeId) {
+                        top.frames[iframeId].AcceptClick(function (data) {
+                            $.each(buttonJson, function (i) {
+                                if (buttonJson[i].ModuleButtonId == moduleButtonId) {
+                                    buttonJson[i] = data;
+                                }
+                            });
+                            ButtonListToListTreeJson(buttonJson);
+                        });
+                    }
+                });
+            }
+        })
+        //删除
+        $("#lr-delete-button").click(function () {
+            var moduleButtonId = $("#gridTable-button").jqGridRowValue("ModuleButtonId");
+            if (checkedRow(moduleButtonId)) {
+                $.each(buttonJson, function (i) {
+                    if (buttonJson[i].ModuleButtonId == moduleButtonId) {
+                        buttonJson.splice(i, 1);
+                        ButtonListToListTreeJson(buttonJson);
+                        return false;
+                    }
+                });
+            }
+        });
+        //复制
+        $("#lr-copy-button").click(function () {
+            var moduleButtonId = $("#gridTable-button").jqGridRowValue("ModuleButtonId");
+            if (checkedRow(moduleButtonId)) {
+                dialogOpen({
+                    id: "OptionModule",
+                    title: '将按钮复制到指定功能里面',
+                    url: '/AuthorizeManage/ModuleButton/OptionModule?keyValue=' + moduleButtonId,
+                    width: "500px",
+                    height: "500px",
+                    callBack: function (iframeId) {
+                        top.frames[iframeId].AcceptClick();
+                    }
+                });
+            }
+        });
+    }
+    /*系统按钮end====================================*/
+
+    /*系统视图being==================================*/
+    var columnJson = "";
+    function getGridView() {
+        var moduleId = $("#ModuleId").val();
+        $.ajax({
+            url: "/Api/ModuleColumn/GetListJson?moduleId=" + escape(moduleId),
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                columnJson = data;
+            },
+        });
+        var $grid = $("#gridTable-view");
+        $grid.jqGrid({
+            unwritten: false,
+            url: "/Api/ModuleColumn/GetTreeListJson?moduleId=" + escape(moduleId),
+            datatype: "json",
+            height: $(window).height() - 165,
+            width: $(window).width() - 11,
+            colModel: [
+                { label: "主键", name: "ModuleColumnId", index: "ModuleColumnId", hidden: true },
+                { label: "名称", name: "FullName", index: "FullName", width: 140, align: "left", sortable: false, },
+                { label: "编号", name: "EnCode", index: "EnCode", width: 140, align: "left", sortable: false },
+                { label: "描述", name: "Description", index: "Description", width: 500, align: "left", sortable: false }
+            ],
+            rowNum: 1000,
+            rownumbers: true
+        });
+        //处理Json
+        function ViewListToListTreeJson(columnJson) {
+            $.ajax({
+                url: "/Api/ModuleColumn/ListToListTreeJson",
+                data: { moduleColumnJson: JSON.stringify(columnJson) },
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    $grid.clearGridData();
+                    $grid[0].addJSONData(data);
+                },
+            });
+        }
+        //新增
+        $("#lr-add-view").click(function () {
+            dialogOpen({
+                id: "viewForm",
+                title: '添加视图',
+                url: '/AuthorizeManage/ModuleColumn/Form?moduleId=' + escape(moduleId),
+                width: "450px",
+                height: "260px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick(function (data) {
+                        columnJson.push(data);
+                        ViewListToListTreeJson(columnJson);
+                    });
+                }
+            });
+        })
+        //编辑
+        $("#lr-edit-view").click(function () {
+            var moduleColumnId = $("#gridTable-view").jqGridRowValue("ModuleColumnId");
+            if (checkedRow(moduleColumnId)) {
+                dialogOpen({
+                    id: "viewForm",
+                    title: '编辑视图',
+                    url: '/AuthorizeManage/ModuleColumn/Form?moduleColumnId=' + moduleColumnId + "&moduleId=" + escape(moduleId),
+                    width: "450px",
+                    height: "260px",
+                    callBack: function (iframeId) {
+                        top.frames[iframeId].AcceptClick(function (data) {
+                            $.each(columnJson, function (i) {
+                                if (columnJson[i].ModuleColumnId == moduleColumnId) {
+                                    columnJson[i] = data;
+                                }
+                            });
+                            ViewListToListTreeJson(columnJson);
+                        });
+                    }
+                });
+            }
+        })
+        //删除
+        $("#lr-delete-view").click(function () {
+            var moduleColumnId = $("#gridTable-view").jqGridRowValue("ModuleColumnId");
+            if (checkedRow(moduleColumnId)) {
+                $.each(columnJson, function (i) {
+                    if (columnJson[i].ModuleColumnId == moduleColumnId) {
+                        columnJson.splice(i, 1);
+                        ViewListToListTreeJson(columnJson);
+                        return false;
+                    }
+                });
+            }
+        });
+        //批量添加
+        $("#lr-batch-addview").click(function () {
+            dialogOpen({
+                id: "viewForm",
+                title: '批量添加视图',
+                url: '/AuthorizeManage/ModuleColumn/BatchAdd?moduleId=' + escape(moduleId),
+                width: "450px",
+                height: "300px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick(function (data) {
+                        columnJson = data;
+                        ViewListToListTreeJson(data);
+                    });
+                }
+            });
+        })
+    }
+    /*系统视图end====================================*/
+</script>
+<div class="widget-body">
+    <div id="wizard" class="wizard" data-target="#wizard-steps" style="border-left: none; border-top: none; border-right: none;">
+        <ul class="steps">
+            <li data-target="#step-1" class="active"><span class="step">1</span>系统功能<span class="chevron"></span></li>
+            <li data-target="#step-2"><span class="step">2</span>系统按钮<span class="chevron"></span></li>
+            <li data-target="#step-3"><span class="step">3</span>系统视图<span class="chevron"></span></li>
+        </ul>
+    </div>
+    <div class="step-content" id="wizard-steps" style="border-left: none; border-bottom: none; border-right: none;">
+        <div class="step-pane active" id="step-1" style="margin-left: 0px; margin-top: 15px; margin-right: 30px;">
+            <input id="ModuleId" type="hidden" value="@ViewBag.ModuleId" />
+            <table class="form">
+                <tr>
+                    <th class="formTitle">编号<font face="宋体">*</font></th>
+                    <td class="formValue">
+                        <input id="EnCode" type="text" class="form-control" placeholder="请输入编号" isvalid="yes" checkexpession="NotNull" />
+                    </td>
+                    <th class="formTitle">名称<font face="宋体">*</font></th>
+                    <td class="formValue">
+                        <input id="FullName" type="text" class="form-control" placeholder="请输入名称" isvalid="yes" checkexpession="NotNull" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">上级</th>
+                    <td class="formValue">
+                        <div id="ParentId" type="selectTree" class="ui-select">
+                        </div>
+                    </td>
+                    <th class="formTitle">图标</th>
+                    <td class="formValue">
+                        <input id="Icon" type="text" class="form-control" />
+                        <span class="input-button" onclick="SelectIcon()" title="选取图标">...</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">目标<font face="宋体">*</font></th>
+                    <td class="formValue">
+                        <div id="Target" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull">
+                            <ul>
+                                <li data-value="expand">expand</li>
+                                <li data-value="iframe">iframe</li>
+                                <li data-value="open">open</li>
+                                <li data-value="href">href</li>
+                                <li data-value="blank">blank</li>
+                            </ul>
+                        </div>
+                    </td>
+                    <th class="formTitle">排序<font face="宋体">*</font></th>
+                    <td class="formValue">
+                        <input id="SortIndex" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">地址</th>
+                    <td class="formValue" colspan="3">
+                        <input id="UrlAddress" type="text" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle" style="height: 37px;">选项</th>
+                    <td class="formValue">
+                        <div class="checkbox user-select">
+                            <label>
+                                <input id="IsMenu" type="checkbox" />
+                                菜单
+                            </label>
+                            <label>
+                                <input id="IsPublic" type="checkbox" />
+                                公共
+                            </label>
+                            <label>
+                                <input id="AllowExpand" type="checkbox" />
+                                展开
+                            </label>
+                            <label>
+                                <input id="EnabledMark" type="checkbox" checked="checked" />
+                                有效
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle" valign="top" style="padding-top: 4px;">
+                        描述
+                    </th>
+                    <td class="formValue" colspan="3">
+                        <textarea id="Description" class="form-control" style="height: 70px;"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="step-pane" id="step-2" style="margin: 5px;">
+            <div style="height: 40px; line-height: 33px; text-align: right;">
+                <div class="btn-group">
+                    <a id="lr-add-button" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;新增</a>
+                    <a id="lr-edit-button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+                    <a id="lr-delete-button" class="btn btn-default"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+                </div>
+                <div class="btn-group">
+                    <a id="lr-copy-button" class="btn btn-default"><i class="fa fa-copy"></i>&nbsp;复制</a>
+                </div>
+            </div>
+            <table id="gridTable-button"></table>
+        </div>
+        <div class="step-pane" id="step-3" style="margin: 5px;">
+            <div style="height: 40px; line-height: 33px; text-align: right;">
+                <div class="btn-group">
+                    <a id="lr-add-view" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;新增</a>
+                    <a id="lr-edit-view" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+                    <a id="lr-delete-view" class="btn btn-default"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+                </div>
+                <div class="btn-group">
+                    <a id="lr-batch-addview" class="btn btn-default"><i class="fa fa-sign-in"></i>&nbsp;批量添加</a>
+                </div>
+            </div>
+            <table id="gridTable-view"></table>
+        </div>
+    </div>
+</div>
+<div class="form-button" id="wizard-actions">
+    <a id="btn_last" disabled class="btn btn-default btn-prev">上一步</a>
+    <a id="btn_next" disabled class="btn btn-default btn-next">下一步</a>
+    <a id="btn_finish" class="btn btn-success">完成</a>
+</div>

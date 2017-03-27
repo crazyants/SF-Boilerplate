@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "角色权限";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script type="text/javascript">
+    var roleId = SF.utility.request('roleId');
+    $(function () {
+        initialPage();
+        GetModuleTree();
+        GetModuleButtonTree();
+    })
+    //初始化页面
+    function initialPage() {
+        //加载导向
+        $('#wizard').wizard().on('change', function (e, data) {
+            var $finish = $("#btn_finish");
+            var $next = $("#btn_next");
+            if (data.direction == "next") {
+                if (data.step == 1) {
+                    var ModuleId = $("#ModuleTree").getCheckedAllNodes();
+                    for (var i = 0; i < ModuleId.length; i++) {
+                        var $thisid = $("#ModuleButtonTree").find('ul').find('[data-value=' + "M_" + ModuleId[i] + ']').parent().parent();
+                        $thisid.show();
+                        $thisid.parents('ul').find('.' + ModuleId[i]).parent().show();
+                    }
+                    $finish.removeAttr('disabled');
+                    $next.attr('disabled', 'disabled');
+                }
+            } else {
+                $finish.attr('disabled', 'disabled');
+                $next.removeAttr('disabled');
+            }
+        });
+
+        buttonOperation();
+    }
+    //获取系统功能
+    function GetModuleTree() {
+        var item = {
+            height: 540,
+            showcheck: true,
+            url: "/Api/Authorize/GetModuleTreeJson?roleId=" + roleId
+        };
+        $("#ModuleTree").treeview(item);
+    }
+    //获取系统按钮
+    function GetModuleButtonTree() {
+        var item = {
+            height: 540,
+            showcheck: true,
+            url: "/Api/Authorize/GetModuleButtonTreeJson?roleId=" + roleId
+        };
+        $("#ModuleButtonTree").treeview(item);
+        $("#ModuleButtonTree").find('.bbit-tree-node-el').hide();
+    }
+    //按钮操作（上一步、下一步、完成、关闭）
+    function buttonOperation() {
+        var $last = $("#btn_last");
+        var $next = $("#btn_next");
+        var $finish = $("#btn_finish");
+        //完成提交保存
+        $finish.click(function () {
+            var postData = $("#form1").GetWebControls();
+            postData["roleId"] = roleId;
+            postData["moduleIds"] = String($("#ModuleTree").getCheckedAllNodes());
+            postData["moduleButtonIds"] = String($("#ModuleButtonTree").getCheckedAllNodes());
+            SF.utility.saveForm({
+                url: "/Api/Role/SaveAuthorize",
+                param: postData,
+                loading: "正在保存角色授权...",
+                success: function () {
+                    SF.utility.currentIframe().$("#gridTable").resetSelection();
+                    SF.utility.currentIframe().$("#gridTable").trigger("reloadGrid");
+                }
+            })
+        })
+    }
+    
+</script>
+<div class="widget-body">
+    <div id="wizard" class="wizard" data-target="#wizard-steps" style="border-left: none; border-top: none; border-right: none;">
+        <ul class="steps">
+            <li data-target="#step-1" class="active"><span class="step">1</span>系统功能<span class="chevron"></span></li>
+            <li data-target="#step-2"><span class="step">2</span>系统按钮<span class="chevron"></span></li>
+        </ul>
+    </div>
+    <div class="step-content" id="wizard-steps" style="border-left: none; border-bottom: none; border-right: none;">
+        <div class="step-pane active" id="step-1">
+            <div id="ModuleTree" style="margin: 10px;"></div>
+        </div>
+        <div class="step-pane" id="step-2">
+            <div id="ModuleButtonTree" style="margin: 10px;"></div>
+        </div>
+    </div>
+</div>
+<div class="form-button" id="wizard-actions">
+    <a id="btn_last" disabled class="btn btn-default btn-prev">上一步</a>
+    <a id="btn_next"  class="btn btn-default btn-next">下一步</a>
+    <a id="btn_finish" disabled class="btn btn-success">完成</a>
+</div>
+
+

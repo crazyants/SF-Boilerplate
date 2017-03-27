@@ -1,0 +1,278 @@
+@{
+    ViewData["Title"] = "区域管理-列表";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<section id="page-title">
+    <h1 class="title pull-left">
+        <div class="page-icon">
+            <i class="fa fa-users"></i>
+        </div> 区域管理
+    </h1>
+    <ul class="breadcrumb pull-left">
+        <li><a href="/User"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active">区域</li>
+    </ul>
+    <div class="clearfix"></div>
+</section>
+<section id="page-content">
+    <!-- Ajax Error -->
+    <div class="alert alert-danger ajax-error" style="display:none">
+        <p><strong>错误</strong></p>
+        <span class="ajax-error-message"></span>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @*<div id="zone-feature" class="zone-instance can-configure">
+                <div class="zone-content">
+                    <div class="block-content">
+                        <div class="panel panel-block">
+                            <div class="panel-heading">
+                                <div id="upGroupType">
+                                    <input type="hidden" name="fRootGroupId" id="hfRootGroupId" />
+                                    <input type="hidden" name="fInitialGroupParentIds" id="hfInitialGroupParentIds" />
+                                    <input type="hidden" name="fSelectedGroupId" id="hfSelectedGroupId" value="0" />
+                                    <div class="treeview js-grouptreeview">
+                                        <div class="treeview-scroll scroll-container scroll-container-horizontal">
+                                            <div class="viewport">
+                                                <div class="overview">
+                                                    <div class="panel-body treeview-frame">
+                                                        <div id="pnlTreeviewContent">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="scrollbar">
+                                                <div class="track">
+                                                    <div class="thumb">
+                                                        <div class="end"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+            <div class="west-Panel">
+                <div class="panel-Title">目录信息</div>
+                <div id="itemTree"></div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div id="zone-feature" class="zone-instance can-configure">
+                <div class="zone-content">
+                    <div class="block-content">
+                        <div class="panel panel-block">
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <table>
+                                        <tr>
+                                            <td style="padding-left: 2px;">
+                                                <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;" />
+                                            </td>
+                                            <td style="padding-left: 5px;">
+                                                <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;查询</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="grid-actions pull-right">
+                                    <a title="刷新" class="btn btn-default" onclick="SF.utility.reload();"><i class="fa fa-refresh"></i></a>
+                                    <a title="新增" class="btn-add btn btn-default btn-sm" onclick="btn_add()"><i class="fa fa-plus-circle"></i></a>
+                                    <a title="编辑" class="btn-add btn btn-default btn-sm" onclick="btn_edit()"><i class="fa  fa-edit"></i></a>
+                                    <a title="删除" class="btn btn-default" onclick="btn_delete()"><i class="fa fa-trash-o"></i></a>
+                                    <a title="详细" class="btn btn-default" onclick="btn_detail()"><i class="fa fa-list-alt"></i></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="grid grid-panel">
+                                    <div class="table-responsive">
+                                        <div class="gridPanel">
+                                            <table id="gridTable"></table>
+                                            <div id="gridPager"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    //加载树
+    var AreaCode = 0;
+    var FixedHeight = 130.5;
+    var FixedGridHeight = 180.5;
+    $(function () {
+        InitialPage();
+        GetGrid();
+        GetTree();
+    });
+
+
+    //初始化页面
+    function InitialPage() {
+        //resize重设(表格、树形)宽高
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $("#gridTable").setGridHeight($(window).height() -FixedGridHeight);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+
+    function LoadTree() {
+        var scrollbCategory = $('#pnlTreeviewContent').closest('.treeview-scroll');
+        scrollbCategory.tinyscrollbar({ sizethumb: 10, size: $(window).height() - FixedHeight+40 });
+        var $selectedId = $('#hfSelectedGroupId'),
+          $expandedIds = $('#hfInitialGroupParentIds');
+        $('#pnlTreeviewContent')
+            .on('sfTree:selected', function (e, id) {
+                AreaCode = id;
+                //已选的字典分类名称
+                //$("#titleinfo").html(_itemName + "(" + _itemId + ")");
+                $("#txt_Keyword").val("");
+                $('#btn_Search').trigger("click");
+            })
+            .on('sfTree:rendered', function () {
+                // update viewport height
+                SF.utility.resizeScrollbarWithWinHeight(scrollbCategory, $(window).height() -  FixedHeight);
+
+            })
+            .sfTree({
+                restUrl: '/Api/Area/GetChildren/',
+                restParams: '?rootAreaId=' + ($('#hfRootGroupId').val() || 0),
+                multiSelect: false,
+                selectedIds: $selectedId.val() ? $selectedId.val().split(',') : null,
+                expandedIds: $expandedIds.val() ? $expandedIds.val().split(',') : null
+            });
+
+        $(window).resize(function (e) {
+            SF.utility.resizeScrollbarWithWinHeight(scrollbCategory, $(window).height() -  FixedHeight);
+        });
+    }
+    function GetTree() {
+        var item = {
+            height: $(window).height() - 52,
+            url: "/Api/Area/GetTreeJson",
+            onnodeclick: function (item) {
+                AreaCode = item.id;
+                //展开下级
+                $(".bbit-tree-selected").children('.bbit-tree-ec-icon').trigger("click");
+                $('#btn_Search').trigger("click");
+            },
+        };
+        //初始化
+        $("#itemTree").treeview(item);
+    }
+
+    //加载表格
+    function GetGrid() {
+        var selectedRowIndex = 0;
+        var $gridTable = $("#gridTable");
+        $gridTable.jqGrid({
+            url: "/Api/Area/GetListJson",
+            datatype: "json",
+            height: $(window).height() -FixedGridHeight,
+            autowidth: true,
+            colModel: [
+                { label: '主键', name: 'Id', hidden: true },
+                { label: '编号', name: 'AreaCode', index: 'AreaCode', width: 100, align: 'left' },
+                { label: '名称', name: 'AreaName', index: 'AreaName', width: 300, align: 'left' },
+                { label: '简拼', name: 'SimpleSpelling', index: 'SimpleSpelling', width: 100, align: 'left' },
+                { label: '级', name: 'Layer', index: 'Layer', width: 50, align: 'center' },
+                {
+                    label: "有效", name: "EnabledMark", index: "EnabledMark", width: 50, align: "center",
+                    formatter: function (cellvalue, options, rowObject) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { label: "备注", name: "Description", index: "Description", width: 200, align: "left" }
+            ],
+            rowNum: "10000",
+            rownumbers: true,
+            onSelectRow: function () {
+                selectedRowIndex = $("#" + this.id).getGridParam('selrow');
+            },
+            gridComplete: function () {
+                $("#" + this.id).setSelection(selectedRowIndex, false);
+            }
+        });
+        //查询事件
+        $("#btn_Search").click(function () {
+            $gridTable.jqGrid('setGridParam', {
+                postData: { value: AreaCode, keyword: $("#txt_Keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    //新增
+    function btn_add() {
+        var AreaId = AreaCode;
+        SF.utility.dialogOpen({
+            id: "Form",
+            title: '添加区域',
+            url: '/Area/Form?parentId=' + AreaId,
+            width: "800px",
+            height: "500px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick("POST");
+            }
+        });
+    };
+    //编辑
+    function btn_edit() {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        if (SF.utility.checkedRow(keyValue)) {
+            SF.utility.dialogOpen({
+                id: "Form",
+                title: '编辑区域',
+                url: '/Area/Form?keyValue=' + keyValue,
+                width: "800px",
+                height: "500px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick("PUT");
+                }
+            });
+        }
+    }
+    //删除
+    function btn_delete() {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        if (keyValue) {
+            SF.utility.removeForm({
+                type: "DELETE",
+                url: "/Api/Area/" + keyValue,
+                success: function (data) {
+                    $("#gridTable").resetSelection();
+                    $("#gridTable").trigger("reloadGrid");
+                }
+            })
+        } else {
+            SF.utility.dialogMsg('请选择需要删除的区域！', 0);
+        }
+    }
+    //详细
+    function btn_detail() {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        if (SF.utility.checkedRow(keyValue)) {
+            SF.utility.dialogOpen({
+                id: "Detail",
+                title: '区域信息',
+                url: '/Area/Detail?keyValue=' + keyValue,
+                width: "800px",
+                height: "500px",
+                btn: null
+            });
+        }
+    }
+</script>

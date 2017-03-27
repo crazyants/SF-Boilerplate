@@ -1,0 +1,39 @@
+{
+  "EventType": "POST Account/Login",
+  "Environment": {
+    "UserName": "tomny.tang",
+    "MachineName": "GZIT008",
+    "CallingMethodName": "SF.Module.Backend.Controllers.AccountController.Login()",
+    "AssemblyName": "SF.Module.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Culture": "zh"
+  },
+  "StartDate": "2017-03-24T11:03:59.5763473+08:00",
+  "EndDate": "2017-03-24T11:03:59.6573527+08:00",
+  "Duration": 81,
+  "Action": {
+    "HttpMethod": "POST",
+    "ControllerName": "Account",
+    "ActionName": "Login",
+    "ViewName": "Login",
+    "FormVariables": {
+      "Email": "admin@admin.com",
+      "password": "123456",
+      "verifycode": "",
+      "rememberMe": "0",
+      "returnUrl": ""
+    },
+    "ActionParameters": {
+      "model": {
+        "Email": "admin@admin.com",
+        "Password": "123456",
+        "RememberMe": false
+      },
+      "returnUrl": null
+    },
+    "UserName": null,
+    "RequestUrl": "http://localhost:37680/Login",
+    "IpAddress": "::1",
+    "ResponseStatus": "200",
+    "ResponseStatusCode": 200
+  }
+}

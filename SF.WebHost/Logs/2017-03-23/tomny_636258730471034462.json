@@ -1,0 +1,26 @@
+{
+  "EventType": "GET Home/Index",
+  "Environment": {
+    "UserName": "tomny",
+    "MachineName": "DESKTOP-K2FDV9J",
+    "CallingMethodName": "SF.Module.Backend.Controllers.HomeController.Index()",
+    "AssemblyName": "SF.Module.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Culture": "zh"
+  },
+  "StartDate": "2017-03-23T13:37:25.6054471+08:00",
+  "EndDate": "2017-03-23T13:37:27.1034462+08:00",
+  "Duration": 1498,
+  "Action": {
+    "HttpMethod": "GET",
+    "ControllerName": "Home",
+    "ActionName": "Index",
+    "ViewName": "Index",
+    "FormVariables": null,
+    "ActionParameters": {},
+    "UserName": "Administrator",
+    "RequestUrl": "http://localhost:37680/",
+    "IpAddress": "::1",
+    "ResponseStatus": "200",
+    "ResponseStatusCode": 200
+  }
+}

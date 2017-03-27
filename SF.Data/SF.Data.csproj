@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CacheManager.Core" Version="0.9.3" />
+    <PackageReference Include="MediatR" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.0.2" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.0.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" />
+    <PackageReference Include="Serenity.FluentMigrator" Version="1.6.904" />
+    <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SF.Core\SF.Core.csproj" />
+    <ProjectReference Include="..\SF.Entitys\SF.Entitys.csproj" />
+  </ItemGroup>
+</Project>

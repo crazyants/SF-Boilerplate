@@ -1,0 +1,80 @@
+@{
+    ViewBag.Title = "区域管理-编辑";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = SF.utility.request('keyValue');
+    $(function () {
+        initControl();
+    })
+    //初始化控件
+    function initControl() {
+        //获取表单
+        if (!!keyValue) {
+            SF.utility.setForm({
+                url: "/Api/Area/" + keyValue,
+                success: function (data) {
+                    SF.utility.setWebControls('form1', data);
+                    $("#form1").find('.form-control,.ui-select,input').attr('disabled', 'disabled');
+                }
+            });
+        }
+
+    }
+
+
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <td class="formTitle">编号</td>
+            <td class="formValue">
+                <input id="AreaCode" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">名称</td>
+            <td class="formValue">
+                <input id="AreaName" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">简拼</td>
+            <td class="formValue">
+                <input id="SimpleSpelling" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle" valign="top" style="padding-top: 4px;">
+                备注
+            </th>
+            <td class="formValue">
+                <textarea id="Description" class="form-control" style="height: 70px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">创建用户</td>
+            <td class="formValue">
+                <input id="CreatedBy" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">创建时间</td>
+            <td class="formValue">
+                <input id="CreatedOn" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">修改用户</td>
+            <td class="formValue">
+                <input id="UpdatedBy" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">修改时间</td>
+            <td class="formValue">
+                <input id="UpdatedOn" type="text" class="form-control" />
+            </td>
+        </tr>
+    </table>
+</div>

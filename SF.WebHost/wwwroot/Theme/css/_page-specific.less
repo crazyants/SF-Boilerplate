@@ -1,0 +1,77 @@
+﻿/*
+    Used to manage styles for specific blocks.
+
+    1. Error Page 
+    2. Blank Page
+    3. Exception Page
+*/
+
+
+// 1. Error Page
+// -------------------------
+
+.error-wrap {
+  max-width: 450px;
+  margin: 0 auto;
+  text-align: center;
+
+  h1 {
+    font-size: 45px;
+  }
+
+  .error-icon {
+    margin: @spacing-md-px;
+    font-size: 256px;
+    line-height: 256px;
+    opacity: .7;
+
+    &.info {
+      color: @brand-info;
+    }
+
+    &.warning {
+      color: @brand-warning;
+    }
+
+    &.danger {
+      color: @brand-danger;
+    }
+  }
+}
+
+.error-details {
+  pre {
+    color: @alert-danger-text;
+    background-color: transparent;
+    border: 0;
+  }
+}
+
+// 2. Blank Page
+// -------------------------
+
+.sf-blank {
+  background-color: @body-bg;
+
+  main.container {
+    padding: 12px;
+    margin: 0;
+  }
+}
+
+// 3. Exception Page
+// -------------------------
+.exceptionDetail-stackTrace-hide {
+  display: none;
+}
+
+.exceptionDetail-stackTrace-show {
+  display: table-row;
+
+  pre {
+    padding: 0;
+    color: inherit;
+    background-color: transparent;
+    border-color: transparent;
+  }
+}

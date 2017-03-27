@@ -1,0 +1,102 @@
+@{
+    ViewBag.Title = "岗位管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<!--表格组件end-->
+<script type="text/javascript">
+    var keyValue = SF.utility.request('keyValue');
+    var organizeId = SF.utility.request('organizeId');
+    $(function () {
+        initControl();
+
+    })
+    //初始化控件
+    function initControl() {
+        SF.controls.datePicker.initialize({ id: 'FoundedTime', startView: 0, format: 'yyyy-mm-dd', todayHighlight: true });
+        //上级公司
+        SF.utility.comboBoxTree($("#OrganizeId"), {
+            url: "/Api/Organize/GetTreeJson",
+            description: "==请选择==",
+            height: "260px",
+            allowSearch: true
+        });
+       
+        //获取表单
+        if (!!keyValue) {
+            SF.utility.setForm({
+                url: "/Api/DMOS/" + keyValue,
+                success: function (data) {
+                    SF.utility.setWebControls('form1', data);
+                }
+            });
+        }
+    }
+    //保存表单
+    function AcceptClick(type) {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = SF.utility.getWebControls('form1', keyValue);
+        var url = "/Api/DMOS/";
+        if (type == "PUT")
+            url = url + keyValue;
+        else if (type == "POST")
+            url = url;
+
+        SF.utility.saveForm({
+            type: type,
+            url: url,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                SF.utility.currentIframe().$("#gridTable").resetSelection();
+                SF.utility.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+
+</script>
+<div style="margin-left: 10px; margin-top: 20px; margin-right: 30px;">
+    <input type="hidden" name="Category" id="Category" value="1" />
+    <table class="form">
+        <tr>
+            <th class="formTitle">所在公司<font face="宋体">*</font></th>
+            <td class="formValue">
+                <div id="OrganizeId" type="selectTree" class="ui-select" isvalid="yes" checkexpession="NotNull">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">岗位编号<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="EnCode" type="text" onblur="SF.utility.existField(this.id, '/Api/DMOS/ExistEnCode')" class="form-control" placeholder="请输入编号" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">岗位名称<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="FullName" type="text" onblur="SF.utility.existField(this.id, '/Api/DMOS/ExistFullName')" class="form-control" placeholder="请输入名称" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle" style="height: 37px;"></th>
+            <td class="formValue">
+                <div class="checkbox">
+                    <label>
+                        <input id="EnabledMark" type="checkbox" checked="checked" />
+                        有效
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle" valign="top" style="padding-top: 4px;">
+                岗位描述
+            </th>
+            <td class="formValue">
+                <textarea id="Description" class="form-control" style="height: 70px;"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "部门管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<script>
+    var keyValue = SF.utility.request('keyValue');
+    var organizeId = SF.utility.request('organizeId');
+    var parentId = SF.utility.request('parentId');
+    $(function () {
+        initControl();
+    })
+    //初始化控件
+    function initControl() {
+
+        //上级部门
+        SF.utility.comboBoxTree($("#DepartmentTree"), {
+            url: "/Api/Department/GetOrganizeTreeJson",
+            description: "==请选择==",
+            height: "250px",
+            click: function (item) {
+                if (item.Sort == 'Organize') {
+                    organizeId = item.id;
+                    parentId = 0;
+                } else {
+                    parentId = item.id;
+                }
+            }
+        });
+        //负责人
+        SF.utility.comboBoxTree($("#ManagerId"), {
+            url: "/Api/User/GetTreeJson",
+            description: "==请选择==",
+            height: "220px",
+            allowSearch: true
+        });
+        //部门性质
+        SF.utility.comboBox($("#Nature"), {
+            url: "/Api/DataItemDetail/GetDataItemListJson",
+            param: { EnCode: "CompanyNature" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "==请选择==",
+            height: "200px"
+        });
+        //获取表单
+        if (!!keyValue) {
+            SF.utility.setForm({
+                url: "/Api/Department/" + keyValue,
+                success: function (data) {
+                    SF.utility.setWebControls('form1', data);
+                    if (data.ParentId == 0) {
+                        SF.utility.comboBoxTreeSetValue($("#DepartmentTree"), 'O_' + data.OrganizeId);
+                    } else {
+                        SF.utility.comboBoxTreeSetValue($("#DepartmentTree"), data.ParentId);
+                    }
+                    parentId = data.ParentId;
+                    organizeId = 'O_' + data.OrganizeId;
+                }
+            });
+        } else {
+            if (parentId == 0) {
+                SF.utility.comboBoxTreeSetValue($("#DepartmentTree"), organizeId);
+            } else {
+                SF.utility.comboBoxTreeSetValue($("#DepartmentTree"), parentId);
+            }
+        }
+    }
+    //保存表单
+    function AcceptClick(type) {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = SF.utility.getWebControls('form1', keyValue);
+        postData["OrganizeId"] = organizeId.replace('O_', '');
+        postData["ParentId"] = parentId;
+        postData["Manager"] = $("#ManagerId").attr('data-text');
+        var url = "/Api/Department/";
+        if (type == "PUT")
+            url = url + keyValue;
+        else if (type == "POST")
+            url = url;
+
+        SF.utility.saveForm({
+            type: type,
+            url: url,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                SF.utility.currentIframe().$("#gridTable").resetSelection();
+                SF.utility.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<div style="margin-left: 10px; margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <th class="formTitle">上级部门<font face="宋体">*</font></th>
+            <td class="formValue">
+                <div id="DepartmentTree" type="selectTree" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+            </td>
+            <th class="formTitle">负责人</th>
+            <td class="formValue">
+                <div id="ManagerId" type="selectTree" class="ui-select"></div>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">部门名称<font face="宋体">*</font></th>
+            <td class="formValue">
+                <input id="FullName" type="text" onblur="SF.utility.existField(this.id,'/Api/Department/ExistEnCode')" class="form-control" placeholder="请输入名称" isvalid="yes" checkexpession="NotNull" />
+            </td>
+            <th class="formTitle">部门编号<font face="宋体">*</font></th>
+            <td class="formValue">
+                <input id="EnCode" type="text" onblur="SF.utility.existField(this.id,'/Api/Department/ExistFullName')" class="form-control" placeholder="请输入编号" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">部门简称</th>
+            <td class="formValue">
+                <input id="ShortName" type="text" class="form-control" />
+            </td>
+            <th class="formTitle">部门性质</th>
+            <td class="formValue">
+                <div id="Nature" type="select" class="ui-select"></div>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">电话号</th>
+            <td class="formValue">
+                <input id="OuterPhone" type="text" class="form-control" />
+            </td>
+            <th class="formTitle">分机号</th>
+            <td class="formValue">
+                <input id="InnerPhone" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">邮箱</th>
+            <td class="formValue">
+                <input id="Email" type="text" class="form-control" />
+            </td>
+            <th class="formTitle">传真</th>
+            <td class="formValue">
+                <input id="Fax" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle" valign="top" style="padding-top: 4px;">
+                备注
+            </th>
+            <td class="formValue" colspan="3">
+                <textarea id="Description" class="form-control" style="height: 70px;"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>

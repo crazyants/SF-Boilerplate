@@ -1,0 +1,39 @@
+{
+  "EventType": "POST Account/Login",
+  "Environment": {
+    "UserName": "tomny",
+    "MachineName": "DESKTOP-K2FDV9J",
+    "CallingMethodName": "SF.Module.Backend.Controllers.AccountController.Login()",
+    "AssemblyName": "SF.Module.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Culture": "zh"
+  },
+  "StartDate": "2017-03-26T01:49:29.5613709+08:00",
+  "EndDate": "2017-03-26T01:49:31.2608761+08:00",
+  "Duration": 1700,
+  "Action": {
+    "HttpMethod": "POST",
+    "ControllerName": "Account",
+    "ActionName": "Login",
+    "ViewName": "Login",
+    "FormVariables": {
+      "Email": "administrator",
+      "password": "123456",
+      "verifycode": "",
+      "rememberMe": "0",
+      "returnUrl": ""
+    },
+    "ActionParameters": {
+      "model": {
+        "Email": "administrator",
+        "Password": "123456",
+        "RememberMe": false
+      },
+      "returnUrl": null
+    },
+    "UserName": null,
+    "RequestUrl": "http://localhost:37680/Login",
+    "IpAddress": "::1",
+    "ResponseStatus": "200",
+    "ResponseStatusCode": 200
+  }
+}

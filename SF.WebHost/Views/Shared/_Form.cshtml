@@ -1,0 +1,36 @@
+﻿<!--
+
+  _____ _                 _      ______                                           _
+ / ____(_)               | |    |  ____|                                         | |
+| (___  _ _ __ ___  _ __ | | ___| |__ _ __ __ _ _ __ ___   _____      _____  _ __| | __
+ \___ \| | '_ ` _ \| '_ \| |/ _ \  __| '__/ _` | '_ ` _ \ / _ \ \ /\ / / _ \| '__| |/ /
+ ____) | | | | | | | |_) | |  __/ |  | | | (_| | | | | | |  __/\ V  V / (_) | |  |   <
+|_____/|_|_| |_| |_| .__/|_|\___|_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\
+                   | |
+                   |_|
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title | SF</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    @await Component.InvokeAsync("BackendStyleSheets")
+    @await Component.InvokeAsync("BackendScripts")
+    @Html.Partial("_StylePartial")
+</head>
+<body class="form-body">
+    @Html.Partial("_ScriptPartial")
+    <form id="form1">
+        @RenderBody()
+    </form>
+    <script>
+        $(document).ready(function () {
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,337 @@
+@{
+    ViewData["Title"] = "用户-列表";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<section id="page-title">
+    <h1 class="title pull-left">
+        <div class="page-icon">
+            <i class="fa fa-users"></i>
+        </div> 用户
+    </h1>
+    <ul class="breadcrumb pull-left">
+        <li><a href="/User"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active">用户</li>
+    </ul>
+    <div class="clearfix"></div>
+</section>
+<section id="page-content">
+    <!-- Ajax Error -->
+    <div class="alert alert-danger ajax-error" style="display:none">
+        <p><strong>错误</strong></p>
+        <span class="ajax-error-message"></span>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="zone-feature" class="zone-instance can-configure">
+                <div class="zone-content">
+                    <div class="block-content">
+                        <div class="panel panel-block">
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div id="queryCondition" class="btn-group">
+                                                    <a class="btn btn-default dropdown-text" data-toggle="dropdown">选择条件</a>
+                                                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a data-value="Account">账户</a></li>
+                                                        <li><a data-value="RealName">姓名</a></li>
+                                                        <li><a data-value="Mobile">手机</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td style="padding-left: 2px;">
+                                                <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;" />
+                                            </td>
+                                            <td style="padding-left: 5px;">
+                                                <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;查询</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="grid-actions pull-right">
+                                    <div class="btn-group">
+                                        <a title="刷新" class="btn btn-default" onclick="SF.utility.reload();"><i class="fa fa-refresh"></i></a>
+                                        <a title="新增" class="btn btn-default" onclick="btn_add()"><i class="fa fa-plus-circle"></i></a>
+                                        <a title="编辑" class="btn btn-default " onclick="btn_edit()"><i class="fa  fa-edit"></i></a>
+                                        <a title="删除" class="btn btn-default" onclick="btn_delete()"><i class="fa fa-trash-o"></i></a>
+                                        <a id="lr-more" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa fa-reorder"></i>&nbsp;更多<span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li id="lr-disabled"><a onclick="btn_disabled()"><i></i>&nbsp;禁用账户</a></li>
+                                            <li id="lr-enabled"><a onclick="btn_enabled()"><i></i>&nbsp;启用账户</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a title="重置密码" class="btn-add btn btn-default btn-sm" onclick="btn_revisepassword()"><i class="fa fa-key"></i>重置密码</a>
+                                        <a title="角色授权" class="btn-add btn btn-default btn-sm" onclick="btn_roleauthorize()"><i class="fa  fa-gavel"></i>角色授权</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="grid grid-panel">
+                                    <div class="table-responsive">
+                                        <div class="gridPanel">
+                                            <table id="gridTable"></table>
+                                            <div id="gridPager"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    //加载树
+    var _parentId = 0;
+    var FixedHeight = 180;
+    var categoryType = '1';
+    $(function () {
+        InitialPage();
+        GetGrid();
+    });
+
+
+    //初始化页面
+    function InitialPage() {
+        //resize重设(表格、树形)宽高
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $("#gridTable").setGridHeight($(window).height() - FixedHeight);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+
+    //加载表格
+    function GetGrid() {
+        var selectedRowIndex = 0;
+        var $gridTable = $('#gridTable');
+        $gridTable.jqGrid({
+            url: "/Api/User/GetPageListJson",
+            datatype: "json",
+            height: $(window).height() - FixedHeight,
+            autowidth: true,
+            colModel: [
+                { label: '主键', name: 'Id', hidden: true },
+                { label: '账户', name: 'UserName', index: 'UserName', width: 150, align: 'left' },
+                { label: '姓名', name: 'DisplayName', index: 'DisplayName', width: 150, align: 'left' },
+                {
+                    label: '性别', name: 'Gender', index: 'Gender', width: 45, align: 'center',
+                    formatter: function (cellvalue, options, rowObject) {
+                        return cellvalue == 1 ? "男" : "女";
+                    }
+                },
+                { label: '手机', name: 'PhoneNumber', index: 'PhoneNumber', width: 100, align: 'center' },
+                //{
+                //    label: '公司', name: 'OrganizeId', index: 'OrganizeId', width: 200, align: 'left',
+                //    formatter: function (cellvalue, options, rowObject) {
+                //        return top.clientorganizeData[cellvalue] == null ? "" : top.clientorganizeData[cellvalue].FullName;
+                //    }
+                //},
+                //{
+                //    label: '部门', name: 'DepartmentId', index: 'DepartmentId', width: 100, align: 'left',
+                //    formatter: function (cellvalue, options, rowObject) {
+                //        return top.clientdepartmentData[cellvalue] == null ? "" : top.clientdepartmentData[cellvalue].FullName;
+                //    }
+                //},
+                //{ label: '岗位', name: 'DutyName', index: 'DutyName', width: 100, align: 'left' },
+                //{ label: '职位', name: 'PostName', index: 'PostName', width: 100, align: 'left' },
+                //{
+                //    label: '角色', name: 'RoleId', index: 'RoleId', width: 100, align: 'left',
+                //    formatter: function (cellvalue, options, rowObject) {
+                //        return top.clientroleData[cellvalue] == null ? "" : top.clientroleData[cellvalue].FullName;
+                //    }
+                //},
+                { label: '主管', name: 'Manager', index: 'Manager', width: 100, align: 'left' },
+                {
+                    label: "审核", name: "AccountApproved", index: "AccountApproved", width: 100, align: "center",
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 1) {
+                            return '<span  class=\"label label-success\" style=\"cursor: pointer;\">通过</span>';
+                        } else if (cellvalue == 0) {
+                            return '<span  class=\"label label-default\" style=\"cursor: pointer;\">未通过</span>';
+                        }
+                    }
+                },
+                {
+                    label: "锁定", name: "IsLockedOut", index: "IsLockedOut", width: 100, align: "center",
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 1) {
+                            return '<span onclick=\"btn_disabled(\'' + rowObject.UserId + '\')\" class=\"label label-success\" style=\"cursor: pointer;\">正常</span>';
+                        } else if (cellvalue == 0) {
+                            return '<span onclick=\"btn_enabled(\'' + rowObject.UserId + '\')\" class=\"label label-default\" style=\"cursor: pointer;\">锁定</span>';
+                        }
+                    }
+                },
+                { label: "备注", name: "Description", index: "Description", width: 200, align: "left" }
+            ],
+            pager: true,
+            rowNum: "15",
+            rownumbers: true,
+            shrinkToFit: false,
+            gridview: true,
+            onSelectRow: function () {
+                selectedRowIndex = $("#" + this.id).getGridParam('selrow');
+            },
+            gridComplete: function () {
+                $("#" + this.id).setSelection(selectedRowIndex, false);
+            }
+        });
+        //查询条件
+        $("#queryCondition .dropdown-menu li").click(function () {
+            var text = $(this).find('a').html();
+            var value = $(this).find('a').attr('data-value');
+            $("#queryCondition .dropdown-text").html(text).attr('data-value', value)
+        });
+        //查询事件
+        $("#btn_Search").click(function () {
+            $gridTable.jqGrid('setGridParam', {
+                url: "/Api/User/GetPageListJson",
+                postData: {
+                    condition: $("#queryCondition").find('.dropdown-text').attr('data-value'),
+                    keyword: $("#txt_Keyword").val()
+                },
+            }).trigger('reloadGrid');
+        });
+
+    }
+    //新增
+    function btn_add() {
+
+        SF.utility.dialogOpen({
+            id: "Form",
+            title: '添加用户',
+            url: '/User/Form?parentId=' + _parentId,
+            width: "800px",
+            height: "600px",
+            //  btn: null,
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick("POST");
+            }
+        });
+    };
+    //编辑
+    function btn_edit() {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        if (SF.utility.checkedRow(keyValue)) {
+            SF.utility.dialogOpen({
+                id: "Form",
+                title: '修改用户',
+                url: '/User/Form?keyValue=' + keyValue,
+                width: "800px",
+                height: "600px",
+                //    btn: null,
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick("PUT");
+                }
+            });
+        }
+    }
+    //删除
+    function btn_delete() {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        if (keyValue) {
+            SF.utility.removeForm({
+                type: "DELETE",
+                url: "/Api/User/" + keyValue,
+                success: function (data) {
+                    $("#gridTable").resetSelection();
+                    $("#gridTable").trigger("reloadGrid");
+                }
+            })
+        } else {
+            SF.utility.dialogMsg('请选择需要删除的菜单！', 0);
+        }
+    }
+    //角色授权
+    function btn_roleauthorize() {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        var UserName = $("#gridTable").jqGridRowValue("NormalizedName");
+        if (SF.utility.checkedRow(keyValue)) {
+            SF.utility.dialogOpen({
+                id: "AllotRole",
+                title: '角色授权 - ' + UserName,
+                url: '/Authorize/AllotRole?userId=' + keyValue,
+                width: "700px",
+                height: "690px",
+                btn: null
+            });
+        }
+    }
+    //用户授权
+    function btn_authorize() {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        var UserName = $("#gridTable").jqGridRowValue("NormalizedName");
+        if (SF.utility.checkedRow(keyValue)) {
+            SF.utility.dialogOpen({
+                id: "AllotAuthorize",
+                title: '用户授权 - ' + UserName,
+                url: '/Authorize/AllotAuthorizeUser?userId=' + keyValue,
+                width: "700px",
+                height: "690px",
+                btn: null
+            });
+        }
+    }
+
+    //重置密码
+    function btn_revisepassword() {
+        var keyValue = $("#gridTable").jqGridRowValue("UserName");
+        var UserName = $("#gridTable").jqGridRowValue("UserName");
+        var DisplayName = $("#gridTable").jqGridRowValue("DisplayName");
+        if (SF.utility.checkedRow(keyValue)) {
+            SF.utility.dialogOpen({
+                id: "RevisePassword",
+                title: '重置密码',
+                url: '/User/RevisePassword?userId=' + keyValue + "&Account=" + escape(UserName) + '&RealName=' + escape(DisplayName),
+                width: "500px",
+                height: "260px",
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick();
+                }
+            });
+        }
+    }
+    //禁用
+    function btn_disabled(keyValue) {
+        if (keyValue == undefined) {
+            keyValue = $("#gridTable").jqGridRowValue("UserName");
+        }
+        if (SF.utility.checkedRow(keyValue)) {
+            SF.utility.confirmAjax({
+                msg: "注：您确定要【禁用】账户？",
+                url: "/Api/User/DisabledAccount",
+                param: { userId: keyValue },
+                success: function (data) {
+                    $("#gridTable").trigger("reloadGrid");
+                }
+            })
+        }
+    }
+    //启用
+    function btn_enabled(keyValue) {
+        if (keyValue == undefined) {
+            keyValue = $("#gridTable").jqGridRowValue("UserName");
+        }
+        if (SF.utility.checkedRow(keyValue)) {
+            SF.utility.confirmAjax({
+                msg: "注：您确定要【启用】账户？",
+                url: "/Api/User/EnabledAccount",
+                param: { userId: keyValue },
+                success: function (data) {
+                    $("#gridTable").trigger("reloadGrid");
+                }
+            })
+        }
+    }
+</script>

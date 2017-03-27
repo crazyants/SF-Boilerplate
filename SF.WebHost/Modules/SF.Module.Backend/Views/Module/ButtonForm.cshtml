@@ -1,0 +1,66 @@
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script type="text/javascript">
+    var moduleButtonId = SF.utility.request('buttonId');
+    var moduleId = SF.utility.request('moduleId');
+    $(function () {
+        initControl();
+    })
+    var dataJson = top.Form.buttonJson;
+    //初始化控件
+    function initControl() {
+        if (!!moduleButtonId) {
+            $.each(dataJson, function (i) {
+                var row = dataJson[i];
+                if (row.Id == moduleButtonId) {
+                    SF.utility.setWebControls("form1", row);
+                }
+            });
+        } else {
+            $("#ModuleId").val(moduleId);
+
+        }
+    }
+    //保存表单
+    function AcceptClick(callback) {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var data = SF.utility.getWebControls("form1", moduleButtonId);
+        callback(data);
+        SF.utility.dialogClose();
+    }
+</script>
+<div style="margin-top: 10px; margin-right: 30px;">
+    <input id="Id" type="hidden" value="0" />
+    <input id="ModuleId" type="hidden" />
+    <table class="form">
+        <tr>
+            <th class="formTitle">编号<font face="宋体">*</font></th>
+            <td class="formValue">
+                <input id="Name" type="text" class="form-control" placeholder="请输入编号" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">名称<font face="宋体">*</font></th>
+            <td class="formValue">
+                <input id="Description" type="text" class="form-control" placeholder="请输入名称" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">排序<font face="宋体">*</font></th>
+            <td class="formValue">
+                <input id="SortIndex" type="text" class="form-control" placeholder="请输入排序" isvalid="yes" checkexpession="Num" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">地址</th>
+            <td class="formValue">
+                <input id="ActionAddress" type="text" class="form-control" />
+            </td>
+        </tr>
+    </table>
+</div>
+

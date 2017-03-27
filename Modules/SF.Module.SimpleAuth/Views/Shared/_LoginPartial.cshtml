@@ -1,0 +1,21 @@
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Http.Extensions
+@using SF.Module.SimpleAuth.Extensions
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-controller="Login" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#">Hello @User.GetDisplayName()!</a>
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-controller="Login" asp-action="Index" asp-route-returnUrl="@(Context.Request.Path + Context.Request.QueryString)">Log in</a></li>
+    </ul>
+}

@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SF.Core\SF.Core.csproj" />
+    <ProjectReference Include="..\..\SF.Data\SF.Data.csproj" />
+    <ProjectReference Include="..\..\SF.Entitys\SF.Entitys.csproj" />
+  </ItemGroup>
+
+</Project>

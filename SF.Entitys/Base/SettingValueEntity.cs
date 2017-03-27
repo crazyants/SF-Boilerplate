@@ -1,0 +1,83 @@
+﻿using SF.Entitys.Abstraction;
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace SF.Entitys
+{
+    public class SettingValueEntity : BaseEntity
+    {
+        public const string TypeShortText = "ShortText";
+        public const string TypeLongText = "LongText";
+        public const string TypeInteger = "Integer";
+        public const string TypeDecimal = "Decimal";
+        public const string TypeBoolean = "Boolean";
+        public const string TypeDateTime = "DateTime";
+        public const string TypeSecureString = "SecureString";
+
+        [Required]
+        [StringLength(64)]
+        public string ValueType { get; set; }
+
+        [StringLength(512)]
+        public string ShortTextValue { get; set; }
+
+        public string LongTextValue { get; set; }
+        public decimal DecimalValue { get; set; }
+        public int IntegerValue { get; set; }
+        public bool BooleanValue { get; set; }
+
+        public DateTime? DateTimeValue { get; set; }
+
+
+        [StringLength(64)]
+        public string Locale { get; set; }
+
+        public long SettingId { get; set; }
+        public virtual SettingEntity Setting { get; set; }
+
+
+        public object RawValue()
+        {
+            switch (ValueType)
+            {
+                case TypeBoolean:
+                    return BooleanValue;
+                case TypeDateTime:
+                    return DateTimeValue;
+                case TypeDecimal:
+                    return DecimalValue;
+                case TypeInteger:
+                    return IntegerValue;
+                case TypeLongText:
+                    return LongTextValue;
+                case TypeShortText:
+                case TypeSecureString:
+                    return ShortTextValue;
+                default:
+                    return null;
+            }
+        }
+
+        public string ToString(IFormatProvider formatProvider)
+        {
+            switch (ValueType)
+            {
+                case TypeBoolean:
+                    return BooleanValue.ToString();
+                case TypeDateTime:
+                    return DateTimeValue == null ? null : DateTimeValue.Value.ToString(formatProvider);
+                case TypeDecimal:
+                    return DecimalValue.ToString(formatProvider);
+                case TypeInteger:
+                    return IntegerValue.ToString(formatProvider);
+                case TypeLongText:
+                    return LongTextValue;
+                case TypeShortText:
+                case TypeSecureString:
+                    return ShortTextValue;
+                default:
+                    return base.ToString();
+            }
+        }
+    }
+}

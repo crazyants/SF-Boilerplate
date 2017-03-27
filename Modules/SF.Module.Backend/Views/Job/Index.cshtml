@@ -1,0 +1,221 @@
+@{
+    ViewData["Title"] = "职位管理-列表";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<section id="page-title">
+    <h1 class="title pull-left">
+        <div class="page-icon">
+            <i class="fa fa-users"></i>
+        </div> 职位管理
+    </h1>
+    <ul class="breadcrumb pull-left">
+        <li><a href="/User"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active">职位</li>
+    </ul>
+    <div class="clearfix"></div>
+</section>
+<section id="page-content">
+    <!-- Ajax Error -->
+    <div class="alert alert-danger ajax-error" style="display:none">
+        <p><strong>错误</strong></p>
+        <span class="ajax-error-message"></span>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="zone-feature" class="zone-instance can-configure">
+                <div class="zone-content">
+                    <div class="block-content">
+                        <div class="panel panel-block">
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div id="queryCondition" class="btn-group">
+                                                    <a class="btn btn-default dropdown-text" data-toggle="dropdown">选择条件</a>
+                                                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a data-value="EnCode">职位编号</a></li>
+                                                        <li><a data-value="FullName">职位名称</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td style="padding-left: 2px;">
+                                                <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;" />
+                                            </td>
+                                            <td style="padding-left: 5px;">
+                                                <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;查询</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="grid-actions pull-right">
+                                    <a title="刷新" class="btn btn-default" onclick="SF.utility.reload();"><i class="fa fa-refresh"></i></a>
+                                    <a title="新增" class="btn-add btn btn-default btn-sm" onclick="btn_add()"><i class="fa fa-plus-circle"></i></a>
+                                    <a title="编辑" class="btn-add btn btn-default btn-sm" onclick="btn_edit()"><i class="fa  fa-edit"></i></a>
+                                    <a title="删除" class="btn btn-default" onclick="btn_delete()"><i class="fa fa-trash-o"></i></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="grid grid-panel">
+                                    <div class="table-responsive">
+                                        <div class="gridPanel">
+                                            <table id="gridTable"></table>
+                                            <div id="gridPager"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    //加载树
+    var _parentId = 0;
+    var FixedHeight = 180;
+    var categoryType = 2;
+    $(function () {
+        InitialPage();
+        GetGrid();
+    });
+
+
+    //初始化页面
+    function InitialPage() {
+        //resize重设(表格、树形)宽高
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $("#gridTable").setGridHeight($(window).height() - FixedHeight);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+
+    //加载表格
+    function GetGrid() {
+        var selectedRowIndex = 0;
+        var postData = {
+            condition: $("#queryCondition").find('.dropdown-text').attr('data-value'),
+            keyword: $("#txt_Keyword").val(),
+            category: categoryType,
+        }
+        var $gridTable = $('#gridTable');
+        $gridTable.jqGrid({
+            url: "/Api/DMOS/GetPageListJson",
+            datatype: "json",
+            height: $(window).height() - FixedHeight,
+            postData: postData,
+            autowidth: true,
+            colModel: [
+                { label: '主键', name: 'Id', hidden: true },
+                 { label: '职位编号', name: 'EnCode', index: 'EnCode', width: 100, align: 'left' },
+                { label: '职位名称', name: 'FullName', index: 'FullName', width: 200, align: 'left' },
+                {
+                    label: '所在公司', name: 'OrganizeName', index: 'OrganizeName', width: 250, align: 'left',
+                },
+                 {
+                     label: '所在部门', name: 'DepartmentName', index: 'DepartmentName', width: 250, align: 'left',
+                 },
+                {
+                    label: '创建时间', name: 'CreatedOn', index: 'CreatedOn', width: 130, align: 'center',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d H:i', newformat: 'Y-m-d H:i' }
+                },
+                {
+                    label: "有效", name: "EnabledMark", index: "EnabledMark", width: 50, align: "center",
+                    formatter: function (cellvalue, options, rowObject) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { label: "职位描述", name: "Description", index: "Description", width: 200, align: "left" }
+            ],
+            pager: true,
+            rowNum: "15",
+            rownumbers: true,
+            shrinkToFit: false,
+            gridview: true,
+            onSelectRow: function () {
+                selectedRowIndex = $("#" + this.id).getGridParam('selrow');
+            },
+            gridComplete: function () {
+                $("#" + this.id).setSelection(selectedRowIndex, false);
+            }
+        });
+        //查询条件设置
+        $("#queryCondition .dropdown-menu li").click(function () {
+            var text = $(this).find('a').html();
+            var value = $(this).find('a').attr('data-value');
+            $("#queryCondition .dropdown-text").html(text).attr('data-value', value)
+        });
+        //查询事件
+        $("#btn_Search").click(function () {
+            $gridTable.jqGrid('setGridParam', {
+                postData: {
+                    condition: $("#queryCondition").find('.dropdown-text').attr('data-value'),
+                    keyword: $("#txt_Keyword").val(),
+                    category: categoryType,
+                }
+            }).trigger('reloadGrid');
+        });
+        //查询回车事件
+        $('#txt_Keyword').bind('keypress', function (event) {
+            if (event.keyCode == "13") {
+                $('#btn_Search').trigger("click");
+            }
+        });
+    }
+    //新增
+    function btn_add() {
+
+        SF.utility.dialogOpen({
+            id: "Form",
+            title: '添加职位',
+            url: '/Job/Form?parentId=' + _parentId,
+            width: "800px",
+            height: "600px",
+            //  btn: null,
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick("POST");
+            }
+        });
+    };
+    //编辑
+    function btn_edit() {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        if (SF.utility.checkedRow(keyValue)) {
+            SF.utility.dialogOpen({
+                id: "Form",
+                title: '修改职位',
+                url: '/Job/Form?keyValue=' + keyValue,
+                width: "800px",
+                height: "600px",
+                //    btn: null,
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick("PUT");
+                }
+            });
+        }
+    }
+    //删除
+    function btn_delete() {
+        var keyValue = $("#gridTable").jqGridRowValue("Id");
+        if (keyValue) {
+            SF.utility.removeForm({
+                type: "DELETE",
+                url: "/Api/DMOS/" + keyValue,
+                success: function (data) {
+                    $("#gridTable").resetSelection();
+                    $("#gridTable").trigger("reloadGrid");
+                }
+            })
+        } else {
+            SF.utility.dialogMsg('请选择需要删除的菜单！', 0);
+        }
+    }
+</script>

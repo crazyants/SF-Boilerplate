@@ -1,0 +1,17 @@
+{
+  "Value": {
+    "Id": "SF.Module.Blog",
+    "Version": "1.0.1",
+    "PlatformVersion": "1.0.0",
+    "Title": "SF.Backend",
+    "Description": "博客模块",
+    "Authors": "疯狂蚂蚁",
+    "Owners": "疯狂蚂蚁",
+    "IconUrl": "",
+    "ReleaseNotes": "First version.",
+    "Copyright": "Copyright © 2017 疯狂蚂蚁. All rights reserved",
+    "Tags": "Home",
+    "SystemModule": "True",
+    "ConnectionString": "Server=.;Database=SF_Team_Blog;uid=sa;pwd=123.com.cn;Pooling=True;Min Pool Size=1;Max Pool Size=100;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=false;"
+  }
+}

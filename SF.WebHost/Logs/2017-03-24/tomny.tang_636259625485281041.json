@@ -1,0 +1,27 @@
+{
+  "EventType": "GET Home/Index",
+  "Environment": {
+    "UserName": "tomny.tang",
+    "MachineName": "GZIT008",
+    "CallingMethodName": "SF.Module.Backend.Controllers.HomeController.Index()",
+    "AssemblyName": "SF.Module.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Culture": "zh"
+  },
+  "StartDate": "2017-03-24T14:28:32.9480017+08:00",
+  "EndDate": "2017-03-24T14:29:08.5251031+08:00",
+  "Duration": 35577,
+  "Action": {
+    "HttpMethod": "GET",
+    "ControllerName": "Home",
+    "ActionName": "Index",
+    "ViewName": "Index",
+    "FormVariables": null,
+    "ActionParameters": {},
+    "UserName": "Administrator",
+    "RequestUrl": "http://localhost:37680/",
+    "IpAddress": "::1",
+    "ResponseStatus": "200",
+    "ResponseStatusCode": 200,
+    "Exception": "(InvalidOperationException) The partial view '/Barebone/Backend/View/Components/_BackendStyleSheets' was not found. The following locations were searched:\r\n/Barebone/Backend/View/Components/_BackendStyleSheets"
+  }
+}

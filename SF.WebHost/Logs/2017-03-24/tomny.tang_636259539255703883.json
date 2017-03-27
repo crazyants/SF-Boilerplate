@@ -1,0 +1,27 @@
+{
+  "EventType": "GET Home/Index",
+  "Environment": {
+    "UserName": "tomny.tang",
+    "MachineName": "GZIT008",
+    "CallingMethodName": "SF.Module.Backend.Controllers.HomeController.Index()",
+    "AssemblyName": "SF.Module.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Culture": "zh"
+  },
+  "StartDate": "2017-03-24T12:05:22.2011724+08:00",
+  "EndDate": "2017-03-24T12:05:25.5683882+08:00",
+  "Duration": 3367,
+  "Action": {
+    "HttpMethod": "GET",
+    "ControllerName": "Home",
+    "ActionName": "Index",
+    "ViewName": "Index",
+    "FormVariables": null,
+    "ActionParameters": {},
+    "UserName": "Administrator",
+    "RequestUrl": "http://localhost:37680/",
+    "IpAddress": "::1",
+    "ResponseStatus": "200",
+    "ResponseStatusCode": 200,
+    "Exception": "(InvalidOperationException) The view component name 'BackendStyleSheets' matched multiple types:\r\nType: 'SF.Web.Barebone.Backend.ViewComponents.BackendStyleSheetsViewComponent' - Name: 'SF.Web.Barebone.Backend.ViewComponents.BackendStyleSheets'\r\nType: 'SF.Module.Backend.ViewComponents.BackendStyleSheetsViewComponent' - Name: 'SF.Module.Backend.ViewComponents.BackendStyleSheets'"
+  }
+}

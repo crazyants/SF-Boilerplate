@@ -1,0 +1,6 @@
+
+@model SF.Web.Barebone.Backend.ViewModels.BackendScriptsViewModel
+@foreach (var backendScript in this.Model.BackendScripts)
+{
+  @Html.Partial("_BackendScript", backendScript)
+}

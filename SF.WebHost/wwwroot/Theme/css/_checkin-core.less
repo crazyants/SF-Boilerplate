@@ -1,0 +1,497 @@
+﻿@import "_global-variables.less";
+@import "_sf-variables";
+
+/*
+  Used to style the check-in screens
+
+  1. Check-in specific variables
+  2. Bootstrap Overrides
+  3. Global Styles
+  4. Components
+  5. Specific Page Styles
+  6. Scroll container
+  7. Kiosk Manager
+
+*/
+
+// 1. Check-in specific variables
+// -------------------------
+@checkin-scrollbar-bg: fade(@text-color, 50%);
+
+
+// 2. Bootstrap Overrides
+// -------------------------
+
+h1, h2, h3 {
+  letter-spacing: -.03em;
+}
+
+h1 {
+  font-size: 28px;
+  color: @header-text-color;
+}
+
+.close {
+  color: @header-text-color;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.btn-checkin-select {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: @font-weight-semibold;
+}
+
+// 3. Global Styles
+// -------------------------
+
+// turn off configuration items
+#cms-admin-footer {
+  display: none;
+}
+
+.config-bar {
+  display: none;
+}
+
+.btn-dimmed {
+  opacity: .33;  // todo does this look good JME
+}
+
+// set page background
+body {
+  .checkinBackground;
+    
+    overflow-x: hidden;
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+
+  @media all and (-webkit-min-device-pixel-ratio: 1.5) {
+    .checkinBackgroundRetina();
+  }
+}
+
+// 4. Components
+// -------------------------
+
+// main body
+.body-content {
+  position: relative;
+  height: 100vh;
+}
+
+// checkin header items
+
+.checkin-header {
+  margin-top: 45px;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 48px;
+    font-weight: @header-font-weight;
+  }
+
+  .checkin-sub-title {
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: @subheader-font-weight;
+    color: @subheader-text-color;
+  }
+}
+
+// button sub-text
+.btn .checkin-sub-title {
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: @checkin-button-alttext-weight;
+  white-space: normal;
+}
+
+// checkin body items
+
+.checkin-body {
+  .checkin-actions {
+    text-align: right;
+
+    .btn {
+      font-size: 36px;
+    }
+  }
+}
+
+.checkin-search-actions a {
+  padding: 20px 48px;
+  font-size: 48px;
+  font-weight: @checkin-button-text-weight;
+  line-height: 48px;
+}
+
+.checkin-start {
+  margin-top: 25%;
+  text-align: center;
+}
+
+// checkin footer
+
+.checkin-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+
+.checkin-actions {
+  a {
+    padding: 12px 24px;
+    font-size: 22px;
+    font-weight: @checkin-button-text-weight;
+
+    &.btn-primary {
+      padding: 14px 26px;
+      font-size: 28px;
+    }
+  }
+}
+
+// time select checkbox
+.btn-checkbox {
+  padding: 24px;
+  font-size: 20px;
+  color: @btn-default-color;
+  background-color: @btn-default-bg;
+  border-color: @btn-default-border;
+
+  &.active,
+  &.active:focus {
+    color: @btn-primary-color;
+    background-color: @btn-primary-bg;
+    border-color: @btn-primary-border;
+  }
+
+  i {
+    display: block;
+    font-size: 92px;
+    line-height: 92px;
+  }
+
+  &.active i:before {
+    // checked icon
+    content: "\f046";
+  }
+}
+
+/* Ten Key Keypad */
+.tenkey {
+  width: 320px;
+
+  a {
+    &:focus, &:active {
+      background-color: @btn-default-bg;
+    }
+
+    &.digit {
+      font-size: 48px;
+      font-weight: @font-weight-semibold;
+    }
+
+    &.command {
+      padding-top: 28px;
+      font-size: 20px;
+      font-weight: @font-weight-light;
+    }
+
+    &.btn {
+      width: 80px;
+      height: 80px;
+      margin: 2px;
+    }
+  }
+}
+
+/* bootbox modal styles */
+.bootbox {
+  z-index: @zindex-popover;
+
+  .modal-content {
+    background-color: @bg-color;
+  }
+
+  .modal-footer {
+    border-top-color: lighten(@bg-color, 20%);
+  }
+}
+
+// checkin override button
+.btn-checkin-override {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 110px;
+  height: 110px;
+  background-color: transparent;
+  border: 0;
+}
+
+// round photos
+.photo-round {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+
+  &.photo-round-md {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+}
+
+// dim no photo images
+img[src*="no-photo"] {
+  opacity: .4;
+}
+
+// 5. Specific Page Styles
+// -------------------------
+
+// search page
+.checkin-search-body {
+  width: 260px;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+input.checkin-phone-entry {
+  float: left;
+  width: 260px; // keypad is 320 - padding (24px x 2)
+  height: 60px;
+  padding: 6px 20px;
+  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: @checkin-button-text-weight;
+}
+
+input.namesearch {
+  float: left;
+  width: 360px;
+  height: 60px;
+  padding: 6px 20px;
+  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.checkin-phone-keypad {
+  float: left;
+  margin-bottom: 12px;
+}
+
+// time select
+.checkin-time-select {
+  display: table;
+  margin: 0 auto;
+}
+
+.checkin-timelist {
+  margin-bottom: 12px;
+}
+
+// checkin summary page
+.checkin-summary {
+  list-style-type: none;
+
+  li {
+    margin-bottom: 18px;
+    font-size: 22px;
+    color: @text-color;
+  }
+}
+
+// closed page
+.checkin-closed-header {
+  > h1 {
+    margin-bottom: 0;
+    font-size: 5em;
+    line-height: 1;
+    @media @sm {
+      font-size: 9em;
+    }
+    @media @md {
+      font-size: 14em;
+    }
+    @media @lg {
+      font-size: 17em;
+    }
+  }
+}
+
+.checkin-closed-body {
+  padding-left: .5em;
+  @media @sm {
+    padding-left: 1em;
+  }
+  @media @md {
+    padding-left: 2em;
+  }
+}
+
+// family select - select person
+.family-personselect {
+  padding-top: 20px;
+}
+
+
+//
+// 6. Scroll Container
+// --------------------------------------
+
+.checkin-scroll-panel {
+  position: absolute;
+  top: 45px;
+  bottom: 48px;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.scroller {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  padding-right: 40px;
+  -webkit-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translateZ(0);
+     -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+       -o-transform: translateZ(0);
+          transform: translateZ(0);
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+     -moz-text-size-adjust: none;
+       -o-text-size-adjust: none;
+          text-size-adjust: none;
+}
+
+.iScrollIndicator {
+  position: absolute;
+  display: block;
+  width: 100%;
+  min-height: 100px;
+  box-sizing: border-box;
+  background-color: @checkin-scrollbar-bg;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  -webkit-transition: 0ms cubic-bezier(.1, .57, .1, 1);
+          transition: 0ms cubic-bezier(.1, .57, .1, 1);
+  transform: translate(0px, 0px) translateZ(0px);
+}
+
+.iScrollVerticalScrollbar,
+.iScrollLoneScrollbar {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  bottom: 2px;
+  z-index: 1;
+  width: 30px;
+  overflow: hidden;
+}
+
+//
+// 7. Kiosk Manager
+// --------------------------------------
+
+.kioskmanager-activate {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  color: @text-color;
+  opacity: .5;
+
+  &:hover {
+    color: @text-color;
+  }
+}
+
+.kioskmanager-locations {
+  max-width: 75%;
+}
+
+.kioskmanager-location {
+  position: relative;
+  padding: 16px;
+  margin: 0 60px 0 0;
+  background-color: rgba(0, 0, 0, .1);
+  border-radius: @border-radius-base;
+
+  .clearfix();
+
+  .kioskmanager-location-toggle {
+    float: left;
+    margin-top: 4px;
+  }
+
+  .kioskmanager-location-label {
+    float: left;
+    padding-left: 8px;
+    font-size: 36px;
+    font-weight: 600;
+  }
+
+  .kioskmanager-location-count {
+    position: absolute;
+    right: 12px;
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
+
+.kioskmanager-actions {
+  position: absolute;
+  bottom: 0;
+  left: 75%;
+}
+
+.kioskmanager-counts {
+  .kioskmanager-count h3,
+  .kioskmanager-count li {
+    color: @text-color;
+  }
+
+  .kioskmanager-count-locations,
+  .kioskmanager-count-groups,
+  .kioskmanager-count-schedules {
+    padding: 0;
+    list-style: none;
+  }
+
+  .kioskmanager-count-locations > li {
+    float: left;
+    margin-right: 12px;
+  }
+
+  .kioskmanager-counts ul li {
+    float: left;
+    margin-right: 24px;
+  }
+}

@@ -1,0 +1,237 @@
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<!--表格组件end-->
+<script type="text/javascript">
+    var keyValue = SF.utility.request('keyValue');
+    var parentId = SF.utility.request('parentId');
+
+    $(function () {
+        initControl();
+
+    })
+    //初始化控件
+    function initControl() {
+        SF.controls.datePicker.initialize({ id: 'FoundedTime', startView: 0, format: 'yyyy-mm-dd', todayHighlight: true });
+
+        //上级公司
+        SF.utility.comboBoxTree($("#ParentId"), {
+            url: "/Api/Organize/GetTreeJson",
+            description: "==请选择==",
+            height: "260px",
+            allowSearch: true
+        });
+        //公司性质
+        SF.utility.comboBox($("#Nature"), {
+            url: "/Api/DataItemDetail/GetDataItemListJson",
+            param: { EnCode: "CompanyNature" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "==请选择==",
+            height: "200px"
+        });
+        //负责人
+        SF.utility.comboBoxTree($("#ManagerId"), {
+            url: "/Api/User/GetTreeJson",
+            description: "==请选择==",
+            height: "220px",
+            allowSearch: true
+        });
+        //省份
+        SF.utility.comboBox($("#ProvinceId"), {
+            url: "/Api/Area/GetAreaListJson/0",
+            id: "AreaCode",
+            text: "AreaName",
+            description: "选择省",
+            height: "170px"
+        }).bind("change", function () {
+            var value = $(this).attr('data-value');
+            SF.utility.comboBox($("#CityId"), {
+                url: "/Api/Area/GetAreaListJson/" + value,
+                id: "AreaCode",
+                text: "AreaName",
+                description: "选择市",
+                height: "170px"
+            });
+        });
+        //城市
+        SF.utility.comboBox($("#CityId"), {
+            description: "选择市",
+            height: "170px"
+        }).bind("change", function () {
+            var value = $(this).attr('data-value');
+            if (value) {
+                SF.utility.comboBox($("#CountyId"), {
+                    url: "/Api/Area/GetAreaListJson/" + value,
+                    id: "AreaCode",
+                    text: "AreaName",
+                    description: "选择县/区",
+                    height: "170px"
+                });
+            }
+        });
+        //县/区
+        SF.utility.comboBox($("#CountyId"), {
+            description: "选择县/区",
+            height: "170px"
+        });
+        //获取表单
+        if (!!keyValue) {
+            SF.utility.setForm({
+                url: "/Api/Organize/" + keyValue,
+                success: function (data) {
+                    SF.utility.setWebControls('form1', data);
+                    $("#FoundedTime").val(SF.utility.formatDate(data.FoundedTime, "yyyy-MM-dd"));
+                    $("#ProvinceId").trigger("change");
+                    SF.utility.comboBoxSetValue($("#CityId"), data.CityId).trigger("change");
+                    SF.utility.comboBoxSetValue($("#CountyId"), data.CountyId);
+                }
+            });
+        } else {
+            SF.utility.comboBoxTreeSetValue($("#ParentId"), parentId);
+        }
+    }
+    //保存表单
+    function AcceptClick(type) {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = SF.utility.getWebControls('form1', keyValue);
+        var url = "/Api/Organize/";
+        if (type == "PUT")
+            url = url + keyValue;
+        else if (type == "POST")
+            url = url;
+
+        SF.utility.saveForm({
+            type: type,
+            url: url,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                SF.utility.currentIframe().$("#gridTable").resetSelection();
+                SF.utility.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+
+</script>
+<div style="margin-left: 10px; margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <th class="formTitle">公司名称<font face="宋体">*</font></th>
+            <td class="formValue">
+                <input id="FullName" type="text" onblur="SF.utility.existField(this.id,'/Api/Organize/ExistFullName')" class="form-control"  isvalid="yes" checkexpession="NotNull" />
+            </td>
+            <th class="formTitle">公司性质</th>
+            <td class="formValue">
+                <div id="Nature" type="select" class="ui-select">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">外文名称</th>
+            <td class="formValue">
+                <input id="EnCode" type="text" onblur="SF.utility.existField(this.id,'/Api/Organize/ExistEnCode')" class="form-control" />
+            </td>
+            <th class="formTitle">中文名称</th>
+            <td class="formValue">
+                <input id="ShortName" type="text" onblur="SF.utility.existField(this.id,'/Api/Organize/ExistShortName')" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">上级公司</th>
+            <td class="formValue">
+                <div id="ParentId" type="selectTree" class="ui-select">
+                </div>
+            </td>
+            <th class="formTitle">成立时间</th>
+            <td class="formValue">
+                @*<input id="FoundedTime" type="text" class="form-control input-group input-width-md js-date-picker date input-wdatepicker" />*@
+                <div class="form-group date-picker ">
+                    <div class="control-wrapper">
+                        <div class="input-group input-width-md js-date-picker date">
+                            <input name="FoundedTime" type="text" id="FoundedTime" class="form-control" />
+                            <span class="input-group-addon"><i class='fa fa-calendar'></i></span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">负责人</th>
+            <td class="formValue">
+                <div id="ManagerId" type="selectTree" class="ui-select"></div>
+            </td>
+            <th class="formTitle">电话</th>
+            <td class="formValue">
+                <div class="input-group phone-number-box">
+                    <span class="input-group-addon"><i class='fa fa-phone-square'></i></span>
+                    <input name="OuterPhone" type="text" id="OuterPhone" class="form-control" />
+                </div>
+
+
+            </td>
+
+        </tr>
+        <tr>
+            <th class="formTitle">电子邮箱</th>
+            <td class="formValue">
+                <div class="form-group data-text-box ">
+                    <div class="control-wrapper">
+                        <div class="input-group ">
+                            <span class="input-group-addon"><i class='fa fa-envelope'></i></span><input name="Email" type="text" id="Email" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+            </td>
+            <th class="formTitle">传真</th>
+            <td class="formValue">
+                <input id="Fax" type="text" class="form-control" />
+            </td>
+        </tr>
+
+        <tr>
+            <th class="formTitle">公司地点</th>
+            <td class="formValue" colspan="3">
+                <div style="float: left; width: 255px;">
+                    <div id="ProvinceId" type="select" class="ui-select" style="float: left; width: 84px; margin-right: 1px;"></div>
+                    <div id="CityId" type="select" class="ui-select" style="float: left; width: 84px; margin-right: 1px;"></div>
+                    <div id="CountyId" type="select" class="ui-select" style="float: left; width: 84px; margin-right: 1px;"></div>
+                </div>
+                <div style="margin: 0 auto; width: 100%;">
+                    <input id="Address" type="text" class="form-control" style="float: left; width: 355px;" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">邮编</th>
+            <td class="formValue">
+                <input id="Postalcode" type="text" class="form-control" />
+            </td>
+            <th class="formTitle">公司官网</th>
+            <td class="formValue">
+                <input id="WebAddress" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">
+                经营范围
+            </th>
+            <td class="formValue" colspan="3">
+                <input id="BusinessScope" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle" valign="top" style="padding-top: 4px;">
+                备注
+            </th>
+            <td class="formValue" colspan="3">
+                <textarea id="Description" class="form-control" style="height: 70px;"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>

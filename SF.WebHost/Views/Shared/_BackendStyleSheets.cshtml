@@ -1,0 +1,6 @@
+
+@model SF.Web.Barebone.Backend.ViewModels.BackendStyleSheetsViewModel
+@foreach (var backendStyleSheet in this.Model.BackendStyleSheets)
+{
+  @Html.Partial("_BackendStyleSheet", backendStyleSheet)
+}

@@ -1,0 +1,17 @@
+{
+  "Value": {
+    "Key": "SF.Module.Backend",
+    "Version": "1.0.1",
+    "PlatformVersion": "1.0.0",
+    "Title": "SF.Backend",
+    "Description": "后台管理模块",
+    "Authors": "疯狂蚂蚁",
+    "Owners": "疯狂蚂蚁",
+    "IconUrl": "",
+    "ReleaseNotes": "First version.",
+    "Copyright": "Copyright © 2017 疯狂蚂蚁. All rights reserved",
+    "Tags": "Home",
+    "SystemModule": "True",
+    "ConnectionString": ""
+  }
+}
